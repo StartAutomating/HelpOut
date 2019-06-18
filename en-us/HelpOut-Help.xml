@@ -1,0 +1,991 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<helpItems schema="maml">
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>ConvertTo-MAML</command:name>
+      <command:noun>MAML</command:noun>
+      <command:verb>ConvertTo</command:verb>
+      <maml:description>
+        <maml:para>Converts command help to MAML</maml:para>
+      </maml:description>
+      <dev:version>0.1</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>Converts command help to MAML (Microsoft Assistance Markup Language).</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-MAML</maml:name>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>XML</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-MAML</maml:name>
+        <command:parameter required="false" position="0" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Name</maml:name>
+          <maml:description>
+            <maml:para>The name of or more commands.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>XML</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-MAML</maml:name>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Module</maml:name>
+          <maml:description>
+            <maml:para>The name of one or more modules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>XML</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>ConvertTo-MAML</maml:name>
+        <command:parameter required="true" position="named" pipelineInput="True (ByValue)" aliases="" variableLength="true" globbing="false">
+          <maml:name>CommandInfo</maml:name>
+          <maml:description>
+            <maml:para>The CommandInfo object (returned from Get-Command).</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.Management.Automation.CommandInfo[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Management.Automation.CommandInfo[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>XML</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>CommandInfo</maml:name>
+        <maml:description>
+          <maml:para>The CommandInfo object (returned from Get-Command).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Management.Automation.CommandInfo[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Management.Automation.CommandInfo[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Compact</maml:name>
+        <maml:description>
+          <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Module</maml:name>
+        <maml:description>
+          <maml:para>The name of one or more modules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Name</maml:name>
+        <maml:description>
+          <maml:para>The name of or more commands.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoVersion</maml:name>
+        <maml:description>
+          <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>XML</maml:name>
+        <maml:description>
+          <maml:para>If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>[String]</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>The MAML, as a String.  This is the default.</maml:para>
+        </maml:description>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>[Xml]</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+        <maml:description>
+          <maml:para>The MAML, as an XmlDocument (when -XML is passed in)</maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 1 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> ConvertTo-Maml -Name ConvertTo-Maml </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 2 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> Get-Command ConvertTo-Maml | ConvertTo-Maml </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 3 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> ConvertTo-Maml -Name ConvertTo-Maml -Compact </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 4 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> ConvertTo-Maml -Name ConvertTo-Maml -XML </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Get-Help</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Save-MAML</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Install-MAML</command:name>
+      <command:noun>MAML</command:noun>
+      <command:verb>Install</command:verb>
+      <maml:description>
+        <maml:para>Installs MAML into a module</maml:para>
+      </maml:description>
+      <dev:version>0.1</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>Installs MAML into a module.  </maml:para>
+      <maml:para>This generates a single script that: </maml:para>
+      <maml:para>* Includes all commands</maml:para>
+      <maml:para>* Removes their multiline comments</maml:para>
+      <maml:para>* Directs the commands to use external help</maml:para>
+      <maml:para>You should then include this script in your module import.</maml:para>
+      <maml:para>Ideally, you should use the allcommands script</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Install-MAML</maml:name>
+        <command:parameter required="true" position="0" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Module</maml:name>
+          <maml:description>
+            <maml:para>The name of one or more modules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoRefresh</maml:name>
+          <maml:description>
+            <maml:para>If set, will refresh the documentation for the module before generating the commands file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="1" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>ScriptName</maml:name>
+          <maml:description>
+            <maml:para>The name of the combined script.  By default, allcommands.ps1.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>FunctionRoot</maml:name>
+          <maml:description>
+            <maml:para>The root directories containing functions.  If not provided, the function root will be the module root.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoRecurse</maml:name>
+          <maml:description>
+            <maml:para>If set, the function roots will not be recursively searched.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="2" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Encoding</maml:name>
+          <maml:description>
+            <maml:para>The encoding of the combined script.  By default, UTF8.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.Text.Encoding</command:parameterValue>
+          <dev:type>
+            <maml:name>System.Text.Encoding</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Exclude</maml:name>
+          <maml:description>
+            <maml:para>A list of wildcards to exclude.  This list will always contain the ScriptName.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Culture</maml:name>
+          <maml:description>
+            <maml:para>If provided, will save the MAML to a different directory than the current UI culture.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
+          <dev:type>
+            <maml:name>Cultureinfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>PassThru</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the files that were generated.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Compact</maml:name>
+        <maml:description>
+          <maml:para>If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Culture</maml:name>
+        <maml:description>
+          <maml:para>If provided, will save the MAML to a different directory than the current UI culture.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
+        <dev:type>
+          <maml:name>Cultureinfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Encoding</maml:name>
+        <maml:description>
+          <maml:para>The encoding of the combined script.  By default, UTF8.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.Text.Encoding</command:parameterValue>
+        <dev:type>
+          <maml:name>System.Text.Encoding</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Exclude</maml:name>
+        <maml:description>
+          <maml:para>A list of wildcards to exclude.  This list will always contain the ScriptName.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>FunctionRoot</maml:name>
+        <maml:description>
+          <maml:para>The root directories containing functions.  If not provided, the function root will be the module root.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Module</maml:name>
+        <maml:description>
+          <maml:para>The name of one or more modules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoRecurse</maml:name>
+        <maml:description>
+          <maml:para>If set, the function roots will not be recursively searched.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoRefresh</maml:name>
+        <maml:description>
+          <maml:para>If set, will refresh the documentation for the module before generating the commands file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoVersion</maml:name>
+        <maml:description>
+          <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>If set, will return the files that were generated.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>ScriptName</maml:name>
+        <maml:description>
+          <maml:para>The name of the combined script.  By default, allcommands.ps1.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Nullable</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+      </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.FileInfo</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 1 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> Install-MAML -Module HelpOut </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Save-MAML</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>ConvertTo-MAML</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+    <command:details>
+      <command:name>Save-MAML</command:name>
+      <command:noun>MAML</command:noun>
+      <command:verb>Save</command:verb>
+      <maml:description>
+        <maml:para>Saves a Module's MAML</maml:para>
+      </maml:description>
+      <dev:version>0.1</dev:version>
+    </command:details>
+    <maml:description>
+      <maml:para>Generates a Module's MAML file, and then saves it to the appropriate location.</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Save-MAML</maml:name>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Culture</maml:name>
+          <maml:description>
+            <maml:para>If provided, will save the MAML to a different directory than the current UI culture.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
+          <dev:type>
+            <maml:name>Cultureinfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>PassThru</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the files that were generated.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+      <command:syntaxItem>
+        <maml:name>Save-MAML</maml:name>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Module</maml:name>
+          <maml:description>
+            <maml:para>The name of one or more modules.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Compact</maml:name>
+          <maml:description>
+            <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Culture</maml:name>
+          <maml:description>
+            <maml:para>If provided, will save the MAML to a different directory than the current UI culture.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
+          <dev:type>
+            <maml:name>Cultureinfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoVersion</maml:name>
+          <maml:description>
+            <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>PassThru</maml:name>
+          <maml:description>
+            <maml:para>If set, will return the files that were generated.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Compact</maml:name>
+        <maml:description>
+          <maml:para>If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Culture</maml:name>
+        <maml:description>
+          <maml:para>If provided, will save the MAML to a different directory than the current UI culture.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
+        <dev:type>
+          <maml:name>Cultureinfo</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Module</maml:name>
+        <maml:description>
+          <maml:para>The name of one or more modules.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoVersion</maml:name>
+        <maml:description>
+          <maml:para>If set, the generate MAML will not contain a version number.  
+This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>PassThru</maml:name>
+        <maml:description>
+          <maml:para>If set, will return the files that were generated.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+    </command:parameters>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Nullable</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+      </command:returnValue>
+    </command:returnValues>
+    <command:examples>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 1 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> Save-Maml -Module HelpOut </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 2 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> Save-Maml -Module HelpOut -WhatIf </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+      <command:example>
+        <maml:title> -------------------------- EXAMPLE 3 -------------------------- </maml:title>
+        <maml:introduction>
+          <maml:para> PS C:\&gt; </maml:para>
+        </maml:introduction>
+        <dev:code> Save-Maml -Module HelpOut -PassThru </dev:code>
+        <dev:remarks>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <maml:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>ConvertTo-MAML</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
+    </maml:relatedLinks>
+  </command:command>
+</helpItems>
