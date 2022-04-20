@@ -11,4 +11,7 @@ jobs:
         uses: actions/checkout@v2
       - name: UseEZOut
         uses: StartAutomating/EZOut@master
+      - name: Push Changes
+        shell: pwsh
+        run: git push; exit 0
 
