@@ -91,7 +91,7 @@
             $theModuleHelpFile = Join-Path $theModuleCultureDir "$m-Help.xml" # Construct the path to the module help file (e.g. en-us\Module-Help.xml)
 
             & $convertToMaml @splat | # Convert the module help to MAML,
-                Set-Content -Encoding UTF8 -Path $theModuleHelpFile # and write the file.
+                Set-Content -Encoding UTF8 -Path $theModuleHelpFile -Passthru: $PassThru # and write the file.
          }
 
         if ($t -gt 1) {
