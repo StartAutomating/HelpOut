@@ -11,7 +11,13 @@ describe HelpOut {
         it 'Can save all help from a module into MAML' {
             $savedMaml = Save-MAML -Module HelpOut -PassThru
             [xml]$savedMaml
-            
+
+        }
+    }
+
+    context 'Get-ScriptReference' {
+        it 'Can discover references in a script' {
+            Get-Command Save-MAML | Get-ScriptReference
         }
     }
 }
