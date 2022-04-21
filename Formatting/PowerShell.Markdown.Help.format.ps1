@@ -22,7 +22,15 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                 if ($nav.Uri) {
                     Format-Markdown -Link $nav.Uri -inputObject $nav.LinkText -BulletPoint
                 } elseif ($helpObject.WikiLink) {
-                    Format-Markdown -Link $nav.LinkText -inputObject $nav.LinkText -BulletPoint
+                    $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
+                    $linkUrl = if ($linkedCmd -and $linkedCmd.Module -like 'microsoft.*') {
+                        "https://docs.microsoft.com/powershell/module/$($linkedCmd.Module)/$linkedCmd"
+
+                    } else {
+                        $nav.LinkText                        
+                    }
+
+                    Format-Markdown -Link $linkUrl -inputObject $nav.LinkText -BulletPoint
                 } elseif ($ehlpObject.DocLink) {
                     Format-Markdown -inputObject "$($helpObject.docLink)/$($nav.LinkText.md)" -BulletPoint
                 } else {
