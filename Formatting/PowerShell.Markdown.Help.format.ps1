@@ -21,8 +21,10 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             foreach ($nav in $helpObject.RelatedLinks.navigationLink) {
                 if ($nav.Uri) {
                     Format-Markdown -Link $nav.Uri -inputObject $nav.LinkText -BulletPoint
-                } elseif ($helpObject.UriRoot) {
+                } elseif ($helpObject.WikiLink) {
                     Format-Markdown -Link $nav.LinkText -inputObject $nav.LinkText -BulletPoint
+                } elseif ($ehlpObject.DocLink) {
+                    Format-Markdown -inputObject "$($helpObject.docLink)/$($nav.LinkText.md)" -BulletPoint
                 } else {
                     Format-Markdown -inputObject $nav.LinkText -BulletPoint
                 }
@@ -62,14 +64,19 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                 Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
 
                 if ($parameter.Name -in 'WhatIf', 'Confirm') {
-                    "-$($parameter.Name)" +  
+                    "-$($parameter.Name) " +  
                         'is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.'
                     if ($parameter.Name -eq 'WhatIf') {
                         "-WhatIf is used to see what would happen, or return operations without executing them"
                     }
                     if ($parameter.Name -eq 'Confirm') {
-                        '-Confirm is used to -Confirm each operation.  If you pass ```-Confirm:$false``` you will not be prompted.'
-                        'If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed'
+                        '-Confirm is used to -Confirm each operation.
+
+If you pass ```-Confirm:$false``` you will not be prompted.
+
+
+If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
+'
                     }
                     continue
                 }
