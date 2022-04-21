@@ -93,7 +93,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
 
                 [Ordered]@{
-                    Type = $parameter.type.name
+                    Type = '```' + "[" + $($parameter.type.name -replace 'SwitchParameter', 'Switch') + "]" + '```'
                     Requried = $parameter.required
                     Postion = $parameter.position
                     PipelineInput = $parameter.pipelineInput                    
