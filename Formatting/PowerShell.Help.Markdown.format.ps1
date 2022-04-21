@@ -1,16 +1,16 @@
-Write-FormatView -TypeName PowerShell.Help.Markdown.Format -Action {
+Write-FormatView -TypeName PowerShell.Markdown.Help.Format -Action {
     $helpObject = $_
     @(
         $helpObject.Synopsis | Format-Markdown -Heading $helpObject.Name
 
-        '-' * $host.UI.RawUI.BufferSize.Width
+        '---'
         foreach ($desc in $helpObject.Description) {
             [Environment]::NewLine + $desc.text  + [Environment]::NewLine
         }
 
 
         if ($helpObject.RelatedLinks) {
-            Format-Markdown -horizontalRule
+            '---'
 
             Format-Markdown -Heading "Related:" -headingsize 3
 
@@ -22,6 +22,16 @@ Write-FormatView -TypeName PowerShell.Help.Markdown.Format -Action {
                 } else {
                     Format-Markdown -inputObject $nav.LinkText -BulletPoint
                 }
+            }
+        }
+
+
+        if ($helpObject.Examples) {
+            '---'
+            Format-Markdown -Heading "Related:" -headingsize 3
+
+            foreach ($example in $helpObject.Examples.Example) {
+                (Format-Markdown -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'                
             }
         }
     ) -join [Environment]::NewLine
