@@ -72,14 +72,14 @@
             &amp; ${HelpOut_Format-Markdown} -Heading "Examples:" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
-                (&amp; ${HelpOut_Format-Markdown} -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s+]$') -HeadingSize 4)
+                (&amp; ${HelpOut_Format-Markdown} -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4)
 
                 if ($example.Code) {
                     $example.Code | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
                 }
 
                 if ($example.Remarks) {
-                    $example.Remarks | Out-String -Width 1mb
+                    ($example.Remarks | Out-String -Width 1mb).Trim()
                 }
             }
         }
@@ -97,12 +97,16 @@
                     }
 
                 &amp; ${HelpOut_Format-Markdown} -HeadingSize 4 -Heading $parameterDisplayName
-                @{
-                    Type = $parameter.type.name
-                    Requried = $parameter.required
-                } | &amp; ${HelpOut_Format-Markdown}                
 
                 ($parameter.description | Out-String -Width 1mb) -split '(?&gt;\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
+
+                [Ordered]@{
+                    Type = $parameter.type.name
+                    Requried = $parameter.required
+                    Postion = $parameter.position
+                    PipelineInput = $parameter.pipelineInput                    
+                } | &amp; ${HelpOut_Format-Markdown}
+
             }
         }
     ) -join [Environment]::NewLine
