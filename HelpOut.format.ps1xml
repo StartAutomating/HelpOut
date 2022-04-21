@@ -3,9 +3,9 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>PowerShell.Help.Markdown.Format</Name>
+      <Name>PowerShell.Markdown.Help.Format</Name>
       <ViewSelectedBy>
-        <TypeName>PowerShell.Help.Markdown.Format</TypeName>
+        <TypeName>PowerShell.Markdown.Help.Format</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -44,14 +44,14 @@
     @(
         $helpObject.Synopsis | &amp; ${HelpOut_Format-Markdown} -Heading $helpObject.Name
 
-        '-' * $host.UI.RawUI.BufferSize.Width
+        '---'
         foreach ($desc in $helpObject.Description) {
             [Environment]::NewLine + $desc.text  + [Environment]::NewLine
         }
 
 
         if ($helpObject.RelatedLinks) {
-            &amp; ${HelpOut_Format-Markdown} -horizontalRule
+            '---'
 
             &amp; ${HelpOut_Format-Markdown} -Heading "Related:" -headingsize 3
 
@@ -63,6 +63,16 @@
                 } else {
                     &amp; ${HelpOut_Format-Markdown} -inputObject $nav.LinkText -BulletPoint
                 }
+            }
+        }
+
+
+        if ($helpObject.Examples) {
+            '---'
+            &amp; ${HelpOut_Format-Markdown} -Heading "Related:" -headingsize 3
+
+            foreach ($example in $helpObject.Examples.Example) {
+                (&amp; ${HelpOut_Format-Markdown} -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'                
             }
         }
     ) -join [Environment]::NewLine
