@@ -1,4 +1,4 @@
-Write-FormatView -TypeName PowerShell.Markdown.Help.Format -Action {
+Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
     @(
         $helpObject.Synopsis | Format-Markdown -Heading $helpObject.Name
@@ -28,10 +28,10 @@ Write-FormatView -TypeName PowerShell.Markdown.Help.Format -Action {
 
         if ($helpObject.Examples) {
             '---'
-            Format-Markdown -Heading "Related:" -headingsize 3
+            Format-Markdown -Heading "Examples:" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
-                (Format-Markdown -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'                
+                (Format-Markdown -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'
             }
         }
     ) -join [Environment]::NewLine
