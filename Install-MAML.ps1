@@ -149,15 +149,13 @@
                 (?<Name>[^\-]{1,1}\S+) # any non-whitespace, starting with a non-dash
                 \s{0,} # optional whitespace
                 [\(\{] # opening parenthesis or brackets
-', 'MultiLine,IgnoreCase,IgnorePatternWhitespace')
+', 'MultiLine,IgnoreCase,IgnorePatternWhitespace', '00:00:05')
 
             
             $newFileContent = # We'll assign new file content by
                 foreach ($f in $fileList) { # walking thru each file. 
-                    $fileBytes = [IO.File]::ReadAllBytes($f.Fullname) # We'll read the file content in as bytes
-                    $ms = [IO.MemoryStream]::new($fileBytes) # so we can use an [IO.MemoryStream] and 
-                    $sr = [IO.StreamReader]::new($ms, $true) # an [IO.Streamreader] to peek at the encoding 
-                    $fileContent = $sr.ReadToEnd() # and read it as a string.
+                    $fCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($f.FullName, 'ExternalScript')
+                    $fileContent = $fCmd.ScriptBlock # and read it as a string.
                     $start = 0
                     do { 
                         $matched = $regex.Match($fileContent,$start) # See if we find a functon. 
@@ -174,11 +172,8 @@
                         # Keep doing this until we've reached the end of the file or the end of the matches.
                     } while ($start -le $filecontent.Length -and $matched.Success) 
   
-                    # Then output the file content, stripped of block comments.
-                    $fileContent -replace '\<\#(?<Block>(.|\s)+?(?=\#>))\#\>', ''
-
-                    $sr.Close()
-                    $sr.Dispose()               
+                    # Then output the file content.
+                    $fileContent
                 }
             
             # Last but not least, we 
