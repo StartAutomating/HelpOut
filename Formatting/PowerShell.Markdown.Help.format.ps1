@@ -38,7 +38,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                 }
 
                 if ($example.Remarks) {
-                    $example.Remarks | Out-String -Width 1mb
+                    ($example.Remarks | Out-String -Width 1mb).Trim()
                 }
             }
         }
@@ -56,6 +56,9 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     }
 
                 Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
+
+                ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
+
                 [Ordered]@{
                     Type = $parameter.type.name
                     Requried = $parameter.required
@@ -63,7 +66,6 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     PipelineInput = $parameter.pipelineInput                    
                 } | Format-Markdown
 
-                ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
             }
         }
     ) -join [Environment]::NewLine
