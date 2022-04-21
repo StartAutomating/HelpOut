@@ -56,7 +56,10 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     }
 
                 Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
-                Format-Markdown -HeadingSize 5 -Heading "Type: $($parameter.type.name)"
+                @{
+                    Type = $parameter.type.name
+                    Requried = $parameter.required
+                } | Format-Markdown                
 
                 ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
             }
