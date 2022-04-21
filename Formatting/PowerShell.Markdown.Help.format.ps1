@@ -41,8 +41,25 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     $example.Remarks | Out-String -Width 1mb
                 }
             }
+        }
 
-            
+        if ($helpObject.Parameters) {
+            '---'
+            Format-Markdown -Heading "Parameters:" -HeadingSize 3
+
+            foreach ($parameter in $helpObject.Parameters.parameter) {
+                $parameterDisplayName = 
+                    if ($parameter.required) {
+                        "**$($parameter.Name)**"
+                    } else {
+                        $parameter.Name
+                    }
+
+                Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
+                Format-Markdown -HeadingSize 5 -Heading "Type: $($parameter.type.name)"
+
+                ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
+            }
         }
     ) -join [Environment]::NewLine
 }
