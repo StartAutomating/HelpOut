@@ -82,8 +82,25 @@
                     $example.Remarks | Out-String -Width 1mb
                 }
             }
+        }
 
-            
+        if ($helpObject.Parameters) {
+            '---'
+            &amp; ${HelpOut_Format-Markdown} -Heading "Parameters:" -HeadingSize 3
+
+            foreach ($parameter in $helpObject.Parameters.parameter) {
+                $parameterDisplayName = 
+                    if ($parameter.required) {
+                        "**$($parameter.Name)**"
+                    } else {
+                        $parameter.Name
+                    }
+
+                &amp; ${HelpOut_Format-Markdown} -HeadingSize 4 -Heading $parameterDisplayName
+                &amp; ${HelpOut_Format-Markdown} -HeadingSize 5 -Heading "Type: $($parameter.type.name)"
+
+                ($parameter.description | Out-String -Width 1mb) -split '(?&gt;\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
+            }
         }
     ) -join [Environment]::NewLine
 </ScriptBlock>
