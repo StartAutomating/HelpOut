@@ -57,12 +57,16 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                 }
             }
         }
+                
 
         if ($helpObject.Parameters) {
             '---'
             Format-Markdown -Heading "Parameters:" -HeadingSize 3
 
-            foreach ($parameter in $helpObject.Parameters.parameter) {                
+            $parameterTotal= $helpObject.parameters.parameter.Length
+            $parameterCounter = 0 
+            foreach ($parameter in $helpObject.Parameters.parameter) {
+                $parameterCounter++
                 $parameterDisplayName = 
                     if ($parameter.required) {
                         "**$($parameter.Name)**"
@@ -98,8 +102,23 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     Postion = $parameter.position
                     PipelineInput = $parameter.pipelineInput                    
                 } | Format-Markdown
-                '---'
+                if ($parameterCounter -lt $parameterTotal) { '---' } 
+            }            
+        }
+
+        if ($helpObject.returnValues.returnValue) {
+            '---'
+            Format-Markdown -Heading "Outputs:" -HeadingSize 3
+            foreach ($returnValue in $helpObject.returnValues.returnValue) {
+                $returnValue.Text
+                [Environment]::NewLine                    
             }
+        }
+
+        if ($helpObject.syntax.syntaxItem) {
+            '---'
+            Format-Markdown -Heading "Syntax:" -HeadingSize 3
+            ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' | Format-Markdown -CodeLanguage PowerShell
         }
     ) -join [Environment]::NewLine
 }
