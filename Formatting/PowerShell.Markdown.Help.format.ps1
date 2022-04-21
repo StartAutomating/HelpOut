@@ -29,7 +29,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         "https://docs.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
                     } elseif ($helpObject.WikiLink) {
                         $nav.LinkText
-                    } elseif ($helpObject.DocLink) {
+                    } elseif ($null -ne $helpObject.DocLink) {
                         "$($helpObject.docLink)/$($nav.LinkText.md)"
                     }
                     else {
@@ -118,7 +118,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         if ($helpObject.syntax.syntaxItem) {
             '---'
             Format-Markdown -Heading "Syntax:" -HeadingSize 3
-            ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' | Format-Markdown -CodeLanguage PowerShell
+            ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
         }
     ) -join [Environment]::NewLine
 }
