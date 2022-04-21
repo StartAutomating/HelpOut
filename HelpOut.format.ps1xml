@@ -72,7 +72,7 @@
             &amp; ${HelpOut_Format-Markdown} -Heading "Examples:" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
-                (&amp; ${HelpOut_Format-Markdown} -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'
+                (&amp; ${HelpOut_Format-Markdown} -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s+]$') -HeadingSize 4)
 
                 if ($example.Code) {
                     $example.Code | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
