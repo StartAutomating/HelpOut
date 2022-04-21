@@ -3,9 +3,9 @@
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>PowerShell.Markdown.Help.Format</Name>
+      <Name>PowerShell.Markdown.Help</Name>
       <ViewSelectedBy>
-        <TypeName>PowerShell.Markdown.Help.Format</TypeName>
+        <TypeName>PowerShell.Markdown.Help</TypeName>
       </ViewSelectedBy>
       <CustomControl>
         <CustomEntries>
@@ -69,10 +69,10 @@
 
         if ($helpObject.Examples) {
             '---'
-            &amp; ${HelpOut_Format-Markdown} -Heading "Related:" -headingsize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Examples:" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
-                (&amp; ${HelpOut_Format-Markdown} -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'                
+                (&amp; ${HelpOut_Format-Markdown} -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'
             }
         }
     ) -join [Environment]::NewLine
