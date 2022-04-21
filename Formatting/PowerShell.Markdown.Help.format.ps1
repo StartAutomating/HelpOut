@@ -8,6 +8,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
         $helpObject.Synopsis | Out-String -Width 1mb
         
         '---'
+        Format-Markdown -HeadingSize 3 -Heading "Description"
         foreach ($desc in $helpObject.Description) {
             [Environment]::NewLine + $desc.text  + [Environment]::NewLine
         }
@@ -16,7 +17,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
         if ($helpObject.RelatedLinks) {
             '---'
 
-            Format-Markdown -Heading "Related:" -headingsize 3
+            Format-Markdown -Heading "Related Links" -headingsize 3
 
             foreach ($nav in $helpObject.RelatedLinks.navigationLink) {
                 $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
@@ -43,7 +44,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
 
         if ($helpObject.Examples) {
             '---'
-            Format-Markdown -Heading "Examples:" -headingsize 3
+            Format-Markdown -Heading "Examples" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
                 (Format-Markdown -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4)
@@ -61,7 +62,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
 
         if ($helpObject.Parameters) {
             '---'
-            Format-Markdown -Heading "Parameters:" -HeadingSize 3
+            Format-Markdown -Heading "Parameters" -HeadingSize 3
 
             $parameterTotal= $helpObject.parameters.parameter.Length
             $parameterCounter = 0 
@@ -108,7 +109,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
         if ($helpObject.returnValues.returnValue.Count) {
             '---'
-            Format-Markdown -Heading "Outputs:" -HeadingSize 3
+            Format-Markdown -Heading "Outputs" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
                 $returnValue.Text
                 [Environment]::NewLine                    
@@ -117,7 +118,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
         if ($helpObject.syntax.syntaxItem) {
             '---'
-            Format-Markdown -Heading "Syntax:" -HeadingSize 3
+            Format-Markdown -Heading "Syntax" -HeadingSize 3
             ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
         }
     ) -join [Environment]::NewLine
