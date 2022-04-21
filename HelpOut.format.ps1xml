@@ -3,6 +3,34 @@
 <Configuration>
   <ViewDefinitions>
     <View>
+      <Name>File.Documentation.PercentageDocumentation.Percentage</Name>
+      <ViewSelectedBy>
+        <TypeName>File.Documentation.Percentage</TypeName>
+        <TypeName>Documentation.Percentage</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <AutoSize />
+        <TableHeaders>
+          <TableColumnHeader>
+          </TableColumnHeader>
+          <TableColumnHeader>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PercentageDocumented</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>PowerShell.Markdown.Help</Name>
       <ViewSelectedBy>
         <TypeName>PowerShell.Markdown.Help</TypeName>
