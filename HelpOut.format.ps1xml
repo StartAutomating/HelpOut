@@ -119,6 +119,7 @@
                     Postion = $parameter.position
                     PipelineInput = $parameter.pipelineInput                    
                 } | &amp; ${HelpOut_Format-Markdown}
+                '---'
             }
         }
     ) -join [Environment]::NewLine
