@@ -24,7 +24,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     if ($nav.Uri) {
                         $nav.Uri
                     }
-                    elseif ($linkedCmd -and $linkedCmd.Module -like 'microsoft.*') {
+                    elseif ($linkedCmd -and ($linkedCmd.Module -like 'microsoft.*' -or $linkedCmd.Source -like 'microsoft.*')) {
                         "https://docs.microsoft.com/powershell/module/$($linkedCmd.Module)/$linkedCmd"
                     } elseif ($helpObject.WikiLink) {
                         $nav.LinkText
