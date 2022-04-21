@@ -19,23 +19,23 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             Format-Markdown -Heading "Related:" -headingsize 3
 
             foreach ($nav in $helpObject.RelatedLinks.navigationLink) {
-                if ($nav.Uri) {
-                    Format-Markdown -Link $nav.Uri -inputObject $nav.LinkText -BulletPoint
-                } elseif ($helpObject.WikiLink) {
-                    $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
-                    $linkUrl = if ($linkedCmd -and $linkedCmd.Module -like 'microsoft.*') {
-                        "https://docs.microsoft.com/powershell/module/$($linkedCmd.Module)/$linkedCmd"
-
-                    } else {
-                        $nav.LinkText                        
+                $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
+                $linkUrl = 
+                    if ($nav.Uri) {
+                        $nav.Uri
                     }
-
-                    Format-Markdown -Link $linkUrl -inputObject $nav.LinkText -BulletPoint
-                } elseif ($ehlpObject.DocLink) {
-                    Format-Markdown -inputObject "$($helpObject.docLink)/$($nav.LinkText.md)" -BulletPoint
-                } else {
-                    Format-Markdown -inputObject $nav.LinkText -BulletPoint
-                }
+                    elseif ($linkedCmd -and $linkedCmd.Module -like 'microsoft.*') {
+                        "https://docs.microsoft.com/powershell/module/$($linkedCmd.Module)/$linkedCmd"
+                    } elseif ($helpObject.WikiLink) {
+                        $nav.LinkText
+                    } elseif ($helpObject.DocLink) {
+                        "$($helpObject.docLink)/$($nav.LinkText.md)"
+                    }
+                    else {
+                        ""
+                    }
+                
+                Format-Markdown -Link $linkUrl -inputObject $nav.LinkText -BulletPoint                
             }
         }
 
