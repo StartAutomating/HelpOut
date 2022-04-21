@@ -1,8 +1,12 @@
 Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
     @(
-        $helpObject.Synopsis | Format-Markdown -Heading $helpObject.Name
+        Format-Markdown -Heading $helpObject.Name
 
+        Format-Markdown -HeadingSize 3 -Heading "Synopsis"
+
+        $helpObject.Synopsis | Out-String -Width 1mb
+        
         '---'
         foreach ($desc in $helpObject.Description) {
             [Environment]::NewLine + $desc.text  + [Environment]::NewLine
@@ -57,13 +61,13 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
 
                 Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
 
-                if ($parameterName -in 'WhatIf', 'Confirm') {
-                    "-$($parameterName)" +  
+                if ($parameter.Name -in 'WhatIf', 'Confirm') {
+                    "-$($parameter.Name)" +  
                         'is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.'
-                    if ($parameterName -eq 'WhatIf') {
+                    if ($parameter.Name -eq 'WhatIf') {
                         "-WhatIf is used to see what would happen, or return operations without executing them"
                     }
-                    if ($parameterName -eq 'Confirm') {
+                    if ($parameter.Name -eq 'Confirm') {
                         '-Confirm is used to -Confirm each operation.  If you pass ```-Confirm:$false``` you will not be prompted.'
                         'If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed'
                     }
