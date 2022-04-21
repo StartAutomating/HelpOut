@@ -77,6 +77,7 @@
         $helpObject.Synopsis | Out-String -Width 1mb
         
         '---'
+        &amp; ${HelpOut_Format-Markdown} -HeadingSize 3 -Heading "Description"
         foreach ($desc in $helpObject.Description) {
             [Environment]::NewLine + $desc.text  + [Environment]::NewLine
         }
@@ -85,7 +86,7 @@
         if ($helpObject.RelatedLinks) {
             '---'
 
-            &amp; ${HelpOut_Format-Markdown} -Heading "Related:" -headingsize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Related Links" -headingsize 3
 
             foreach ($nav in $helpObject.RelatedLinks.navigationLink) {
                 $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
@@ -112,7 +113,7 @@
 
         if ($helpObject.Examples) {
             '---'
-            &amp; ${HelpOut_Format-Markdown} -Heading "Examples:" -headingsize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Examples" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
                 (&amp; ${HelpOut_Format-Markdown} -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4)
@@ -130,7 +131,7 @@
 
         if ($helpObject.Parameters) {
             '---'
-            &amp; ${HelpOut_Format-Markdown} -Heading "Parameters:" -HeadingSize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Parameters" -HeadingSize 3
 
             $parameterTotal= $helpObject.parameters.parameter.Length
             $parameterCounter = 0 
@@ -177,7 +178,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
         if ($helpObject.returnValues.returnValue.Count) {
             '---'
-            &amp; ${HelpOut_Format-Markdown} -Heading "Outputs:" -HeadingSize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Outputs" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
                 $returnValue.Text
                 [Environment]::NewLine                    
@@ -186,7 +187,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
         if ($helpObject.syntax.syntaxItem) {
             '---'
-            &amp; ${HelpOut_Format-Markdown} -Heading "Syntax:" -HeadingSize 3
+            &amp; ${HelpOut_Format-Markdown} -Heading "Syntax" -HeadingSize 3
             ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
         }
     ) -join [Environment]::NewLine
