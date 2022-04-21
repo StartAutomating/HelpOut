@@ -106,7 +106,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             }            
         }
 
-        if ($helpObject.returnValues.returnValue) {
+        if ($helpObject.returnValues.returnValue.Count) {
             '---'
             Format-Markdown -Heading "Outputs:" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
