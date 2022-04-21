@@ -78,6 +78,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     Postion = $parameter.position
                     PipelineInput = $parameter.pipelineInput                    
                 } | Format-Markdown
+                '---'
             }
         }
     ) -join [Environment]::NewLine
