@@ -98,7 +98,7 @@
                         "https://docs.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
                     } elseif ($helpObject.WikiLink) {
                         $nav.LinkText
-                    } elseif ($helpObject.DocLink) {
+                    } elseif ($null -ne $helpObject.DocLink) {
                         "$($helpObject.docLink)/$($nav.LinkText.md)"
                     }
                     else {
@@ -187,7 +187,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         if ($helpObject.syntax.syntaxItem) {
             '---'
             &amp; ${HelpOut_Format-Markdown} -Heading "Syntax:" -HeadingSize 3
-            ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
+            ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
         }
     ) -join [Environment]::NewLine
 </ScriptBlock>
