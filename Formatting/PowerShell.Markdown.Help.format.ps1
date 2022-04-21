@@ -31,7 +31,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             Format-Markdown -Heading "Examples:" -headingsize 3
 
             foreach ($example in $helpObject.Examples.Example) {
-                (Format-Markdown -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'
+                (Format-Markdown -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s+]$') -HeadingSize 4)
 
                 if ($example.Code) {
                     $example.Code | Format-Markdown -CodeLanguage PowerShell
