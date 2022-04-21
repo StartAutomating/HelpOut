@@ -32,7 +32,18 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
 
             foreach ($example in $helpObject.Examples.Example) {
                 (Format-Markdown -Heading $example.Title -HeadingSize 4) -replace '^[-\s]+' -replace '[-\s+]$'
+
+                if ($example.Code) {
+                    $example.Code | Format-Markdown -CodeLanguage PowerShell
+                }
+
+                if ($example.Remarks) {
+                    $example.Remarks | Out-String -Width 1mb
+                }
             }
+
+            
         }
     ) -join [Environment]::NewLine
 }
+ 
