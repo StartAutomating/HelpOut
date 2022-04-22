@@ -19,12 +19,18 @@ describe HelpOut {
     context 'Install-MAML' {
         it 'Can install MAML' {
             Install-MAML -Module HelpOut
-        }
+        }        
     }
 
     context 'Get-ScriptReference' {
         it 'Can discover references in a script' {
             Get-Command Save-MAML | Get-ScriptReference
+        }
+    }
+
+    context 'Measure-Help' {
+        it 'Can measure documentation within a script' {
+            Get-Command Save-MAML | Measure-Help | Select-Object -ExpandProperty CommentPercent | Should -BeGreaterThan 20
         }
     }
 }
