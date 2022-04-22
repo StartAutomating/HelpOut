@@ -418,7 +418,7 @@ function Get-MarkdownHelp {
     #>
     param(
     # The name of the specified command or concept.
-    [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=0, ValueFromPipelineByPropertyName)]
     [ValidateNotNullOrEmpty()]
     [string]
     $Name,
@@ -430,7 +430,12 @@ function Get-MarkdownHelp {
     # If set, will interlink documentation as if it were for GitHub pages, beneath a given directory
     [Alias('GitHubPageRoot')]    
     [string]
-    $GitHubDocRoot
+    $GitHubDocRoot,
+
+    # If provided, will rename the help topic before getting markdown.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string]
+    $Rename
     )
 
 
@@ -440,6 +445,7 @@ function Get-MarkdownHelp {
         $myParams  = @{} + $PSBoundParameters
         $paramCopy.Remove('Wiki')
         $paramCopy.Remove('GitHubDocRoot')
+        $paramCopy.Remove('Rename')
         $gotHelp = Get-Help @paramCopy 
         if (-not $gotHelp) {
             Write-Error "Could not get help for $name"
@@ -451,7 +457,10 @@ function Get-MarkdownHelp {
                     if ($in -is [string]) {
                         $in
                     } else {
-                        $helpObj = $_                        
+                        $helpObj = $_
+                        if ($Rename) {
+                            $helpObj | Add-Member NoteProperty Rename $Rename -Force
+                        }
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
                         $helpObj | Add-Member NoteProperty WikiLink ($Wiki -as [bool]) -Force
@@ -1452,15 +1461,17 @@ function Save-MarkdownHelp
                             $ps1File = $_
                             $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"}
 
-                            $replacedName = $ps1File.Name
+                            $replacedFileName = $ps1File.Name
                             @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) {
                                 if ($ReplaceScriptNameWith[$ri]) {
-                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
+                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
                                 } else {
-                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri]
+                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri]
                                 }
                             })
-                            $docOutputPath = Join-Path $outputPath ($replacedName + '.md')
+                            $docOutputPath = Join-Path $outputPath ($replacedFileName + '.md')
+                            $relativePath = $ps1File.FullName.Substring("$theModuleRoot".Length).TrimStart('/\').Replace('\','/')
+                            $getMarkdownHelpSplat.Rename = $relativePath
                             if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                             else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                             & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
