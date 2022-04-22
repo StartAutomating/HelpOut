@@ -115,7 +115,13 @@
     $helpObject = $_
 
     $MarkdownSections = [Ordered]@{
-        Name =  { &amp; ${HelpOut_Format-Markdown} -Heading $helpObject.Name }
+        Name =  {
+            if ($helpObject.Rename) {
+                &amp; ${HelpOut_Format-Markdown} -Heading $helpObject.Rename
+            } else {
+                &amp; ${HelpOut_Format-Markdown} -Heading $helpObject.Name
+            }
+        }
         Synopsis = {
             &amp; ${HelpOut_Format-Markdown} -HeadingSize 3 -Heading "Synopsis"
 
@@ -240,7 +246,11 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         Syntax = {
             if ($helpObject.syntax.syntaxItem) {
                 &amp; ${HelpOut_Format-Markdown} -Heading "Syntax" -HeadingSize 3
-                ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
+                if ($helpObject.Rename) {
+                    ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' -replace "$($HelpObject.Name.Replace("\", "\\"))", $helpObject.Rename | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
+                } else {
+                    ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
+                }
             }
         }
         Notes = {
