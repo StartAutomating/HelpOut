@@ -64,7 +64,7 @@ function Get-MarkdownHelp {
                         if ($myParams.ContainsKey("GitHubDocRoot")) {
                             $helpObj | Add-Member NoteProperty DocLink $GitHubDocRoot -Force
                         }
-                        $helpObj | Out-String -Width 1mb
+                        $helpObj
                     }
                 } 
             }        
