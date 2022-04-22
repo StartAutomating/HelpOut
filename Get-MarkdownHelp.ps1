@@ -37,7 +37,12 @@ function Get-MarkdownHelp {
         $myParams  = @{} + $PSBoundParameters
         $paramCopy.Remove('Wiki')
         $paramCopy.Remove('GitHubDocRoot')
-        Get-Help @paramCopy |
+        $gotHelp = Get-Help @paramCopy 
+        if (-not $gotHelp) {
+            Write-Error "Could not get help for $name"
+            return
+        }
+        $gotHelp |
             & { process {
                     $in = $_
                     if ($in -is [string]) {
