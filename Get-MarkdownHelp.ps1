@@ -56,7 +56,7 @@ function Get-MarkdownHelp {
                     } else {
                         $helpObj = $_
                         if ($Rename) {
-                            $helpObj | Add-Member NoteProperty Name $Rename -Force
+                            $helpObj | Add-Member NoteProperty Rename $Rename -Force
                         }
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
