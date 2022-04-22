@@ -41,8 +41,10 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         else {
                             ""
                         }
+
+                    $linkText = if ($nav.LinkText) { $linkText } else {$linkUrl}
                     
-                    Format-Markdown -Link $linkUrl -inputObject $nav.LinkText -BulletPoint                
+                    Format-Markdown -Link $linkUrl -inputObject $linkText -BulletPoint
                 }
             }
         }
