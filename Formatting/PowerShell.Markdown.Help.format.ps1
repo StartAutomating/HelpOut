@@ -108,7 +108,18 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             }            
         }
 
-        if ($helpObject.returnValues) {
+        if ($helpObject.inputTypes -and $helpObject.inputTypes.inputType) {
+            '---'
+            Format-Markdown -Heading "Inputs" -HeadingSize 3
+            foreach ($inputType in $helpObject.inputTypes.inputType) {
+                "[$($inputType.type.name)]" | Format-Markdown -CodeLanguage PowerShell
+                foreach ($desc in $inputType.Description) {
+                    $desc.text + [Environment]::NewLine
+                }
+            }
+        }
+        
+        if ($helpObject.returnValues -and $helpObject.returnValues.returnValue) {
             '---'
             Format-Markdown -Heading "Outputs" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
