@@ -24,7 +24,7 @@
                 <PropertyName>Name</PropertyName>
               </TableColumnItem>
               <!-- {ConditionalColor:"
-        Format-Heatmap -HeatMapMax 20 -InputObject 20 -HeatMapHot &quot;#11ff11&quot; -HeatMapCool &quot;#ff1111&quot;
+        Format-Heatmap -HeatMapMax 20 -InputObject $_.CommentPercent -HeatMapHot &quot;#11ff11&quot; -HeatMapCool &quot;#ff1111&quot;
     "}-->
               <TableColumnItem>
                 <ScriptBlock>$moduleName = 'HelpOut'
@@ -57,7 +57,7 @@
 
                 $__ = $_
                 $ci = . {
-        &amp; ${HelpOut_Format-Heatmap} -HeatMapMax 20 -InputObject 20 -HeatMapHot "#11ff11" -HeatMapCool "#ff1111"
+        &amp; ${HelpOut_Format-Heatmap} -HeatMapMax 20 -InputObject $_.CommentPercent -HeatMapHot "#11ff11" -HeatMapCool "#ff1111"
     }
                 $_ = $__
                 if ($ci -is [string]) {
