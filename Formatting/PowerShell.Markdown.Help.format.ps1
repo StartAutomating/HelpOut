@@ -112,7 +112,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             '---'
             Format-Markdown -Heading "Inputs" -HeadingSize 3
             foreach ($inputType in $helpObject.inputTypes.inputType) {
-                "[$($inputType.type.name)]" | Format-Markdown -CodeLanguage PowerShell
+                $inputType.type.name + [Environment]::NewLine
                 foreach ($desc in $inputType.Description) {
                     $desc.text + [Environment]::NewLine
                 }
