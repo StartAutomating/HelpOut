@@ -15,7 +15,7 @@ function Get-MarkdownHelp {
     #>
     param(
     # The name of the specified command or concept.
-    [Parameter(Position=0, ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=0, ValueFromPipelineByPropertyName)]
     [ValidateNotNullOrEmpty()]
     [string]
     $Name,
@@ -27,7 +27,12 @@ function Get-MarkdownHelp {
     # If set, will interlink documentation as if it were for GitHub pages, beneath a given directory
     [Alias('GitHubPageRoot')]    
     [string]
-    $GitHubDocRoot
+    $GitHubDocRoot,
+
+    # If provided, will rename the help topic before getting markdown.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string]
+    $Rename
     )
 
 
@@ -37,6 +42,7 @@ function Get-MarkdownHelp {
         $myParams  = @{} + $PSBoundParameters
         $paramCopy.Remove('Wiki')
         $paramCopy.Remove('GitHubDocRoot')
+        $paramCopy.Remove('Rename')
         $gotHelp = Get-Help @paramCopy 
         if (-not $gotHelp) {
             Write-Error "Could not get help for $name"
@@ -48,7 +54,10 @@ function Get-MarkdownHelp {
                     if ($in -is [string]) {
                         $in
                     } else {
-                        $helpObj = $_                        
+                        $helpObj = $_
+                        if ($Rename) {
+                            $helpObj | Add-Member NoteProperty Name $Rename -Force
+                        }
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
                         $helpObj | Add-Member NoteProperty WikiLink ($Wiki -as [bool]) -Force
