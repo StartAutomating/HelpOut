@@ -30,7 +30,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         } elseif ($helpObject.WikiLink) {
                             $nav.LinkText
                         } elseif ($null -ne $helpObject.DocLink) {
-                            "$($helpObject.docLink)/$($nav.LinkText.md)"
+                            "$($helpObject.docLink)/$($nav.LinkText).md"
                         }
                         else {
                             ""
