@@ -113,6 +113,7 @@
         
 
     $helpObject = $_
+
     @(
         &amp; ${HelpOut_Format-Markdown} -Heading $helpObject.Name
 
@@ -225,7 +226,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             &amp; ${HelpOut_Format-Markdown} -Heading "Outputs" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
                 $returnValue.Text
-                [Environment]::NewLine                    
+                [Environment]::NewLine
             }
         }
 
@@ -234,6 +235,15 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             &amp; ${HelpOut_Format-Markdown} -Heading "Syntax" -HeadingSize 3
             ($helpObject.syntax | Out-String) -split '(?&gt;\r\n|\n)' -ne '' | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
         }
+
+        if ($helpObject.alertset) {
+            '---'
+            &amp; ${HelpOut_Format-Markdown} -Heading "Notes" -HeadingSize 3
+            foreach ($note in $helpObject.AlertSet.alert) {
+                ($note | Out-String).Trim() + [Environment]::NewLine
+            }            
+        }
+
     ) -join [Environment]::NewLine
 </ScriptBlock>
               </ExpressionBinding>
