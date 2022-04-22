@@ -1,5 +1,6 @@
 Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
+
     @(
         Format-Markdown -Heading $helpObject.Name
 
@@ -112,7 +113,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             Format-Markdown -Heading "Outputs" -HeadingSize 3
             foreach ($returnValue in $helpObject.returnValues.returnValue) {
                 $returnValue.Text
-                [Environment]::NewLine                    
+                [Environment]::NewLine
             }
         }
 
@@ -121,6 +122,15 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             Format-Markdown -Heading "Syntax" -HeadingSize 3
             ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
         }
+
+        if ($helpObject.alertset) {
+            '---'
+            Format-Markdown -Heading "Notes" -HeadingSize 3
+            foreach ($note in $helpObject.AlertSet.alert) {
+                ($note | Out-String).Trim() + [Environment]::NewLine
+            }            
+        }
+
     ) -join [Environment]::NewLine
 }
  
