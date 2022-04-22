@@ -11,6 +11,10 @@ foreach ($a in $args) {
     throw 'Arguments must strings or hashtables'
 }
 
+if (-not $args -and (Test-Path (Join-Path $PSScriptRoot '.git'))) {
+    $options["Development"] = $true
+}
+
 $validKeys = 'Development', 'Production'
 foreach ($k in $options.Keys) {
     if ($validKeys -notcontains $k) {
@@ -18,11 +22,10 @@ foreach ($k in $options.Keys) {
     }
 }
 
-
 if ($options.Development) {
-    . $PSScriptRoot\ConvertTo-MAML.ps1
-    . $PSScriptRoot\Save-MAML.ps1
-    . $PSScriptRoot\Install-MAML.ps1
+    foreach ($file in Get-Childitem -LiteralPath $PSScriptRoot -Filter '*-*.ps1' -Recurse) {
+        . $file.FullName    
+    }
 }
 
 if ($options.Production -or -not $options.Development) {

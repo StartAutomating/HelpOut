@@ -6,7 +6,7 @@
     .Description
         Generates a Module's MAML file, and then saves it to the appropriate location.
     .Link
-        ConvertTo-MAML
+        Get-MAML
     .Example
         Save-Maml -Module HelpOut
     .Example
@@ -43,18 +43,18 @@
     $PassThru)
 
     begin {
-        # First, let's cache a reference to ConvertTo-MAML
-        $convertToMaml = 
+        # First, let's cache a reference to Get-MAML
+        $getMAML = 
             if ($MyInvocation.MyCommand.ScriptBlock.Module) {
-                $MyInvocation.MyCommand.ScriptBlock.Module.ExportedCommands['ConvertTo-MAML']
+                $MyInvocation.MyCommand.ScriptBlock.Module.ExportedCommands['Get-MAML']
             } else {
-                $ExecutionContext.SessionState.InvokeCommand.GetCommand('ConvertTo-MAML', 'Function')
+                $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-MAML', 'Function')
             }
     }
 
     process {
-        if (-not $convertToMaml) { # If for whatever reason we don't have ConvertTo-Maml
-            Write-Error "Could not Find ConvertTo-MAML" -Category ObjectNotFound -ErrorId ConvertTo-MAML.NotFound # error out.
+        if (-not $getMAML) { # If for whatever reason we don't have Get-MAML
+            Write-Error "Could not Find Get-MAML" -Category ObjectNotFound -ErrorId Get-MAML.NotFound # error out.
             return
         }
 
@@ -62,7 +62,7 @@
         $c, $t, $id = 0, $Module.Length, [Random]::new().Next() 
         $splat = @{} + $PSBoundParameters # Copy our parameters
         foreach ($k in @($splat.Keys)) { # then strip out any parameter
-            if (-not $convertToMaml.Parameters.ContainsKey($k)) { # that wasn't in ConvertTo-MAML.
+            if (-not $getMAML.Parameters.ContainsKey($k)) { # that wasn't in Get-MAML.
                 $splat.Remove($k)
             }
         }
@@ -90,8 +90,8 @@
             
             $theModuleHelpFile = Join-Path $theModuleCultureDir "$m-Help.xml" # Construct the path to the module help file (e.g. en-us\Module-Help.xml)
 
-            & $convertToMaml @splat | # Convert the module help to MAML,
-                Set-Content -Encoding UTF8 -Path $theModuleHelpFile # and write the file.
+            & $getMAML @splat | # Convert the module help to MAML,
+                Set-Content -Encoding UTF8 -Path $theModuleHelpFile -Passthru: $PassThru # and write the file.
          }
 
         if ($t -gt 1) {
