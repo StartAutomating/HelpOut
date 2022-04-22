@@ -11,7 +11,7 @@ Get markdown help for each command in a module and saves it to the appropriate l
 
 ---
 ### Related Links
-* [Get-MarkdownHelp](docs/Get-MarkdownHelp.md)
+* [Get-MarkdownHelp](Get-MarkdownHelp.md)
 ---
 ### Examples
 #### EXAMPLE 1

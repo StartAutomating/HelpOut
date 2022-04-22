@@ -11,7 +11,7 @@ Gets Help for a given command, in Markdown
 
 ---
 ### Related Links
-* [Save-MarkdownHelp](docs/Save-MarkdownHelp.md)
+* [Save-MarkdownHelp](Save-MarkdownHelp.md)
 ---
 ### Examples
 #### EXAMPLE 1

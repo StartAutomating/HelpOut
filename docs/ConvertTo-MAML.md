@@ -12,7 +12,7 @@ Converts command help to MAML (Microsoft Assistance Markup Language).
 ---
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
-* [Save-MAML](docs/Save-MAML.md)
+* [Save-MAML](Save-MAML.md)
 ---
 ### Examples
 #### EXAMPLE 1

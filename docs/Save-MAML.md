@@ -11,7 +11,7 @@ Generates a Module's MAML file, and then saves it to the appropriate location.
 
 ---
 ### Related Links
-* [ConvertTo-MAML](docs/ConvertTo-MAML.md)
+* [ConvertTo-MAML](ConvertTo-MAML.md)
 ---
 ### Examples
 #### EXAMPLE 1
