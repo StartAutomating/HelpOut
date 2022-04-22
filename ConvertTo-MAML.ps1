@@ -17,6 +17,9 @@
         Get-Help
     .Link
         Save-MAML
+    .INPUTS 
+        [Management.Automation.CommandInfo]
+        Accepts a command
     .Outputs
         [String]
         The MAML, as a String.  This is the default.
