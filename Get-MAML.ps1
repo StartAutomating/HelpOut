@@ -1,18 +1,18 @@
-﻿function ConvertTo-MAML
+﻿function Get-MAML
 {
     <#
     .Synopsis
-        Converts command help to MAML
+        Gets MAML help
     .Description
-        Converts command help to MAML (Microsoft Assistance Markup Language).
+        Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
     .Example
-        ConvertTo-Maml -Name ConvertTo-Maml
+        Get-MAML -Name Get-MAML
     .Example
-        Get-Command ConvertTo-Maml | ConvertTo-Maml
+        Get-Command Get-MAML | Get-MAML
     .Example
-        ConvertTo-Maml -Name ConvertTo-Maml -Compact
+        Get-MAML -Name Get-MAML -Compact
     .Example
-        ConvertTo-Maml -Name ConvertTo-Maml -XML
+        Get-MAML -Name Get-MAML -XML
     .Link
         Get-Help
     .Link

@@ -1,9 +1,10 @@
+#requires -Module HelpOut
 describe HelpOut {
-    context 'ConvertTo-MAML' {
-        it 'Can Convert commands to MAML' {
-            $maml = Get-Command ConvertTo-Maml | ConvertTo-Maml
+    context 'Get-MAML' {
+        it 'Can get MAML' {
+            $maml = Get-Command Get-MAML | Get-MAML
             $maml = [xml]$maml
-            $maml.helpItems.command.details.name | Should -be 'ConvertTo-MAML'
+            $maml.helpItems.command.details.name | Should -be 'Get-MAML'
         }
     }
 
@@ -12,6 +13,12 @@ describe HelpOut {
             $savedMaml = Save-MAML -Module HelpOut -PassThru
             [xml]$savedMaml
 
+        }
+    }
+
+    context 'Install-MAML' {
+        it 'Can install MAML' {
+            Install-MAML -Module HelpOut
         }
     }
 
