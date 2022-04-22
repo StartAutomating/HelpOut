@@ -157,7 +157,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 } else { $null }
             if ($sectionContent) {
                 $sectionContent
-                if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notlike '*---') { 
+                if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') { 
                     '---'
                 }
             }
