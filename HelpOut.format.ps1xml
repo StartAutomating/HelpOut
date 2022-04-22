@@ -219,8 +219,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         }
         Inputs = {
             if ($helpObject.inputTypes -and $helpObject.inputTypes.inputType) {
-                '---'
-                &amp; ${HelpOut_Format-Markdown} -Heading "Inputs" -HeadingSize 3
+                 &amp; ${HelpOut_Format-Markdown} -Heading "Inputs" -HeadingSize 3
                 foreach ($inputType in $helpObject.inputTypes.inputType) {
                     $inputType.type.name + [Environment]::NewLine
                     foreach ($desc in $inputType.Description) {
