@@ -32,6 +32,7 @@ function Get-MAML
     #>
     [CmdletBinding(DefaultParameterSetName='CommandInfo')]
     [OutputType([string],[xml])]
+    [Alias('ConvertTo-MAML')]
     param( 
     # The name of or more commands.
     [Parameter(ParameterSetName='ByName',Position=0,ValueFromPipelineByPropertyName=$true)]
