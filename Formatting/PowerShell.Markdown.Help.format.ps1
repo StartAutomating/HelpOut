@@ -61,7 +61,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             if ($helpObject.Parameters) {                
                 Format-Markdown -Heading "Parameters" -HeadingSize 3
     
-                $parameterTotal= $helpObject.parameters.parameter.Length
+                $parameterTotal= @($helpObject.parameters.parameter).Length
                 $parameterCounter = 0 
                 foreach ($parameter in $helpObject.Parameters.parameter) {
                     $parameterCounter++
@@ -83,11 +83,11 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         if ($parameter.Name -eq 'Confirm') {
                             '-Confirm is used to -Confirm each operation.
     
-    If you pass ```-Confirm:$false``` you will not be prompted.
+If you pass ```-Confirm:$false``` you will not be prompted.
     
     
-    If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
-    '
+If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
+'
                         }
                         continue
                     }
@@ -132,9 +132,11 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             }
         }
         Notes = {
-            Format-Markdown -Heading "Notes" -HeadingSize 3
-            foreach ($note in $helpObject.AlertSet.alert) {
-                ($note | Out-String).Trim() + [Environment]::NewLine
+            if ($helpObject.alertSet) {
+                Format-Markdown -Heading "Notes" -HeadingSize 3
+                foreach ($note in $helpObject.AlertSet.alert) {
+                    ($note | Out-String).Trim() + [Environment]::NewLine
+                }
             }
         }
     }
@@ -155,7 +157,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                 } else { $null }
             if ($sectionContent) {
                 $sectionContent
-                if ($sectionCounter -lt $orderOfSections.Length) { 
+                if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notlike '*---') { 
                     '---'
                 }
             }
