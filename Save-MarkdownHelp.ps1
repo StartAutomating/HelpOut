@@ -44,7 +44,11 @@ function Save-MarkdownHelp
     # If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module with a given Regex replacement.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $ReplaceScriptNameWith
+    $ReplaceScriptNameWith,
+
+    # If set, will output changed or created files.
+    [switch]
+    $PassThru
     )
 
     begin {
@@ -97,7 +101,10 @@ function Save-MarkdownHelp
                 $getMarkdownHelpSplat = @{Name="$cmd"}
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
+                & $GetMarkdownHelp @getMarkdownHelpSplat| Out-String -Width 1mb | Set-Content -Path $docOutputPath -Encoding utf8
+                if ($PassThru) {
+                    Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                }
             }
 
             if ($ScriptPath) {
@@ -124,8 +131,13 @@ function Save-MarkdownHelp
                             $getMarkdownHelpSplat.Rename = $relativePath
                             if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                             else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                            & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
+                            & $GetMarkdownHelp @getMarkdownHelpSplat| Out-String -Width 1mb | Set-Content -Path $docOutputPath -Encoding utf8
+                            if ($PassThru) {
+                                Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                            }
                         }
+
+                    
                 }
             }
          }
