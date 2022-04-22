@@ -28,7 +28,23 @@ function Save-MarkdownHelp
     # If provided without -OutputPath, will assume that a wiki resides in a sibling directory of the module.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
-    $Wiki
+    $Wiki,
+
+    # If provided, will generate documentation for any scripts found within these paths.
+    # -ScriptPath can be either a file name or a full path.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ScriptPath,
+
+    # If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceScriptName,
+
+    # If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module with a given Regex replacement.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceScriptNameWith
     )
 
     begin {
@@ -52,9 +68,8 @@ function Save-MarkdownHelp
 
             $theModule = Get-Module $m # Find the module
             if (-not $theModule) { continue } # (continue if we couldn't).
-
-            if (-not $psBoundParameters.OutputPath) {
-                $theModuleRoot = $theModule | Split-Path # Find the module's root,
+            $theModuleRoot = $theModule | Split-Path # Find the module's root,
+            if (-not $psBoundParameters.OutputPath) {                
                 $OutputPath = 
                     if ($Wiki) {
                         Split-Path $theModuleRoot | Join-Path -ChildPath "$($theModule.Name).wiki"
@@ -83,6 +98,33 @@ function Save-MarkdownHelp
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                 & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
+            }
+
+            if ($ScriptPath) {
+                $childitems = Get-ChildItem -Path $theModuleRoot -Recurse 
+                foreach ($sp in $ScriptPath) {
+                    $childitems |
+                        Where-Object { $_.Name -eq $sp -or $_.FullName -eq $sp } |
+                        Get-ChildItem |
+                        Where-Object Extension -eq '.ps1' |
+                        ForEach-Object {
+                            $ps1File = $_
+                            $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"}
+
+                            $replacedName = $ps1File.Name
+                            @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) {
+                                if ($ReplaceScriptNameWith[$ri]) {
+                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
+                                } else {
+                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri]
+                                }
+                            })
+                            $docOutputPath = Join-Path $outputPath ($replacedName + '.md')
+                            if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
+                            else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
+                            & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
+                        }
+                }
             }
          }
 
