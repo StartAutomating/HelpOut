@@ -111,15 +111,17 @@ function Save-MarkdownHelp
                             $ps1File = $_
                             $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"}
 
-                            $replacedName = $ps1File.Name
+                            $replacedFileName = $ps1File.Name
                             @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) {
                                 if ($ReplaceScriptNameWith[$ri]) {
-                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
+                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
                                 } else {
-                                    $replacedName = $replacedName -replace $ReplaceScriptName[$ri]
+                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri]
                                 }
                             })
-                            $docOutputPath = Join-Path $outputPath ($replacedName + '.md')
+                            $docOutputPath = Join-Path $outputPath ($replacedFileName + '.md')
+                            $relativePath = $ps1File.FullName.Substring("$theModuleRoot".Length).TrimStart('/\').Replace('\','/')
+                            $getMarkdownHelpSplat.Rename = $relativePath
                             if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                             else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                             & $GetMarkdownHelp @getMarkdownHelpSplat| Set-Content -Path $docOutputPath -Encoding utf8
