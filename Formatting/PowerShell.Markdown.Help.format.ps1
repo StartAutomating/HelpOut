@@ -122,8 +122,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         if ($helpObject.returnValues -and $helpObject.returnValues.returnValue) {
             '---'
             Format-Markdown -Heading "Outputs" -HeadingSize 3
-            foreach ($returnValue in $helpObject.returnValues.returnValue) {
-                $returnValue.Text
+            foreach ($returnValue in $helpObject.returnValues.returnValue) {                
+                $returnValue.Type.Name
                 [Environment]::NewLine
             }
         }
