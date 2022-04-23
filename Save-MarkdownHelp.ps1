@@ -48,7 +48,12 @@ function Save-MarkdownHelp
 
     # If set, will output changed or created files.
     [switch]
-    $PassThru
+    $PassThru,
+
+    # The order of the sections.  If not provided, this will be the order they are defined in the formatter.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $SectionOrder
     )
 
     begin {
@@ -62,7 +67,10 @@ function Save-MarkdownHelp
     }
 
     process {
-
+        $getMarkdownHelpSplatBase = @{}
+        if ($SectionOrder) {
+            $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
+        }
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
             if ($t -gt 1) {
@@ -98,7 +106,7 @@ function Save-MarkdownHelp
 
             foreach ($cmd in $theModule.ExportedCommands.Values) {
                 $docOutputPath = Join-Path $outputPath ($cmd.Name + '.md')
-                $getMarkdownHelpSplat = @{Name="$cmd"}
+                $getMarkdownHelpSplat = @{Name="$cmd"} + $getMarkdownHelpSplatBase
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                 & $GetMarkdownHelp @getMarkdownHelpSplat| Out-String -Width 1mb | Set-Content -Path $docOutputPath -Encoding utf8
@@ -116,8 +124,7 @@ function Save-MarkdownHelp
                         Where-Object Extension -eq '.ps1' |
                         ForEach-Object {
                             $ps1File = $_
-                            $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"}
-
+                            $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"} + $getMarkdownHelpSplatBase
                             $replacedFileName = $ps1File.Name
                             @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) {
                                 if ($ReplaceScriptNameWith[$ri]) {
