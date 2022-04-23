@@ -2,7 +2,13 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
 
     $MarkdownSections = [Ordered]@{
-        Name =  { Format-Markdown -Heading $helpObject.Name }
+        Name =  {
+            if ($helpObject.Rename) {
+                Format-Markdown -Heading $helpObject.Rename
+            } else {
+                Format-Markdown -Heading $helpObject.Name
+            }
+        }
         Synopsis = {
             Format-Markdown -HeadingSize 3 -Heading "Synopsis"
 
@@ -35,8 +41,10 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         else {
                             ""
                         }
+
+                    $linkText = if ($nav.LinkText) { $linkText } else {$linkUrl}
                     
-                    Format-Markdown -Link $linkUrl -inputObject $nav.LinkText -BulletPoint                
+                    Format-Markdown -Link $linkUrl -inputObject $linkText -BulletPoint
                 }
             }
         }
@@ -127,7 +135,11 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         Syntax = {
             if ($helpObject.syntax.syntaxItem) {
                 Format-Markdown -Heading "Syntax" -HeadingSize 3
-                ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
+                if ($helpObject.Rename) {
+                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' -replace "$($HelpObject.Name.Replace("\", "\\"))", $helpObject.Rename | Format-Markdown -CodeLanguage PowerShell
+                } else {
+                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
+                }
             }
         }
         Notes = {
