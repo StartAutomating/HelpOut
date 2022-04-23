@@ -11,7 +11,7 @@ Get markdown help for each command in a module and saves it to the appropriate l
 
 ---
 ### Related Links
-* [Get-MarkdownHelp](Get-MarkdownHelp.md)
+* [](Get-MarkdownHelp.md)
 ---
 ### Examples
 #### EXAMPLE 1
@@ -58,9 +58,10 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 |--------------|--------|-------|---------------------|
 |```[Switch]```|false   |named  |true (ByPropertyName)|
 ---
-#### **ScriptDirectory**
+#### **ScriptPath**
 
-If provided, will generate documentation for any scripts found within these sub directories.
+If provided, will generate documentation for any scripts found within these paths.
+-ScriptPath can be either a file name or a full path.
 
 
 
@@ -88,9 +89,29 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 |----------------|--------|-------|---------------------|
 |```[String[]]```|false   |named  |true (ByPropertyName)|
 ---
+#### **PassThru**
+
+If set, will output changed or created files.
+
+
+
+|Type          |Requried|Postion|PipelineInput|
+|--------------|--------|-------|-------------|
+|```[Switch]```|false   |named  |false        |
+---
+#### **SectionOrder**
+
+The order of the sections.  If not provided, this will be the order they are defined in the formatter.
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptDirectory <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [<CommonParameters>]
 ```
 ---
 

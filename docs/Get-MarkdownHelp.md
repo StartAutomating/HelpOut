@@ -11,7 +11,7 @@ Gets Help for a given command, in Markdown
 
 ---
 ### Related Links
-* [Save-MarkdownHelp](Save-MarkdownHelp.md)
+* [](Save-MarkdownHelp.md)
 ---
 ### Examples
 #### EXAMPLE 1
@@ -51,6 +51,26 @@ If set, will interlink documentation as if it were for GitHub pages, beneath a g
 |--------------|--------|-------|-------------|
 |```[String]```|false   |named  |false        |
 ---
+#### **Rename**
+
+If provided, will rename the help topic before getting markdown.
+
+
+
+|Type          |Requried|Postion|PipelineInput        |
+|--------------|--------|-------|---------------------|
+|```[String]```|false   |named  |true (ByPropertyName)|
+---
+#### **SectionOrder**
+
+The order of the sections.  If not provided, this will be the order they are defined in the formatter.
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
 ### Outputs
 [string]
 
@@ -60,7 +80,7 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [<CommonParameters>]
 ```
 ---
 

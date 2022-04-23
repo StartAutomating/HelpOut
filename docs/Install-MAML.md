@@ -20,8 +20,8 @@ Ideally, you should use the allcommands script
 
 ---
 ### Related Links
-* [Save-MAML](Save-MAML.md)
-* [ConvertTo-MAML](ConvertTo-MAML.md)
+* [](Save-MAML.md)
+* [](ConvertTo-MAML.md)
 ---
 ### Examples
 #### EXAMPLE 1
