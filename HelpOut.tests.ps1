@@ -33,4 +33,14 @@ describe HelpOut {
             Get-Command Save-MAML | Measure-Help | Select-Object -ExpandProperty CommentPercent | Should -BeGreaterThan 20
         }
     }
+
+    context 'Get-MarkdownHelp' {
+        $markdownHelp = "$(Get-MarkdownHelp -Name Get-MarkdownHelp | Out-String -Width 1mb)"
+        $markdownHelp | Should -Match "^\s{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
+    }
+
+    context 'Save-MarkdownHelp' {
+        $savedMarkdown = Save-MarkdownHelp -PassThru -Module HelpOut
+        $savedMarkdown | Select-Object -ExpandProperty FullName | Should -BeLike *HelpOut*docs*
+    }
 }
