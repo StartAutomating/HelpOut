@@ -34,6 +34,12 @@ describe HelpOut {
         }
     }
 
+    context 'Get-ScriptStory' {
+        it 'Can get a markdown narrative from a script' {
+            Get-Command Get-ScriptStory | Get-ScriptStory | Should -belike '*##*On Each Input*'
+        }
+    }
+
     context 'Get-MarkdownHelp' {
         $markdownHelp = "$(Get-MarkdownHelp -Name Get-MarkdownHelp | Out-String -Width 1mb)"
         $markdownHelp | Should -Match "^\s{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
