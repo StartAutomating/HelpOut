@@ -1,4 +1,7 @@
 ### 0.2.1
+* Get/Save-MarkdownHelp:  Support for -SectionOrder (#19)
+* Save-MarkdownHelp:  Adding -Passthru (#17).  Converting Markdown Help into a string (#18)
+* Get-MarkdownHelp: Returning Object (#18)
 * Fixing URL-only related links (#14)
 * Adding Get-MarkdownHelp -Rename (#13)
 * Retitling Script Files with relative path (#12)
