@@ -51,12 +51,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
-        CommitMessage: ${{inputs.CommitMessage}}
-        ModuleName: ${{inputs.ModuleName}}
         UserName: ${{inputs.UserName}}
-        UserEmail: ${{inputs.UserEmail}}
-        HelpOutScript: ${{inputs.HelpOutScript}}
         SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
+        HelpOutScript: ${{inputs.HelpOutScript}}
+        ModuleName: ${{inputs.ModuleName}}
+        UserEmail: ${{inputs.UserEmail}}
+        CommitMessage: ${{inputs.CommitMessage}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -179,7 +179,7 @@ runs:
         if (-not $SkipHelpOutPS1) {
             $HelpOutFiles = @(
             Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE |
-                Where-Object Name -Match '\.EZ(Out|Format)\.ps1$')
+                Where-Object Name -Match '\.HelpOut\.ps1$')
                 
             if ($HelpOutFiles) {
                 $HelpOutFiles|        
