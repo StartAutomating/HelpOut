@@ -105,7 +105,7 @@ $HelpOutPS1List  = @()
 if (-not $SkipHelpOutPS1) {
     $HelpOutFiles = @(
     Get-ChildItem -Recurse -Path $env:GITHUB_WORKSPACE |
-        Where-Object Name -Match '\.EZ(Out|Format)\.ps1$')
+        Where-Object Name -Match '\.HelpOut\.ps1$')
         
     if ($HelpOutFiles) {
         $HelpOutFiles|        
