@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.2.1'
+    ModuleVersion='0.2.2'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,11 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.2.2
+* Fixing issue generating docs (#22)
+* HelpOut Action Fix (#20)
+---
+
 ### 0.2.1
 * Get/Save-MarkdownHelp:  Support for -SectionOrder (#19)
 * Save-MarkdownHelp:  Adding -Passthru (#17).  Converting Markdown Help into a string (#18)

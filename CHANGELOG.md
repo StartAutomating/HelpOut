@@ -1,3 +1,8 @@
+### 0.2.2
+* Fixing issue generating docs (#22)
+* HelpOut Action Fix (#20)
+---
+
 ### 0.2.1
 * Get/Save-MarkdownHelp:  Support for -SectionOrder (#19)
 * Save-MarkdownHelp:  Adding -Passthru (#17).  Converting Markdown Help into a string (#18)

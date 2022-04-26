@@ -11,8 +11,8 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 ---
 ### Related Links
-* [](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
-* [](Save-MAML.md)
+* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Save-MAML](Save-MAML.md)
 ---
 ### Examples
 #### EXAMPLE 1
