@@ -11,7 +11,7 @@ Determines the percentage of documentation in a given script
 
 ---
 ### Related Links
-* [](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 ---
 ### Examples
 #### EXAMPLE 1

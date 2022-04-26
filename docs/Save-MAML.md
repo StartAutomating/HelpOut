@@ -11,7 +11,7 @@ Generates a Module's MAML file, and then saves it to the appropriate location.
 
 ---
 ### Related Links
-* [](Get-MAML.md)
+* [Get-MAML](Get-MAML.md)
 ---
 ### Examples
 #### EXAMPLE 1
