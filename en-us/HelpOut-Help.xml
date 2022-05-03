@@ -8,7 +8,7 @@
       <maml:description>
         <maml:para>Gets MAML help</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.</maml:para>
@@ -400,7 +400,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Gets Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets Help for a given command, in Markdown</maml:para>
@@ -463,11 +463,25 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>SectionOrder</maml:name>
           <maml:description>
-            <maml:para>The order of the sections.  If not provided, this will be the order they are defined in the formatter.</maml:para>
+            <maml:para>The order of the sections.
+If not provided, this will be the order they are defined in the formatter.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
           <dev:type>
             <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoValidValueEnumeration</maml:name>
+          <maml:description>
+            <maml:para>If set, will not enumerate valid values and enums of parameters.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>
@@ -503,6 +517,19 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoValidValueEnumeration</maml:name>
+        <maml:description>
+          <maml:para>If set, will not enumerate valid values and enums of parameters.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Rename</maml:name>
         <maml:description>
           <maml:para>If provided, will rename the help topic before getting markdown.</maml:para>
@@ -518,7 +545,8 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>SectionOrder</maml:name>
         <maml:description>
-          <maml:para>The order of the sections.  If not provided, this will be the order they are defined in the formatter.</maml:para>
+          <maml:para>The order of the sections.
+If not provided, this will be the order they are defined in the formatter.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
@@ -581,7 +609,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Gets a script's references</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.</maml:para>
@@ -707,7 +735,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Gets a Script's story</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the Script's "Story"</maml:para>
@@ -870,7 +898,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Installs MAML into a module</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Installs MAML into a module.  </maml:para>
@@ -1224,7 +1252,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Determines the percentage of documentation</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Determines the percentage of documentation in a given script</maml:para>
@@ -1367,7 +1395,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's MAML</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Generates a Module's MAML file, and then saves it to the appropriate location.</maml:para>
@@ -1621,7 +1649,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.2.1</dev:version>
+      <dev:version>0.2.2</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Get markdown help for each command in a module and saves it to the appropriate location.</maml:para>
@@ -1736,9 +1764,39 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>IncludeTopic</maml:name>
+          <maml:description>
+            <maml:para>One or more topic files to include.
+Topic files will be treated as markdown and directly copied inline.
+By default ```\.help\.txt$``` and ```\.md$```</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>IncludeTopic</maml:name>
+        <maml:description>
+          <maml:para>One or more topic files to include.
+Topic files will be treated as markdown and directly copied inline.
+By default ```\.help\.txt$``` and ```\.md$```</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Module</maml:name>
         <maml:description>
