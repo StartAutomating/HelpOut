@@ -60,7 +60,12 @@ function Save-MarkdownHelp
     # By default ```\.help\.txt$``` and ```\.md$```
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $IncludeTopic = @('\.help\.txt$', '\.md$')
+    $IncludeTopic = @('\.help\.txt$', '\.md$'),
+
+    # If set, will not enumerate valid values and enums of parameters.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $NoValidValueEnumeration
     )
 
     begin {
@@ -77,6 +82,9 @@ function Save-MarkdownHelp
         $getMarkdownHelpSplatBase = @{}
         if ($SectionOrder) {
             $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
+        }
+        if ($NoValidValueEnumeration) {
+            $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
         }
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
