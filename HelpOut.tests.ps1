@@ -41,12 +41,16 @@ describe HelpOut {
     }
 
     context 'Get-MarkdownHelp' {
-        $markdownHelp = "$(Get-MarkdownHelp -Name Get-MarkdownHelp | Out-String -Width 1mb)"
-        $markdownHelp | Should -Match "^\s{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
+        it 'Can Get Markdown Help for a command' {
+            $markdownHelp = "$(Get-MarkdownHelp -Name Get-MarkdownHelp | Out-String -Width 1mb)"
+            $markdownHelp | Should -Match "^\s{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
+        }
     }
 
     context 'Save-MarkdownHelp' {
-        $savedMarkdown = Save-MarkdownHelp -PassThru -Module HelpOut
-        $savedMarkdown | Select-Object -ExpandProperty FullName | Should -BeLike *HelpOut*docs*
+        it 'Can Save Markdown help for a whole module' {
+            $savedMarkdown = Save-MarkdownHelp -PassThru -Module HelpOut
+            $savedMarkdown | Select-Object -ExpandProperty FullName | Should -BeLike *HelpOut*docs*
+        }
     }
 }
