@@ -34,10 +34,16 @@ function Get-MarkdownHelp {
     [string]
     $Rename,
 
-    # The order of the sections.  If not provided, this will be the order they are defined in the formatter.
+    # The order of the sections.
+    # If not provided, this will be the order they are defined in the formatter.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $SectionOrder
+    $SectionOrder,
+
+    # If set, will not enumerate valid values and enums of parameters.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $NoValidValueEnumeration
     )
 
     process
@@ -68,6 +74,7 @@ function Get-MarkdownHelp {
                         if ($myParams.ContainsKey("GitHubDocRoot")) {
                             $helpObj | Add-Member NoteProperty DocLink $GitHubDocRoot -Force
                         }
+                        $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
                         $helpObj
                     }
                 } 

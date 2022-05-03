@@ -1,0 +1,1 @@
+﻿### HelpOut is a PowerShell module that helps you build and manage help for a module.

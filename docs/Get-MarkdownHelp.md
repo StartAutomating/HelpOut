@@ -63,13 +63,24 @@ If provided, will rename the help topic before getting markdown.
 ---
 #### **SectionOrder**
 
-The order of the sections.  If not provided, this will be the order they are defined in the formatter.
+The order of the sections.
+If not provided, this will be the order they are defined in the formatter.
 
 
 
 |Type            |Requried|Postion|PipelineInput        |
 |----------------|--------|-------|---------------------|
 |```[String[]]```|false   |named  |true (ByPropertyName)|
+---
+#### **NoValidValueEnumeration**
+
+If set, will not enumerate valid values and enums of parameters.
+
+
+
+|Type          |Requried|Postion|PipelineInput        |
+|--------------|--------|-------|---------------------|
+|```[Switch]```|false   |named  |true (ByPropertyName)|
 ---
 ### Outputs
 [string]
@@ -80,7 +91,7 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [<CommonParameters>]
 ```
 ---
 

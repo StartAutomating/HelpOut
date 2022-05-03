@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.2.2'
+    ModuleVersion='0.2.3'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,12 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.2.3
+* Get/Save-MarkdownHelp:  Support for -NoValidValueEnumeration (re #25)
+* Save-MarkdownHelp:  Adding -IncludeTopic (Fixes #24, #26)
+* Adding ValidateSet/Enum Formatting for Markdown Help (Fixing #25)
+
+---
 ### 0.2.2
 * Fixing issue generating docs (#22)
 * HelpOut Action Fix (#20)

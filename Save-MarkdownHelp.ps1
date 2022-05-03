@@ -53,7 +53,19 @@ function Save-MarkdownHelp
     # The order of the sections.  If not provided, this will be the order they are defined in the formatter.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $SectionOrder
+    $SectionOrder,
+
+    # One or more topic files to include.
+    # Topic files will be treated as markdown and directly copied inline.
+    # By default ```\.help\.txt$``` and ```\.md$```
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $IncludeTopic = @('\.help\.txt$', '\.md$'),
+
+    # If set, will not enumerate valid values and enums of parameters.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $NoValidValueEnumeration
     )
 
     begin {
@@ -70,6 +82,9 @@ function Save-MarkdownHelp
         $getMarkdownHelpSplatBase = @{}
         if ($SectionOrder) {
             $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
+        }
+        if ($NoValidValueEnumeration) {
+            $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
         }
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
@@ -116,7 +131,7 @@ function Save-MarkdownHelp
             }
 
             if ($ScriptPath) {
-                $childitems = Get-ChildItem -Path $theModuleRoot -Recurse 
+                $childitems = Get-ChildItem -Path $theModuleRoot -Recurse
                 foreach ($sp in $ScriptPath) {
                     $childitems |
                         Where-Object { $_.Name -eq $sp -or $_.FullName -eq $sp } |
@@ -146,6 +161,25 @@ function Save-MarkdownHelp
 
                     
                 }
+            }
+
+            if ($IncludeTopic) {
+                Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                    ForEach-Object {
+                        $fileInfo = $_
+                        foreach ($inc in $IncludeTopic) {
+                            if ($fileInfo.Name -match $inc) {
+                                $replacedName = ($fileInfo.Name -replace $inc)
+                                if ($replacedName -eq "about_$module") {
+                                    $replacedName = 'README'
+                                }
+                                $dest = Join-Path $OutputPath ($replacedName + '.md')
+                                if ($fileInfo.FullName -ne "$dest") {
+                                    $fileInfo | Copy-Item -Destination $dest
+                                }
+                            }
+                        }
+                    }
             }
          }
 

@@ -1,5 +1,6 @@
 Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
+    $helpCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
 
     $MarkdownSections = [Ordered]@{
         Name =  {
@@ -102,6 +103,21 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
     
                     ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
     
+                    if (-not $helpObject.NoValidValueEnumeration -and $helpCmd -and $helpCmd.Parameters.($parameter.Name)) {
+                        $parameterMetadata = $helpCmd.Parameters[$parameter.Name]
+                        $validValuesList = @(
+                            if ($parameterMetadata.ParameterType.IsSubclassOf([Enum])) {
+                                [Enum]::GetValues($parameterMetadata.ParameterType)
+                            } elseif ($parameterMetadata.Attributes.ValidValues) {
+                                $parameterMetadata.Attributes.ValidValues
+                            }
+                        )
+                        if ($validValuesList) {
+                            "Valid Values:" + [Environment]::NewLine
+                            $validValuesList | Format-Markdown -BulletPoint
+                        }
+                    }
+
                     [Ordered]@{
                         Type = '```' + "[" + $($parameter.type.name -replace 'SwitchParameter', 'Switch') + "]" + '```'
                         Requried = $parameter.required
