@@ -31,7 +31,8 @@ function Save-MarkdownHelp
     $Wiki,
 
     # If provided, will generate documentation for any scripts found within these paths.
-    # -ScriptPath can be either a file name or a full path.
+    # -ScriptPath can be either a file name or a full path.  
+    # If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $ScriptPath,
@@ -134,7 +135,9 @@ function Save-MarkdownHelp
                 $childitems = Get-ChildItem -Path $theModuleRoot -Recurse
                 foreach ($sp in $ScriptPath) {
                     $childitems |
-                        Where-Object { $_.Name -eq $sp -or $_.FullName -eq $sp } |
+                        Where-Object { 
+                                $_.Name -eq $sp -or $_.FullName -eq $sp -or $_.Name -like $sp -or $_.FullName -like $sp
+                        } |
                         Get-ChildItem |
                         Where-Object Extension -eq '.ps1' |
                         ForEach-Object {
