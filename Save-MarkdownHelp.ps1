@@ -31,7 +31,8 @@ function Save-MarkdownHelp
     $Wiki,
 
     # If provided, will generate documentation for any scripts found within these paths.
-    # -ScriptPath can be either a file name or a full path.
+    # -ScriptPath can be either a file name or a full path.  
+    # If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $ScriptPath,
@@ -65,7 +66,14 @@ function Save-MarkdownHelp
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
-    $NoValidValueEnumeration
+    $NoValidValueEnumeration,
+
+    # A list of command types to skip.  
+    # If not provided, all types of commands from the module will be saved as a markdown document.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('SkipCommandTypes','OmitCommandType','OmitCommandTypes')]
+    [Management.Automation.CommandTypes[]]
+    $SkipCommandType
     )
 
     begin {
@@ -75,10 +83,10 @@ function Save-MarkdownHelp
                 $MyInvocation.MyCommand.ScriptBlock.Module.ExportedCommands['Get-MarkdownHelp']
             } else {
                 $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-MarkdownHelp', 'Function')
-            }        
+            }
     }
 
-    process {
+    process {        
         $getMarkdownHelpSplatBase = @{}
         if ($SectionOrder) {
             $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
@@ -121,6 +129,9 @@ function Save-MarkdownHelp
 
             foreach ($cmd in $theModule.ExportedCommands.Values) {
                 $docOutputPath = Join-Path $outputPath ($cmd.Name + '.md')
+                if ($SkipCommandType -and $SkipCommandType -contains $cmd.CommandType) {
+                    continue
+                }
                 $getMarkdownHelpSplat = @{Name="$cmd"} + $getMarkdownHelpSplatBase
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
@@ -134,7 +145,9 @@ function Save-MarkdownHelp
                 $childitems = Get-ChildItem -Path $theModuleRoot -Recurse
                 foreach ($sp in $ScriptPath) {
                     $childitems |
-                        Where-Object { $_.Name -eq $sp -or $_.FullName -eq $sp } |
+                        Where-Object { 
+                                $_.Name -eq $sp -or $_.FullName -eq $sp -or $_.Name -like $sp -or $_.FullName -like $sp
+                        } |
                         Get-ChildItem |
                         Where-Object Extension -eq '.ps1' |
                         ForEach-Object {

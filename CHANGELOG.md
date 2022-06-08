@@ -1,3 +1,10 @@
+### 0.2.4
+* Save-MarkdownHelp:
+  * Adding -SkipCommandType (#29)
+  * -ScriptPath now allows wildcards (#28)
+* Formatting now Handles Arrays of Enums (#30)
+---
+
 ### 0.2.3
 * Get/Save-MarkdownHelp:  Support for -NoValidValueEnumeration (re #25)
 * Save-MarkdownHelp:  Adding -IncludeTopic (Fixes #24, #26)

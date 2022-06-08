@@ -61,7 +61,8 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 #### **ScriptPath**
 
 If provided, will generate documentation for any scripts found within these paths.
--ScriptPath can be either a file name or a full path.
+-ScriptPath can be either a file name or a full path.  
+If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.
 
 
 
@@ -121,9 +122,41 @@ By default ```\.help\.txt$``` and ```\.md$```
 |----------------|--------|-------|---------------------|
 |```[String[]]```|false   |named  |true (ByPropertyName)|
 ---
+#### **NoValidValueEnumeration**
+
+If set, will not enumerate valid values and enums of parameters.
+
+
+
+|Type          |Requried|Postion|PipelineInput        |
+|--------------|--------|-------|---------------------|
+|```[Switch]```|false   |named  |true (ByPropertyName)|
+---
+#### **SkipCommandType**
+
+A list of command types to skip.  
+If not provided, all types of commands from the module will be saved as a markdown document.
+
+
+
+Valid Values:
+
+* Alias
+* Function
+* Filter
+* Cmdlet
+* ExternalScript
+* Application
+* Script
+* Configuration
+* All
+|Type                  |Requried|Postion|PipelineInput        |
+|----------------------|--------|-------|---------------------|
+|```[CommandTypes[]]```|false   |named  |true (ByPropertyName)|
+---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 
