@@ -63,6 +63,12 @@ function Save-MarkdownHelp
     [string[]]
     $IncludeTopic = @('\.help\.txt$', '\.md$'),
 
+    # One or more extensions to include.
+    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png'),
+
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
@@ -199,6 +205,25 @@ function Save-MarkdownHelp
                                 if ($fileInfo.FullName -ne "$dest") {
                                     $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
                                 }
+                            }
+                        }
+                    }
+            }
+
+            if ($IncludeExtension) {
+                Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                    ForEach-Object {
+                        $fileInfo = $_
+                        foreach ($ext in $IncludeExtension) {                            
+                            if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
+                                $relativePath   = $fileInfo.FullName.Substring("$theModuleRoot".Length) -replace '^[\\/]'
+                                $outputPathLeaf = $outputPath | Split-Path -Leaf                                
+                                $dest = Join-Path $OutputPath $relativePath
+                                if ($fileInfo.FullName -ne "$dest" -and 
+                                    $relativePath -notlike "$outputPathLeaf$([IO.Path]::DirectorySeparatorChar)*") {
+                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                }
+                                break
                             }
                         }
                     }
