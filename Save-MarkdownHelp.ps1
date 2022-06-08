@@ -188,7 +188,7 @@ function Save-MarkdownHelp
                                 }
                                 $dest = Join-Path $OutputPath ($replacedName + '.md')
                                 if ($fileInfo.FullName -ne "$dest") {
-                                    $fileInfo | Copy-Item -Destination $dest
+                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
                                 }
                             }
                         }
