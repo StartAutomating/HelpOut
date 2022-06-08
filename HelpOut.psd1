@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.2.4'
+    ModuleVersion='0.2.5'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,13 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.2.5
+* Save-MarkdownHelp:
+  * Adding -IncludeExtension (#35)
+  * Applying -PassThru to -IncludeTopic (#34)
+  * Allowing wildcards in -IncludeTopic (#33)
+* Preliminary support for GitHub Pages Publishing (#32)
+---
 ### 0.2.4
 * Save-MarkdownHelp:
   * Adding -SkipCommandType (#29)

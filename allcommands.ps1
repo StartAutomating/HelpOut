@@ -1424,6 +1424,12 @@ function Save-MarkdownHelp
     [string[]]
     $IncludeTopic = @('\.help\.txt$', '\.md$'),
 
+    # One or more extensions to include.
+    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png'),
+
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
@@ -1542,15 +1548,43 @@ function Save-MarkdownHelp
                     ForEach-Object {
                         $fileInfo = $_
                         foreach ($inc in $IncludeTopic) {
-                            if ($fileInfo.Name -match $inc) {
-                                $replacedName = ($fileInfo.Name -replace $inc)
+                            $matches = $null
+                            if ($fileInfo.Name -eq $inc -or $fileInfo.Name -like $inc -or 
+                                (-not $inc.Contains('*') -and $(try {$fileInfo.Name -match $inc} catch {$null}))
+                            ) {
+                                $replacedName = 
+                                    if ($matches) {
+                                        $fileInfo.Name -replace $inc
+                                    } else {
+                                        $fileInfo.Name.Substring(0, $fileInfo.name.Length - $fileInfo.Extension.Length) -replace '\.help$'
+                                    }
+                                
                                 if ($replacedName -eq "about_$module") {
                                     $replacedName = 'README'
                                 }
                                 $dest = Join-Path $OutputPath ($replacedName + '.md')
                                 if ($fileInfo.FullName -ne "$dest") {
-                                    $fileInfo | Copy-Item -Destination $dest
+                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
                                 }
+                            }
+                        }
+                    }
+            }
+
+            if ($IncludeExtension) {
+                Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                    ForEach-Object {
+                        $fileInfo = $_
+                        foreach ($ext in $IncludeExtension) {                            
+                            if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
+                                $relativePath   = $fileInfo.FullName.Substring("$theModuleRoot".Length) -replace '^[\\/]'
+                                $outputPathLeaf = $outputPath | Split-Path -Leaf                                
+                                $dest = Join-Path $OutputPath $relativePath
+                                if ($fileInfo.FullName -ne "$dest" -and 
+                                    $relativePath -notlike "$outputPathLeaf$([IO.Path]::DirectorySeparatorChar)*") {
+                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                }
+                                break
                             }
                         }
                     }

@@ -122,6 +122,17 @@ By default ```\.help\.txt$``` and ```\.md$```
 |----------------|--------|-------|---------------------|
 |```[String[]]```|false   |named  |true (ByPropertyName)|
 ---
+#### **IncludeExtension**
+
+One or more extensions to include.
+By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
 #### **NoValidValueEnumeration**
 
 If set, will not enumerate valid values and enums of parameters.
@@ -156,7 +167,7 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 
