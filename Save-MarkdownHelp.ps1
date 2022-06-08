@@ -181,8 +181,17 @@ function Save-MarkdownHelp
                     ForEach-Object {
                         $fileInfo = $_
                         foreach ($inc in $IncludeTopic) {
-                            if ($fileInfo.Name -match $inc) {
-                                $replacedName = ($fileInfo.Name -replace $inc)
+                            $matches = $null
+                            if ($fileInfo.Name -eq $inc -or $fileInfo.Name -like $inc -or 
+                                (-not $inc.Contains('*') -and $(try {$fileInfo.Name -match $inc} catch {$null}))
+                            ) {
+                                $replacedName = 
+                                    if ($matches) {
+                                        $fileInfo.Name -replace $inc
+                                    } else {
+                                        $fileInfo.Name.Substring(0, $fileInfo.name.Length - $fileInfo.Extension.Length) -replace '\.help$'
+                                    }
+                                
                                 if ($replacedName -eq "about_$module") {
                                     $replacedName = 'README'
                                 }
