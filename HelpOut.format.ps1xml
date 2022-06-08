@@ -223,6 +223,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                                 [Enum]::GetValues($parameterMetadata.ParameterType)
                             } elseif ($parameterMetadata.Attributes.ValidValues) {
                                 $parameterMetadata.Attributes.ValidValues
+                            } elseif ($parameterMetadata.ParameterType.IsArray -and 
+                                $parameterMetadata.ParameterType.GetElementType().IsSubclassOf([Enum])) {
+                                [Enum]::GetValues($parameterMetadata.ParameterType.GetElementType())
                             }
                         )
                         if ($validValuesList) {
