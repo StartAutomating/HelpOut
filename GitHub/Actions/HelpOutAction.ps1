@@ -86,8 +86,8 @@ $processScriptOutput = { process {
             git commit -m "$($out.Message)"
         } elseif ($out.CommitMessage) {
             git commit -m "$($out.CommitMessage)"
-        }  elseif ($gitHubEvent.HeadCommit.Message) {
-            git commit -m "$($gitHubEvent.HeadCommit.Message)"
+        }  elseif ($gitHubEvent.head_commit.message) {
+            git commit -m "$($gitHubEvent.head_commit.message)"
         }  
         $anyFilesChanged = $true
     }
