@@ -46,6 +46,17 @@ $UserName
 [PSCustomObject]$PSBoundParameters | Format-List | Out-Host
 "::endgroup::" | Out-Host
 
+
+$gitHubEvent = if ($env:GITHUB_EVENT_PATH) {
+    [IO.File]::ReadAllText($env:GITHUB_EVENT_PATH) | ConvertFrom-Json
+} else { $null }
+
+@"
+::group::GitHubEvent
+$($gitHubEvent | ConvertTo-Json -Depth 100)
+::endgroup::
+"@ | Out-Host
+
 if ($env:GITHUB_ACTION_PATH) {
     $HelpOutModulePath = Join-Path $env:GITHUB_ACTION_PATH 'HelpOut.psd1'
     if (Test-path $HelpOutModulePath) {
@@ -75,7 +86,9 @@ $processScriptOutput = { process {
             git commit -m "$($out.Message)"
         } elseif ($out.CommitMessage) {
             git commit -m "$($out.CommitMessage)"
-        }
+        }  elseif ($gitHubEvent.HeadCommit.Message) {
+            git commit -m "$($gitHubEvent.HeadCommit.Message)"
+        }  
         $anyFilesChanged = $true
     }
     $out
