@@ -253,17 +253,28 @@ function Save-MarkdownHelp
                     }
             }
             
+            # If -IncludeExtension was provided
             if ($IncludeExtension) {
+                # get all files beneath the root
                 Get-ChildItem -Path $theModuleRoot -Recurse -File |
                     ForEach-Object {
                         $fileInfo = $_
-                        foreach ($ext in $IncludeExtension) {                            
+                        foreach ($ext in $IncludeExtension) { # and see if they are the right extension
                             if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
+                                # Determine the relative path
                                 $relativePath   = $fileInfo.FullName.Substring("$theModuleRoot".Length) -replace '^[\\/]'
-                                $outputPathLeaf = $outputPath | Split-Path -Leaf                                
+                                $outputPathLeaf = $outputPath | Split-Path -Leaf
+                                # and use that to determine the destination of this file.
                                 $dest = Join-Path $OutputPath $relativePath
                                 if ($fileInfo.FullName -ne "$dest" -and 
                                     $relativePath -notlike "$outputPathLeaf$([IO.Path]::DirectorySeparatorChar)*") {
+                                    # Create the file (so it creates the folder structure).
+                                    $createdFile = New-Item -ItemType File -Path $dest -Force 
+                                    if (-not $createdFile) { # If we could not, write and error and stop trying for this file.
+                                        Write-Error "Unable to initialize file: '$dest'"
+                                        break
+                                    }
+                                    # Copy the file to the destination.
                                     $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
                                 }
                                 break
