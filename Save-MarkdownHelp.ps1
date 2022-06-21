@@ -215,34 +215,44 @@ function Save-MarkdownHelp
                     }                
             }
 
+            # If -IncludeTopic was provided
             if ($IncludeTopic) {
+                # get all of the children beneath the module root
                 Get-ChildItem -Path $theModuleRoot -Recurse -File |
                     ForEach-Object {
                         $fileInfo = $_
-                        foreach ($inc in $IncludeTopic) {
+                        foreach ($inc in $IncludeTopic) { # find any files that should be included
                             $matches = $null
-                            if ($fileInfo.Name -eq $inc -or $fileInfo.Name -like $inc -or 
-                                (-not $inc.Contains('*') -and $(try {$fileInfo.Name -match $inc} catch {$null}))
+                            if ($fileInfo.Name -eq $inc -or 
+                                $fileInfo.Name -like $inc -or 
+                                $(
+                                    $incRegex = $inc -as [regex]
+                                    $incRegex -and $fileInfo.Name -match $incRegex
+                                )
                             ) {
                                 $replacedName = 
-                                    if ($matches) {
-                                        $fileInfo.Name -replace $inc
+                                    if ($matches) { # If $inc was a regex
+                                        $fileInfo.Name -replace $inc # just replace it
                                     } else {
-                                        $fileInfo.Name.Substring(0, $fileInfo.name.Length - $fileInfo.Extension.Length) -replace '\.help$'
+                                        # Otherwise, strip the file of it's extension                                        
+                                        $fileInfo.Name.Substring(0, 
+                                            $fileInfo.name.Length - $fileInfo.Extension.Length) -replace '\.help$' # (and .help).
                                     }
                                 
-                                if ($replacedName -eq "about_$module") {
-                                    $replacedName = 'README'
+                                if ($replacedName -eq "about_$module") { # If the replaced named was "about_$Module"
+                                    $replacedName = 'README' # treat it as the README
                                 }
+                                # Determine the output path
                                 $dest = Join-Path $OutputPath ($replacedName + '.md')
-                                if ($fileInfo.FullName -ne "$dest") {
-                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                # and make sure we're not overwriting ourselves
+                                if ($fileInfo.FullName -ne "$dest") { 
+                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru # then copy the file.
                                 }
                             }
                         }
                     }
             }
-
+            
             if ($IncludeExtension) {
                 Get-ChildItem -Path $theModuleRoot -Recurse -File |
                     ForEach-Object {
