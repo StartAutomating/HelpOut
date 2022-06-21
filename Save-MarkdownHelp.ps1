@@ -109,45 +109,59 @@ function Save-MarkdownHelp
 
             $theModule = Get-Module $m # Find the module
             if (-not $theModule) { continue } # (continue if we couldn't).
-            $theModuleRoot = $theModule | Split-Path # Find the module's root,
-            if (-not $psBoundParameters.OutputPath) {                
+            $theModuleRoot = $theModule | Split-Path # Find the module's root.
+            if (-not $psBoundParameters.OutputPath) { # If no -OutputPath was provided
                 $OutputPath = 
-                    if ($Wiki) {
+                    if ($Wiki) { # set the default.  If it's a wiki, it's a sibling directory
                         Split-Path $theModuleRoot | Join-Path -ChildPath "$($theModule.Name).wiki"
                     } else {
-                        Join-Path $theModuleRoot "docs"                        
+                        Join-Path $theModuleRoot "docs" # Otherwise, it's the docs subdirectory.
                     }                
             }
             
+            # If the -OutputPath does not exist
             if (-not (Test-Path $OutputPath)) {
-                $null = New-Item -ItemType Directory -Path $OutputPath
+                $null = New-Item -ItemType Directory -Path $OutputPath # create it.
             }
 
+            # Double-check that the output path 
             $outputPathItem = Get-Item $OutputPath
-            if ($outputPathItem -isnot [IO.DirectoryInfo]) {
+            if ($outputPathItem -isnot [IO.DirectoryInfo]) { # is not a directory
+                # (if it is, error out).
                 Write-Error "-OutputPath '$outputPath' must point to a directory"
                 return
             }
-
-            $myHelpParams = @{}
-            if ($wiki) { $myHelpParams.Wiki = $true}
-            else { $myHelpParams.GitHubDocRoot = $OutputPath | Split-Path}            
-
+            
+            # Next we're going to call Get-MarkdownHelp on each exported command.
             foreach ($cmd in $theModule.ExportedCommands.Values) {
-                $docOutputPath = Join-Path $outputPath ($cmd.Name + '.md')
+                # If we specified command types to skip, skip them now.
                 if ($SkipCommandType -and $SkipCommandType -contains $cmd.CommandType) {
                     continue
                 }
+                
+                # Determine the output path for each item.
+                $docOutputPath = Join-Path $outputPath ($cmd.Name + '.md')
+                # Prepare a splat for this command by copying out base splat.
                 $getMarkdownHelpSplat = @{Name="$cmd"} + $getMarkdownHelpSplatBase
-                if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
+
+                # If -Wiki was passed, call Get-MarkDownHelp with -Wiki (this impacts link format)
+                if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki }
+                # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                & $GetMarkdownHelp @getMarkdownHelpSplat| Out-String -Width 1mb | Set-Content -Path $docOutputPath -Encoding utf8
-                if ($PassThru) {
+
+                & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp 
+                    Out-String -Width 1mb |                # output it as a string
+                    Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
+
+                if ($PassThru) { # If -PassThru was provided, get the path.
                     Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
                 }
             }
 
+            
+            # If a -ScriptPath was provided
             if ($ScriptPath) {
+                # get the child items.
                 $childitems = Get-ChildItem -Path $theModuleRoot -Recurse
                 foreach ($sp in $ScriptPath) {
                     $childitems |
