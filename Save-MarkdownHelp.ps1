@@ -168,7 +168,7 @@ function Save-MarkdownHelp
                         Where-Object { 
                                 $_.Name -eq $sp -or $_.FullName -eq $sp -or $_.Name -like $sp -or $_.FullName -like $sp
                         } |
-                        Get-ChildItem |
+                        Get-ChildItem -Recurse |
                         Where-Object Extension -eq '.ps1' |
                         ForEach-Object {
                             $ps1File = $_
