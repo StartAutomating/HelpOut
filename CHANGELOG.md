@@ -1,3 +1,11 @@
+### 0.2.6
+* Save-MarkdownHelp:
+  * Improving Inline Documentation
+  * Allowing -ScriptPath to be a Regex (#41)
+  * Fixing Relative Paths with -IncludeExtension (#42)
+  * Improving -IncludeTopic regex behavior (#43)
+---
+
 ### 0.2.5
 * Save-MarkdownHelp:
   * Adding -IncludeExtension (#35)
