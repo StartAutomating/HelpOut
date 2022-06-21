@@ -161,39 +161,58 @@ function Save-MarkdownHelp
             
             # If a -ScriptPath was provided
             if ($ScriptPath) {
-                # get the child items.
-                $childitems = Get-ChildItem -Path $theModuleRoot -Recurse
-                foreach ($sp in $ScriptPath) {
-                    $childitems |
-                        Where-Object { 
-                                $_.Name -eq $sp -or $_.FullName -eq $sp -or $_.Name -like $sp -or $_.FullName -like $sp
-                        } |
-                        Get-ChildItem -Recurse |
-                        Where-Object Extension -eq '.ps1' |
-                        ForEach-Object {
-                            $ps1File = $_
-                            $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"} + $getMarkdownHelpSplatBase
-                            $replacedFileName = $ps1File.Name
-                            @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) {
-                                if ($ReplaceScriptNameWith[$ri]) {
-                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
-                                } else {
-                                    $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri]
-                                }
-                            })
-                            $docOutputPath = Join-Path $outputPath ($replacedFileName + '.md')
-                            $relativePath = $ps1File.FullName.Substring("$theModuleRoot".Length).TrimStart('/\').Replace('\','/')
-                            $getMarkdownHelpSplat.Rename = $relativePath
-                            if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
-                            else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                            & $GetMarkdownHelp @getMarkdownHelpSplat| Out-String -Width 1mb | Set-Content -Path $docOutputPath -Encoding utf8
-                            if ($PassThru) {
-                                Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
-                            }
+                # get the child items beneath the module root.
+                Get-ChildItem -Path $theModuleRoot -Recurse |                                    
+                    Where-Object {
+                        # Any Script Path whose Name or FullName is 
+                        foreach ($sp in $ScriptPath) {
+                            $_.Name -eq $sp -or     # an exact match,
+                            $_.FullName -eq $sp -or 
+                            $_.Name -like $sp -or   # a wildcard match,
+                            $_.FullName -like $sp -or $(
+                                $spRegex = $sp -as [regex]
+                                $spRegex -and (    # or a regex match
+                                    $_.Name -match $spRegex -or
+                                    $_.FullName -match $spRegex
+                                )
+                            )
                         }
-
-                    
-                }
+                        # will be included.
+                    } |
+                    # Any child items of that path will also be included
+                    Get-ChildItem -Recurse |
+                    Where-Object Extension -eq '.ps1' | # (as long as they're PowerShell Scripts).
+                    ForEach-Object {
+                        $ps1File = $_
+                        # For each script that we find, prepare to call Get-MarkdownHelp
+                        $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"} + $getMarkdownHelpSplatBase
+                        # because not all file names will be valid (or good) topic names
+                        $replacedFileName = $ps1File.Name # prepare to replace the file.
+                        @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) { # Walk over any -ReplaceScriptName(s) provided.
+                            if ($ReplaceScriptNameWith[$ri]) { # Replace it with the -ReplaceScriptNameWith parameter (if present).
+                                $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
+                            } else {
+                                # Otherwise, just remove the replacement.
+                                $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri]
+                            }
+                        })
+                        # Determine the output path
+                        $docOutputPath = Join-Path $outputPath ($replacedFileName + '.md')
+                        # and the relative path of this .ps1 to the module root.
+                        $relativePath = $ps1File.FullName.Substring("$theModuleRoot".Length).TrimStart('/\').Replace('\','/')
+                        # Then, rename the potential topic with it's relative path.
+                        $getMarkdownHelpSplat.Rename = $relativePath
+                        if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
+                        else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
+                        # Call Get-MarkdownHelp
+                        & $GetMarkdownHelp @getMarkdownHelpSplat |
+                            Out-String -Width 1mb | # format the result
+                            Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
+                        
+                        if ($PassThru) { # If -PassThru was provided
+                            Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue # return the created file.
+                        }
+                    }                
             }
 
             if ($IncludeTopic) {
