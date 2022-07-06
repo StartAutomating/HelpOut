@@ -249,8 +249,9 @@ function Save-MarkdownHelp
                         $getMarkdownHelpSplat = @{Name="$($ps1File.FullName)"} + $getMarkdownHelpSplatBase
                         # because not all file names will be valid (or good) topic names
                         $replacedFileName = $ps1File.Name # prepare to replace the file.
-                        @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) { # Walk over any -ReplaceScriptName(s) provided.
-                            if ($ReplaceScriptNameWith[$ri]) { # Replace it with the -ReplaceScriptNameWith parameter (if present).
+                        @(for ($ri = 0; $ri -lt $ReplaceScriptName.Length; $ri++) { # Walk over any -ReplaceScriptName(s) provided.                            
+                            if ($ReplaceScriptNameWith -and $ReplaceScriptNameWith[$ri]) { 
+                                # Replace it with the -ReplaceScriptNameWith parameter (if present).
                                 $replacedFileName = $replacedFileName -replace $ReplaceScriptName[$ri], $ReplaceScriptNameWith[$ri]
                             } else {
                                 # Otherwise, just remove the replacement.
