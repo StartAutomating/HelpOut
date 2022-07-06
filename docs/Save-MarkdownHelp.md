@@ -58,6 +58,37 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 |--------------|--------|-------|---------------------|
 |```[Switch]```|false   |named  |true (ByPropertyName)|
 ---
+#### **Command**
+
+If provided, will generate documentation for additional commands.
+
+
+
+|Type                 |Requried|Postion|PipelineInput        |
+|---------------------|--------|-------|---------------------|
+|```[CommandInfo[]]```|false   |named  |true (ByPropertyName)|
+---
+#### **ReplaceCommandName**
+
+Replaces parts of the names of the commands provided in the -Command parameter.
+-ReplaceScriptName is treated as a regular expression.
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
+#### **ReplaceCommandNameWith**
+
+If provided, will replace parts of the names of the scripts discovered in a -Command parameter with a given Regex replacement.
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
 #### **ScriptPath**
 
 If provided, will generate documentation for any scripts found within these paths.
@@ -167,7 +198,7 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 
