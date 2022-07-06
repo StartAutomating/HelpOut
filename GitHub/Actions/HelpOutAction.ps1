@@ -57,7 +57,12 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 ::endgroup::
 "@ | Out-Host
 
-if ($env:GITHUB_ACTION_PATH) {
+$PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" | Where-Object Name -eq 'HelpOut.psd1' | Select-Object -First 1
+
+if ($PSD1Found) {
+    $PipeScriptModulePath = $PSD1Found
+    Import-Module $PSD1Found -Force -PassThru | Out-Host
+} elseif ($env:GITHUB_ACTION_PATH) {
     $HelpOutModulePath = Join-Path $env:GITHUB_ACTION_PATH 'HelpOut.psd1'
     if (Test-path $HelpOutModulePath) {
         Import-Module $HelpOutModulePath -Force -PassThru | Out-String

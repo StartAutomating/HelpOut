@@ -51,12 +51,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
-        SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
-        ModuleName: ${{inputs.ModuleName}}
-        UserName: ${{inputs.UserName}}
+        CommitMessage: ${{inputs.CommitMessage}}
         HelpOutScript: ${{inputs.HelpOutScript}}
         UserEmail: ${{inputs.UserEmail}}
-        CommitMessage: ${{inputs.CommitMessage}}
+        SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
+        UserName: ${{inputs.UserName}}
+        ModuleName: ${{inputs.ModuleName}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -131,7 +131,12 @@ runs:
         ::endgroup::
         "@ | Out-Host
         
-        if ($env:GITHUB_ACTION_PATH) {
+        $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" | Where-Object Name -eq 'HelpOut.psd1' | Select-Object -First 1
+        
+        if ($PSD1Found) {
+            $PipeScriptModulePath = $PSD1Found
+            Import-Module $PSD1Found -Force -PassThru | Out-Host
+        } elseif ($env:GITHUB_ACTION_PATH) {
             $HelpOutModulePath = Join-Path $env:GITHUB_ACTION_PATH 'HelpOut.psd1'
             if (Test-path $HelpOutModulePath) {
                 Import-Module $HelpOutModulePath -Force -PassThru | Out-String
