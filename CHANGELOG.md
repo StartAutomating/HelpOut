@@ -1,3 +1,12 @@
+### 0.2.7
+* Save-MarkdownHelp:
+  * Adding -Command, -ReplaceCommandName, -ReplaceCommandNameWith (#45)
+  * Fixing -ReplaceScriptName issue (#46)
+* Save-MAML:
+  * -PassThru now returns files, not file contents (#47)
+* HelpOut.HelpOut.ps1 Added (Selfhosting Action (#48))
+---
+
 ### 0.2.6
 * Save-MarkdownHelp:
   * Improving Inline Documentation

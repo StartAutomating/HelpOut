@@ -1,3 +1,20 @@
+### 0.2.7
+* Save-MarkdownHelp:
+  * Adding -Command, -ReplaceCommandName, -ReplaceCommandNameWith (#45)
+  * Fixing -ReplaceScriptName issue (#46)
+* Save-MAML:
+  * -PassThru now returns files, not file contents (#47)
+* HelpOut.HelpOut.ps1 Added (Selfhosting Action (#48))
+---
+
+### 0.2.6
+* Save-MarkdownHelp:
+  * Improving Inline Documentation
+  * Allowing -ScriptPath to be a Regex (#41)
+  * Fixing Relative Paths with -IncludeExtension (#42)
+  * Improving -IncludeTopic regex behavior (#43)
+---
+
 ### 0.2.5
 * Save-MarkdownHelp:
   * Adding -IncludeExtension (#35)

@@ -11,7 +11,7 @@ describe HelpOut {
     context 'Save-MAML' {
         it 'Can save all help from a module into MAML' {
             $savedMaml = Save-MAML -Module HelpOut -PassThru
-            [xml]$savedMaml
+            [xml][IO.File]::ReadAllText($savedMaml.FullName)
 
         }
     }
