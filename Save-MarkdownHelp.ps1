@@ -30,6 +30,22 @@ function Save-MarkdownHelp
     [switch]
     $Wiki,
 
+    # If provided, will generate documentation for additional commands.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Management.Automation.CommandInfo[]]
+    $Command,
+
+    # Replaces parts of the names of the commands provided in the -Command parameter.
+    # -ReplaceScriptName is treated as a regular expression.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceCommandName,
+
+    # If provided, will replace parts of the names of the scripts discovered in a -Command parameter with a given Regex replacement.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceCommandNameWith = @(),
+
     # If provided, will generate documentation for any scripts found within these paths.
     # -ScriptPath can be either a file name or a full path.  
     # If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.
@@ -45,7 +61,7 @@ function Save-MarkdownHelp
     # If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module with a given Regex replacement.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $ReplaceScriptNameWith,
+    $ReplaceScriptNameWith = @(),
 
     # If set, will output changed or created files.
     [switch]
@@ -148,7 +164,7 @@ function Save-MarkdownHelp
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki }
                 # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-
+                
                 & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp 
                     Out-String -Width 1mb |                # output it as a string
                     Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
@@ -158,7 +174,52 @@ function Save-MarkdownHelp
                 }
             }
 
-            
+            if ($Command) {
+                foreach ($cmd in $Command) {
+                    # For each script that we find, prepare to call Get-MarkdownHelp
+                    $getMarkdownHelpSplat = @{
+                        Name= if ($cmd.Source) { "$($cmd.Source)" } else { "$cmd" }
+                    } + $getMarkdownHelpSplatBase
+
+                    $replacedCmdName = 
+                        if ($cmd.DisplayName) {
+                            $cmd.DisplayName
+                        } elseif ($cmd.Name -and $cmd.Name.Contains([IO.Path]::DirectorySeparatorChar)) {
+                            $cmd.Name
+                        }
+
+                    @(for ($ri = 0; $ri -lt $ReplaceCommandName.Length; $ri++) { # Walk over any -ReplaceScriptName(s) provided.
+                        # Replace it with the -ReplaceScriptNameWith parameter (if present).
+                        if ($ReplaceCommandNameWith -and $ReplaceCommandNameWith[$ri]) { 
+                            $replacedCmdName = $replacedCmdName -replace $ReplaceCommandName[$ri], $ReplaceCommandNameWith[$ri]
+                        } else {
+                            # Otherwise, just remove the replacement.
+                            $replacedCmdName = $replacedCmdName -replace $ReplaceCommandName[$ri]
+                        }
+                    })
+                    
+                    # Determine the output path for each item.
+                    $docOutputPath = Join-Path $outputPath ($replacedCmdName + '.md')
+                    $getMarkdownHelpSplat.Rename = $replacedCmdName
+                    if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
+                    else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
+                    
+                    try {                    
+                        & $GetMarkdownHelp @getMarkdownHelpSplat |
+                                Out-String -Width 1mb | # format the result
+                                Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
+                    }
+                    catch {
+                        $ex = $_
+                        Write-Error -Exception $ex.Exception -Message "Could not Get Help for $($cmd.Name): $($ex.Exception.Message)" -TargetObject $getMarkdownHelpSplat
+                    }
+
+                    if ($PassThru) { # If -PassThru was provided
+                        Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue # return the created file.
+                    }
+
+                }
+            }
             # If a -ScriptPath was provided
             if ($ScriptPath) {
                 # get the child items beneath the module root.
@@ -282,6 +343,8 @@ function Save-MarkdownHelp
                         }
                     }
             }
+
+            
          }
 
         if ($t -gt 1) {
