@@ -156,7 +156,7 @@ By default ```\.help\.txt$``` and ```\.md$```
 #### **IncludeExtension**
 
 One or more extensions to include.
-By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 
 
 
