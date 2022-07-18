@@ -1,3 +1,10 @@
+### 0.2.8:
+* Save-MarkdownHelp:
+  * Adding -ExcludeTopic (#55)
+  * -IncludeTopic excludes deeply nested topics (#54)
+  * -IncludeExtension default now includes .svg files (#53)
+---
+
 ### 0.2.7
 * Save-MarkdownHelp:
   * Adding -Command, -ReplaceCommandName, -ReplaceCommandNameWith (#45)
