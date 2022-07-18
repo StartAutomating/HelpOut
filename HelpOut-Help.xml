@@ -1824,7 +1824,7 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
           <maml:name>IncludeExtension</maml:name>
           <maml:description>
             <maml:para>One or more extensions to include.
-By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png</maml:para>
+By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
           <dev:type>
@@ -1881,7 +1881,7 @@ If not provided, all types of commands from the module will be saved as a markdo
         <maml:name>IncludeExtension</maml:name>
         <maml:description>
           <maml:para>One or more extensions to include.
-By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png</maml:para>
+By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
