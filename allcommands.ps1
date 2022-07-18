@@ -1444,6 +1444,12 @@ function Save-MarkdownHelp
     [string[]]
     $IncludeTopic = @('\.help\.txt$', '\.md$'),
 
+    # One or more topic file patterns to exclude.
+    # Topic files that match this pattern will not be included.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ExcludeTopic = @('\.ps1{0,1}\.md$'),
+
     # One or more extensions to include.
     # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -1658,7 +1664,7 @@ function Save-MarkdownHelp
                         if ([Regex]::Matches($relativePath, "[\\/]").Count -gt 1) {
                             return
                         }
-                        foreach ($inc in $IncludeTopic) { # find any files that should be included
+                        :NextTopicFile foreach ($inc in $IncludeTopic) { # find any files that should be included
                             $matches = $null
                             if ($fileInfo.Name -eq $inc -or 
                                 $fileInfo.Name -like $inc -or 
@@ -1667,6 +1673,19 @@ function Save-MarkdownHelp
                                     $incRegex -and $fileInfo.Name -match $incRegex
                                 )
                             ) {
+                                # Double-check that the file should not excluded.
+                                foreach ($exclude in $ExcludeTopic) {
+                                    if (
+                                        $fileInfo.Name -eq $exclude -or 
+                                        $fileInfo.Name -like $exclude -or
+                                        $(
+                                            $exclude -as [regex] -and 
+                                            $fileInfo.Name -match $exclude
+                                        )
+                                    ) {
+                                        continue NextTopicFile
+                                    }
+                                }
                                 $replacedName = 
                                     if ($matches) { # If $inc was a regex
                                         $fileInfo.Name -replace $inc # just replace it
