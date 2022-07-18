@@ -153,6 +153,17 @@ By default ```\.help\.txt$``` and ```\.md$```
 |----------------|--------|-------|---------------------|
 |```[String[]]```|false   |named  |true (ByPropertyName)|
 ---
+#### **ExcludeTopic**
+
+One or more topic file patterns to exclude.
+Topic files that match this pattern will not be included.
+
+
+
+|Type            |Requried|Postion|PipelineInput        |
+|----------------|--------|-------|---------------------|
+|```[String[]]```|false   |named  |true (ByPropertyName)|
+---
 #### **IncludeExtension**
 
 One or more extensions to include.
@@ -198,7 +209,7 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 
