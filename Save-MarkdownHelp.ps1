@@ -79,11 +79,17 @@ function Save-MarkdownHelp
     [string[]]
     $IncludeTopic = @('\.help\.txt$', '\.md$'),
 
-    # One or more extensions to include.
-    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+    # One or more topic file patterns to exclude.
+    # Topic files that match this pattern will not be included.
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png'),
+    $ExcludeTopic = @('\.ps1{0,1}\.md$'),
+
+    # One or more extensions to include.
+    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png', '.svg'),
 
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -280,10 +286,20 @@ function Save-MarkdownHelp
             # If -IncludeTopic was provided
             if ($IncludeTopic) {
                 # get all of the children beneath the module root
-                Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                $filesArray = @(Get-ChildItem -Path $theModuleRoot -Recurse -File)
+                # then reverse that list, so that the most shallow items come last.
+                [array]::reverse($filesArray)
+                $filesArray |
                     ForEach-Object {
                         $fileInfo = $_
-                        foreach ($inc in $IncludeTopic) { # find any files that should be included
+                        # Determine the relative path of the file.
+                        $relativePath  =
+                            $fileInfo.FullName.Substring("$theModuleRoot".Length) -replace '^[\\/]'
+                        # If it is more than one layer deep, ignore it.
+                        if ([Regex]::Matches($relativePath, "[\\/]").Count -gt 1) {
+                            return
+                        }
+                        :NextTopicFile foreach ($inc in $IncludeTopic) { # find any files that should be included
                             $matches = $null
                             if ($fileInfo.Name -eq $inc -or 
                                 $fileInfo.Name -like $inc -or 
@@ -292,6 +308,19 @@ function Save-MarkdownHelp
                                     $incRegex -and $fileInfo.Name -match $incRegex
                                 )
                             ) {
+                                # Double-check that the file should not excluded.
+                                foreach ($exclude in $ExcludeTopic) {
+                                    if (
+                                        $fileInfo.Name -eq $exclude -or 
+                                        $fileInfo.Name -like $exclude -or
+                                        $(
+                                            $exclude -as [regex] -and 
+                                            $fileInfo.Name -match $exclude
+                                        )
+                                    ) {
+                                        continue NextTopicFile
+                                    }
+                                }
                                 $replacedName = 
                                     if ($matches) { # If $inc was a regex
                                         $fileInfo.Name -replace $inc # just replace it

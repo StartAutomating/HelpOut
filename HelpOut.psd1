@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.2.7'
+    ModuleVersion='0.2.8'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,13 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.2.8:
+* Save-MarkdownHelp:
+  * Adding -ExcludeTopic (#55)
+  * -IncludeTopic excludes deeply nested topics (#54)
+  * -IncludeExtension default now includes .svg files (#53)
+---
+
 ### 0.2.7
 * Save-MarkdownHelp:
   * Adding -Command, -ReplaceCommandName, -ReplaceCommandNameWith (#45)
