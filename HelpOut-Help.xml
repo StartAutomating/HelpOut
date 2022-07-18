@@ -1821,6 +1821,20 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>ExcludeTopic</maml:name>
+          <maml:description>
+            <maml:para>One or more topic file patterns to exclude.
+Topic files that match this pattern will not be included.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>IncludeExtension</maml:name>
           <maml:description>
             <maml:para>One or more extensions to include.
@@ -1872,6 +1886,20 @@ If not provided, all types of commands from the module will be saved as a markdo
         <command:parameterValue required="false" variableLength="true">System.Management.Automation.CommandInfo[]</command:parameterValue>
         <dev:type>
           <maml:name>System.Management.Automation.CommandInfo[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>ExcludeTopic</maml:name>
+        <maml:description>
+          <maml:para>One or more topic file patterns to exclude.
+Topic files that match this pattern will not be included.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
