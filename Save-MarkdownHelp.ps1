@@ -80,10 +80,10 @@ function Save-MarkdownHelp
     $IncludeTopic = @('\.help\.txt$', '\.md$'),
 
     # One or more extensions to include.
-    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png
+    # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
-    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png'),
+    $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png', '.svg'),
 
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -283,6 +283,7 @@ function Save-MarkdownHelp
                 Get-ChildItem -Path $theModuleRoot -Recurse -File |
                     ForEach-Object {
                         $fileInfo = $_
+                        
                         foreach ($inc in $IncludeTopic) { # find any files that should be included
                             $matches = $null
                             if ($fileInfo.Name -eq $inc -or 
