@@ -1645,10 +1645,19 @@ function Save-MarkdownHelp
             # If -IncludeTopic was provided
             if ($IncludeTopic) {
                 # get all of the children beneath the module root
-                Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                $filesArray = @(Get-ChildItem -Path $theModuleRoot -Recurse -File)
+                # then reverse that list, so that the most shallow items come last.
+                [array]::reverse($filesArray)
+                $filesArray |
                     ForEach-Object {
                         $fileInfo = $_
-                        
+                        # Determine the relative path of the file.
+                        $relativePath  =
+                            $fileInfo.FullName.Substring("$theModuleRoot".Length) -replace '^[\\/]'
+                        # If it is more than one layer deep, ignore it.
+                        if ([Regex]::Matches($relativePath, "[\\/]").Count -gt 1) {
+                            return
+                        }
                         foreach ($inc in $IncludeTopic) { # find any files that should be included
                             $matches = $null
                             if ($fileInfo.Name -eq $inc -or 
