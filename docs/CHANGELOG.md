@@ -1,3 +1,8 @@
+### 0.3:
+* Get-MarkdownHelp: Fixing Property Table rendering issues with ValidValues (#58)
+* Workflow improvements:  Building formatting / types in CI/CD (#63)
+---
+
 ### 0.2.9:
 * Get-MarkdownHelp: Fixing Property Table rendering issues with ValidValues (#58)
 * Action improvements:
