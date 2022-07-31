@@ -203,6 +203,9 @@ Valid Values:
 * Script
 * Configuration
 * All
+
+
+
 |Type                  |Requried|Postion|PipelineInput        |
 |----------------------|--------|-------|---------------------|
 |```[CommandTypes[]]```|false   |named  |true (ByPropertyName)|
