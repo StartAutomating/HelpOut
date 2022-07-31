@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<!-- Generated with EZOut 1.8.6: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
+<!-- Generated with EZOut 1.8.8: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
 <Configuration>
   <ViewDefinitions>
     <View>
@@ -231,6 +231,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         if ($validValuesList) {
                             "Valid Values:" + [Environment]::NewLine
                             $validValuesList | &amp; ${HelpOut_Format-Markdown} -BulletPoint
+                            [Environment]::NewLine * 2
                         }
                     }
 
