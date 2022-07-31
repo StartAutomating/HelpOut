@@ -118,7 +118,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         if ($validValuesList) {
                             "Valid Values:" + [Environment]::NewLine
                             $validValuesList | Format-Markdown -BulletPoint
-                            [Environment]::NewLine
+                            [Environment]::NewLine * 2
                         }
                     }
 
