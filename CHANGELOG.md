@@ -1,3 +1,10 @@
+### 0.2.9:
+* Get-MarkdownHelp:  Fixing Property Table rendering issues with ValidValues (#58)
+* Action improvements:
+  * Pulling just before push (#59)
+  * Improving username / email detection (#60)
+---
+
 ### 0.2.8:
 * Save-MarkdownHelp:
   * Adding -ExcludeTopic (#55)

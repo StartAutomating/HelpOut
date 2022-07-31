@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.2.8'
+    ModuleVersion='0.2.9'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,13 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.2.9:
+* Get-MarkdownHelp:  Fixing Property Table rendering issues with ValidValues (#58)
+* Action improvements:
+  * Pulling just before push (#59)
+  * Improving username / email detection (#60)
+---
+
 ### 0.2.8:
 * Save-MarkdownHelp:
   * Adding -ExcludeTopic (#55)
