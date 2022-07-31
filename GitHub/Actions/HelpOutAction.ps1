@@ -57,7 +57,9 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 ::endgroup::
 "@ | Out-Host
 
-$PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" | Where-Object Name -eq 'HelpOut.psd1' | Select-Object -First 1
+$PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" |
+    Where-Object Name -eq 'HelpOut.psd1' | 
+    Select-Object -First 1
 
 if ($PSD1Found) {
     $PipeScriptModulePath = $PSD1Found
@@ -158,6 +160,8 @@ if ($CommitMessage -or $anyFilesChanged) {
 
     $checkDetached = git symbolic-ref -q HEAD
     if (-not $LASTEXITCODE) {
+        "::notice::Pulling Changes" | Out-Host
+        git pull | Out-Host
         "::notice::Pushing Changes" | Out-Host
         git push        
         "Git Push Output: $($gitPushed  | Out-String)"

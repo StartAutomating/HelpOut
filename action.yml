@@ -52,11 +52,11 @@ runs:
       shell: pwsh
       env: 
         CommitMessage: ${{inputs.CommitMessage}}
-        HelpOutScript: ${{inputs.HelpOutScript}}
-        UserEmail: ${{inputs.UserEmail}}
         SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
+        HelpOutScript: ${{inputs.HelpOutScript}}
         UserName: ${{inputs.UserName}}
         ModuleName: ${{inputs.ModuleName}}
+        UserEmail: ${{inputs.UserEmail}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -131,7 +131,9 @@ runs:
         ::endgroup::
         "@ | Out-Host
         
-        $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" | Where-Object Name -eq 'HelpOut.psd1' | Select-Object -First 1
+        $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" |
+            Where-Object Name -eq 'HelpOut.psd1' | 
+            Select-Object -First 1
         
         if ($PSD1Found) {
             $PipeScriptModulePath = $PSD1Found
@@ -232,6 +234,8 @@ runs:
         
             $checkDetached = git symbolic-ref -q HEAD
             if (-not $LASTEXITCODE) {
+                "::notice::Pulling Changes" | Out-Host
+                git pull | Out-Host
                 "::notice::Pushing Changes" | Out-Host
                 git push        
                 "Git Push Output: $($gitPushed  | Out-String)"
