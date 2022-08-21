@@ -158,6 +158,9 @@ function Save-MarkdownHelp
                 $null = New-Item -ItemType Directory -Path $OutputPath # create it.
             }
 
+            $outputPathName = $OutputPath | Split-Path -Leaf
+            $ReplaceLink   += "^$outputPathName[\\/]"
+
             # Double-check that the output path 
             $outputPathItem = Get-Item $OutputPath
             if ($outputPathItem -isnot [IO.DirectoryInfo]) { # is not a directory
