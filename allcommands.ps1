@@ -1428,6 +1428,16 @@ function Save-MarkdownHelp
     [string[]]
     $ReplaceScriptNameWith = @(),
 
+    # If provided, will replace links discovered in markdown content.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceLink,
+
+    # If provided, will replace links discovered in markdown content with a given Regex replacement.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ReplaceLinkWith = @(),
+
     # If set, will output changed or created files.
     [switch]
     $PassThru,
@@ -1464,7 +1474,7 @@ function Save-MarkdownHelp
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('SkipCommandTypes','OmitCommandType','OmitCommandTypes')]
+    [Alias('SkipCommandTypes','ExcludeCommandType','ExcludeCommandTypes')]
     [Management.Automation.CommandTypes[]]
     $SkipCommandType
     )
@@ -1477,6 +1487,8 @@ function Save-MarkdownHelp
             } else {
                 $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-MarkdownHelp', 'Function')
             }
+
+        $filesChanged = @()
     }
 
     process {        
@@ -1510,6 +1522,9 @@ function Save-MarkdownHelp
             if (-not (Test-Path $OutputPath)) {
                 $null = New-Item -ItemType Directory -Path $OutputPath # create it.
             }
+
+            $outputPathName = $OutputPath | Split-Path -Leaf
+            $ReplaceLink   += "^$outputPathName[\\/]"
 
             # Double-check that the output path 
             $outputPathItem = Get-Item $OutputPath
@@ -1585,8 +1600,12 @@ function Save-MarkdownHelp
                         Write-Error -Exception $ex.Exception -Message "Could not Get Help for $($cmd.Name): $($ex.Exception.Message)" -TargetObject $getMarkdownHelpSplat
                     }
 
-                    if ($PassThru) { # If -PassThru was provided
-                        Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue # return the created file.
+                    $filesChanged += # add the file to the changed list.
+                        Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue 
+
+                    # If -PassThru was provided (and we're not going to change anything)
+                    if ($PassThru -and -not $ReplaceLink) { 
+                        $filesChanged[-1] # output the file changed now.
                     }
 
                 }
@@ -1642,8 +1661,13 @@ function Save-MarkdownHelp
                             Out-String -Width 1mb | # format the result
                             Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
                         
-                        if ($PassThru) { # If -PassThru was provided
-                            Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue # return the created file.
+                        
+                        $filesChanged += # add the file to the changed list.
+                            Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue 
+    
+                        # If -PassThru was provided (and we're not going to change anything)
+                        if ($PassThru -and -not $ReplaceLink) { 
+                            $filesChanged[-1] # output the file changed now.
                         }
                     }                
             }
@@ -1701,8 +1725,14 @@ function Save-MarkdownHelp
                                 # Determine the output path
                                 $dest = Join-Path $OutputPath ($replacedName + '.md')
                                 # and make sure we're not overwriting ourselves
-                                if ($fileInfo.FullName -ne "$dest") { 
-                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru # then copy the file.
+                                if ($fileInfo.FullName -ne "$dest") {                                     
+                                    $filesChanged += # copy the file and add it to the change list.
+                                        $fileInfo | Copy-Item -Destination $dest -PassThru 
+                                }
+
+                                # If -PassThru was passed and we're not changing anything.
+                                if ($PassThru -and -not $ReplaceLink) {
+                                    $filesChanged[-1] # output the file now.
                                 }
                             }
                         }
@@ -1731,16 +1761,60 @@ function Save-MarkdownHelp
                                         break
                                     }
                                     # Copy the file to the destination.
-                                    $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                    if ($fileInfo.FullName -ne "$dest") {                                     
+                                        $filesChanged += # and add it to the change list.
+                                            fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                    }
+    
+                                    # If -PassThru was passed and we're not changing anything.
+                                    if ($PassThru -and -not $ReplaceLink) {
+                                        $filesChanged[-1] # output the file now.
+                                    }                                    
                                 }
                                 break
                             }
                         }
                     }
             }
+        }
 
-            
-         }
+        if ($PassThru -and $ReplaceLink) {
+            $linkFinder = [Regex]::new("            
+            (?<IsImage>\!)?    # If there is an exclamation point, then it is an image link
+            \[                 # Markdown links start with a bracket
+            (?<Text>[^\]\r\n]+)
+            \]                 # anything until the end bracket is the link text.
+            \(                 # The link uri is within parenthesis
+            (?<Uri>[^\)\r\n]+)
+            \)
+            ", 'IgnoreCase,IgnorePatternWhitespace')
+            foreach ($file in $filesChanged) {                
+                $fileContent = Get-Content $file.FullName -Raw
+                $fileContent = $linkFinder.Replace($fileContent, {
+                    param($LinkMatch)                    
+                    $linkReplacementNumber = 0
+
+                    $linkUri  = $LinkMatch.Groups["Uri"].ToString()
+                    $linkText = $linkMatch.Groups["Text"].ToString()
+                    foreach ($linkToReplace in $ReplaceLink) {
+                        $replacement = "$($ReplaceLinkWith[$linkReplacementNumber])"
+                        $linkUri  = $linkUri  -replace $linkToReplace, $replacement
+                        $linkText = $linkText -replace $linkToReplace, $replacement                        
+                    }
+
+                    if ($LinkMatch.Groups["IsImage"].Length) {
+                        "![$linkText]($linkUri)"
+                    } else {
+                        "[$linkText]($linkUri)"
+                    }                    
+                })
+                Set-Content $file.FullName -Encoding UTF8 -Value $fileContent
+                
+                if ($PassThru) {
+                    Get-Item -LiteralPath $file.FullName
+                }
+            }
+        }
 
         if ($t -gt 1) {
             Write-Progress 'Saving Markdown' 'Complete' -Completed -Id $id
