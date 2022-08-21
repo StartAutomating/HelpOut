@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.3'
+    ModuleVersion='0.3.1'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,12 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.3.1
+* Save-MarkdownHelp:  
+  * Can now -ReplaceLink (Fixes #66)
+  * -ReplaceLink will always replace -OutputPath (Fixes #67)
+  * Changing Aliases for -SkipCommandType (Fixes #65)
+---
 ### 0.3:
 * Get-MarkdownHelp: Fixing Property Table rendering issues with ValidValues (#58)
 * Workflow improvements:  Building formatting / types in CI/CD (#63)
