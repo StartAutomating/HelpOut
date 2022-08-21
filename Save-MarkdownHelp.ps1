@@ -99,7 +99,7 @@ function Save-MarkdownHelp
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('SkipCommandTypes','OmitCommandType','OmitCommandTypes')]
+    [Alias('SkipCommandTypes','ExcludeCommandType','ExcludeCommandTypes')]
     [Management.Automation.CommandTypes[]]
     $SkipCommandType
     )
