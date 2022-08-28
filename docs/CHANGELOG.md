@@ -1,3 +1,7 @@
+### 0.3.2
+* Save-MarkdownHelp Bugfix (Fixes #69)
+---
+
 ### 0.3.1
 * Save-MarkdownHelp:  
   * Can now -ReplaceLink (Fixes #66)
