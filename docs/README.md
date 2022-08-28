@@ -29,3 +29,4 @@ Get-Module HelpOut | Save-MarkdownHelp -Wiki  # Will generate a ../HelpOut.wiki 
 
 You can use HelpOut as a GitHub Action.  Doing so will run whatever .HelpOut.ps1 files exist in your repository.  If a -CommitMessage is provided, or attached to any files returned by the .HelpOut.ps1, the changes will be commited.
 
+
