@@ -398,7 +398,7 @@ function Save-MarkdownHelp
                                     # Copy the file to the destination.
                                     if ($fileInfo.FullName -ne "$dest") {                                     
                                         $filesChanged += # and add it to the change list.
-                                            fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
+                                            $fileInfo | Copy-Item -Destination $dest -PassThru:$PassThru
                                     }
     
                                     # If -PassThru was passed and we're not changing anything.
