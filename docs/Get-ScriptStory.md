@@ -26,9 +26,10 @@ A script block
 
 
 
-|Type               |Requried|Postion|PipelineInput |
-|-------------------|--------|-------|--------------|
-|```[ScriptBlock]```|true    |1      |true (ByValue)|
+> **Type**: ```[ScriptBlock]```
+> **Required**: true
+> **Position**: 1
+> **PipelineInput**:true (ByValue)
 ---
 #### **Text**
 
@@ -36,9 +37,10 @@ A block of text
 
 
 
-|Type          |Requried|Postion|PipelineInput                 |
-|--------------|--------|-------|------------------------------|
-|```[String]```|true    |1      |true (ByValue, ByPropertyName)|
+> **Type**: ```[String]```
+> **Required**: true
+> **Position**: 1
+> **PipelineInput**:true (ByValue, ByPropertyName)
 ---
 #### **RegionName**
 
@@ -46,15 +48,17 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
-|Type               |Requried|Postion|PipelineInput|
-|-------------------|--------|-------|-------------|
-|```[IDictionary]```|false   |named  |false        |
+> **Type**: ```[IDictionary]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:false
 ---
 #### **HeadingSize**
 
-|Type         |Requried|Postion|PipelineInput|
-|-------------|--------|-------|-------------|
-|```[Int32]```|false   |named  |false        |
+> **Type**: ```[Int32]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:false
 ---
 ### Syntax
 ```PowerShell
