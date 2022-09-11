@@ -1,3 +1,7 @@
+### 0.3.4
+* Fixing accidental heading names in .Link and parameter properties (Fixes #73)
+---
+
 ### 0.3.3
 * Markdown Help now uses fewer tables (improves default GitHub Page rendering) (fixes #71)
 ---
