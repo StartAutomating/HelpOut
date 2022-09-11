@@ -32,9 +32,10 @@ The name of one or more modules.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **OutputPath**
 
@@ -43,9 +44,10 @@ If not provided, will be assumed to be the "docs" folder of a given module (unle
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[String]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Wiki**
 
@@ -54,9 +56,10 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Command**
 
@@ -64,9 +67,10 @@ If provided, will generate documentation for additional commands.
 
 
 
-|Type                 |Requried|Postion|PipelineInput        |
-|---------------------|--------|-------|---------------------|
-|```[CommandInfo[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[CommandInfo[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceCommandName**
 
@@ -75,9 +79,10 @@ Replaces parts of the names of the commands provided in the -Command parameter.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceCommandNameWith**
 
@@ -85,9 +90,10 @@ If provided, will replace parts of the names of the scripts discovered in a -Com
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ScriptPath**
 
@@ -97,9 +103,10 @@ If an exact match is not found -ScriptPath will also check to see if there is a 
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceScriptName**
 
@@ -107,9 +114,10 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceScriptNameWith**
 
@@ -117,9 +125,10 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceLink**
 
@@ -127,9 +136,10 @@ If provided, will replace links discovered in markdown content.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ReplaceLinkWith**
 
@@ -137,9 +147,10 @@ If provided, will replace links discovered in markdown content with a given Rege
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **PassThru**
 
@@ -147,9 +158,10 @@ If set, will output changed or created files.
 
 
 
-|Type          |Requried|Postion|PipelineInput|
-|--------------|--------|-------|-------------|
-|```[Switch]```|false   |named  |false        |
+> **Type**: ```[Switch]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:false
 ---
 #### **SectionOrder**
 
@@ -157,9 +169,10 @@ The order of the sections.  If not provided, this will be the order they are def
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **IncludeTopic**
 
@@ -169,9 +182,10 @@ By default ```\.help\.txt$``` and ```\.md$```
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ExcludeTopic**
 
@@ -180,9 +194,10 @@ Topic files that match this pattern will not be included.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **IncludeExtension**
 
@@ -191,9 +206,10 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **NoValidValueEnumeration**
 
@@ -201,9 +217,10 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **SkipCommandType**
 
@@ -226,9 +243,10 @@ Valid Values:
 
 
 
-|Type                  |Requried|Postion|PipelineInput        |
-|----------------------|--------|-------|---------------------|
-|```[CommandTypes[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[CommandTypes[]]```
+> **Required**: false
+> **Position**: named
+> **PipelineInput**:true (ByPropertyName)
 ---
 ### Syntax
 ```PowerShell
