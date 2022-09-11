@@ -43,8 +43,11 @@ The path to the file
 
 
 > **Type**: ```[String]```
+
 > **Required**: true
+
 > **Position**: 1
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 #### **ScriptBlock**
@@ -54,8 +57,11 @@ A PowerShell script block
 
 
 > **Type**: ```[ScriptBlock]```
+
 > **Required**: true
+
 > **Position**: named
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 #### **Name**
@@ -65,8 +71,11 @@ The name of the script being measured.
 
 
 > **Type**: ```[String]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 ### Syntax
