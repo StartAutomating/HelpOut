@@ -235,12 +235,11 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         }
                     }
 
-                    [Ordered]@{
-                        Type = '```' + "[" + $($parameter.type.name -replace 'SwitchParameter', 'Switch') + "]" + '```'
-                        Requried = $parameter.required
-                        Postion = $parameter.position
-                        PipelineInput = $parameter.pipelineInput                    
-                    } | &amp; ${HelpOut_Format-Markdown}
+                    "&gt; **Type**: " + '```' + "[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]" + '```'
+                    "&gt; **Required**: " + $parameter.required
+                    "&gt; **Position**: " + $parameter.position
+                    "&gt; **PipelineInput**:" + $parameter.pipelineInput
+
                     if ($parameterCounter -lt $parameterTotal) { '---' } 
                 }            
             }            
