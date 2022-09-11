@@ -37,9 +37,13 @@ The name of one or more modules.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|true    |1      |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+
+> **Required**: true
+
+> **Position**: 1
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **NoRefresh**
 
@@ -47,9 +51,13 @@ If set, will refresh the documentation for the module before generating the comm
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Compact**
 
@@ -57,9 +65,13 @@ If set, will compact the generated MAML.  This will be ignored if -Refresh is no
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **ScriptName**
 
@@ -67,9 +79,13 @@ The name of the combined script.  By default, allcommands.ps1.
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[String]```|false   |2      |true (ByPropertyName)|
+> **Type**: ```[String]```
+
+> **Required**: false
+
+> **Position**: 2
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **FunctionRoot**
 
@@ -77,9 +93,13 @@ The root directories containing functions.  If not provided, the function root w
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **NoRecurse**
 
@@ -87,9 +107,13 @@ If set, the function roots will not be recursively searched.
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Encoding**
 
@@ -97,9 +121,13 @@ The encoding of the combined script.  By default, UTF8.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[Encoding]```|false   |3      |true (ByPropertyName)|
+> **Type**: ```[Encoding]```
+
+> **Required**: false
+
+> **Position**: 3
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Exclude**
 
@@ -107,9 +135,13 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **NoVersion**
 
@@ -118,9 +150,13 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Culture**
 
@@ -128,9 +164,13 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
-|Type               |Requried|Postion|PipelineInput        |
-|-------------------|--------|-------|---------------------|
-|```[CultureInfo]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[CultureInfo]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **PassThru**
 
@@ -138,9 +178,13 @@ If set, will return the files that were generated.
 
 
 
-|Type          |Requried|Postion|PipelineInput        |
-|--------------|--------|-------|---------------------|
-|```[Switch]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 ### Outputs
 System.Nullable

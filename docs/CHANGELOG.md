@@ -1,3 +1,7 @@
+### 0.3.3
+* Markdown Help now uses fewer tables (improves default GitHub Page rendering) (fixes #71)
+---
+
 ### 0.3.2
 * Save-MarkdownHelp Bugfix (Fixes #69)
 ---

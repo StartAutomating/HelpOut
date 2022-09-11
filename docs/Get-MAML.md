@@ -43,9 +43,13 @@ The name of or more commands.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |1      |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: 1
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **Module**
 
@@ -53,9 +57,13 @@ The name of one or more modules.
 
 
 
-|Type            |Requried|Postion|PipelineInput        |
-|----------------|--------|-------|---------------------|
-|```[String[]]```|false   |named  |true (ByPropertyName)|
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
 ---
 #### **CommandInfo**
 
@@ -63,9 +71,13 @@ The CommandInfo object (returned from Get-Command).
 
 
 
-|Type                 |Requried|Postion|PipelineInput |
-|---------------------|--------|-------|--------------|
-|```[CommandInfo[]]```|true    |named  |true (ByValue)|
+> **Type**: ```[CommandInfo[]]```
+
+> **Required**: true
+
+> **Position**: named
+
+> **PipelineInput**:true (ByValue)
 ---
 #### **Compact**
 
@@ -73,9 +85,13 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
-|Type          |Requried|Postion|PipelineInput|
-|--------------|--------|-------|-------------|
-|```[Switch]```|false   |named  |false        |
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:false
 ---
 #### **XML**
 
@@ -83,9 +99,13 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 
 
 
-|Type          |Requried|Postion|PipelineInput|
-|--------------|--------|-------|-------------|
-|```[Switch]```|false   |named  |false        |
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:false
 ---
 #### **NoVersion**
 
@@ -94,9 +114,13 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-|Type          |Requried|Postion|PipelineInput|
-|--------------|--------|-------|-------------|
-|```[Switch]```|false   |named  |false        |
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:false
 ---
 ### Inputs
 [Management.Automation.CommandInfo]
