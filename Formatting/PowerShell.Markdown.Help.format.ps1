@@ -122,10 +122,10 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         }
                     }
 
-                    "> **Type**: " + '```' + "[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]" + '```'
+                    @("> **Type**: " + '```' + "[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]" + '```'
                     "> **Required**: " + $parameter.required
                     "> **Position**: " + $parameter.position
-                    "> **PipelineInput**:" + $parameter.pipelineInput
+                    "> **PipelineInput**:" + $parameter.pipelineInput) -join ([Environment]::NewLine * 2)
 
                     if ($parameterCounter -lt $parameterTotal) { '---' } 
                 }            
