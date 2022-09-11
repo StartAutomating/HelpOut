@@ -31,6 +31,9 @@ The path to a file
 > **Position**: 1
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ScriptBlock**
 
@@ -45,6 +48,9 @@ One or more PowerShell ScriptBlocks
 > **Position**: 1
 
 > **PipelineInput**:true (ByValue, ByPropertyName)
+
+
+
 ---
 #### **Recurse**
 
@@ -59,6 +65,9 @@ If set, will recursively find references.
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 ### Syntax
 ```PowerShell

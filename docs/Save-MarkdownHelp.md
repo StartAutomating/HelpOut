@@ -12,6 +12,9 @@ Get markdown help for each command in a module and saves it to the appropriate l
 ---
 ### Related Links
 * [Get-MarkdownHelp](Get-MarkdownHelp.md)
+
+
+
 ---
 ### Examples
 #### EXAMPLE 1
@@ -39,6 +42,9 @@ The name of one or more modules.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **OutputPath**
 
@@ -54,6 +60,9 @@ If not provided, will be assumed to be the "docs" folder of a given module (unle
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Wiki**
 
@@ -69,6 +78,9 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Command**
 
@@ -83,6 +95,9 @@ If provided, will generate documentation for additional commands.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceCommandName**
 
@@ -98,6 +113,9 @@ Replaces parts of the names of the commands provided in the -Command parameter.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceCommandNameWith**
 
@@ -112,6 +130,9 @@ If provided, will replace parts of the names of the scripts discovered in a -Com
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ScriptPath**
 
@@ -128,6 +149,9 @@ If an exact match is not found -ScriptPath will also check to see if there is a 
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceScriptName**
 
@@ -142,6 +166,9 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceScriptNameWith**
 
@@ -156,6 +183,9 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceLink**
 
@@ -170,6 +200,9 @@ If provided, will replace links discovered in markdown content.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ReplaceLinkWith**
 
@@ -184,6 +217,9 @@ If provided, will replace links discovered in markdown content with a given Rege
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **PassThru**
 
@@ -198,6 +234,9 @@ If set, will output changed or created files.
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **SectionOrder**
 
@@ -212,6 +251,9 @@ The order of the sections.  If not provided, this will be the order they are def
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **IncludeTopic**
 
@@ -228,6 +270,9 @@ By default ```\.help\.txt$``` and ```\.md$```
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ExcludeTopic**
 
@@ -243,6 +288,9 @@ Topic files that match this pattern will not be included.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **IncludeExtension**
 
@@ -258,6 +306,9 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **NoValidValueEnumeration**
 
@@ -272,6 +323,9 @@ If set, will not enumerate valid values and enums of parameters.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **SkipCommandType**
 
@@ -301,6 +355,9 @@ Valid Values:
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 ### Syntax
 ```PowerShell

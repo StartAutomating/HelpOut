@@ -12,6 +12,9 @@ Determines the percentage of documentation in a given script
 ---
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+
+
+
 ---
 ### Examples
 #### EXAMPLE 1
@@ -49,6 +52,9 @@ The path to the file
 > **Position**: 1
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **ScriptBlock**
 
@@ -63,6 +69,9 @@ A PowerShell script block
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Name**
 
@@ -77,6 +86,9 @@ The name of the script being measured.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 ### Syntax
 ```PowerShell

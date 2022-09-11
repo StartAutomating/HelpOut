@@ -12,6 +12,9 @@ Generates a Module's MAML file, and then saves it to the appropriate location.
 ---
 ### Related Links
 * [Get-MAML](Get-MAML.md)
+
+
+
 ---
 ### Examples
 #### EXAMPLE 1
@@ -44,6 +47,9 @@ The name of one or more modules.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Compact**
 
@@ -58,6 +64,9 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Culture**
 
@@ -72,6 +81,9 @@ If provided, will save the MAML to a different directory than the current UI cul
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **NoVersion**
 
@@ -87,6 +99,9 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **PassThru**
 
@@ -101,6 +116,9 @@ If set, will return the files that were generated.
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **WhatIf**
 -WhatIf is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.

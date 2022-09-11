@@ -33,6 +33,9 @@ A script block
 > **Position**: 1
 
 > **PipelineInput**:true (ByValue)
+
+
+
 ---
 #### **Text**
 
@@ -47,6 +50,9 @@ A block of text
 > **Position**: 1
 
 > **PipelineInput**:true (ByValue, ByPropertyName)
+
+
+
 ---
 #### **RegionName**
 
@@ -61,6 +67,9 @@ The friendly names of code regions or begin,process, or end blocks.
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **HeadingSize**
 
@@ -71,6 +80,9 @@ The friendly names of code regions or begin,process, or end blocks.
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 ### Syntax
 ```PowerShell

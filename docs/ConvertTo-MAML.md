@@ -12,7 +12,13 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 ---
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+
+
+
 * [Save-MAML](Save-MAML.md)
+
+
+
 ---
 ### Examples
 #### EXAMPLE 1
@@ -50,6 +56,9 @@ The name of or more commands.
 > **Position**: 1
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Module**
 
@@ -64,6 +73,9 @@ The name of one or more modules.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **CommandInfo**
 
@@ -78,6 +90,9 @@ The CommandInfo object (returned from Get-Command).
 > **Position**: named
 
 > **PipelineInput**:true (ByValue)
+
+
+
 ---
 #### **Compact**
 
@@ -92,6 +107,9 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **XML**
 
@@ -106,6 +124,9 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **NoVersion**
 
@@ -121,6 +142,9 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 ### Inputs
 [Management.Automation.CommandInfo]

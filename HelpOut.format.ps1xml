@@ -159,6 +159,7 @@
                     $linkText = if ($nav.LinkText) { $nav.linkText } else {$linkUrl}
                     
                     &amp; ${HelpOut_Format-Markdown} -Link $linkUrl -inputObject $linkText -BulletPoint
+                    [Environment]::NewLine * 2
                 }
             }
         }
@@ -239,7 +240,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     "&gt; **Required**: " + $parameter.required
                     "&gt; **Position**: " + $parameter.position
                     "&gt; **PipelineInput**:" + $parameter.pipelineInput) -join ([Environment]::NewLine * 2)
-
+                    [Environment]::NewLine * 2
+                    
                     if ($parameterCounter -lt $parameterTotal) { '---' } 
                 }            
             }            
