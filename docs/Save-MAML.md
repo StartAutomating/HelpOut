@@ -38,8 +38,11 @@ The name of one or more modules.
 
 
 > **Type**: ```[String[]]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 #### **Compact**
@@ -49,8 +52,11 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 > **Type**: ```[Switch]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 #### **Culture**
@@ -60,8 +66,11 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 > **Type**: ```[CultureInfo]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:true (ByPropertyName)
 ---
 #### **NoVersion**
@@ -72,8 +81,11 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 > **Type**: ```[Switch]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:false
 ---
 #### **PassThru**
@@ -83,8 +95,11 @@ If set, will return the files that were generated.
 
 
 > **Type**: ```[Switch]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:false
 ---
 #### **WhatIf**
