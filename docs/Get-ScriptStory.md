@@ -27,8 +27,11 @@ A script block
 
 
 > **Type**: ```[ScriptBlock]```
+
 > **Required**: true
+
 > **Position**: 1
+
 > **PipelineInput**:true (ByValue)
 ---
 #### **Text**
@@ -38,8 +41,11 @@ A block of text
 
 
 > **Type**: ```[String]```
+
 > **Required**: true
+
 > **Position**: 1
+
 > **PipelineInput**:true (ByValue, ByPropertyName)
 ---
 #### **RegionName**
@@ -49,15 +55,21 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 > **Type**: ```[IDictionary]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:false
 ---
 #### **HeadingSize**
 
 > **Type**: ```[Int32]```
+
 > **Required**: false
+
 > **Position**: named
+
 > **PipelineInput**:false
 ---
 ### Syntax
