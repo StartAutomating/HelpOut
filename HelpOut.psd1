@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.3.3'
+    ModuleVersion='0.3.4'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,10 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.3.4
+* Fixing accidental heading names in .Link and parameter properties (Fixes #73)
+---
+
 ### 0.3.3
 * Markdown Help now uses fewer tables (improves default GitHub Page rendering) (fixes #71)
 ---
