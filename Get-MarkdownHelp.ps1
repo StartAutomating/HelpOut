@@ -13,6 +13,7 @@ function Get-MarkdownHelp {
 
         The documentation for a single command, in Markdown.
     #>
+    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
     param(
     # The name of the specified command or concept.
     [Parameter(Position=0, ValueFromPipelineByPropertyName)]
@@ -72,26 +73,30 @@ function Get-MarkdownHelp {
                         # Command help is the interesting scenario.
                         $helpObj = $_
                         # In this case, we want to prepare the object to become markdown in a few ways.
-                        # First, if -Rename was passed, put that on the help object.
+                        # * Clear the typenames and decorate the return object.
+                        $helpObj.pstypenames.clear()
+                        $helpObj.pstypenames.add('PowerShell.Markdown.Help')
+
+                        # * If -Rename was passed, put that on the help object.
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
                         }
-                        # Next, clear the typenames and decorate the return object.
-                        $helpObj.pstypenames.clear()
-                        $helpObj.pstypenames.add('PowerShell.Markdown.Help')
-                        # Then, add the provided -SectionOrder to the help object.
+                        
+                        # * Add the -SectionOrder to the help object.
                         if ($SectionOrder) {
                             $helpObj | Add-Member NoteProperty SectionOrder $SectionOrder -Force    
                         }
-                        # Then, add a boolean indicating if it should be treated as a wiki.
+                        # * Add -Wiki to the help object, as .WikiLink.
                         $helpObj | Add-Member NoteProperty WikiLink ($Wiki -as [bool]) -Force
-                        # Then add on the GitHubDocRoot as .DocLink, if provided.
+                        # * Add -GitHubDocRoot as .DocLink.
                         if ($myParams.ContainsKey("GitHubDocRoot")) {
                             $helpObj | Add-Member NoteProperty DocLink $GitHubDocRoot -Force
                         }
-                        # And finally, pass down our enumeraiton settings.
+                        # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
-                        # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.                        
+                        
+                        
+                        # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj
                     }
                 } 
