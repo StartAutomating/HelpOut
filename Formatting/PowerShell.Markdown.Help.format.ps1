@@ -46,6 +46,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                     $linkText = if ($nav.LinkText) { $nav.linkText } else {$linkUrl}
                     
                     Format-Markdown -Link $linkUrl -inputObject $linkText -BulletPoint
+                    [Environment]::NewLine * 2
                 }
             }
         }
@@ -126,7 +127,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     "> **Required**: " + $parameter.required
                     "> **Position**: " + $parameter.position
                     "> **PipelineInput**:" + $parameter.pipelineInput) -join ([Environment]::NewLine * 2)
-
+                    [Environment]::NewLine * 2
+                    
                     if ($parameterCounter -lt $parameterTotal) { '---' } 
                 }            
             }            
