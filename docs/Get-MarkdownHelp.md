@@ -12,6 +12,9 @@ Gets Help for a given command, in Markdown
 ---
 ### Related Links
 * [Save-MarkdownHelp](Save-MarkdownHelp.md)
+
+
+
 ---
 ### Examples
 #### EXAMPLE 1
@@ -34,6 +37,9 @@ The name of the specified command or concept.
 > **Position**: 1
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **Wiki**
 
@@ -48,6 +54,9 @@ If set, will generate a markdown wiki.  Links will be relative to the current pa
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **GitHubDocRoot**
 
@@ -62,6 +71,9 @@ If set, will interlink documentation as if it were for GitHub pages, beneath a g
 > **Position**: named
 
 > **PipelineInput**:false
+
+
+
 ---
 #### **Rename**
 
@@ -76,6 +88,9 @@ If provided, will rename the help topic before getting markdown.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **SectionOrder**
 
@@ -91,6 +106,9 @@ If not provided, this will be the order they are defined in the formatter.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 #### **NoValidValueEnumeration**
 
@@ -105,6 +123,9 @@ If set, will not enumerate valid values and enums of parameters.
 > **Position**: named
 
 > **PipelineInput**:true (ByPropertyName)
+
+
+
 ---
 ### Outputs
 [string]
