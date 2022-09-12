@@ -1,3 +1,7 @@
+### 0.3.5
+* Markdown Help Improvements: Escaping Example Code (Fixes #75)
+---
+
 ### 0.3.4
 * Fixing accidental heading names in .Link and parameter properties (Fixes #73)
 ---
