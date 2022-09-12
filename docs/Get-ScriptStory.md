@@ -86,10 +86,10 @@ The friendly names of code regions or begin,process, or end blocks.
 ---
 ### Syntax
 ```PowerShell
-Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
+Get-ScriptStory [-ScriptBlock] &lt;ScriptBlock&gt; [-RegionName &lt;IDictionary&gt;] [-HeadingSize &lt;Int32&gt;] [&lt;CommonParameters&gt;]
 ```
 ```PowerShell
-Get-ScriptStory [-Text] <String> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
+Get-ScriptStory [-Text] &lt;String&gt; [-RegionName &lt;IDictionary&gt;] [-HeadingSize &lt;Int32&gt;] [&lt;CommonParameters&gt;]
 ```
 ---
 

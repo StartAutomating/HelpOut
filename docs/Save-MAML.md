@@ -140,10 +140,10 @@ System.Nullable
 ---
 ### Syntax
 ```PowerShell
-Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Save-MAML [-Compact] [-Culture &lt;CultureInfo&gt;] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
 ```
 ```PowerShell
-Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Save-MAML [-Module &lt;String[]&gt;] [-Compact] [-Culture &lt;CultureInfo&gt;] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
 ```
 ---
 

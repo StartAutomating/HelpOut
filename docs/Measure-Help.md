@@ -92,10 +92,10 @@ The name of the script being measured.
 ---
 ### Syntax
 ```PowerShell
-Measure-Help [-FilePath] <String> [<CommonParameters>]
+Measure-Help [-FilePath] &lt;String&gt; [&lt;CommonParameters&gt;]
 ```
 ```PowerShell
-Measure-Help -ScriptBlock <ScriptBlock> [-Name <String>] [<CommonParameters>]
+Measure-Help -ScriptBlock &lt;ScriptBlock&gt; [-Name &lt;String&gt;] [&lt;CommonParameters&gt;]
 ```
 ---
 
