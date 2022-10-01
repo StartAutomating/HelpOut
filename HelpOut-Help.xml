@@ -1603,6 +1603,13 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
           <maml:description />
         </dev:type>
       </command:returnValue>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.IO.FileInfo</maml:name>
+          <maml:uri />
+          <maml:description />
+        </dev:type>
+      </command:returnValue>
     </command:returnValues>
     <command:examples>
       <command:example>
