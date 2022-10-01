@@ -51,12 +51,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
+        UserName: ${{inputs.UserName}}
+        UserEmail: ${{inputs.UserEmail}}
+        ModuleName: ${{inputs.ModuleName}}
         CommitMessage: ${{inputs.CommitMessage}}
         SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
         HelpOutScript: ${{inputs.HelpOutScript}}
-        UserName: ${{inputs.UserName}}
-        ModuleName: ${{inputs.ModuleName}}
-        UserEmail: ${{inputs.UserEmail}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -130,6 +130,16 @@ runs:
         $($gitHubEvent | ConvertTo-Json -Depth 100)
         ::endgroup::
         "@ | Out-Host
+        
+        
+        # Check to ensure we are on a branch
+        $branchName = git rev-parse --abrev-ref HEAD
+        # If we were not, return.
+        if (-not $branchName) {
+            "::notice title=No Branch Found::Not on a Branch.  Exiting" | Out-Host  
+            return
+        }
+        
         
         $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" |
             Where-Object Name -eq 'HelpOut.psd1' | 
