@@ -417,6 +417,7 @@ function Get-MarkdownHelp {
         The documentation for a single command, in Markdown.
     #>
     [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
+    [OutputType('PowerShell.Markdown.Help')]
     param(
     # The name of the specified command or concept.
     [Parameter(Position=0, ValueFromPipelineByPropertyName)]
@@ -424,12 +425,12 @@ function Get-MarkdownHelp {
     [string]
     $Name,
 
-    # If set, will generate a markdown wiki.  Links will be relative to the current path, and will not include the .md extensions    
+    # If set, will generate a markdown wiki.  Links will be relative to the current path, and will not include the .md extensions
     [switch]
     $Wiki,
 
     # If set, will interlink documentation as if it were for GitHub pages, beneath a given directory
-    [Alias('GitHubPageRoot')]    
+    [Alias('GitHubPageRoot')]
     [string]
     $GitHubDocRoot,
 
@@ -455,7 +456,7 @@ function Get-MarkdownHelp {
         # We start off by copying the bound parameters
         $myParams= @{} + $PSBoundParameters
         # Then we call Get-Help.
-        $getHelp = @{name=$Name}       
+        $getHelp = @{name=$Name}
         $gotHelp = Get-Help @getHelp
         # If we could not call Get-Help
         if (-not $gotHelp) {
@@ -484,10 +485,10 @@ function Get-MarkdownHelp {
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
                         }
-                        
+
                         # * Add the -SectionOrder to the help object.
                         if ($SectionOrder) {
-                            $helpObj | Add-Member NoteProperty SectionOrder $SectionOrder -Force    
+                            $helpObj | Add-Member NoteProperty SectionOrder $SectionOrder -Force
                         }
                         # * Add -Wiki to the help object, as .WikiLink.
                         $helpObj | Add-Member NoteProperty WikiLink ($Wiki -as [bool]) -Force
@@ -497,13 +498,13 @@ function Get-MarkdownHelp {
                         }
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
-                        
-                        
+
+
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj
                     }
-                } 
-            }        
+                }
+            }
     }
 }
  #requires -version 3.0
