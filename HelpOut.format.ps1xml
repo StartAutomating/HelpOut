@@ -260,8 +260,17 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         Outputs = {
             if ($helpObject.returnValues -and $helpObject.returnValues.returnValue) {
                 &amp; ${HelpOut_Format-Markdown} -Heading "Outputs" -HeadingSize 3
-                foreach ($returnValue in $helpObject.returnValues.returnValue) {                
-                    "* $($returnValue.Type.Name)"
+                foreach ($returnValue in $helpObject.returnValues.returnValue) {
+                    $isRealType = $returnValue.Type.Name -as [type]
+                    if ($isRealType -and 
+                        $isRealType.Assembly.IsFullyTrusted -and
+                        $isRealType.FullName -match '^System\.') {
+                        $msdnLink = "https://learn.microsoft.com/en-us/dotnet/api/$($isRealType.FullName)"
+                        $returnTypeName = "[$($isRealType.FullName -replace '^\System\.')]($msdnLink)"
+                        "* $returnTypeName"
+                    } else {
+                        "* $($returnValue.Type.Name)"
+                    }                    
                     [Environment]::NewLine
                 }
                 [Environment]::NewLine
@@ -271,7 +280,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 foreach ($outputType in $helpCmd.OutputType) {
                     $returnTypeName = $outputType.Type.FullName
                     if ($outputType.Type.Assembly.IsFullyTrusted -and $outputType.Type.FullName -match '^System\.') {
-                        $msdnLink = "https://learn.microsoft.com/en-us/dotnet/api/$($outputType.FullName)"
+                        $msdnLink = "https://learn.microsoft.com/en-us/dotnet/api/$($outputType.Type.FullName)"
                         $returnTypeName = "[$($outputType.Type.FullName -replace '^\System\.')]($msdnLink)"
                     }
                     elseif ($outputType.Name -and -not $outputType.Type) {
