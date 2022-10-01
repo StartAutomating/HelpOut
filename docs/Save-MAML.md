@@ -134,7 +134,12 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
 ---
 ### Outputs
-System.Nullable
+* System.Nullable
+
+
+* System.IO.FileInfo
+
+
 
 
 ---
