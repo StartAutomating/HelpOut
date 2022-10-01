@@ -226,10 +226,12 @@ If set, will return the files that were generated.
 
 ---
 ### Outputs
-System.Nullable
+* System.Nullable
 
 
-System.IO.FileInfo
+* System.IO.FileInfo
+
+
 
 
 ---
