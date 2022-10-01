@@ -152,12 +152,14 @@ Accepts a command
 
 ---
 ### Outputs
-[String]
+* [String]
 The MAML, as a String.  This is the default.
 
 
-[Xml]
+* [Xml]
 The MAML, as an XmlDocument (when -XML is passed in)
+
+
 
 
 ---
