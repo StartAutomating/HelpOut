@@ -15,7 +15,7 @@
         Save-Maml -Module HelpOut -PassThru
     #>
     [CmdletBinding(DefaultParameterSetName='CommandInfo',SupportsShouldProcess=$true)]
-    [OutputType([Nullable])]
+    [OutputType([Nullable], [IO.FileInfo])]
     param( 
     # The name of one or more modules.
     [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName=$true)]
