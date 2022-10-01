@@ -134,16 +134,21 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
 ---
 ### Outputs
-System.Nullable
+* [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
+
+
+* [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
+
+
 
 
 ---
 ### Syntax
 ```PowerShell
-Save-MAML [-Compact] [-Culture &lt;CultureInfo&gt;] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 ```PowerShell
-Save-MAML [-Module &lt;String[]&gt;] [-Compact] [-Culture &lt;CultureInfo&gt;] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 ---
 

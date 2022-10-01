@@ -57,6 +57,16 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 ::endgroup::
 "@ | Out-Host
 
+
+# Check to ensure we are on a branch
+$branchName = git rev-parse --abrev-ref HEAD
+# If we were not, return.
+if (-not $branchName) {
+    "::notice title=No Branch Found::Not on a Branch.  Exiting" | Out-Host  
+    return
+}
+
+
 $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" |
     Where-Object Name -eq 'HelpOut.psd1' | 
     Select-Object -First 1

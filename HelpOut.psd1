@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.3.5'
+    ModuleVersion='0.3.6'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,11 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.3.6
+* Improvements to [OutputType] support (Fixes #78)
+* GitHub Action No Longer Runs when not on a branch (Fixes #77)
+---
+
 ### 0.3.5
 * Markdown Help Improvements: Escaping Example Code (Fixes #75)
 ---

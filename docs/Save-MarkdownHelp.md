@@ -361,7 +361,7 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module &lt;String[]&gt;] [-OutputPath &lt;String&gt;] [-Wiki] [-Command &lt;CommandInfo[]&gt;] [-ReplaceCommandName &lt;String[]&gt;] [-ReplaceCommandNameWith &lt;String[]&gt;] [-ScriptPath &lt;String[]&gt;] [-ReplaceScriptName &lt;String[]&gt;] [-ReplaceScriptNameWith &lt;String[]&gt;] [-ReplaceLink &lt;String[]&gt;] [-ReplaceLinkWith &lt;String[]&gt;] [-PassThru] [-SectionOrder &lt;String[]&gt;] [-IncludeTopic &lt;String[]&gt;] [-ExcludeTopic &lt;String[]&gt;] [-IncludeExtension &lt;String[]&gt;] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [&lt;CommonParameters&gt;]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 

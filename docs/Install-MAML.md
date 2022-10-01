@@ -226,16 +226,18 @@ If set, will return the files that were generated.
 
 ---
 ### Outputs
-System.Nullable
+* [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
 
-System.IO.FileInfo
+* [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
+
+
 
 
 ---
 ### Syntax
 ```PowerShell
-Install-MAML [-Module] &lt;String[]&gt; [-NoRefresh] [-Compact] [[-ScriptName] &lt;String&gt;] [-FunctionRoot &lt;String[]&gt;] [-NoRecurse] [[-Encoding] &lt;Encoding&gt;] [-Exclude &lt;String[]&gt;] [-NoVersion] [-Culture &lt;CultureInfo&gt;] [-PassThru] [&lt;CommonParameters&gt;]
+Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
 ```
 ---
 
