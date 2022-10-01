@@ -226,10 +226,10 @@ If set, will return the files that were generated.
 
 ---
 ### Outputs
-* System.Nullable
+* [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
 
-* System.IO.FileInfo
+* [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
 
 
 
