@@ -163,16 +163,16 @@ The MAML, as an XmlDocument (when -XML is passed in)
 ---
 ### Syntax
 ```PowerShell
-Get-MAML [-Compact] [-XML] [-NoVersion] [&lt;CommonParameters&gt;]
+Get-MAML [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML [[-Name] &lt;String[]&gt;] [-Compact] [-XML] [-NoVersion] [&lt;CommonParameters&gt;]
+Get-MAML [[-Name] <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML [-Module &lt;String[]&gt;] [-Compact] [-XML] [-NoVersion] [&lt;CommonParameters&gt;]
+Get-MAML [-Module <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML -CommandInfo &lt;CommandInfo[]&gt; [-Compact] [-XML] [-NoVersion] [&lt;CommonParameters&gt;]
+Get-MAML -CommandInfo <CommandInfo[]> [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
 ---
 
