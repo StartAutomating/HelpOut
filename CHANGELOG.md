@@ -1,3 +1,8 @@
+### 0.3.6
+* Improvements to [OutputType] support (Fixes #78)
+* GitHub Action No Longer Runs when not on a branch (Fixes #77)
+---
+
 ### 0.3.5
 * Markdown Help Improvements: Escaping Example Code (Fixes #75)
 ---
