@@ -128,9 +128,11 @@ If set, will not enumerate valid values and enums of parameters.
 
 ---
 ### Outputs
-[string]
+* [string]
 
 The documentation for a single command, in Markdown.
+
+
 
 
 ---
