@@ -136,7 +136,7 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] &lt;String&gt;] [-Wiki] [-GitHubDocRoot &lt;String&gt;] [-Rename &lt;String&gt;] [-SectionOrder &lt;String[]&gt;] [-NoValidValueEnumeration] [&lt;CommonParameters&gt;]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [<CommonParameters>]
 ```
 ---
 
