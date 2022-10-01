@@ -71,10 +71,10 @@ If set, will recursively find references.
 ---
 ### Syntax
 ```PowerShell
-Get-ScriptReference [-FilePath] &lt;String[]&gt; [-Recurse] [&lt;CommonParameters&gt;]
+Get-ScriptReference [-FilePath] <String[]> [-Recurse] [<CommonParameters>]
 ```
 ```PowerShell
-Get-ScriptReference [-ScriptBlock] &lt;ScriptBlock[]&gt; [-Recurse] [&lt;CommonParameters&gt;]
+Get-ScriptReference [-ScriptBlock] <ScriptBlock[]> [-Recurse] [<CommonParameters>]
 ```
 ---
 
