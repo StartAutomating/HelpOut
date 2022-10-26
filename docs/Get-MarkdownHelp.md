@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Get-MarkdownHelp
@@ -35,11 +33,11 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: NoYamlHeader
+  - Name: IncludeYamlHeader
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
-    - NoFrontMatter
-    - NoHeader
+    - IncludeFrontMatter
+    - IncludeHeader
 
 ---
 
@@ -172,7 +170,7 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 ---
-#### **NoYamlHeader**
+#### **IncludeYamlHeader**
 
 If set, will not attach a YAML header to the generated help.
 
@@ -200,8 +198,6 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-NoYamlHeader] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [<CommonParameters>]
 ```
 ---
-
-
