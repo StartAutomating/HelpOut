@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Get-ScriptReference
