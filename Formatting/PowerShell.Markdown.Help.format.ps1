@@ -200,6 +200,14 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
     }
 
     @(
+        if (-not $helpObject.NoYamlHeader) {
+            [PSCustomObject][Ordered]@{
+                PSTypename = 'PowerShell.Markdown.Help.YamlHeader'
+                Command    = $helpCmd
+                Help       = $helpObject
+            } | Out-String -Width 1kb
+        }
+
         $orderOfSections = @(if ($helpObject.SectionOrder) {
             $helpObject.SectionOrder
         } else {
