@@ -49,9 +49,9 @@
 
     # If set, will not attach a YAML header to the generated help.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('NoFrontMatter', 'NoHeader')]
+    [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
-    $NoYamlHeader
+    $IncludeYamlHeader
     )
 
     process
@@ -101,8 +101,7 @@
                         }
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
-                        $helpObj | Add-Member NoteProperty NoYamlHeader $NoYamlHeader -Force
-
+                        $helpObj | Add-Member NoteProperty IncludeYamlHeader $IncludeYamlHeader -Force
 
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj

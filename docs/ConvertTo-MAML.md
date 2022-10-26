@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Get-MAML
@@ -37,8 +35,6 @@ Parameters:
     - Unversioned
 
 ---
-
-
 Get-MAML
 --------
 ### Synopsis
@@ -217,5 +213,3 @@ Get-MAML [-Module <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>
 Get-MAML -CommandInfo <CommandInfo[]> [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
 ---
-
-

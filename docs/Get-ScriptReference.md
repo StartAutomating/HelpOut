@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Get-ScriptReference
@@ -25,8 +23,6 @@ Parameters:
     
 
 ---
-
-
 Get-ScriptReference
 -------------------
 ### Synopsis
@@ -105,5 +101,3 @@ Get-ScriptReference [-FilePath] <String[]> [-Recurse] [<CommonParameters>]
 Get-ScriptReference [-ScriptBlock] <ScriptBlock[]> [-Recurse] [<CommonParameters>]
 ```
 ---
-
-

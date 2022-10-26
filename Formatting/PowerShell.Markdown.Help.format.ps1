@@ -200,9 +200,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         }
     }
 
-    @(
-        if (-not $helpObject.NoYamlHeader) {
-            [PSCustomObject][Ordered]@{
+    (@(
+        if ($helpObject.IncludeYamlHeader) {
+            ([PSCustomObject][Ordered]@{
                 PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
                 CommandName = $helpCmd.Name
                 Synopsis    = $helpObject.Synopsis
@@ -218,7 +218,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         Name = 'Type'; Expression={ $_.ParameterType.FullName }
                     }, Aliases
                 )                
-            } | Out-String -Width 1kb
+            } | Out-String -Width 1kb).Trim()
         }
 
         $orderOfSections = @(if ($helpObject.SectionOrder) {
@@ -242,6 +242,6 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             }
         }
 
-    ) -join [Environment]::NewLine
+    ) -join [Environment]::NewLine).Trim()
 }
  

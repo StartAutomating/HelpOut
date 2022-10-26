@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Get-ScriptStory
@@ -32,8 +30,6 @@ Parameters:
     
 
 ---
-
-
 Get-ScriptStory
 ---------------
 ### Synopsis
@@ -127,5 +123,3 @@ Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-Headi
 Get-ScriptStory [-Text] <String> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
 ```
 ---
-
-

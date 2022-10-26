@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Measure-Help
@@ -25,8 +23,6 @@ Parameters:
     
 
 ---
-
-
 Measure-Help
 ------------
 ### Synopsis
@@ -126,5 +122,3 @@ Measure-Help [-FilePath] <String> [<CommonParameters>]
 Measure-Help -ScriptBlock <ScriptBlock> [-Name <String>] [<CommonParameters>]
 ```
 ---
-
-

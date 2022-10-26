@@ -452,9 +452,9 @@ function Get-MarkdownHelp {
 
     # If set, will not attach a YAML header to the generated help.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('NoFrontMatter', 'NoHeader')]
+    [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
-    $NoYamlHeader
+    $IncludeYamlHeader
     )
 
     process
@@ -504,8 +504,7 @@ function Get-MarkdownHelp {
                         }
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
-                        $helpObj | Add-Member NoteProperty NoYamlHeader $NoYamlHeader -Force
-
+                        $helpObj | Add-Member NoteProperty IncludeYamlHeader $IncludeYamlHeader -Force
 
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj
@@ -1500,9 +1499,9 @@ function Save-MarkdownHelp
 
     # If set, will not attach a YAML header to the generated help.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('NoFrontMatter', 'NoHeader')]
+    [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
-    $NoYamlHeader,
+    $IncludeYamlHeader,
 
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
@@ -1533,8 +1532,8 @@ function Save-MarkdownHelp
             $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
         }
 
-        if ($NoYamlHeader) {
-            $getMarkdownHelpSplatBase.NoYamlHeader = $true
+        if ($IncludeYamlHeader) {
+            $getMarkdownHelpSplatBase.IncludeYamlHeader = $true
         }
 
         #region Save the Markdowns
@@ -1590,7 +1589,8 @@ function Save-MarkdownHelp
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                 
                 & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp 
-                    Out-String -Width 1mb |                # output it as a string
+                    Out-String -Width 1mb                | # output it as a string
+                    ForEach-Object { $_.Trim()}          | # trim it
                     Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
 
                 if ($PassThru) { # If -PassThru was provided, get the path.
@@ -1628,10 +1628,11 @@ function Save-MarkdownHelp
                     if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                     else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                     
-                    try {                    
-                        & $GetMarkdownHelp @getMarkdownHelpSplat |
-                                Out-String -Width 1mb | # format the result
-                                Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
+                    try {           
+                        & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp 
+                            Out-String -Width 1mb                | # output it as a string
+                            ForEach-Object { $_.Trim()}          | # trim it
+                            Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.         
                     }
                     catch {
                         $ex = $_

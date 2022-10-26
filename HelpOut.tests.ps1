@@ -43,7 +43,7 @@ describe HelpOut {
     context 'Get-MarkdownHelp' {
         it 'Can Get Markdown Help for a command' {
             $markdownHelp = "$(Get-MarkdownHelp -Name Get-MarkdownHelp | Out-String -Width 1mb)"
-            $markdownHelp | Should -Match "---[\s\r\n]{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
+            $markdownHelp | Should -Match "-{0,3}[\s\r\n]{0,}Get-MarkdownHelp[\s\n\r]{0,}[\-=]+"
         }
     }
 
