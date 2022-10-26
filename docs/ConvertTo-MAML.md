@@ -1,3 +1,40 @@
+---
+
+CommandName: Get-MAML
+Synopsis: Gets MAML help
+Description: |
+  
+  Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
+  
+  
+  
+Parameters: 
+  - Name: Name
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: Module
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: CommandInfo
+    Type: System.Management.Automation.CommandInfo[]
+    Aliases: 
+    
+  - Name: Compact
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: XML
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: NoVersion
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - Unversioned
+
+---
 Get-MAML
 --------
 ### Synopsis
