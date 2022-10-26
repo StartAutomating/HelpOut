@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Save-MAML
@@ -187,5 +185,3 @@ Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf]
 Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 ---
-
-
