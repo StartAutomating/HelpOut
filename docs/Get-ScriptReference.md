@@ -1,4 +1,32 @@
 
+
+---
+
+CommandName: Get-ScriptReference
+Synopsis: Gets a script's references
+Description: |
+  
+  Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.
+  
+  
+  
+Parameters: 
+  - Name: FilePath
+    Type: System.String[]
+    Aliases: 
+    - Fullname
+  - Name: ScriptBlock
+    Type: System.Management.Automation.ScriptBlock[]
+    Aliases: 
+    - Definition
+  - Name: Recurse
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+
+---
+
+
 Get-ScriptReference
 -------------------
 ### Synopsis

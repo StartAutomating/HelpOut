@@ -1,4 +1,99 @@
 
+
+---
+
+CommandName: Save-MarkdownHelp
+Synopsis: Saves a Module's Markdown Help
+Description: |
+  
+  Get markdown help for each command in a module and saves it to the appropriate location.
+  
+  
+  
+Parameters: 
+  - Name: Module
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: OutputPath
+    Type: System.String
+    Aliases: 
+    
+  - Name: Wiki
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: Command
+    Type: System.Management.Automation.CommandInfo[]
+    Aliases: 
+    
+  - Name: ReplaceCommandName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceCommandNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ScriptPath
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceLink
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceLinkWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: PassThru
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: SectionOrder
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ExcludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeExtension
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: NoValidValueEnumeration
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: NoYamlHeader
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - NoFrontMatter
+    - NoHeader
+  - Name: SkipCommandType
+    Type: System.Management.Automation.CommandTypes[]
+    Aliases: 
+    - SkipCommandTypes
+    - ExcludeCommandType
+    - ExcludeCommandTypes
+
+---
+
+
 Save-MarkdownHelp
 -----------------
 ### Synopsis
@@ -327,6 +422,23 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 ---
+#### **NoYamlHeader**
+
+If set, will not attach a YAML header to the generated help.
+
+
+
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
+
+
+
+---
 #### **SkipCommandType**
 
 A list of command types to skip.  
@@ -361,7 +473,7 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-NoYamlHeader] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
 

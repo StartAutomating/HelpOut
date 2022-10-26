@@ -106,6 +106,12 @@ function Save-MarkdownHelp
     [switch]
     $NoValidValueEnumeration,
 
+    # If set, will not attach a YAML header to the generated help.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoFrontMatter', 'NoHeader')]
+    [switch]
+    $NoYamlHeader,
+
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -134,6 +140,11 @@ function Save-MarkdownHelp
         if ($NoValidValueEnumeration) {
             $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
         }
+
+        if ($NoYamlHeader) {
+            $getMarkdownHelpSplatBase.NoYamlHeader = $true
+        }
+
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
             if ($t -gt 1) {

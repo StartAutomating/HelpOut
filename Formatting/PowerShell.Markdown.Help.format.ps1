@@ -1,6 +1,7 @@
 Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
-    $helpCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
+    $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
+    $helpCmdMetadata = [Management.Automation.CommandMetadata]$helpCmd
 
     $MarkdownSections = [Ordered]@{
         Name =  {
@@ -200,6 +201,26 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
     }
 
     @(
+        if (-not $helpObject.NoYamlHeader) {
+            [PSCustomObject][Ordered]@{
+                PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
+                CommandName = $helpCmd.Name
+                Synopsis    = $helpObject.Synopsis
+                Description = ($helpObject.description | Out-String -Width 1kb)
+                Parameters = @(
+                    $helpCmd.Parameters.Values | 
+                    Where-Object {
+                        $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
+                    } |
+                    Select-Object @{
+                        Name = 'Name'; Expression={ $_.Name }                        
+                    }, @{
+                        Name = 'Type'; Expression={ $_.ParameterType.FullName }
+                    }, Aliases
+                )                
+            } | Out-String -Width 1kb
+        }
+
         $orderOfSections = @(if ($helpObject.SectionOrder) {
             $helpObject.SectionOrder
         } else {
