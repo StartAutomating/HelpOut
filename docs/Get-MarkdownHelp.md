@@ -127,6 +127,23 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 ---
+#### **NoYamlHeader**
+
+If set, will not attach a YAML header to the generated help.
+
+
+
+> **Type**: ```[Switch]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:true (ByPropertyName)
+
+
+
+---
 ### Outputs
 * [string]
 
@@ -138,7 +155,7 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-NoYamlHeader] [<CommonParameters>]
 ```
 ---
 
