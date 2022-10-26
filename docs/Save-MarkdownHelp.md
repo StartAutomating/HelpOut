@@ -1,3 +1,95 @@
+---
+
+CommandName: Save-MarkdownHelp
+Synopsis: Saves a Module's Markdown Help
+Description: |
+  
+  Get markdown help for each command in a module and saves it to the appropriate location.
+  
+  
+  
+Parameters: 
+  - Name: Module
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: OutputPath
+    Type: System.String
+    Aliases: 
+    
+  - Name: Wiki
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: Command
+    Type: System.Management.Automation.CommandInfo[]
+    Aliases: 
+    
+  - Name: ReplaceCommandName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceCommandNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ScriptPath
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceLink
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceLinkWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: PassThru
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: SectionOrder
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ExcludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeExtension
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: NoValidValueEnumeration
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: IncludeYamlHeader
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - IncludeFrontMatter
+    - IncludeHeader
+  - Name: SkipCommandType
+    Type: System.Management.Automation.CommandTypes[]
+    Aliases: 
+    - SkipCommandTypes
+    - ExcludeCommandType
+    - ExcludeCommandTypes
+
+---
 Save-MarkdownHelp
 -----------------
 ### Synopsis
