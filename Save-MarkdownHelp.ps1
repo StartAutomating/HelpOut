@@ -108,7 +108,7 @@ function Save-MarkdownHelp
 
     # If set, will not attach a YAML header to the generated help.
     [Parameter(ValueFromPipelineByPropertyName)]
-    [Alias('IncludeFrontMatter', 'IncludeFrontMatter')]
+    [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
     $IncludeYamlHeader,
 
