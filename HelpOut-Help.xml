@@ -488,7 +488,7 @@ If not provided, this will be the order they are defined in the formatter.</maml
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
-          <maml:name>NoYamlHeader</maml:name>
+          <maml:name>IncludeYamlHeader</maml:name>
           <maml:description>
             <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
           </maml:description>
@@ -517,6 +517,19 @@ If not provided, this will be the order they are defined in the formatter.</maml
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>IncludeYamlHeader</maml:name>
+        <maml:description>
+          <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Name</maml:name>
         <maml:description>
           <maml:para>The name of the specified command or concept.</maml:para>
@@ -533,19 +546,6 @@ If not provided, this will be the order they are defined in the formatter.</maml
         <maml:name>NoValidValueEnumeration</maml:name>
         <maml:description>
           <maml:para>If set, will not enumerate valid values and enums of parameters.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
-        <dev:type>
-          <maml:name>Switch</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>
-        </dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
-        <maml:name>NoYamlHeader</maml:name>
-        <maml:description>
-          <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
         <dev:type>
@@ -1921,7 +1921,7 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg</maml:pa
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
-          <maml:name>NoYamlHeader</maml:name>
+          <maml:name>IncludeYamlHeader</maml:name>
           <maml:description>
             <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
           </maml:description>
@@ -2007,6 +2007,19 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>IncludeYamlHeader</maml:name>
+        <maml:description>
+          <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Module</maml:name>
         <maml:description>
           <maml:para>The name of one or more modules.</maml:para>
@@ -2023,19 +2036,6 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         <maml:name>NoValidValueEnumeration</maml:name>
         <maml:description>
           <maml:para>If set, will not enumerate valid values and enums of parameters.</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
-        <dev:type>
-          <maml:name>Switch</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>
-        </dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
-        <maml:name>NoYamlHeader</maml:name>
-        <maml:description>
-          <maml:para>If set, will not attach a YAML header to the generated help.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
         <dev:type>
