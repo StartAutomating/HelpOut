@@ -448,7 +448,13 @@ function Get-MarkdownHelp {
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
-    $NoValidValueEnumeration
+    $NoValidValueEnumeration,
+
+    # If set, will not attach a YAML header to the generated help.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoFrontMatter', 'NoHeader')]
+    [switch]
+    $NoYamlHeader
     )
 
     process
@@ -498,6 +504,7 @@ function Get-MarkdownHelp {
                         }
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
+                        $helpObj | Add-Member NoteProperty NoYamlHeader $NoYamlHeader -Force
 
 
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
@@ -1491,6 +1498,12 @@ function Save-MarkdownHelp
     [switch]
     $NoValidValueEnumeration,
 
+    # If set, will not attach a YAML header to the generated help.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoFrontMatter', 'NoHeader')]
+    [switch]
+    $NoYamlHeader,
+
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -1519,6 +1532,11 @@ function Save-MarkdownHelp
         if ($NoValidValueEnumeration) {
             $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
         }
+
+        if ($NoYamlHeader) {
+            $getMarkdownHelpSplatBase.NoYamlHeader = $true
+        }
+
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
             if ($t -gt 1) {
