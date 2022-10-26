@@ -1,5 +1,3 @@
-
-
 ---
 
 CommandName: Save-MarkdownHelp
@@ -79,11 +77,11 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: NoYamlHeader
+  - Name: IncludeYamlHeader
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
-    - NoFrontMatter
-    - NoHeader
+    - IncludeFrontMatter
+    - IncludeHeader
   - Name: SkipCommandType
     Type: System.Management.Automation.CommandTypes[]
     Aliases: 
@@ -422,7 +420,7 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 ---
-#### **NoYamlHeader**
+#### **IncludeYamlHeader**
 
 If set, will not attach a YAML header to the generated help.
 
@@ -473,8 +471,6 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-NoYamlHeader] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
-
-
