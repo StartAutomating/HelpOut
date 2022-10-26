@@ -1,3 +1,10 @@
+### 0.3.8
+
+* YAML Header is now optional (with -IncludeYamlHeader) (Fixes #80)
+* Save-MarkdownHelp trims content (Fixes #85)
+
+---
+
 ### 0.3.7
 
 All Markdown help now includes a YAML Header unless -NoYAMLHeader is passed (Fixes #80)
