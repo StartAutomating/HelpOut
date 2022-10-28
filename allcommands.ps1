@@ -1828,7 +1828,10 @@ function Save-MarkdownHelp
             \)
             ", 'IgnoreCase,IgnorePatternWhitespace')
             foreach ($file in $filesChanged) {
-                if ($file.Extension -notin '.md', '.markdown') { continue }
+                if ($file.Extension -notin '.md', '.markdown') {
+                    $file
+                    continue
+                }
                 $fileContent = Get-Content $file.FullName -Raw
                 $fileContent = $linkFinder.Replace($fileContent, {
                     param($LinkMatch)                    
