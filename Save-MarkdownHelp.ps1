@@ -436,7 +436,8 @@ function Save-MarkdownHelp
             (?<Uri>[^\)\r\n]+)
             \)
             ", 'IgnoreCase,IgnorePatternWhitespace')
-            foreach ($file in $filesChanged) {                
+            foreach ($file in $filesChanged) {
+                if ($file.Extension -notin '.md', '.markdown') { continue }
                 $fileContent = Get-Content $file.FullName -Raw
                 $fileContent = $linkFinder.Replace($fileContent, {
                     param($LinkMatch)                    

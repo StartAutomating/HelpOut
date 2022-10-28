@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.3.8'
+    ModuleVersion='0.3.9'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,12 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.3.9
+
+* No longer attempting to repair links if the file is not markdown (Fixes #88)
+
+---
+
 ### 0.3.8
 
 * YAML Header is now optional (with -IncludeYamlHeader) (Fixes #80)
