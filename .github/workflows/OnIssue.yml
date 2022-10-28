@@ -1,8 +1,11 @@
 
-name: OnIssueChanged
+name: OnIssueOrRelease
 on: 
   issues: 
   workflow_dispatch: 
+  release: 
+    types: 
+    - released
 jobs: 
   RunGitPub: 
     runs-on: ubuntu-latest
