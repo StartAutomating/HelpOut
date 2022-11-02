@@ -1828,7 +1828,10 @@ function Save-MarkdownHelp
             \)
             ", 'IgnoreCase,IgnorePatternWhitespace')
             foreach ($file in $filesChanged) {
-                if ($file.Extension -notin '.md', '.markdown') { continue }
+                if ($file.Extension -notin '.md', '.markdown') {
+                    $file
+                    continue
+                }
                 $fileContent = Get-Content $file.FullName -Raw
                 $fileContent = $linkFinder.Replace($fileContent, {
                     param($LinkMatch)                    
@@ -1840,6 +1843,11 @@ function Save-MarkdownHelp
                         $replacement = "$($ReplaceLinkWith[$linkReplacementNumber])"
                         $linkUri  = $linkUri  -replace $linkToReplace, $replacement
                         $linkText = $linkText -replace $linkToReplace, $replacement                        
+                    }
+
+                    if ($linkUri -match '\#.+$') {
+                        $lowerCaseAnchor = ($matches.0).ToLower()
+                        $linkUri = $linkUri -replace '\#.+$', $lowerCaseAnchor
                     }
 
                     if ($LinkMatch.Groups["IsImage"].Length) {
