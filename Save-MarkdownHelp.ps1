@@ -454,6 +454,11 @@ function Save-MarkdownHelp
                         $linkText = $linkText -replace $linkToReplace, $replacement                        
                     }
 
+                    if ($linkUri -match '\#.+$') {
+                        $lowerCaseAnchor = ($matches.0).ToLower()
+                        $linkUri = $linkUri -replace '\#.+$', $lowerCaseAnchor
+                    }
+
                     if ($LinkMatch.Groups["IsImage"].Length) {
                         "![$linkText]($linkUri)"
                     } else {
