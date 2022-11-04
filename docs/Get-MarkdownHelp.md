@@ -1,13 +1,5 @@
 ---
-
 CommandName: Get-MarkdownHelp
-Synopsis: Gets Markdown Help
-Description: |
-  
-  Gets Help for a given command, in Markdown
-  
-  
-  
 Parameters: 
   - Name: Name
     Type: System.String
@@ -38,7 +30,19 @@ Parameters:
     Aliases: 
     - IncludeFrontMatter
     - IncludeHeader
+  - Name: YamlHeaderInformationType
+    Type: System.String[]
+    Aliases: 
+    - YamlHeaderInfoType
 
+Synopsis: Gets Markdown Help
+Description: |
+  
+  Gets Help for a given command, in Markdown
+  
+  
+  
+HelpOut.TellStory: True
 ---
 Get-MarkdownHelp
 ----------------
@@ -185,6 +189,31 @@ If set, will not attach a YAML header to the generated help.
 
 
 ---
+#### **YamlHeaderInformationType**
+
+The type of information to include in the YAML Header
+
+
+
+Valid Values:
+
+* Command
+* Help
+* Metadata
+
+
+
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:false
+
+
+
+---
 ### Outputs
 * [string]
 
@@ -196,6 +225,6 @@ The documentation for a single command, in Markdown.
 ---
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [<CommonParameters>]
 ```
 ---
