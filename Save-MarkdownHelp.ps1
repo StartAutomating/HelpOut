@@ -112,6 +112,12 @@ function Save-MarkdownHelp
     [switch]
     $IncludeYamlHeader,
 
+    # The type of information to include in the YAML Header
+    [ValidateSet('Command','Help','Metadata')]
+    [Alias('YamlHeaderInfoType')]
+    [string[]]
+    $YamlHeaderInformationType,    
+
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -134,16 +140,13 @@ function Save-MarkdownHelp
 
     process {        
         $getMarkdownHelpSplatBase = @{}
-        if ($SectionOrder) {
-            $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
-        }
-        if ($NoValidValueEnumeration) {
-            $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
-        }
 
-        if ($IncludeYamlHeader) {
-            $getMarkdownHelpSplatBase.IncludeYamlHeader = $true
+        foreach ($param in $psBoundParameters.Keys) {
+            if ($GetMarkdownHelp.Parameters[$param]) {
+                $getMarkdownHelpSplatBase[$param] = $psBoundParameters[$param]
+            }
         }
+        
 
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            

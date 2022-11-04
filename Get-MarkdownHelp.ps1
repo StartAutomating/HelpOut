@@ -13,7 +13,7 @@
 
         The documentation for a single command, in Markdown.
     #>
-    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
+    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]    
     [OutputType('PowerShell.Markdown.Help')]
     param(
     # The name of the specified command or concept.
@@ -51,7 +51,13 @@
     [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
-    $IncludeYamlHeader
+    $IncludeYamlHeader,
+
+    # The type of information to include in the YAML Header
+    [ValidateSet('Command','Help','Metadata')]
+    [Alias('YamlHeaderInfoType')]
+    [string[]]
+    $YamlHeaderInformationType
     )
 
     process
@@ -102,6 +108,7 @@
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
                         $helpObj | Add-Member NoteProperty IncludeYamlHeader $IncludeYamlHeader -Force
+                        $helpObj | Add-Member NoteProperty YamlHeaderInformationType $YamlHeaderInformationType -Force
 
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj

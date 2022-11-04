@@ -1,6 +1,6 @@
 Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
-    $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
+    $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')    
     $helpCmdMetadata = [Management.Automation.CommandMetadata]$helpCmd
 
     $MarkdownSections = [Ordered]@{
@@ -102,8 +102,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         }
                         continue
                     }
-    
-                    ($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)' -replace '^-\s', '* ' -join [Environment]::NewLine
+                    
+                    $descriptionLines = @($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)'
+                    $descriptionLines -replace '^-\s', '* ' -join [Environment]::NewLine
     
                     if (-not $helpObject.NoValidValueEnumeration -and $helpCmd -and $helpCmd.Parameters.($parameter.Name)) {
                         $parameterMetadata = $helpCmd.Parameters[$parameter.Name]
@@ -201,24 +202,66 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
     }
 
     (@(
-        if ($helpObject.IncludeYamlHeader) {
-            ([PSCustomObject][Ordered]@{
-                PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
-                CommandName = $helpCmd.Name
-                Synopsis    = $helpObject.Synopsis
-                Description = ($helpObject.description | Out-String -Width 1kb)
-                Parameters = @(
-                    $helpCmd.Parameters.Values | 
-                    Where-Object {
-                        $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
-                    } |
-                    Select-Object @{
-                        Name = 'Name'; Expression={ $_.Name }                        
-                    }, @{
-                        Name = 'Type'; Expression={ $_.ParameterType.FullName }
-                    }, Aliases
-                )                
-            } | Out-String -Width 1kb).Trim()
+        $metadataAttributes = [Ordered]@{}
+        if ($helpCmd.ScriptBlock.Attributes) {            
+            foreach ($attr in $helpCmd.ScriptBlock.Attributes) {
+                if ($attr -is [Reflection.AssemblyMetadataAttribute]) {
+                    if (-not $metadataAttributes[$attr.Key]) {
+                        $metadataAttributes[$attr.Key] = $attr.Value
+                    } else {
+                        $metadataAttributes[$attr.Key] = @($metadataAttributes[$attr.Key]) + $attr.Value
+                    }
+                }
+            }
+        }
+
+        if ($helpObject.IncludeYamlHeader -or $metadataAttributes.Keys -like 'Jekyll.*') {
+            $infoTypes= 
+                @(if ($helpObject.YamlHeaderInformationType) {
+                    $helpObject.YamlHeaderInformationType
+                } elseif ($metadataAttributes.Keys -like 'Jekyll.*') {
+                    'Metadata'
+                } else {
+                    'Command', 'Help', 'Metadata'
+                })
+
+            if ($metadataAttributes.Keys -like 'Jekyll.*' -and $infoTypes -notcontains 'Metadata') {
+                $infoTypes += 'Metadata'
+            }
+
+            $yamlHeaderToBe = [Ordered]@{}
+            if ($infoTypes -contains 'Command') {
+                $yamlHeaderToBe += [Ordered]@{
+                    PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
+                    CommandName = $helpCmd.Name
+                    Parameters = @(
+                        $helpCmd.Parameters.Values | 
+                        Where-Object {
+                            $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
+                        } |
+                        Select-Object @{
+                            Name = 'Name'; Expression={ $_.Name }                        
+                        }, @{
+                            Name = 'Type'; Expression={ $_.ParameterType.FullName }
+                        }, Aliases
+                    )                
+                }
+            }
+            if ($infoTypes -contains 'Help') {
+                $yamlHeaderToBe += @{
+                    Synopsis    = $helpObject.Synopsis
+                    Description = ($helpObject.description | Out-String -Width 1kb)
+                }
+            }
+
+            if ($infoTypes -contains 'Metadata') {
+                foreach ($kv in $metadataAttributes.GetEnumerator()) {
+                    $yamlHeaderToBe[$kv.Key -replace '^Jekyll\.'] = $kv.Value
+                }
+            }
+            "---"
+            ([PSCustomObject]$yamlHeaderToBe | Format-Yaml).Trim()
+            "---"
         }
 
         $orderOfSections = @(if ($helpObject.SectionOrder) {
