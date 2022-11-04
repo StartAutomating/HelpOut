@@ -1,13 +1,5 @@
 ---
-
 CommandName: Measure-Help
-Synopsis: Determines the percentage of documentation
-Description: |
-  
-  Determines the percentage of documentation in a given script
-  
-  
-  
 Parameters: 
   - Name: FilePath
     Type: System.String
@@ -21,7 +13,10 @@ Parameters:
     Type: System.String
     Aliases: 
     
-
+Synopsis: Determines the percentage of documentation
+Description: |
+  
+  Determines the percentage of documentation in a given script
 ---
 Measure-Help
 ------------

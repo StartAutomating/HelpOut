@@ -1,13 +1,5 @@
 ---
-
 CommandName: Get-MAML
-Synopsis: Gets MAML help
-Description: |
-  
-  Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
-  
-  
-  
 Parameters: 
   - Name: Name
     Type: System.String[]
@@ -34,6 +26,10 @@ Parameters:
     Aliases: 
     - Unversioned
 
+Synopsis: Gets MAML help
+Description: |
+  
+  Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
 ---
 Get-MAML
 --------

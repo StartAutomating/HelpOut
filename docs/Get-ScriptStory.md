@@ -1,15 +1,5 @@
 ---
-
 CommandName: Get-ScriptStory
-Synopsis: Gets a Script's story
-Description: |
-  
-  Gets the Script's "Story"
-  
-  Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
-  
-  
-  
 Parameters: 
   - Name: ScriptBlock
     Type: System.Management.Automation.ScriptBlock
@@ -28,7 +18,12 @@ Parameters:
     Type: System.Int32
     Aliases: 
     
-
+Synopsis: Gets a Script's story
+Description: |
+  
+  Gets the Script's "Story"
+  
+  Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 ---
 Get-ScriptStory
 ---------------
