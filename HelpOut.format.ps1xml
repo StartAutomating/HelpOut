@@ -406,54 +406,6 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         </CustomEntries>
       </CustomControl>
     </View>
-    <View>
-      <Name>PowerShell.Markdown.Help.YamlHeader</Name>
-      <ViewSelectedBy>
-        <TypeName>PowerShell.Markdown.Help.YamlHeader</TypeName>
-      </ViewSelectedBy>
-      <CustomControl>
-        <CustomEntries>
-          <CustomEntry>
-            <CustomItem>
-              <ExpressionBinding>
-                <ScriptBlock>$moduleName = 'HelpOut'
-
-            do {
-                $lm = Get-Module -Name $moduleName -ErrorAction Ignore
-                if (-not $lm) { continue } 
-                if ($lm.FormatPartsLoaded) { break }
-                $wholeScript = @(foreach ($formatFilePath in $lm.exportedFormatFiles) {         
-                    foreach ($partNodeName in Select-Xml -LiteralPath $formatFilePath -XPath "/Configuration/Controls/Control/Name[starts-with(., '$')]") {
-                        $ParentNode = $partNodeName.Node.ParentNode
-                        "$($ParentNode.Name)={
-            $($ParentNode.CustomControl.CustomEntries.CustomEntry.CustomItem.ExpressionBinding.ScriptBlock)}"
-                    }
-                }) -join [Environment]::NewLine
-                New-Module -Name "${ModuleName}.format.ps1xml" -ScriptBlock ([ScriptBlock]::Create(($wholeScript + ';Export-ModuleMember -Variable *'))) |
-                    Import-Module -Global
-                $onRemove = [ScriptBlock]::Create("Remove-Module '${ModuleName}.format.ps1xml'")
-                
-                if (-not $lm.OnRemove) {
-                    $lm.OnRemove = $onRemove
-                } else {
-                    $lm.OnRemove = [ScriptBlock]::Create($onRemove.ToString() + ''  + [Environment]::NewLine + $lm.OnRemove)
-                }
-                $lm | Add-Member NoteProperty FormatPartsLoaded $true -Force
-            
-            } while ($false)
-            
-        
-
-    @("---"
-    &amp; ${HelpOut_Format-Yaml} -InputObject $_
-    "---") -join [Environment]::NewLine
-</ScriptBlock>
-              </ExpressionBinding>
-            </CustomItem>
-          </CustomEntry>
-        </CustomEntries>
-      </CustomControl>
-    </View>
   </ViewDefinitions>
   <Controls>
     <Control>
