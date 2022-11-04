@@ -416,7 +416,7 @@ function Get-MarkdownHelp {
 
         The documentation for a single command, in Markdown.
     #>
-    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
+    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]    
     [OutputType('PowerShell.Markdown.Help')]
     param(
     # The name of the specified command or concept.
@@ -454,7 +454,13 @@ function Get-MarkdownHelp {
     [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('IncludeFrontMatter', 'IncludeHeader')]
     [switch]
-    $IncludeYamlHeader
+    $IncludeYamlHeader,
+
+    # The type of information to include in the YAML Header
+    [ValidateSet('Command','Help','Metadata')]
+    [Alias('YamlHeaderInfoType')]
+    [string[]]
+    $YamlHeaderInformationType
     )
 
     process
@@ -505,6 +511,7 @@ function Get-MarkdownHelp {
                         # * Pass down -NoValidValueEnumeration.
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
                         $helpObj | Add-Member NoteProperty IncludeYamlHeader $IncludeYamlHeader -Force
+                        $helpObj | Add-Member NoteProperty YamlHeaderInformationType $YamlHeaderInformationType -Force
 
                         # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
                         $helpObj
@@ -1503,6 +1510,12 @@ function Save-MarkdownHelp
     [switch]
     $IncludeYamlHeader,
 
+    # The type of information to include in the YAML Header
+    [ValidateSet('Command','Help','Metadata')]
+    [Alias('YamlHeaderInfoType')]
+    [string[]]
+    $YamlHeaderInformationType,    
+
     # A list of command types to skip.  
     # If not provided, all types of commands from the module will be saved as a markdown document.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -1525,16 +1538,13 @@ function Save-MarkdownHelp
 
     process {        
         $getMarkdownHelpSplatBase = @{}
-        if ($SectionOrder) {
-            $getMarkdownHelpSplatBase.SectionOrder =$SectionOrder
-        }
-        if ($NoValidValueEnumeration) {
-            $getMarkdownHelpSplatBase.NoValidValueEnumeration =$true
-        }
 
-        if ($IncludeYamlHeader) {
-            $getMarkdownHelpSplatBase.IncludeYamlHeader = $true
+        foreach ($param in $psBoundParameters.Keys) {
+            if ($GetMarkdownHelp.Parameters[$param]) {
+                $getMarkdownHelpSplatBase[$param] = $psBoundParameters[$param]
+            }
         }
+        
 
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.            
