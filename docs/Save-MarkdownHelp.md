@@ -1,13 +1,5 @@
 ---
-
 CommandName: Save-MarkdownHelp
-Synopsis: Saves a Module's Markdown Help
-Description: |
-  
-  Get markdown help for each command in a module and saves it to the appropriate location.
-  
-  
-  
 Parameters: 
   - Name: Module
     Type: System.String[]
@@ -82,6 +74,10 @@ Parameters:
     Aliases: 
     - IncludeFrontMatter
     - IncludeHeader
+  - Name: YamlHeaderInformationType
+    Type: System.String[]
+    Aliases: 
+    - YamlHeaderInfoType
   - Name: SkipCommandType
     Type: System.Management.Automation.CommandTypes[]
     Aliases: 
@@ -89,6 +85,10 @@ Parameters:
     - ExcludeCommandType
     - ExcludeCommandTypes
 
+Synopsis: Saves a Module's Markdown Help
+Description: |
+  
+  Get markdown help for each command in a module and saves it to the appropriate location.
 ---
 Save-MarkdownHelp
 -----------------
@@ -435,6 +435,31 @@ If set, will not attach a YAML header to the generated help.
 
 
 ---
+#### **YamlHeaderInformationType**
+
+The type of information to include in the YAML Header
+
+
+
+Valid Values:
+
+* Command
+* Help
+* Metadata
+
+
+
+> **Type**: ```[String[]]```
+
+> **Required**: false
+
+> **Position**: named
+
+> **PipelineInput**:false
+
+
+
+---
 #### **SkipCommandType**
 
 A list of command types to skip.  
@@ -469,6 +494,6 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
