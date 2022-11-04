@@ -13,13 +13,10 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
+Synopsis: Gets a script's references
 Description: |
   
   Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.
-  
-  
-  
-Synopsis: Gets a script's references
 ---
 Get-ScriptReference
 -------------------
