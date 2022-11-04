@@ -1,3 +1,12 @@
+### 0.4
+
+* Get/Save-MarkdownHelp:
+  * Adding -YamlHeaderInformationType and including [Reflection.AssemblyMetaData] attributes (Fixes #93)
+* Replacing anchor links with lowercase (Fixes #92)
+* Returning unmodified files when no link is replaced (Fixes #91)
+
+---
+
 ### 0.3.9
 
 * No longer attempting to repair links if the file is not markdown (Fixes #88)
