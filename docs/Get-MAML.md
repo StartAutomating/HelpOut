@@ -26,13 +26,10 @@ Parameters:
     Aliases: 
     - Unversioned
 
+Synopsis: Gets MAML help
 Description: |
   
   Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
-  
-  
-  
-Synopsis: Gets MAML help
 ---
 Get-MAML
 --------
