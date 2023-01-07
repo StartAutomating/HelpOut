@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.4'
+    ModuleVersion='0.4.1'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,13 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.4.1
+
+* Parameter Properties are now rendered as a table (Fixes #98)
+* Save-MarkdownHelp:  Adding -ExcludeFile (Fixes #97)
+
+---
+
 ### 0.4
 
 * Get/Save-MarkdownHelp:
