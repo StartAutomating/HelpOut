@@ -1,3 +1,10 @@
+### 0.4.1
+
+* Parameter Properties are now rendered as a table (Fixes #98)
+* Save-MarkdownHelp:  Adding -ExcludeFile (Fixes #97)
+
+---
+
 ### 0.4
 
 * Get/Save-MarkdownHelp:
