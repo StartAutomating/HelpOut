@@ -35,13 +35,13 @@ Parameters:
     Aliases: 
     - YamlHeaderInfoType
 
-Synopsis: Gets Markdown Help
 Description: |
   
   Gets Help for a given command, in Markdown
   
   
   
+Synopsis: Gets Markdown Help
 HelpOut.TellStory: True
 ---
 Get-MarkdownHelp
