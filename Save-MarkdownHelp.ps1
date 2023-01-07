@@ -95,6 +95,13 @@ function Save-MarkdownHelp
     [string[]]
     $ExcludeTopic = @('\.ps1{0,1}\.md$'),
 
+    # One or more files to exclude.
+    # By default, this is treated as a wildcard.
+    # If the file name starts and ends with slashes, it will be treated as a Regular Expression.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string[]]
+    $ExcludeFile,
+
     # One or more extensions to include.
     # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -134,6 +141,24 @@ function Save-MarkdownHelp
             } else {
                 $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-MarkdownHelp', 'Function')
             }
+
+        $NotExcluded = {
+            if (-not $ExcludeFile) { return $true }
+            foreach ($ex in $ExcludeFile) {
+                if ($ex -match '^/' -and $ex -match '/$') {
+                    if ([Regex]::New(
+                        $ex -replace '^/' -replace '/$', 'IgnoreCase,IgnorePatternWhitespace'
+                    ).Match($_.FullName)) {
+                        return $false
+                    }
+                } else {
+                    if ($_.FullName -like $ex -or $_.Name -like $ex) {
+                        return $false
+                    }
+                }
+            }
+            return $true
+        }
 
         $filesChanged = @()
     }
@@ -284,6 +309,7 @@ function Save-MarkdownHelp
                     # Any child items of that path will also be included
                     Get-ChildItem -Recurse |
                     Where-Object Extension -eq '.ps1' | # (as long as they're PowerShell Scripts).
+                    Where-Object $NotExcluded | # (and as long as they're not excluded)
                     ForEach-Object {
                         $ps1File = $_
                         # For each script that we find, prepare to call Get-MarkdownHelp
@@ -330,6 +356,7 @@ function Save-MarkdownHelp
                 # then reverse that list, so that the most shallow items come last.
                 [array]::reverse($filesArray)
                 $filesArray |
+                    Where-Object $NotExcluded | # (and as long as they're not excluded)
                     ForEach-Object {
                         $fileInfo = $_
                         # Determine the relative path of the file.
@@ -394,6 +421,7 @@ function Save-MarkdownHelp
             if ($IncludeExtension) {
                 # get all files beneath the root
                 Get-ChildItem -Path $theModuleRoot -Recurse -File |
+                    Where-Object $NotExcluded | # (and as long as they're not excluded)
                     ForEach-Object {
                         $fileInfo = $_
                         foreach ($ext in $IncludeExtension) { # and see if they are the right extension
