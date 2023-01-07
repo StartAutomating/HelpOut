@@ -1920,6 +1920,21 @@ Topic files that match this pattern will not be included.</maml:para>
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>ExcludeFile</maml:name>
+          <maml:description>
+            <maml:para>One or more files to exclude.
+By default, this is treated as a wildcard.
+If the file name starts and ends with slashes, it will be treated as a Regular Expression.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>IncludeExtension</maml:name>
           <maml:description>
             <maml:para>One or more extensions to include.
@@ -1997,6 +2012,21 @@ If not provided, all types of commands from the module will be saved as a markdo
         <command:parameterValue required="false" variableLength="true">System.Management.Automation.CommandInfo[]</command:parameterValue>
         <dev:type>
           <maml:name>System.Management.Automation.CommandInfo[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>ExcludeFile</maml:name>
+        <maml:description>
+          <maml:para>One or more files to exclude.
+By default, this is treated as a wildcard.
+If the file name starts and ends with slashes, it will be treated as a Regular Expression.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
