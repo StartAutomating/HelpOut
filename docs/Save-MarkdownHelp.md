@@ -61,6 +61,10 @@ Parameters:
     Type: System.String[]
     Aliases: 
     
+  - Name: ExcludeFile
+    Type: System.String[]
+    Aliases: 
+    
   - Name: IncludeExtension
     Type: System.String[]
     Aliases: 
@@ -85,13 +89,10 @@ Parameters:
     - ExcludeCommandType
     - ExcludeCommandTypes
 
+Synopsis: Saves a Module's Markdown Help
 Description: |
   
   Get markdown help for each command in a module and saves it to the appropriate location.
-  
-  
-  
-Synopsis: Saves a Module's Markdown Help
 ---
 Save-MarkdownHelp
 -----------------
@@ -371,6 +372,24 @@ Topic files that match this pattern will not be included.
 
 
 ---
+#### **ExcludeFile**
+
+One or more files to exclude.
+By default, this is treated as a wildcard.
+If the file name starts and ends with slashes, it will be treated as a Regular Expression.
+
+
+
+
+
+
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|
+
+
+
+---
 #### **IncludeExtension**
 
 One or more extensions to include.
@@ -477,6 +496,6 @@ Valid Values:
 ---
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
 ---
