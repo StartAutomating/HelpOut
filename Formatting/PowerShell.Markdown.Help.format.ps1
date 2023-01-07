@@ -125,10 +125,15 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         }
                     }
 
-                    @("> **Type**: " + '```' + "[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]" + '```'
-                    "> **Required**: " + $parameter.required
-                    "> **Position**: " + $parameter.position
-                    "> **PipelineInput**:" + $parameter.pipelineInput) -join ([Environment]::NewLine * 2)
+                    [Environment]::NewLine * 2
+                    
+                    Format-Markdown -MarkdownTable -InputObject ([PSCustomObject][Ordered]@{
+                        Type = "``[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]``"
+                        Required = $parameter.required
+                        Position = $parameter.position
+                        PipelineInput = $parameter.PipelineInput
+                    })
+
                     [Environment]::NewLine * 2
                     
                     if ($parameterCounter -lt $parameterTotal) { '---' } 
