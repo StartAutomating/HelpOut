@@ -84,13 +84,12 @@ The name of or more commands.
 
 
 
-> **Type**: ```[String[]]```
 
-> **Required**: false
 
-> **Position**: 1
 
-> **PipelineInput**:true (ByPropertyName)
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
+|`[String[]]`|false   |1       |true (ByPropertyName)|
 
 
 
@@ -101,13 +100,12 @@ The name of one or more modules.
 
 
 
-> **Type**: ```[String[]]```
 
-> **Required**: false
 
-> **Position**: named
 
-> **PipelineInput**:true (ByPropertyName)
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
 
@@ -118,13 +116,12 @@ The CommandInfo object (returned from Get-Command).
 
 
 
-> **Type**: ```[CommandInfo[]]```
 
-> **Required**: true
 
-> **Position**: named
 
-> **PipelineInput**:true (ByValue)
+|Type             |Required|Position|PipelineInput |
+|-----------------|--------|--------|--------------|
+|`[CommandInfo[]]`|true    |named   |true (ByValue)|
 
 
 
@@ -135,13 +132,12 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
-> **Type**: ```[Switch]```
 
-> **Required**: false
 
-> **Position**: named
 
-> **PipelineInput**:false
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
 
 
 
@@ -152,13 +148,12 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 
 
 
-> **Type**: ```[Switch]```
 
-> **Required**: false
 
-> **Position**: named
 
-> **PipelineInput**:false
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
 
 
 
@@ -170,13 +165,12 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-> **Type**: ```[Switch]```
 
-> **Required**: false
 
-> **Position**: named
 
-> **PipelineInput**:false
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
 
 
 
