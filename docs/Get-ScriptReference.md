@@ -46,13 +46,12 @@ The path to a file
 
 
 
-> **Type**: ```[String[]]```
 
-> **Required**: true
 
-> **Position**: 1
 
-> **PipelineInput**:true (ByPropertyName)
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
+|`[String[]]`|true    |1       |true (ByPropertyName)|
 
 
 
@@ -63,13 +62,12 @@ One or more PowerShell ScriptBlocks
 
 
 
-> **Type**: ```[ScriptBlock[]]```
 
-> **Required**: true
 
-> **Position**: 1
 
-> **PipelineInput**:true (ByValue, ByPropertyName)
+|Type             |Required|Position|PipelineInput                 |
+|-----------------|--------|--------|------------------------------|
+|`[ScriptBlock[]]`|true    |1       |true (ByValue, ByPropertyName)|
 
 
 
@@ -80,13 +78,12 @@ If set, will recursively find references.
 
 
 
-> **Type**: ```[Switch]```
 
-> **Required**: false
 
-> **Position**: named
 
-> **PipelineInput**:false
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
 
 
 
