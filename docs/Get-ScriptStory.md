@@ -113,4 +113,3 @@ Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-Headi
 ```PowerShell
 Get-ScriptStory [-Text] <String> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
 ```
----
