@@ -278,7 +278,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
                     CommandName = $helpCmd.Name
                     Parameters = @(
-                        $helpCmd.Parameters.Values | 
+                        $helpCmd.Parameters.Values |
+                        Sort-Object { $_.Attributes.Position }, Name | 
                         Where-Object {
                             $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
                         } |
