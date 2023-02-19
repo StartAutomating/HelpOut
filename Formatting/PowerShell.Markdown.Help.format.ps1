@@ -185,17 +185,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
                 [Environment]::NewLine
             }
-        }
-        Syntax = {
-            if ($helpObject.syntax.syntaxItem) {
-                Format-Markdown -Heading "Syntax" -HeadingSize 3
-                if ($helpObject.Rename) {
-                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' -replace "$($HelpObject.Name.Replace("\", "\\"))", $helpObject.Rename | Format-Markdown -CodeLanguage PowerShell
-                } else {
-                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
-                }
-            }
-        }
+        }        
         Notes = {
             if ($helpObject.alertSet) {
                 Format-Markdown -Heading "Notes" -HeadingSize 3
@@ -240,6 +230,16 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     }
                 Format-Markdown -Heading $storyHeader -HeadingSize 2
                 $helpCmd | Get-ScriptStory
+            }
+        }
+        Syntax = {
+            if ($helpObject.syntax.syntaxItem) {
+                Format-Markdown -Heading "Syntax" -HeadingSize 3
+                if ($helpObject.Rename) {
+                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' -replace "$($HelpObject.Name.Replace("\", "\\"))", $helpObject.Rename | Format-Markdown -CodeLanguage PowerShell
+                } else {
+                    ($helpObject.syntax | Out-String) -split '(?>\r\n|\n)' -ne '' | Format-Markdown -CodeLanguage PowerShell
+                }
             }
         }
     }
