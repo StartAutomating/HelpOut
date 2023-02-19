@@ -236,8 +236,8 @@ The documentation for a single command, in Markdown.
 ---
 
 
-Story
------
+How It Works
+------------
 
 ## On Each Command Or Topic
  We start off by copying the bound parameters and then we call Get-Help.  If we could not call Get-Help error out.  Next we need to tweak the output of Get-Help.  Get-Help can return either a help topic or help about a command.
@@ -251,8 +251,8 @@ Story
 * Pass down -NoValidValueEnumeration.
 
  Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
-Story
------
+How It Works
+------------
 
 ## On Each Command Or Topic
  We start off by copying the bound parameters and then we call Get-Help.  If we could not call Get-Help error out.  Next we need to tweak the output of Get-Help.  Get-Help can return either a help topic or help about a command.
