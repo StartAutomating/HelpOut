@@ -89,28 +89,41 @@ Parameters:
     - ExcludeCommandType
     - ExcludeCommandTypes
 
-Synopsis: Saves a Module's Markdown Help
 Description: |
   
   Get markdown help for each command in a module and saves it to the appropriate location.
+  
+  
+  
+Synopsis: Saves a Module's Markdown Help
 ---
+
+
 Save-MarkdownHelp
 -----------------
+
+
 ### Synopsis
 Saves a Module's Markdown Help
 
 ---
+
+
 ### Description
 
 Get markdown help for each command in a module and saves it to the appropriate location.
 
 ---
+
+
 ### Related Links
 * [Get-MarkdownHelp](Get-MarkdownHelp.md)
 
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -123,6 +136,8 @@ Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
 ```
 
 ---
+
+
 ### Parameters
 #### **Module**
 
@@ -494,6 +509,8 @@ Valid Values:
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
