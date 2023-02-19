@@ -35,13 +35,13 @@ Parameters:
     Aliases: 
     - YamlHeaderInfoType
 
+Synopsis: Gets Markdown Help
 Description: |
   
   Gets Help for a given command, in Markdown
   
   
   
-Synopsis: Gets Markdown Help
 HelpOut.TellStory: True
 HelpOut.Story.Process: On Each Command Or Topic
 ---
@@ -236,6 +236,21 @@ The documentation for a single command, in Markdown.
 ---
 
 
+Story
+-----
+
+## On Each Input
+ We start off by copying the bound parameters and then we call Get-Help.  If we could not call Get-Help error out.  Next we need to tweak the output of Get-Help.  Get-Help can return either a help topic or help about a command.
+
+ Help topics will be returned as a string (which we will output as-is for now) Command help is the interesting scenario.  In this case, we want to prepare the object to become markdown in a few ways.  
+* Clear the typenames and decorate the return object.  
+* If -Rename was passed, put that on the help object.  
+* Add the -SectionOrder to the help object.  
+* Add -Wiki to the help object, as .WikiLink.  
+* Add -GitHubDocRoot as .DocLink.  
+* Pass down -NoValidValueEnumeration.
+
+ Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
 Story
 -----
 
