@@ -26,22 +26,33 @@ Parameters:
     Aliases: 
     - Unversioned
 
-Synopsis: Gets MAML help
 Description: |
   
   Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
+  
+  
+  
+Synopsis: Gets MAML help
 ---
+
+
 Get-MAML
 --------
+
+
 ### Synopsis
 Gets MAML help
 
 ---
+
+
 ### Description
 
 Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
 
 ---
+
+
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
@@ -52,6 +63,8 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -74,6 +87,8 @@ Get-MAML -Name Get-MAML -XML
 ```
 
 ---
+
+
 ### Parameters
 #### **Name**
 
@@ -172,11 +187,15 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 ---
+
+
 ### Inputs
 [Management.Automation.CommandInfo]
 Accepts a command
 
 ---
+
+
 ### Outputs
 * [String]
 The MAML, as a String.  This is the default.
@@ -189,6 +208,8 @@ The MAML, as an XmlDocument (when -XML is passed in)
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Get-MAML [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
