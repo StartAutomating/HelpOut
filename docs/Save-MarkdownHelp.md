@@ -89,13 +89,10 @@ Parameters:
     Aliases: 
     - YamlHeaderInfoType
 
+Synopsis: Saves a Module's Markdown Help
 Description: |
   
   Get markdown help for each command in a module and saves it to the appropriate location.
-  
-  
-  
-Synopsis: Saves a Module's Markdown Help
 ---
 
 
