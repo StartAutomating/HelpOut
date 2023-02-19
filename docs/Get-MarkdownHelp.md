@@ -35,32 +35,42 @@ Parameters:
     Aliases: 
     - YamlHeaderInfoType
 
-Synopsis: Gets Markdown Help
 Description: |
   
   Gets Help for a given command, in Markdown
   
   
   
+Synopsis: Gets Markdown Help
 HelpOut.TellStory: True
 ---
+
+
 Get-MarkdownHelp
 ----------------
+
+
 ### Synopsis
 Gets Markdown Help
 
 ---
+
+
 ### Description
 
 Gets Help for a given command, in Markdown
 
 ---
+
+
 ### Related Links
 * [Save-MarkdownHelp](Save-MarkdownHelp.md)
 
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -68,6 +78,8 @@ Get-MarkdownHelp Get-Help
 ```
 
 ---
+
+
 ### Parameters
 #### **Name**
 
@@ -206,6 +218,8 @@ Valid Values:
 
 
 ---
+
+
 ### Outputs
 * [string]
 
@@ -215,6 +229,8 @@ The documentation for a single command, in Markdown.
 
 
 ---
+
+
 Story
 -----
 
@@ -231,6 +247,8 @@ Story
 
  Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
 ---
+
+
 ### Syntax
 ```PowerShell
 Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [<CommonParameters>]
