@@ -151,7 +151,7 @@ runs:
         } elseif ($env:GITHUB_ACTION_PATH) {
             $HelpOutModulePath = Join-Path $env:GITHUB_ACTION_PATH 'HelpOut.psd1'
             if (Test-path $HelpOutModulePath) {
-                Import-Module $HelpOutModulePath -Force -PassThru | Out-String
+                Import-Module $HelpOutModulePath -Force -PassThru | Out-Host
             } else {
                 throw "HelpOut not found"
             }
