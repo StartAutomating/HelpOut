@@ -18,12 +18,15 @@ Parameters:
     Type: System.Collections.IDictionary
     Aliases: 
     
-Synopsis: Gets a Script's story
 Description: |
   
   Gets the Script's "Story"
   
   Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
+  
+  
+  
+Synopsis: Gets a Script's story
 ---
 
 
