@@ -51,12 +51,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
-        UserName: ${{inputs.UserName}}
+        HelpOutScript: ${{inputs.HelpOutScript}}
+        SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
+        CommitMessage: ${{inputs.CommitMessage}}
         UserEmail: ${{inputs.UserEmail}}
         ModuleName: ${{inputs.ModuleName}}
-        CommitMessage: ${{inputs.CommitMessage}}
-        SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
-        HelpOutScript: ${{inputs.HelpOutScript}}
+        UserName: ${{inputs.UserName}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -134,9 +134,10 @@ runs:
         
         # Check to ensure we are on a branch
         $branchName = git rev-parse --abrev-ref HEAD
+            
         # If we were not, return.
-        if (-not $branchName) {
-            "::notice title=No Branch Found::Not on a Branch.  Exiting" | Out-Host  
+        if ((-not $branchName) -or $LASTEXITCODE) {
+            "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
             return
         }
         
