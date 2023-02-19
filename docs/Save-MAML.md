@@ -21,10 +21,13 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-Synopsis: Saves a Module's MAML
 Description: |
   
   Generates a Module's MAML file, and then saves it to the appropriate location.
+  
+  
+  
+Synopsis: Saves a Module's MAML
 ---
 
 
