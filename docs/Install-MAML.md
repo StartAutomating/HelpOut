@@ -45,7 +45,6 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-Synopsis: Installs MAML into a module
 Description: |
   
   Installs MAML into a module.  
@@ -58,13 +57,23 @@ Description: |
   You should then include this script in your module import.
   
   Ideally, you should use the allcommands script
+  
+  
+  
+Synopsis: Installs MAML into a module
 ---
+
+
 Install-MAML
 ------------
+
+
 ### Synopsis
 Installs MAML into a module
 
 ---
+
+
 ### Description
 
 Installs MAML into a module.  
@@ -79,6 +88,8 @@ You should then include this script in your module import.
 Ideally, you should use the allcommands script
 
 ---
+
+
 ### Related Links
 * [Save-MAML](Save-MAML.md)
 
@@ -89,6 +100,8 @@ Ideally, you should use the allcommands script
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -96,6 +109,8 @@ Install-MAML -Module HelpOut
 ```
 
 ---
+
+
 ### Parameters
 #### **Module**
 
@@ -274,6 +289,8 @@ If set, will return the files that were generated.
 
 
 ---
+
+
 ### Outputs
 * [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
@@ -284,6 +301,8 @@ If set, will return the files that were generated.
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
