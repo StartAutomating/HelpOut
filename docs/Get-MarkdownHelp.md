@@ -1,18 +1,19 @@
 ---
 CommandName: Get-MarkdownHelp
 Parameters: 
-  - Name: Name
-    Type: System.String
-    Aliases: 
-    
-  - Name: Wiki
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
   - Name: GitHubDocRoot
     Type: System.String
     Aliases: 
     - GitHubPageRoot
+  - Name: IncludeYamlHeader
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - IncludeFrontMatter
+    - IncludeHeader
+  - Name: NoValidValueEnumeration
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
   - Name: Rename
     Type: System.String
     Aliases: 
@@ -21,27 +22,25 @@ Parameters:
     Type: System.String[]
     Aliases: 
     
-  - Name: NoValidValueEnumeration
+  - Name: Wiki
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: IncludeYamlHeader
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    - IncludeFrontMatter
-    - IncludeHeader
   - Name: YamlHeaderInformationType
     Type: System.String[]
     Aliases: 
     - YamlHeaderInfoType
-
+  - Name: Name
+    Type: System.String
+    Aliases: 
+    
+Synopsis: Gets Markdown Help
 Description: |
   
   Gets Help for a given command, in Markdown
   
   
   
-Synopsis: Gets Markdown Help
 HelpOut.TellStory: True
 HelpOut.Story.Process: On Each Command Or Topic
 ---
