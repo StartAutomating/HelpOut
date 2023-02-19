@@ -113,4 +113,3 @@ Measure-Help [-FilePath] <String> [<CommonParameters>]
 ```PowerShell
 Measure-Help -ScriptBlock <ScriptBlock> [-Name <String>] [<CommonParameters>]
 ```
----
