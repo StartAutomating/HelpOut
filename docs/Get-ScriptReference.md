@@ -92,4 +92,3 @@ Get-ScriptReference [-FilePath] <String[]> [-Recurse] [<CommonParameters>]
 ```PowerShell
 Get-ScriptReference [-ScriptBlock] <ScriptBlock[]> [-Recurse] [<CommonParameters>]
 ```
----
