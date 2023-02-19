@@ -1,14 +1,6 @@
 ---
 CommandName: Get-MAML
 Parameters: 
-  - Name: Name
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: Module
-    Type: System.String[]
-    Aliases: 
-    
   - Name: CommandInfo
     Type: System.Management.Automation.CommandInfo[]
     Aliases: 
@@ -17,22 +9,26 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: XML
-    Type: System.Management.Automation.SwitchParameter
+  - Name: Module
+    Type: System.String[]
     Aliases: 
     
   - Name: NoVersion
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     - Unversioned
-
+  - Name: XML
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: Name
+    Type: System.String[]
+    Aliases: 
+    
+Synopsis: Gets MAML help
 Description: |
   
   Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
-  
-  
-  
-Synopsis: Gets MAML help
 ---
 
 
