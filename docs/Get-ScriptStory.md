@@ -1,6 +1,14 @@
 ---
 CommandName: Get-ScriptStory
 Parameters: 
+  - Name: HeadingSize
+    Type: System.Int32
+    Aliases: 
+    
+  - Name: RegionName
+    Type: System.Collections.IDictionary
+    Aliases: 
+    
   - Name: ScriptBlock
     Type: System.Management.Automation.ScriptBlock
     Aliases: 
@@ -10,23 +18,13 @@ Parameters:
     Aliases: 
     - ScriptContents
     - Definition
-  - Name: RegionName
-    Type: System.Collections.IDictionary
-    Aliases: 
-    
-  - Name: HeadingSize
-    Type: System.Int32
-    Aliases: 
-    
+
+Synopsis: Gets a Script's story
 Description: |
   
   Gets the Script's "Story"
   
   Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
-  
-  
-  
-Synopsis: Gets a Script's story
 ---
 
 
