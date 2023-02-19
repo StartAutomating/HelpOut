@@ -1,20 +1,16 @@
 ---
 CommandName: Install-MAML
 Parameters: 
-  - Name: Module
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: NoRefresh
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
   - Name: Compact
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: ScriptName
-    Type: System.String
+  - Name: Culture
+    Type: System.Globalization.CultureInfo
+    Aliases: 
+    
+  - Name: Exclude
+    Type: System.String[]
     Aliases: 
     
   - Name: FunctionRoot
@@ -25,26 +21,31 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: Encoding
-    Type: System.Text.Encoding
-    Aliases: 
-    
-  - Name: Exclude
-    Type: System.String[]
+  - Name: NoRefresh
+    Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
   - Name: NoVersion
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     - Unversioned
-  - Name: Culture
-    Type: System.Globalization.CultureInfo
-    Aliases: 
-    
   - Name: PassThru
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
+  - Name: Module
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ScriptName
+    Type: System.String
+    Aliases: 
+    
+  - Name: Encoding
+    Type: System.Text.Encoding
+    Aliases: 
+    
+Synopsis: Installs MAML into a module
 Description: |
   
   Installs MAML into a module.  
@@ -57,10 +58,6 @@ Description: |
   You should then include this script in your module import.
   
   Ideally, you should use the allcommands script
-  
-  
-  
-Synopsis: Installs MAML into a module
 ---
 
 
