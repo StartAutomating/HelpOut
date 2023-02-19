@@ -210,7 +210,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
                 
                 foreach ($storyAttribute in $storyAttributes) {
-                    $storyKey = $storyAttribute.Key -replace '^HelpOut\.Story'
+                    $storyKey = $storyAttribute.Key -replace '^HelpOut\.Story\.'
                     
                     if ($storyCmd.Parameters[$storyKey]) {
                         $storySplat[$storyKey] = $storyAttribute.Value
