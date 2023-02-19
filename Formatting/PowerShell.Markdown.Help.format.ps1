@@ -279,7 +279,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     CommandName = $helpCmd.Name
                     Parameters = @(
                         $helpCmd.Parameters.Values |
-                        Sort-Object { $_.Attributes.Position }, Name | 
+                        Sort-Object @{
+                            Expression = { $_.Attributes.Position };Descending=$true
+                        }, Name | 
                         Where-Object {
                             $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
                         } |
