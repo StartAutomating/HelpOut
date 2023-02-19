@@ -309,7 +309,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         }
         Story = {
             $storyAttributes = @(foreach ($attr in $helpCmd.ScriptBlock.Attributes) {
-                if ($attr.Key -notmatch '^HelpOut\.(.+?)Story') { continue }
+                if ($attr.Key -notmatch '^HelpOut\.(.?)Story') { continue }
                 $attr
             })
             if ($storyAttributes) {
