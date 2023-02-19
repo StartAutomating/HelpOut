@@ -21,28 +21,41 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-Synopsis: Saves a Module's MAML
 Description: |
   
   Generates a Module's MAML file, and then saves it to the appropriate location.
+  
+  
+  
+Synopsis: Saves a Module's MAML
 ---
+
+
 Save-MAML
 ---------
+
+
 ### Synopsis
 Saves a Module's MAML
 
 ---
+
+
 ### Description
 
 Generates a Module's MAML file, and then saves it to the appropriate location.
 
 ---
+
+
 ### Related Links
 * [Get-MAML](Get-MAML.md)
 
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -60,6 +73,8 @@ Save-Maml -Module HelpOut -PassThru
 ```
 
 ---
+
+
 ### Parameters
 #### **Module**
 
@@ -155,6 +170,8 @@ If you pass ```-Confirm:$false``` you will not be prompted.
 If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
 
 ---
+
+
 ### Outputs
 * [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
@@ -165,6 +182,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
