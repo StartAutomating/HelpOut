@@ -13,10 +13,13 @@ Parameters:
     Type: System.Management.Automation.ScriptBlock
     Aliases: 
     
-Synopsis: Determines the percentage of documentation
 Description: |
   
   Determines the percentage of documentation in a given script
+  
+  
+  
+Synopsis: Determines the percentage of documentation
 ---
 
 
