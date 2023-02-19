@@ -582,6 +582,7 @@ jobs:
         uses: StartAutomating/PipeScript@main
       - name: UseEZOut
         uses: StartAutomating/EZOut@master
-      - name: UseHelpOut
-        uses: StartAutomating/HelpOut@master
+      - name: Run Help Out
+        uses: StartAutomating/HelpOut@HelpOut-Stories-And-Stuff
+        id: HelpOut
 
