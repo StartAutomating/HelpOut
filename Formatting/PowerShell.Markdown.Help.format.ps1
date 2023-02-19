@@ -226,8 +226,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     } elseif ($storySplat.RegionName.Heading) {
                         $storySplat.RegionName.Heading
                     } else {
-                        "Story"
+                        "How It Works"
                     }
+
                 Format-Markdown -Heading $storyHeader -HeadingSize 2
                 $helpCmd | Get-ScriptStory @storySplat
             }
