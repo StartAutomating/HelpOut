@@ -288,4 +288,3 @@ If set, will return the files that were generated.
 ```PowerShell
 Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
 ```
----
