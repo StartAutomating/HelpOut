@@ -1,20 +1,45 @@
 ---
 CommandName: Save-MarkdownHelp
 Parameters: 
+  - Name: Command
+    Type: System.Management.Automation.CommandInfo[]
+    Aliases: 
+    
+  - Name: ExcludeFile
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ExcludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeExtension
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeYamlHeader
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - IncludeFrontMatter
+    - IncludeHeader
   - Name: Module
     Type: System.String[]
+    Aliases: 
+    
+  - Name: NoValidValueEnumeration
+    Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
   - Name: OutputPath
     Type: System.String
     Aliases: 
     
-  - Name: Wiki
+  - Name: PassThru
     Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: Command
-    Type: System.Management.Automation.CommandInfo[]
     Aliases: 
     
   - Name: ReplaceCommandName
@@ -22,18 +47,6 @@ Parameters:
     Aliases: 
     
   - Name: ReplaceCommandNameWith
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ScriptPath
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ReplaceScriptName
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ReplaceScriptNameWith
     Type: System.String[]
     Aliases: 
     
@@ -45,57 +58,41 @@ Parameters:
     Type: System.String[]
     Aliases: 
     
-  - Name: PassThru
-    Type: System.Management.Automation.SwitchParameter
+  - Name: ReplaceScriptName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ScriptPath
+    Type: System.String[]
     Aliases: 
     
   - Name: SectionOrder
     Type: System.String[]
     Aliases: 
     
-  - Name: IncludeTopic
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ExcludeTopic
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ExcludeFile
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: IncludeExtension
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: NoValidValueEnumeration
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: IncludeYamlHeader
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    - IncludeFrontMatter
-    - IncludeHeader
-  - Name: YamlHeaderInformationType
-    Type: System.String[]
-    Aliases: 
-    - YamlHeaderInfoType
   - Name: SkipCommandType
     Type: System.Management.Automation.CommandTypes[]
     Aliases: 
     - SkipCommandTypes
     - ExcludeCommandType
     - ExcludeCommandTypes
+  - Name: Wiki
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: YamlHeaderInformationType
+    Type: System.String[]
+    Aliases: 
+    - YamlHeaderInfoType
 
+Synopsis: Saves a Module's Markdown Help
 Description: |
   
   Get markdown help for each command in a module and saves it to the appropriate location.
-  
-  
-  
-Synopsis: Saves a Module's Markdown Help
 ---
 
 
