@@ -215,11 +215,6 @@ The documentation for a single command, in Markdown.
 
 
 ---
-### Syntax
-```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [<CommonParameters>]
-```
----
 Story
 -----
 
@@ -235,3 +230,8 @@ Story
 * Pass down -NoValidValueEnumeration.
 
  Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
+---
+### Syntax
+```PowerShell
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [<CommonParameters>]
+```
