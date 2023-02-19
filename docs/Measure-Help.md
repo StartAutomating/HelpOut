@@ -13,28 +13,41 @@ Parameters:
     Type: System.String
     Aliases: 
     
-Synopsis: Determines the percentage of documentation
 Description: |
   
   Determines the percentage of documentation in a given script
+  
+  
+  
+Synopsis: Determines the percentage of documentation
 ---
+
+
 Measure-Help
 ------------
+
+
 ### Synopsis
 Determines the percentage of documentation
 
 ---
+
+
 ### Description
 
 Determines the percentage of documentation in a given script
 
 ---
+
+
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -57,6 +70,8 @@ Measure-Help {
 ```
 
 ---
+
+
 ### Parameters
 #### **FilePath**
 
@@ -106,6 +121,8 @@ The name of the script being measured.
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Measure-Help [-FilePath] <String> [<CommonParameters>]
