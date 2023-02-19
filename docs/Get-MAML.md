@@ -202,4 +202,3 @@ Get-MAML [-Module <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>
 ```PowerShell
 Get-MAML -CommandInfo <CommandInfo[]> [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
 ```
----
