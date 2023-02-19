@@ -1,16 +1,16 @@
 ---
 CommandName: Save-MAML
 Parameters: 
-  - Name: Module
-    Type: System.String[]
-    Aliases: 
-    
   - Name: Compact
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
   - Name: Culture
     Type: System.Globalization.CultureInfo
+    Aliases: 
+    
+  - Name: Module
+    Type: System.String[]
     Aliases: 
     
   - Name: NoVersion
@@ -21,13 +21,10 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
+Synopsis: Saves a Module's MAML
 Description: |
   
   Generates a Module's MAML file, and then saves it to the appropriate location.
-  
-  
-  
-Synopsis: Saves a Module's MAML
 ---
 
 
