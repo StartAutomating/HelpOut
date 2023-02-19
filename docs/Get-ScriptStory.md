@@ -18,19 +18,28 @@ Parameters:
     Type: System.Int32
     Aliases: 
     
-Synopsis: Gets a Script's story
 Description: |
   
   Gets the Script's "Story"
   
   Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
+  
+  
+  
+Synopsis: Gets a Script's story
 ---
+
+
 Get-ScriptStory
 ---------------
+
+
 ### Synopsis
 Gets a Script's story
 
 ---
+
+
 ### Description
 
 Gets the Script's "Story"
@@ -38,6 +47,8 @@ Gets the Script's "Story"
 Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -45,6 +56,8 @@ Get-Command Get-ScriptStory | Get-ScriptStory
 ```
 
 ---
+
+
 ### Parameters
 #### **ScriptBlock**
 
@@ -106,6 +119,8 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
