@@ -8,12 +8,15 @@
         Get-MarkdownHelp Get-Help
     .LINK
         Save-MarkdownHelp
+    .LINK
+        Get-Help
     .OUTPUTS
         [string]
 
         The documentation for a single command, in Markdown.
     #>
-    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]    
+    [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
+    [Reflection.AssemblyMetadata("HelpOut.Story.Process", "On Each Command Or Topic")]
     [OutputType('PowerShell.Markdown.Help')]
     param(
     # The name of the specified command or concept.
@@ -64,7 +67,7 @@
     {
         # We start off by copying the bound parameters
         $myParams= @{} + $PSBoundParameters
-        # Then we call Get-Help.
+        # and then we call Get-Help.
         $getHelp = @{name=$Name}
         $gotHelp = Get-Help @getHelp
         # If we could not call Get-Help
