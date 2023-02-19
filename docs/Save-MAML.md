@@ -172,4 +172,3 @@ Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf]
 ```PowerShell
 Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
----
