@@ -14,7 +14,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
         Synopsis = {
             Format-Markdown -HeadingSize 3 -Heading "Synopsis"
 
-            $helpObject.Synopsis | Out-String -Width 1mb            
+            $helpObject.Synopsis | Out-String -Width 1mb
         }
         Description = {
             Format-Markdown -HeadingSize 3 -Heading "Description"
@@ -229,7 +229,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         "Story"
                     }
                 Format-Markdown -Heading $storyHeader -HeadingSize 2
-                $helpCmd | Get-ScriptStory
+                $helpCmd | Get-ScriptStory @storySplat
             }
         }
         Syntax = {
