@@ -321,6 +321,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     & $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
+                [Environment]::NewLine
                 $sectionContent
                 if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') { 
                     '---'
