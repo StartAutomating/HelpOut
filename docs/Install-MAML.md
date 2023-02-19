@@ -45,6 +45,7 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
+Synopsis: Installs MAML into a module
 Description: |
   
   Installs MAML into a module.  
@@ -57,10 +58,6 @@ Description: |
   You should then include this script in your module import.
   
   Ideally, you should use the allcommands script
-  
-  
-  
-Synopsis: Installs MAML into a module
 ---
 
 
