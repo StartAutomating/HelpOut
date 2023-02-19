@@ -16,7 +16,7 @@
         The documentation for a single command, in Markdown.
     #>
     [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
-    [Reflection.AssemblyMetadata("HelpOut.Story.Process", "On Each Command Or Topic")]
+    [Reflection.AssemblyMetadata("HelpOut.Story.Process", "For each Command")]
     [OutputType('PowerShell.Markdown.Help')]
     param(
     # The name of the specified command or concept.
@@ -70,50 +70,60 @@
         # and then we call Get-Help.
         $getHelp = @{name=$Name}
         $gotHelp = Get-Help @getHelp
-        # If we could not call Get-Help
+        
+        
+        # If we could not Get-Help,
         if (-not $gotHelp) {
             Write-Error "Could not get help for $name"
-            return # error out.
+            return # we error out.
         }
 
-        # Next we need to tweak the output of Get-Help.
-        # Get-Help can return either a help topic or help about a command.
+        # We need to decorate the output of Get-Help so it renders as markdown,
+        # so we pipe thru all results from Get-Help.    
 
         $gotHelp |
             & { process {
+                    # Get-Help can return either a help topic or command help.
                     $in = $_
                     # Help topics will be returned as a string
                     if ($in -is [string]) {
-                        $in # (which we will output as-is for now)
+                        $in # (which we will output as-is for now).
                     } else {
-                        # Command help is the interesting scenario.
+
+
+                        
                         $helpObj = $_
-                        # In this case, we want to prepare the object to become markdown in a few ways.
-                        # * Clear the typenames and decorate the return object.
+                        # Command Help will be returned as an object
+                        # We decorate that object with the typename `PowerShell.Markdown.Help`.
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
 
-                        # * If -Rename was passed, put that on the help object.
+                        # Then we attach parameters passed to this command to the help object.
+                        # * `-Rename` will become `[string] .Rename`
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
                         }
 
-                        # * Add the -SectionOrder to the help object.
+                        # * `-SectionOrder` will become `[string[]] .SectionOrder`
                         if ($SectionOrder) {
                             $helpObj | Add-Member NoteProperty SectionOrder $SectionOrder -Force
                         }
-                        # * Add -Wiki to the help object, as .WikiLink.
+                        # * `-Wiki`  will become `[bool] .WikiLink`
                         $helpObj | Add-Member NoteProperty WikiLink ($Wiki -as [bool]) -Force
-                        # * Add -GitHubDocRoot as .DocLink.
+                        # * `-GitHubDocRoot` will become `.DocLink`
                         if ($myParams.ContainsKey("GitHubDocRoot")) {
                             $helpObj | Add-Member NoteProperty DocLink $GitHubDocRoot -Force
                         }
-                        # * Pass down -NoValidValueEnumeration.
+                        # * `-NoValidValueEnumeration`
                         $helpObj | Add-Member NoteProperty NoValidValueEnumeration $NoValidValueEnumeration -Force
+                        # * `-IncludeYamlHeader`
                         $helpObj | Add-Member NoteProperty IncludeYamlHeader $IncludeYamlHeader -Force
+                        # * `-NoValidValueEnumeration`
                         $helpObj | Add-Member NoteProperty YamlHeaderInformationType $YamlHeaderInformationType -Force
 
-                        # Now, when we output this object, the PowerShell.Markdown.Help formatter will display it.
+
+                        # After we've attached all of the properties, we simply output the object.
+                        # PowerShell.Markdown.Help formatter will display it exactly as we'd like it.                        
                         $helpObj
                     }
                 }
