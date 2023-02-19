@@ -1,6 +1,10 @@
 ---
 CommandName: Get-MarkdownHelp
 Parameters: 
+  - Name: Name
+    Type: System.String
+    Aliases: 
+    
   - Name: GitHubDocRoot
     Type: System.String
     Aliases: 
@@ -30,17 +34,14 @@ Parameters:
     Type: System.String[]
     Aliases: 
     - YamlHeaderInfoType
-  - Name: Name
-    Type: System.String
-    Aliases: 
-    
-Synopsis: Gets Markdown Help
+
 Description: |
   
   Gets Help for a given command, in Markdown
   
   
   
+Synopsis: Gets Markdown Help
 HelpOut.TellStory: True
 HelpOut.Story.Process: On Each Command Or Topic
 ---
