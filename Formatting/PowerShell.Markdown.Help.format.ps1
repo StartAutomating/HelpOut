@@ -204,6 +204,44 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
             }
         }
+        Story = {
+            $storyAttributes = @(foreach ($attr in $helpCmd.ScriptBlock.Attributes) {
+                if ($attr.Key -notmatch '^HelpOut\.(.+?)Story') { continue }
+                $attr
+            })
+            if ($storyAttributes) {
+                $storyCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-ScriptStory', 'Function')
+                $storySplat = [Ordered]@{
+                    RegionName = [Ordered]@{
+                        begin = "Before any input"
+                        process = "On Each Input"
+                        end = "After all input"
+                    }
+                }
+                
+                foreach ($storyAttribute in $storyAttributes) {
+                    $storyKey = $storyAttribute.Key -replace '^HelpOut\.Story'
+                    
+                    if ($storyCmd.Parameters[$storyKey]) {
+                        $storySplat[$storyKey] = $storyAttribute.Value
+                    } else {
+                        $storySplat.RegionName[$storyKey] = $storyAttribute.Value
+                    }
+                }
+            }
+            foreach ($story in $storyAttributes) {
+                $storyHeader = 
+                    if ($storySplat.RegionName.Header) {
+                        $storySplat.RegionName.Header
+                    } elseif ($storySplat.RegionName.Heading) {
+                        $storySplat.RegionName.Heading
+                    } else {
+                        "Story"
+                    }
+                Format-Markdown -Heading $storyHeader -HeadingSize 2
+                $helpCmd | Get-ScriptStory
+            }
+        }
     }
 
     (@(
