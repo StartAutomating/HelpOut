@@ -294,7 +294,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
             }
             if ($infoTypes -contains 'Help') {
-                $yamlHeaderToBe += @{
+                $yamlHeaderToBe += [Ordered]@{
                     Synopsis    = $helpObject.Synopsis
                     Description = ($helpObject.description | Out-String -Width 1kb)
                 }
