@@ -13,13 +13,10 @@ Parameters:
     Type: System.String
     Aliases: 
     
+Synopsis: Determines the percentage of documentation
 Description: |
   
   Determines the percentage of documentation in a given script
-  
-  
-  
-Synopsis: Determines the percentage of documentation
 ---
 
 
