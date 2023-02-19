@@ -174,12 +174,12 @@ runs:
             if ($shouldCommit) {
                 git add $fullName
                 if ($out.Message) {
-                    git commit -m "$($out.Message)"
+                    git commit -m "$($out.Message)" | Out-Host
                 } elseif ($out.CommitMessage) {
-                    git commit -m "$($out.CommitMessage)"
+                    git commit -m "$($out.CommitMessage)" | Out-Host
                 }  elseif ($gitHubEvent.head_commit.message) {
-                    git commit -m "$($gitHubEvent.head_commit.message)"
-                }  
+                    git commit -m "$($gitHubEvent.head_commit.message)" | Out-Host
+                }
                 $anyFilesChanged = $true
             }
             $out
