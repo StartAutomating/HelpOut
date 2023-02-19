@@ -651,6 +651,11 @@ If not provided, this will be the order they are defined in the formatter.</maml
         <maml:uri>
         </maml:uri>
       </maml:navigationLink>
+      <maml:navigationLink>
+        <maml:linkText>Get-Help</maml:linkText>
+        <maml:uri>
+        </maml:uri>
+      </maml:navigationLink>
     </maml:relatedLinks>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
