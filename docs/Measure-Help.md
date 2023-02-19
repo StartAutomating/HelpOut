@@ -1,6 +1,10 @@
 ---
 CommandName: Measure-Help
 Parameters: 
+  - Name: FilePath
+    Type: System.String
+    Aliases: 
+    - Fullname
   - Name: Name
     Type: System.String
     Aliases: 
@@ -9,15 +13,13 @@ Parameters:
     Type: System.Management.Automation.ScriptBlock
     Aliases: 
     
-  - Name: FilePath
-    Type: System.String
-    Aliases: 
-    - Fullname
-
-Synopsis: Determines the percentage of documentation
 Description: |
   
   Determines the percentage of documentation in a given script
+  
+  
+  
+Synopsis: Determines the percentage of documentation
 ---
 
 
