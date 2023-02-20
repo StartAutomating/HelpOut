@@ -104,8 +104,8 @@ A PowerShell script block
 
 
 
-|Type           |Required|Position|PipelineInput        |Aliases|
-|---------------|--------|--------|---------------------|-------|
+|Type           |Required|Position|PipelineInput        |
+|---------------|--------|--------|---------------------|
 |`[ScriptBlock]`|true    |named   |true (ByPropertyName)|
 
 
@@ -119,8 +119,8 @@ The name of the script being measured.
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[String]`|false   |named   |true (ByPropertyName)|
 
 
