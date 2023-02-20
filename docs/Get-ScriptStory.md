@@ -79,7 +79,6 @@ A script block
 
 
 
----
 #### **Text**
 
 A block of text
@@ -95,7 +94,6 @@ A block of text
 
 
 
----
 #### **RegionName**
 
 The friendly names of code regions or begin,process, or end blocks.
@@ -111,7 +109,6 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
----
 #### **HeadingSize**
 
 
