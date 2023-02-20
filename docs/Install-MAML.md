@@ -65,8 +65,12 @@ Install-MAML
 ------------
 
 
+
+
 ### Synopsis
 Installs MAML into a module
+
+
 
 ---
 
@@ -84,6 +88,8 @@ You should then include this script in your module import.
 
 Ideally, you should use the allcommands script
 
+
+
 ---
 
 
@@ -96,6 +102,8 @@ Ideally, you should use the allcommands script
 
 
 
+
+
 ---
 
 
@@ -104,6 +112,8 @@ Ideally, you should use the allcommands script
 ```PowerShell
 Install-MAML -Module HelpOut
 ```
+
+
 
 ---
 
@@ -285,6 +295,8 @@ If set, will return the files that were generated.
 
 
 
+
+
 ---
 
 
@@ -293,6 +305,8 @@ If set, will return the files that were generated.
 
 
 * [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
+
+
 
 
 
