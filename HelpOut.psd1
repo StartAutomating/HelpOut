@@ -1,12 +1,12 @@
 @{
-    Copyright='2019-2022 Start-Automating'
+    Copyright='2019-2023 Start-Automating'
     Description='A Helpful Toolkit for Managing PowerShell Help'
     CompanyName='Start-Automating'
     Guid='3f57070a-240f-4406-8e8e-6351ffe6f85b'
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.4.1'
+    ModuleVersion='0.4.2'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,25 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.4.2
+
+* Markdown Help Improvements:
+  * Adding Aliases (Fixes #111)
+  * Removing Horizontal Rule between parameters (Fixes #110)
+  * Adding newline before and after each section
+  * Supporting Script Stories (Fixes #104)
+  * [Ordered] Synopsis and Description (Fixes #107)
+  * Sorting front matter by Position (descending) and Name (Fixes #107)
+  * Moving Syntax below Notes and Story (re #104)
+* Get-ScriptStory:
+  * Defaulting -HeadingSize to 3
+* Action Improvements:
+  * Better Terminal Output / Removing Output Variables (Fixes #109)
+  * Improving branchless error behavior (Fixes #103)
+  * Adding -InstallModule (Fixes #108)
+
+---
+
 ### 0.4.1
 
 * Parameter Properties are now rendered as a table (Fixes #98)
