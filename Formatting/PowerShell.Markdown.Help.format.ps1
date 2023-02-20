@@ -126,12 +126,13 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     }
 
                     [Environment]::NewLine * 2
-                    
+                                        
                     Format-Markdown -MarkdownTable -InputObject ([PSCustomObject][Ordered]@{
                         Type = "``[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]``"
                         Required = $parameter.required
                         Position = $parameter.position
                         PipelineInput = $parameter.PipelineInput
+                        Aliases = $helpCmd.Parameters[$parameter.name].Aliases -join '<br/>'
                     })
 
                     [Environment]::NewLine * 2                    
