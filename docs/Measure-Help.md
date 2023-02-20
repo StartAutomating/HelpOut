@@ -24,8 +24,12 @@ Measure-Help
 ------------
 
 
+
+
 ### Synopsis
 Determines the percentage of documentation
+
+
 
 ---
 
@@ -34,11 +38,15 @@ Determines the percentage of documentation
 
 Determines the percentage of documentation in a given script
 
+
+
 ---
 
 
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+
+
 
 
 
@@ -65,6 +73,8 @@ Measure-Help {
     $null / 100 # Nothing out of 100             
 } | Select-Object -ExpandProperty PercentageDocumented
 ```
+
+
 
 ---
 
@@ -114,6 +124,8 @@ The name of the script being measured.
 |Type      |Required|Position|PipelineInput        |
 |----------|--------|--------|---------------------|
 |`[String]`|false   |named   |true (ByPropertyName)|
+
+
 
 
 
