@@ -100,8 +100,12 @@ Save-MarkdownHelp
 -----------------
 
 
+
+
 ### Synopsis
 Saves a Module's Markdown Help
+
+
 
 ---
 
@@ -110,11 +114,15 @@ Saves a Module's Markdown Help
 
 Get markdown help for each command in a module and saves it to the appropriate location.
 
+
+
 ---
 
 
 ### Related Links
 * [Get-MarkdownHelp](Get-MarkdownHelp.md)
+
+
 
 
 
@@ -131,6 +139,8 @@ Save-MarkdownHelp -Module HelpOut  # Save Markdown to HelpOut/docs
 ```PowerShell
 Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
 ```
+
+
 
 ---
 
@@ -502,6 +512,8 @@ Valid Values:
 |Type              |Required|Position|PipelineInput        |
 |------------------|--------|--------|---------------------|
 |`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|
+
+
 
 
 
