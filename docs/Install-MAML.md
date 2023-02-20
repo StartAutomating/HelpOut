@@ -134,7 +134,6 @@ The name of one or more modules.
 
 
 
----
 #### **NoRefresh**
 
 If set, will refresh the documentation for the module before generating the commands file.
@@ -150,7 +149,6 @@ If set, will refresh the documentation for the module before generating the comm
 
 
 
----
 #### **Compact**
 
 If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.
@@ -166,7 +164,6 @@ If set, will compact the generated MAML.  This will be ignored if -Refresh is no
 
 
 
----
 #### **ScriptName**
 
 The name of the combined script.  By default, allcommands.ps1.
@@ -182,7 +179,6 @@ The name of the combined script.  By default, allcommands.ps1.
 
 
 
----
 #### **FunctionRoot**
 
 The root directories containing functions.  If not provided, the function root will be the module root.
@@ -198,7 +194,6 @@ The root directories containing functions.  If not provided, the function root w
 
 
 
----
 #### **NoRecurse**
 
 If set, the function roots will not be recursively searched.
@@ -214,7 +209,6 @@ If set, the function roots will not be recursively searched.
 
 
 
----
 #### **Encoding**
 
 The encoding of the combined script.  By default, UTF8.
@@ -230,7 +224,6 @@ The encoding of the combined script.  By default, UTF8.
 
 
 
----
 #### **Exclude**
 
 A list of wildcards to exclude.  This list will always contain the ScriptName.
@@ -246,7 +239,6 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 
 
----
 #### **NoVersion**
 
 If set, the generate MAML will not contain a version number.  
@@ -263,7 +255,6 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
----
 #### **Culture**
 
 If provided, will save the MAML to a different directory than the current UI culture.
@@ -279,7 +270,6 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
----
 #### **PassThru**
 
 If set, will return the files that were generated.
