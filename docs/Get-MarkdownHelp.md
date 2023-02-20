@@ -105,8 +105,8 @@ The name of the specified command or concept.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[String]`|false   |1       |true (ByPropertyName)|
 
 
@@ -120,8 +120,8 @@ If set, will generate a markdown wiki.  Links will be relative to the current pa
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
@@ -135,9 +135,9 @@ If set, will interlink documentation as if it were for GitHub pages, beneath a g
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
-|`[String]`|false   |named   |false        |
+|Type      |Required|Position|PipelineInput|Aliases       |
+|----------|--------|--------|-------------|--------------|
+|`[String]`|false   |named   |false        |GitHubPageRoot|
 
 
 
@@ -150,8 +150,8 @@ If provided, will rename the help topic before getting markdown.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[String]`|false   |named   |true (ByPropertyName)|
 
 
@@ -166,8 +166,8 @@ If not provided, this will be the order they are defined in the formatter.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -181,8 +181,8 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -196,9 +196,9 @@ If set, will not attach a YAML header to the generated help.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[Switch]`|false   |named   |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases                             |
+|----------|--------|--------|---------------------|------------------------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|IncludeFrontMatter<br/>IncludeHeader|
 
 
 
@@ -219,9 +219,9 @@ Valid Values:
 
 
 
-|Type        |Required|Position|PipelineInput|
-|------------|--------|--------|-------------|
-|`[String[]]`|false   |named   |false        |
+|Type        |Required|Position|PipelineInput|Aliases           |
+|------------|--------|--------|-------------|------------------|
+|`[String[]]`|false   |named   |false        |YamlHeaderInfoType|
 
 
 
