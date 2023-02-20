@@ -128,8 +128,8 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[String[]]`|true    |1       |true (ByPropertyName)|
 
 
@@ -143,8 +143,8 @@ If set, will refresh the documentation for the module before generating the comm
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -158,8 +158,8 @@ If set, will compact the generated MAML.  This will be ignored if -Refresh is no
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -173,8 +173,8 @@ The name of the combined script.  By default, allcommands.ps1.
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[String]`|false   |2       |true (ByPropertyName)|
 
 
@@ -188,8 +188,8 @@ The root directories containing functions.  If not provided, the function root w
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -203,8 +203,8 @@ If set, the function roots will not be recursively searched.
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -218,8 +218,8 @@ The encoding of the combined script.  By default, UTF8.
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[Encoding]`|false   |3       |true (ByPropertyName)|
 
 
@@ -233,8 +233,8 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -264,8 +264,8 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
-|Type           |Required|Position|PipelineInput        |Aliases|
-|---------------|--------|--------|---------------------|-------|
+|Type           |Required|Position|PipelineInput        |
+|---------------|--------|--------|---------------------|
 |`[CultureInfo]`|false   |named   |true (ByPropertyName)|
 
 
@@ -279,8 +279,8 @@ If set, will return the files that were generated.
 
 
 
-|Type      |Required|Position|PipelineInput        |Aliases|
-|----------|--------|--------|---------------------|-------|
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
