@@ -758,7 +758,7 @@ function Get-ScriptStory
     },
     
     [int]
-    $HeadingSize = 2)
+    $HeadingSize = 3)
 
     process {
         function foo($x, $y) {
