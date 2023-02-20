@@ -94,8 +94,8 @@ If set, will recursively find references.
 
 
 
-|Type      |Required|Position|PipelineInput|Aliases|
-|----------|--------|--------|-------------|-------|
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
 
 
