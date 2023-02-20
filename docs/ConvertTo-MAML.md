@@ -36,8 +36,12 @@ Get-MAML
 --------
 
 
+
+
 ### Synopsis
 Gets MAML help
+
+
 
 ---
 
@@ -45,6 +49,8 @@ Gets MAML help
 ### Description
 
 Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
+
+
 
 ---
 
@@ -55,6 +61,8 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 
 * [Save-MAML](Save-MAML.md)
+
+
 
 
 
@@ -81,6 +89,8 @@ Get-MAML -Name Get-MAML -Compact
 ```PowerShell
 Get-MAML -Name Get-MAML -XML
 ```
+
+
 
 ---
 
@@ -182,12 +192,16 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
+
+
 ---
 
 
 ### Inputs
 [Management.Automation.CommandInfo]
 Accepts a command
+
+
 
 ---
 
@@ -199,6 +213,8 @@ The MAML, as a String.  This is the default.
 
 * [Xml]
 The MAML, as an XmlDocument (when -XML is passed in)
+
+
 
 
 
