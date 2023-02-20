@@ -31,8 +31,12 @@ Get-ScriptStory
 ---------------
 
 
+
+
 ### Synopsis
 Gets a Script's story
+
+
 
 ---
 
@@ -43,6 +47,8 @@ Gets the Script's "Story"
 
 Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 
+
+
 ---
 
 
@@ -51,6 +57,8 @@ Script Stories are a simple markdown summary of all single-line comments within 
 ```PowerShell
 Get-Command Get-ScriptStory | Get-ScriptStory
 ```
+
+
 
 ---
 
@@ -112,6 +120,8 @@ The friendly names of code regions or begin,process, or end blocks.
 |Type     |Required|Position|PipelineInput|
 |---------|--------|--------|-------------|
 |`[Int32]`|false   |named   |false        |
+
+
 
 
 
