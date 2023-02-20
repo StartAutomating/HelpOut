@@ -326,8 +326,9 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             if ($sectionContent) {
                 [Environment]::NewLine
                 $sectionContent
+                [Environment]::NewLine
                 if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') { 
-                    '---'
+                    '---'                    
                 }
             }
         }
