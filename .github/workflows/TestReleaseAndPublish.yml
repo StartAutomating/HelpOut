@@ -583,6 +583,6 @@ jobs:
       - name: UseEZOut
         uses: StartAutomating/EZOut@master
       - name: Run Help Out
-        uses: StartAutomating/HelpOut@HelpOut-Stories-And-Stuff
+        uses: StartAutomating/HelpOut@master
         id: HelpOut
 
