@@ -218,8 +218,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         $storySplat.RegionName[$storyKey] = $storyAttribute.Value
                     }
                 }
-            }
-            foreach ($story in $storyAttributes) {
+
                 $storyHeader = 
                     if ($storySplat.RegionName.Header) {
                         $storySplat.RegionName.Header
