@@ -105,8 +105,8 @@ The name of or more commands.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |1       |true (ByPropertyName)|
 
 
@@ -120,8 +120,8 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -135,8 +135,8 @@ The CommandInfo object (returned from Get-Command).
 
 
 
-|Type             |Required|Position|PipelineInput |
-|-----------------|--------|--------|--------------|
+|Type             |Required|Position|PipelineInput |Aliases|
+|-----------------|--------|--------|--------------|-------|
 |`[CommandInfo[]]`|true    |named   |true (ByValue)|
 
 
@@ -150,8 +150,8 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
@@ -165,8 +165,8 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
@@ -181,9 +181,9 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
-|`[Switch]`|false   |named   |false        |
+|Type      |Required|Position|PipelineInput|Aliases    |
+|----------|--------|--------|-------------|-----------|
+|`[Switch]`|false   |named   |false        |Unversioned|
 
 
 
