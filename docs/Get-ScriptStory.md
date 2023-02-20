@@ -73,8 +73,8 @@ A script block
 
 
 
-|Type           |Required|Position|PipelineInput |
-|---------------|--------|--------|--------------|
+|Type           |Required|Position|PipelineInput |Aliases|
+|---------------|--------|--------|--------------|-------|
 |`[ScriptBlock]`|true    |1       |true (ByValue)|
 
 
@@ -88,9 +88,9 @@ A block of text
 
 
 
-|Type      |Required|Position|PipelineInput                 |
-|----------|--------|--------|------------------------------|
-|`[String]`|true    |1       |true (ByValue, ByPropertyName)|
+|Type      |Required|Position|PipelineInput                 |Aliases                      |
+|----------|--------|--------|------------------------------|-----------------------------|
+|`[String]`|true    |1       |true (ByValue, ByPropertyName)|ScriptContents<br/>Definition|
 
 
 
@@ -103,8 +103,8 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
-|Type           |Required|Position|PipelineInput|
-|---------------|--------|--------|-------------|
+|Type           |Required|Position|PipelineInput|Aliases|
+|---------------|--------|--------|-------------|-------|
 |`[IDictionary]`|false   |named   |false        |
 
 
@@ -114,8 +114,8 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
-|Type     |Required|Position|PipelineInput|
-|---------|--------|--------|-------------|
+|Type     |Required|Position|PipelineInput|Aliases|
+|---------|--------|--------|-------------|-------|
 |`[Int32]`|false   |named   |false        |
 
 
