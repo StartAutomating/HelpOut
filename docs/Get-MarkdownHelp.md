@@ -111,7 +111,6 @@ The name of the specified command or concept.
 
 
 
----
 #### **Wiki**
 
 If set, will generate a markdown wiki.  Links will be relative to the current path, and will not include the .md extensions
@@ -127,7 +126,6 @@ If set, will generate a markdown wiki.  Links will be relative to the current pa
 
 
 
----
 #### **GitHubDocRoot**
 
 If set, will interlink documentation as if it were for GitHub pages, beneath a given directory
@@ -143,7 +141,6 @@ If set, will interlink documentation as if it were for GitHub pages, beneath a g
 
 
 
----
 #### **Rename**
 
 If provided, will rename the help topic before getting markdown.
@@ -159,7 +156,6 @@ If provided, will rename the help topic before getting markdown.
 
 
 
----
 #### **SectionOrder**
 
 The order of the sections.
@@ -176,7 +172,6 @@ If not provided, this will be the order they are defined in the formatter.
 
 
 
----
 #### **NoValidValueEnumeration**
 
 If set, will not enumerate valid values and enums of parameters.
@@ -192,7 +187,6 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 
----
 #### **IncludeYamlHeader**
 
 If set, will not attach a YAML header to the generated help.
@@ -208,7 +202,6 @@ If set, will not attach a YAML header to the generated help.
 
 
 
----
 #### **YamlHeaderInformationType**
 
 The type of information to include in the YAML Header
