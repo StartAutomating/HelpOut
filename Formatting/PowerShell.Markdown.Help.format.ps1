@@ -134,9 +134,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         PipelineInput = $parameter.PipelineInput
                     })
 
-                    [Environment]::NewLine * 2
-                    
-                    if ($parameterCounter -lt $parameterTotal) { '---' } 
+                    [Environment]::NewLine * 2                    
                 }            
             }            
         }
