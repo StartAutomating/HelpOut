@@ -239,35 +239,7 @@ The documentation for a single command, in Markdown.
 How It Works
 ------------
 
-## For each Command
- We start off by copying the bound parameters and then we call Get-Help.
-
-
-
- If we could not Get-Help, we error out.  We need to decorate the output of Get-Help so it renders as markdown, so we pipe thru all results from Get-Help.
-
- Get-Help can return either a help topic or command help.  Help topics will be returned as a string (which we will output as-is for now).
-
-
-
-
-
- Command Help will be returned as an object We decorate that object with the typename `PowerShell.Markdown.Help`.  Then we attach parameters passed to this command to the help object.  
-* `-Rename` will become `[string] .Rename` 
-* `-SectionOrder` will become `[string[]] .SectionOrder` 
-* `-Wiki`  will become `[bool] .WikiLink` 
-* `-GitHubDocRoot` will become `.DocLink` 
-* `-NoValidValueEnumeration` 
-* `-IncludeYamlHeader` 
-* `-NoValidValueEnumeration`
-
-
-
- After we've attached all of the properties, we simply output the object.  PowerShell.Markdown.Help formatter will display it exactly as we'd like it.
-How It Works
-------------
-
-## For each Command
+### For each Command
  We start off by copying the bound parameters and then we call Get-Help.
 
 
