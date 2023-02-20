@@ -105,8 +105,8 @@ The name of or more commands.
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[String[]]`|false   |1       |true (ByPropertyName)|
 
 
@@ -120,8 +120,8 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |Aliases|
-|------------|--------|--------|---------------------|-------|
+|Type        |Required|Position|PipelineInput        |
+|------------|--------|--------|---------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -135,8 +135,8 @@ The CommandInfo object (returned from Get-Command).
 
 
 
-|Type             |Required|Position|PipelineInput |Aliases|
-|-----------------|--------|--------|--------------|-------|
+|Type             |Required|Position|PipelineInput |
+|-----------------|--------|--------|--------------|
 |`[CommandInfo[]]`|true    |named   |true (ByValue)|
 
 
@@ -150,8 +150,8 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
-|Type      |Required|Position|PipelineInput|Aliases|
-|----------|--------|--------|-------------|-------|
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
 
 
@@ -165,8 +165,8 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 
 
 
-|Type      |Required|Position|PipelineInput|Aliases|
-|----------|--------|--------|-------------|-------|
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
 
 
