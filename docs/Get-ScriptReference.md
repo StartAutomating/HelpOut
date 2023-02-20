@@ -24,8 +24,12 @@ Get-ScriptReference
 -------------------
 
 
+
+
 ### Synopsis
 Gets a script's references
+
+
 
 ---
 
@@ -33,6 +37,8 @@ Gets a script's references
 ### Description
 
 Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.
+
+
 
 ---
 
@@ -42,6 +48,8 @@ Gets the external references of a given PowerShell command.  These are the comma
 ```PowerShell
 Get-Command Get-ScriptReference | Get-ScriptReference
 ```
+
+
 
 ---
 
@@ -91,6 +99,8 @@ If set, will recursively find references.
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
+
+
 
 
 
