@@ -155,8 +155,8 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -171,8 +171,8 @@ If not provided, will be assumed to be the "docs" folder of a given module (unle
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[String]`|false   |named   |true (ByPropertyName)|
 
 
@@ -187,8 +187,8 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -202,8 +202,8 @@ If provided, will generate documentation for additional commands.
 
 
 
-|Type             |Required|Position|PipelineInput        |
-|-----------------|--------|--------|---------------------|
+|Type             |Required|Position|PipelineInput        |Aliases|
+|-----------------|--------|--------|---------------------|-------|
 |`[CommandInfo[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -218,8 +218,8 @@ Replaces parts of the names of the commands provided in the -Command parameter.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -233,8 +233,8 @@ If provided, will replace parts of the names of the scripts discovered in a -Com
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -250,8 +250,8 @@ If an exact match is not found -ScriptPath will also check to see if there is a 
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -265,8 +265,8 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -280,8 +280,8 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -295,8 +295,8 @@ If provided, will replace links discovered in markdown content.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -310,8 +310,8 @@ If provided, will replace links discovered in markdown content with a given Rege
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -325,8 +325,8 @@ If set, will output changed or created files.
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
@@ -340,8 +340,8 @@ The order of the sections.  If not provided, this will be the order they are def
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -357,8 +357,8 @@ By default ```\.help\.txt$``` and ```\.md$```
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -373,8 +373,8 @@ Topic files that match this pattern will not be included.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -390,8 +390,8 @@ If the file name starts and ends with slashes, it will be treated as a Regular E
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -406,8 +406,8 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -421,8 +421,8 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -436,9 +436,9 @@ If set, will not attach a YAML header to the generated help.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[Switch]`|false   |named   |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases                             |
+|----------|--------|--------|---------------------|------------------------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|IncludeFrontMatter<br/>IncludeHeader|
 
 
 
@@ -459,9 +459,9 @@ Valid Values:
 
 
 
-|Type        |Required|Position|PipelineInput|
-|------------|--------|--------|-------------|
-|`[String[]]`|false   |named   |false        |
+|Type        |Required|Position|PipelineInput|Aliases           |
+|------------|--------|--------|-------------|------------------|
+|`[String[]]`|false   |named   |false        |YamlHeaderInfoType|
 
 
 
@@ -489,9 +489,9 @@ Valid Values:
 
 
 
-|Type              |Required|Position|PipelineInput        |
-|------------------|--------|--------|---------------------|
-|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|
+|Type              |Required|Position|PipelineInput        |Aliases                                                        |
+|------------------|--------|--------|---------------------|---------------------------------------------------------------|
+|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|SkipCommandTypes<br/>ExcludeCommandType<br/>ExcludeCommandTypes|
 
 
 
