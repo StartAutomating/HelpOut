@@ -70,7 +70,6 @@ The path to a file
 
 
 
----
 #### **ScriptBlock**
 
 One or more PowerShell ScriptBlocks
@@ -86,7 +85,6 @@ One or more PowerShell ScriptBlocks
 
 
 
----
 #### **Recurse**
 
 If set, will recursively find references.
