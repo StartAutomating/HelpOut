@@ -32,8 +32,12 @@ Save-MAML
 ---------
 
 
+
+
 ### Synopsis
 Saves a Module's MAML
+
+
 
 ---
 
@@ -42,11 +46,15 @@ Saves a Module's MAML
 
 Generates a Module's MAML file, and then saves it to the appropriate location.
 
+
+
 ---
 
 
 ### Related Links
 * [Get-MAML](Get-MAML.md)
+
+
 
 
 
@@ -68,6 +76,8 @@ Save-Maml -Module HelpOut -WhatIf
 ```PowerShell
 Save-Maml -Module HelpOut -PassThru
 ```
+
+
 
 ---
 
@@ -166,6 +176,8 @@ If you pass ```-Confirm:$false``` you will not be prompted.
     
 If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
 
+
+
 ---
 
 
@@ -174,6 +186,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
 
 * [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
+
+
 
 
 
