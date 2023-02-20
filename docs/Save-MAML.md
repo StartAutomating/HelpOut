@@ -98,7 +98,6 @@ The name of one or more modules.
 
 
 
----
 #### **Compact**
 
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
@@ -114,7 +113,6 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
----
 #### **Culture**
 
 If provided, will save the MAML to a different directory than the current UI culture.
@@ -130,7 +128,6 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
----
 #### **NoVersion**
 
 If set, the generate MAML will not contain a version number.  
@@ -147,7 +144,6 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
----
 #### **PassThru**
 
 If set, will return the files that were generated.
@@ -163,7 +159,6 @@ If set, will return the files that were generated.
 
 
 
----
 #### **WhatIf**
 -WhatIf is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.
 -WhatIf is used to see what would happen, or return operations without executing them
