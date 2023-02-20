@@ -51,8 +51,12 @@ Get-MarkdownHelp
 ----------------
 
 
+
+
 ### Synopsis
 Gets Markdown Help
+
+
 
 ---
 
@@ -60,6 +64,8 @@ Gets Markdown Help
 ### Description
 
 Gets Help for a given command, in Markdown
+
+
 
 ---
 
@@ -73,6 +79,8 @@ Gets Help for a given command, in Markdown
 
 
 
+
+
 ---
 
 
@@ -81,6 +89,8 @@ Gets Help for a given command, in Markdown
 ```PowerShell
 Get-MarkdownHelp Get-Help
 ```
+
+
 
 ---
 
@@ -222,6 +232,8 @@ Valid Values:
 
 
 
+
+
 ---
 
 
@@ -229,6 +241,8 @@ Valid Values:
 * [string]
 
 The documentation for a single command, in Markdown.
+
+
 
 
 
@@ -264,6 +278,8 @@ How It Works
 
 
  After we've attached all of the properties, we simply output the object.  PowerShell.Markdown.Help formatter will display it exactly as we'd like it.
+
+
 ---
 
 
