@@ -92,8 +92,8 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
@@ -107,8 +107,8 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
@@ -122,8 +122,8 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
-|Type           |Required|Position|PipelineInput        |
-|---------------|--------|--------|---------------------|
+|Type           |Required|Position|PipelineInput        |Aliases|
+|---------------|--------|--------|---------------------|-------|
 |`[CultureInfo]`|false   |named   |true (ByPropertyName)|
 
 
@@ -138,9 +138,9 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
-|`[Switch]`|false   |named   |false        |
+|Type      |Required|Position|PipelineInput|Aliases    |
+|----------|--------|--------|-------------|-----------|
+|`[Switch]`|false   |named   |false        |Unversioned|
 
 
 
@@ -153,8 +153,8 @@ If set, will return the files that were generated.
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
