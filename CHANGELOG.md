@@ -1,3 +1,23 @@
+### 0.4.2
+
+* Markdown Help Improvements:
+  * Adding Aliases (Fixes #111)
+  * Removing Horizontal Rule between parameters (Fixes #110)
+  * Adding newline before and after each section
+  * Supporting Script Stories (Fixes #104)
+  * [Ordered] Synopsis and Description (Fixes #107)
+  * Sorting front matter by Position (descending) and Name (Fixes #107)
+  * Moving Syntax below Notes and Story (re #104)
+* Get-ScriptStory:
+  * Defaulting -HeadingSize to 3
+* Action Improvements:
+  * Better Terminal Output / Removing Output Variables (Fixes #109)
+  * Improving branchless error behavior (Fixes #103)
+  * Adding -InstallModule (Fixes #108)
+
+---
+
+
 ### 0.4.1
 
 * Parameter Properties are now rendered as a table (Fixes #98)

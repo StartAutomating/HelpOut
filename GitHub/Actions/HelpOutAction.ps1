@@ -60,9 +60,10 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 
 # Check to ensure we are on a branch
 $branchName = git rev-parse --abrev-ref HEAD
+    
 # If we were not, return.
-if (-not $branchName) {
-    "::notice title=No Branch Found::Not on a Branch.  Exiting" | Out-Host  
+if ((-not $branchName) -or $LASTEXITCODE) {
+    "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
     return
 }
 

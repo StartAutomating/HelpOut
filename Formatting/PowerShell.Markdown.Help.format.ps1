@@ -1,6 +1,6 @@
-Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
+﻿Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
     $helpObject = $_
-    $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')    
+    $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
     $helpCmdMetadata = [Management.Automation.CommandMetadata]$helpCmd
 
     $MarkdownSections = [Ordered]@{
@@ -14,7 +14,7 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
         Synopsis = {
             Format-Markdown -HeadingSize 3 -Heading "Synopsis"
 
-            $helpObject.Synopsis | Out-String -Width 1mb            
+            $helpObject.Synopsis | Out-String -Width 1mb
         }
         Description = {
             Format-Markdown -HeadingSize 3 -Heading "Description"
@@ -23,12 +23,12 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             }
         }
         RelatedLinks = {
-            if ($helpObject.RelatedLinks) {    
+            if ($helpObject.RelatedLinks) {
                 Format-Markdown -Heading "Related Links" -headingsize 3
-    
+
                 foreach ($nav in $helpObject.RelatedLinks.navigationLink) {
                     $linkedCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($nav.LinkText, 'All')
-                    $linkUrl = 
+                    $linkUrl =
                         if ($nav.Uri) {
                             $nav.Uri
                         }
@@ -45,23 +45,23 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
                         }
 
                     $linkText = if ($nav.LinkText) { $nav.linkText } else {$linkUrl}
-                    
+
                     Format-Markdown -Link $linkUrl -inputObject $linkText -BulletPoint
                     [Environment]::NewLine * 2
                 }
             }
         }
         Examples = {
-            if ($helpObject.Examples) {                
+            if ($helpObject.Examples) {
                 Format-Markdown -Heading "Examples" -headingsize 3
-    
+
                 foreach ($example in $helpObject.Examples.Example) {
                     Format-Markdown -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4
-    
+
                     if ($example.Code) {
                         $example.Code | Format-Markdown -CodeLanguage PowerShell
                     }
-    
+
                     if ($example.Remarks) {
                         ($example.Remarks | Out-String -Width 1mb).Trim()
                     }
@@ -69,43 +69,43 @@ Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
             }
         }
         Parameters = {
-            if ($helpObject.Parameters) {                
+            if ($helpObject.Parameters) {
                 Format-Markdown -Heading "Parameters" -HeadingSize 3
-    
+
                 $parameterTotal= @($helpObject.parameters.parameter).Length
-                $parameterCounter = 0 
+                $parameterCounter = 0
                 foreach ($parameter in $helpObject.Parameters.parameter) {
                     $parameterCounter++
-                    $parameterDisplayName = 
+                    $parameterDisplayName =
                         if ($parameter.required) {
                             "**$($parameter.Name)**"
                         } else {
                             $parameter.Name
                         }
-    
+
                     Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
-    
+
                     if ($parameter.Name -in 'WhatIf', 'Confirm') {
-                        "-$($parameter.Name) " +  
+                        "-$($parameter.Name) " +
                             'is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.'
                         if ($parameter.Name -eq 'WhatIf') {
                             "-WhatIf is used to see what would happen, or return operations without executing them"
                         }
                         if ($parameter.Name -eq 'Confirm') {
                             '-Confirm is used to -Confirm each operation.
-    
+
 If you pass ```-Confirm:$false``` you will not be prompted.
-    
-    
+
+
 If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
 '
                         }
                         continue
                     }
-                    
+
                     $descriptionLines = @($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)'
                     $descriptionLines -replace '^-\s', '* ' -join [Environment]::NewLine
-    
+
                     if (-not $helpObject.NoValidValueEnumeration -and $helpCmd -and $helpCmd.Parameters.($parameter.Name)) {
                         $parameterMetadata = $helpCmd.Parameters[$parameter.Name]
                         $validValuesList = @(
@@ -113,7 +113,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                                 [Enum]::GetValues($parameterMetadata.ParameterType)
                             } elseif ($parameterMetadata.Attributes.ValidValues) {
                                 $parameterMetadata.Attributes.ValidValues
-                            } elseif ($parameterMetadata.ParameterType.IsArray -and 
+                            } elseif ($parameterMetadata.ParameterType.IsArray -and
                                 $parameterMetadata.ParameterType.GetElementType().IsSubclassOf([Enum])) {
                                 [Enum]::GetValues($parameterMetadata.ParameterType.GetElementType())
                             }
@@ -126,19 +126,23 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     }
 
                     [Environment]::NewLine * 2
-                    
-                    Format-Markdown -MarkdownTable -InputObject ([PSCustomObject][Ordered]@{
+
+                    $parameterTableInfo = [Ordered]@{
                         Type = "``[$($parameter.type.name -replace 'SwitchParameter', 'Switch')]``"
                         Required = $parameter.required
                         Position = $parameter.position
                         PipelineInput = $parameter.PipelineInput
-                    })
+                    }
+
+                    if ($helpCmd.Parameters[$parameter.Name].Aliases) {
+                        $parameterTableInfo.Aliases = $helpCmd.Parameters[$parameter.name].Aliases -join '<br/>'
+                    }
+
+                    Format-Markdown -MarkdownTable -InputObject ([PSCustomObject]$parameterTableInfo)
 
                     [Environment]::NewLine * 2
-                    
-                    if ($parameterCounter -lt $parameterTotal) { '---' } 
-                }            
-            }            
+                }
+            }
         }
         Inputs = {
             if ($helpObject.inputTypes -and $helpObject.inputTypes.inputType) {
@@ -149,14 +153,14 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         $desc.text + [Environment]::NewLine
                     }
                 }
-            }            
+            }
         }
         Outputs = {
             if ($helpObject.returnValues -and $helpObject.returnValues.returnValue) {
                 Format-Markdown -Heading "Outputs" -HeadingSize 3
                 foreach ($returnValue in $helpObject.returnValues.returnValue) {
                     $isRealType = $returnValue.Type.Name -as [type]
-                    if ($isRealType -and 
+                    if ($isRealType -and
                         $isRealType.Assembly.IsFullyTrusted -and
                         $isRealType.FullName -match '^System\.') {
                         $msdnLink = "https://learn.microsoft.com/en-us/dotnet/api/$($isRealType.FullName)"
@@ -164,7 +168,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                         "* $returnTypeName"
                     } else {
                         "* $($returnValue.Type.Name)"
-                    }                    
+                    }
                     [Environment]::NewLine
                 }
                 [Environment]::NewLine
@@ -186,6 +190,52 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 [Environment]::NewLine
             }
         }
+        Notes = {
+            if ($helpObject.alertSet) {
+                Format-Markdown -Heading "Notes" -HeadingSize 3
+                foreach ($note in $helpObject.AlertSet.alert) {
+                    ($note | Out-String).Trim() + [Environment]::NewLine
+                }
+            }
+        }
+        Story = {
+            $storyAttributes = @(foreach ($attr in $helpCmd.ScriptBlock.Attributes) {
+                if ($attr.Key -notmatch '^HelpOut\.(?:.{0,}?)Story') { continue }
+                $attr
+            })
+            if ($storyAttributes) {
+                $storyCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand('Get-ScriptStory', 'Function')
+                $storySplat = [Ordered]@{
+                    RegionName = [Ordered]@{
+                        begin = "Before any input"
+                        process = "On Each Input"
+                        end = "After all input"
+                    }
+                }
+
+                foreach ($storyAttribute in $storyAttributes) {
+                    $storyKey = $storyAttribute.Key -replace '^HelpOut\.Story\.'
+
+                    if ($storyCmd.Parameters[$storyKey]) {
+                        $storySplat[$storyKey] = $storyAttribute.Value
+                    } else {
+                        $storySplat.RegionName[$storyKey] = $storyAttribute.Value
+                    }
+                }
+
+                $storyHeader =
+                    if ($storySplat.RegionName.Header) {
+                        $storySplat.RegionName.Header
+                    } elseif ($storySplat.RegionName.Heading) {
+                        $storySplat.RegionName.Heading
+                    } else {
+                        "How It Works"
+                    }
+
+                Format-Markdown -Heading $storyHeader -HeadingSize 2
+                $helpCmd | Get-ScriptStory @storySplat
+            }
+        }
         Syntax = {
             if ($helpObject.syntax.syntaxItem) {
                 Format-Markdown -Heading "Syntax" -HeadingSize 3
@@ -196,19 +246,11 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
             }
         }
-        Notes = {
-            if ($helpObject.alertSet) {
-                Format-Markdown -Heading "Notes" -HeadingSize 3
-                foreach ($note in $helpObject.AlertSet.alert) {
-                    ($note | Out-String).Trim() + [Environment]::NewLine
-                }
-            }
-        }
     }
 
     (@(
         $metadataAttributes = [Ordered]@{}
-        if ($helpCmd.ScriptBlock.Attributes) {            
+        if ($helpCmd.ScriptBlock.Attributes) {
             foreach ($attr in $helpCmd.ScriptBlock.Attributes) {
                 if ($attr -is [Reflection.AssemblyMetadataAttribute]) {
                     if (-not $metadataAttributes[$attr.Key]) {
@@ -221,7 +263,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
         }
 
         if ($helpObject.IncludeYamlHeader -or $metadataAttributes.Keys -like 'Jekyll.*') {
-            $infoTypes= 
+            $infoTypes=
                 @(if ($helpObject.YamlHeaderInformationType) {
                     $helpObject.YamlHeaderInformationType
                 } elseif ($metadataAttributes.Keys -like 'Jekyll.*') {
@@ -237,23 +279,26 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             $yamlHeaderToBe = [Ordered]@{}
             if ($infoTypes -contains 'Command') {
                 $yamlHeaderToBe += [Ordered]@{
-                    PSTypename = 'PowerShell.Markdown.Help.YamlHeader'                
+                    PSTypename = 'PowerShell.Markdown.Help.YamlHeader'
                     CommandName = $helpCmd.Name
                     Parameters = @(
-                        $helpCmd.Parameters.Values | 
+                        $helpCmd.Parameters.Values |
+                        Sort-Object @{
+                            Expression = { $_.Attributes.Position };Descending=$true
+                        }, Name |
                         Where-Object {
                             $_.IsDynamic -or $helpCmdMetadata.Parameters[$_.Name]
                         } |
                         Select-Object @{
-                            Name = 'Name'; Expression={ $_.Name }                        
+                            Name = 'Name'; Expression={ $_.Name }
                         }, @{
                             Name = 'Type'; Expression={ $_.ParameterType.FullName }
                         }, Aliases
-                    )                
+                    )
                 }
             }
             if ($infoTypes -contains 'Help') {
-                $yamlHeaderToBe += @{
+                $yamlHeaderToBe += [Ordered]@{
                     Synopsis    = $helpObject.Synopsis
                     Description = ($helpObject.description | Out-String -Width 1kb)
                 }
@@ -275,16 +320,18 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
             $MarkdownSections.Keys
         })
 
-        $sectionCounter = 0 
+        $sectionCounter = 0
         foreach ($sectionName in $orderOfSections) {
             $sectionCounter++
-            $sectionContent = 
+            $sectionContent =
                 if ($MarkdownSections.$sectionName -is [ScriptBlock]) {
                     & $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
+                [Environment]::NewLine
                 $sectionContent
-                if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') { 
+                [Environment]::NewLine
+                if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') {
                     '---'
                 }
             }
@@ -292,4 +339,3 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
     ) -join [Environment]::NewLine).Trim()
 }
- 

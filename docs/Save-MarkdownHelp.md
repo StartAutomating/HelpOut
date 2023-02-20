@@ -1,20 +1,45 @@
 ---
 CommandName: Save-MarkdownHelp
 Parameters: 
+  - Name: Command
+    Type: System.Management.Automation.CommandInfo[]
+    Aliases: 
+    
+  - Name: ExcludeFile
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ExcludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeExtension
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeTopic
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: IncludeYamlHeader
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - IncludeFrontMatter
+    - IncludeHeader
   - Name: Module
     Type: System.String[]
+    Aliases: 
+    
+  - Name: NoValidValueEnumeration
+    Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
   - Name: OutputPath
     Type: System.String
     Aliases: 
     
-  - Name: Wiki
+  - Name: PassThru
     Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: Command
-    Type: System.Management.Automation.CommandInfo[]
     Aliases: 
     
   - Name: ReplaceCommandName
@@ -22,18 +47,6 @@ Parameters:
     Aliases: 
     
   - Name: ReplaceCommandNameWith
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ScriptPath
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ReplaceScriptName
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ReplaceScriptNameWith
     Type: System.String[]
     Aliases: 
     
@@ -45,72 +58,77 @@ Parameters:
     Type: System.String[]
     Aliases: 
     
-  - Name: PassThru
-    Type: System.Management.Automation.SwitchParameter
+  - Name: ReplaceScriptName
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ReplaceScriptNameWith
+    Type: System.String[]
+    Aliases: 
+    
+  - Name: ScriptPath
+    Type: System.String[]
     Aliases: 
     
   - Name: SectionOrder
     Type: System.String[]
     Aliases: 
     
-  - Name: IncludeTopic
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ExcludeTopic
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: ExcludeFile
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: IncludeExtension
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: NoValidValueEnumeration
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: IncludeYamlHeader
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    - IncludeFrontMatter
-    - IncludeHeader
-  - Name: YamlHeaderInformationType
-    Type: System.String[]
-    Aliases: 
-    - YamlHeaderInfoType
   - Name: SkipCommandType
     Type: System.Management.Automation.CommandTypes[]
     Aliases: 
     - SkipCommandTypes
     - ExcludeCommandType
     - ExcludeCommandTypes
+  - Name: Wiki
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    
+  - Name: YamlHeaderInformationType
+    Type: System.String[]
+    Aliases: 
+    - YamlHeaderInfoType
 
 Synopsis: Saves a Module's Markdown Help
 Description: |
   
   Get markdown help for each command in a module and saves it to the appropriate location.
 ---
+
+
 Save-MarkdownHelp
 -----------------
+
+
+
+
 ### Synopsis
 Saves a Module's Markdown Help
 
+
+
 ---
+
+
 ### Description
 
 Get markdown help for each command in a module and saves it to the appropriate location.
 
+
+
 ---
+
+
 ### Related Links
 * [Get-MarkdownHelp](Get-MarkdownHelp.md)
 
 
 
+
+
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -122,7 +140,11 @@ Save-MarkdownHelp -Module HelpOut  # Save Markdown to HelpOut/docs
 Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
 ```
 
+
+
 ---
+
+
 ### Parameters
 #### **Module**
 
@@ -139,7 +161,6 @@ The name of one or more modules.
 
 
 
----
 #### **OutputPath**
 
 The output path.  
@@ -156,7 +177,6 @@ If not provided, will be assumed to be the "docs" folder of a given module (unle
 
 
 
----
 #### **Wiki**
 
 If set, will interlink documentation as if it were a wiki.  Implied when -OutputPath contains 'wiki'.
@@ -173,7 +193,6 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
 
 
 
----
 #### **Command**
 
 If provided, will generate documentation for additional commands.
@@ -189,7 +208,6 @@ If provided, will generate documentation for additional commands.
 
 
 
----
 #### **ReplaceCommandName**
 
 Replaces parts of the names of the commands provided in the -Command parameter.
@@ -206,7 +224,6 @@ Replaces parts of the names of the commands provided in the -Command parameter.
 
 
 
----
 #### **ReplaceCommandNameWith**
 
 If provided, will replace parts of the names of the scripts discovered in a -Command parameter with a given Regex replacement.
@@ -222,7 +239,6 @@ If provided, will replace parts of the names of the scripts discovered in a -Com
 
 
 
----
 #### **ScriptPath**
 
 If provided, will generate documentation for any scripts found within these paths.
@@ -240,7 +256,6 @@ If an exact match is not found -ScriptPath will also check to see if there is a 
 
 
 
----
 #### **ReplaceScriptName**
 
 If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module.
@@ -256,7 +271,6 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
----
 #### **ReplaceScriptNameWith**
 
 If provided, will replace parts of the names of the scripts discovered in a -ScriptDirectory beneath a module with a given Regex replacement.
@@ -272,7 +286,6 @@ If provided, will replace parts of the names of the scripts discovered in a -Scr
 
 
 
----
 #### **ReplaceLink**
 
 If provided, will replace links discovered in markdown content.
@@ -288,7 +301,6 @@ If provided, will replace links discovered in markdown content.
 
 
 
----
 #### **ReplaceLinkWith**
 
 If provided, will replace links discovered in markdown content with a given Regex replacement.
@@ -304,7 +316,6 @@ If provided, will replace links discovered in markdown content with a given Rege
 
 
 
----
 #### **PassThru**
 
 If set, will output changed or created files.
@@ -320,7 +331,6 @@ If set, will output changed or created files.
 
 
 
----
 #### **SectionOrder**
 
 The order of the sections.  If not provided, this will be the order they are defined in the formatter.
@@ -336,7 +346,6 @@ The order of the sections.  If not provided, this will be the order they are def
 
 
 
----
 #### **IncludeTopic**
 
 One or more topic files to include.
@@ -354,7 +363,6 @@ By default ```\.help\.txt$``` and ```\.md$```
 
 
 
----
 #### **ExcludeTopic**
 
 One or more topic file patterns to exclude.
@@ -371,7 +379,6 @@ Topic files that match this pattern will not be included.
 
 
 
----
 #### **ExcludeFile**
 
 One or more files to exclude.
@@ -389,7 +396,6 @@ If the file name starts and ends with slashes, it will be treated as a Regular E
 
 
 
----
 #### **IncludeExtension**
 
 One or more extensions to include.
@@ -406,7 +412,6 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 
 
 
----
 #### **NoValidValueEnumeration**
 
 If set, will not enumerate valid values and enums of parameters.
@@ -422,7 +427,6 @@ If set, will not enumerate valid values and enums of parameters.
 
 
 
----
 #### **IncludeYamlHeader**
 
 If set, will not attach a YAML header to the generated help.
@@ -432,13 +436,12 @@ If set, will not attach a YAML header to the generated help.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[Switch]`|false   |named   |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases                             |
+|----------|--------|--------|---------------------|------------------------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|IncludeFrontMatter<br/>IncludeHeader|
 
 
 
----
 #### **YamlHeaderInformationType**
 
 The type of information to include in the YAML Header
@@ -456,13 +459,12 @@ Valid Values:
 
 
 
-|Type        |Required|Position|PipelineInput|
-|------------|--------|--------|-------------|
-|`[String[]]`|false   |named   |false        |
+|Type        |Required|Position|PipelineInput|Aliases           |
+|------------|--------|--------|-------------|------------------|
+|`[String[]]`|false   |named   |false        |YamlHeaderInfoType|
 
 
 
----
 #### **SkipCommandType**
 
 A list of command types to skip.  
@@ -487,15 +489,18 @@ Valid Values:
 
 
 
-|Type              |Required|Position|PipelineInput        |
-|------------------|--------|--------|---------------------|
-|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|
+|Type              |Required|Position|PipelineInput        |Aliases                                                        |
+|------------------|--------|--------|---------------------|---------------------------------------------------------------|
+|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|SkipCommandTypes<br/>ExcludeCommandType<br/>ExcludeCommandTypes|
+
+
 
 
 
 ---
+
+
 ### Syntax
 ```PowerShell
 Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [<CommonParameters>]
 ```
----

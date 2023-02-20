@@ -10,12 +10,12 @@ Parameters:
     Aliases: 
     - ScriptContents
     - Definition
-  - Name: RegionName
-    Type: System.Collections.IDictionary
-    Aliases: 
-    
   - Name: HeadingSize
     Type: System.Int32
+    Aliases: 
+    
+  - Name: RegionName
+    Type: System.Collections.IDictionary
     Aliases: 
     
 Synopsis: Gets a Script's story
@@ -25,26 +25,44 @@ Description: |
   
   Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 ---
+
+
 Get-ScriptStory
 ---------------
+
+
+
+
 ### Synopsis
 Gets a Script's story
 
+
+
 ---
+
+
 ### Description
 
 Gets the Script's "Story"
 
 Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 
+
+
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
 Get-Command Get-ScriptStory | Get-ScriptStory
 ```
 
+
+
 ---
+
+
 ### Parameters
 #### **ScriptBlock**
 
@@ -61,7 +79,6 @@ A script block
 
 
 
----
 #### **Text**
 
 A block of text
@@ -71,13 +88,12 @@ A block of text
 
 
 
-|Type      |Required|Position|PipelineInput                 |
-|----------|--------|--------|------------------------------|
-|`[String]`|true    |1       |true (ByValue, ByPropertyName)|
+|Type      |Required|Position|PipelineInput                 |Aliases                      |
+|----------|--------|--------|------------------------------|-----------------------------|
+|`[String]`|true    |1       |true (ByValue, ByPropertyName)|ScriptContents<br/>Definition|
 
 
 
----
 #### **RegionName**
 
 The friendly names of code regions or begin,process, or end blocks.
@@ -93,7 +109,6 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
----
 #### **HeadingSize**
 
 
@@ -105,7 +120,11 @@ The friendly names of code regions or begin,process, or end blocks.
 
 
 
+
+
 ---
+
+
 ### Syntax
 ```PowerShell
 Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
@@ -113,4 +132,3 @@ Get-ScriptStory [-ScriptBlock] <ScriptBlock> [-RegionName <IDictionary>] [-Headi
 ```PowerShell
 Get-ScriptStory [-Text] <String> [-RegionName <IDictionary>] [-HeadingSize <Int32>] [<CommonParameters>]
 ```
----

@@ -5,12 +5,12 @@ Parameters:
     Type: System.String
     Aliases: 
     - Fullname
-  - Name: ScriptBlock
-    Type: System.Management.Automation.ScriptBlock
-    Aliases: 
-    
   - Name: Name
     Type: System.String
+    Aliases: 
+    
+  - Name: ScriptBlock
+    Type: System.Management.Automation.ScriptBlock
     Aliases: 
     
 Synopsis: Determines the percentage of documentation
@@ -18,23 +18,41 @@ Description: |
   
   Determines the percentage of documentation in a given script
 ---
+
+
 Measure-Help
 ------------
+
+
+
+
 ### Synopsis
 Determines the percentage of documentation
 
+
+
 ---
+
+
 ### Description
 
 Determines the percentage of documentation in a given script
 
+
+
 ---
+
+
 ### Related Links
 * [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
+
+
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
@@ -56,7 +74,11 @@ Measure-Help {
 } | Select-Object -ExpandProperty PercentageDocumented
 ```
 
+
+
 ---
+
+
 ### Parameters
 #### **FilePath**
 
@@ -67,13 +89,12 @@ The path to the file
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[String]`|true    |1       |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases |
+|----------|--------|--------|---------------------|--------|
+|`[String]`|true    |1       |true (ByPropertyName)|Fullname|
 
 
 
----
 #### **ScriptBlock**
 
 A PowerShell script block
@@ -89,7 +110,6 @@ A PowerShell script block
 
 
 
----
 #### **Name**
 
 The name of the script being measured.
@@ -105,7 +125,11 @@ The name of the script being measured.
 
 
 
+
+
 ---
+
+
 ### Syntax
 ```PowerShell
 Measure-Help [-FilePath] <String> [<CommonParameters>]
@@ -113,4 +137,3 @@ Measure-Help [-FilePath] <String> [<CommonParameters>]
 ```PowerShell
 Measure-Help -ScriptBlock <ScriptBlock> [-Name <String>] [<CommonParameters>]
 ```
----

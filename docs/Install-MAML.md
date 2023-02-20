@@ -1,20 +1,28 @@
 ---
 CommandName: Install-MAML
 Parameters: 
-  - Name: Module
-    Type: System.String[]
+  - Name: Encoding
+    Type: System.Text.Encoding
     Aliases: 
     
-  - Name: NoRefresh
-    Type: System.Management.Automation.SwitchParameter
+  - Name: ScriptName
+    Type: System.String
+    Aliases: 
+    
+  - Name: Module
+    Type: System.String[]
     Aliases: 
     
   - Name: Compact
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: ScriptName
-    Type: System.String
+  - Name: Culture
+    Type: System.Globalization.CultureInfo
+    Aliases: 
+    
+  - Name: Exclude
+    Type: System.String[]
     Aliases: 
     
   - Name: FunctionRoot
@@ -25,22 +33,14 @@ Parameters:
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
-  - Name: Encoding
-    Type: System.Text.Encoding
-    Aliases: 
-    
-  - Name: Exclude
-    Type: System.String[]
+  - Name: NoRefresh
+    Type: System.Management.Automation.SwitchParameter
     Aliases: 
     
   - Name: NoVersion
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
     - Unversioned
-  - Name: Culture
-    Type: System.Globalization.CultureInfo
-    Aliases: 
-    
   - Name: PassThru
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
@@ -59,12 +59,22 @@ Description: |
   
   Ideally, you should use the allcommands script
 ---
+
+
 Install-MAML
 ------------
+
+
+
+
 ### Synopsis
 Installs MAML into a module
 
+
+
 ---
+
+
 ### Description
 
 Installs MAML into a module.  
@@ -78,7 +88,11 @@ You should then include this script in your module import.
 
 Ideally, you should use the allcommands script
 
+
+
 ---
+
+
 ### Related Links
 * [Save-MAML](Save-MAML.md)
 
@@ -88,14 +102,22 @@ Ideally, you should use the allcommands script
 
 
 
+
+
 ---
+
+
 ### Examples
 #### EXAMPLE 1
 ```PowerShell
 Install-MAML -Module HelpOut
 ```
 
+
+
 ---
+
+
 ### Parameters
 #### **Module**
 
@@ -112,7 +134,6 @@ The name of one or more modules.
 
 
 
----
 #### **NoRefresh**
 
 If set, will refresh the documentation for the module before generating the commands file.
@@ -128,7 +149,6 @@ If set, will refresh the documentation for the module before generating the comm
 
 
 
----
 #### **Compact**
 
 If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.
@@ -144,7 +164,6 @@ If set, will compact the generated MAML.  This will be ignored if -Refresh is no
 
 
 
----
 #### **ScriptName**
 
 The name of the combined script.  By default, allcommands.ps1.
@@ -160,7 +179,6 @@ The name of the combined script.  By default, allcommands.ps1.
 
 
 
----
 #### **FunctionRoot**
 
 The root directories containing functions.  If not provided, the function root will be the module root.
@@ -176,7 +194,6 @@ The root directories containing functions.  If not provided, the function root w
 
 
 
----
 #### **NoRecurse**
 
 If set, the function roots will not be recursively searched.
@@ -192,7 +209,6 @@ If set, the function roots will not be recursively searched.
 
 
 
----
 #### **Encoding**
 
 The encoding of the combined script.  By default, UTF8.
@@ -208,7 +224,6 @@ The encoding of the combined script.  By default, UTF8.
 
 
 
----
 #### **Exclude**
 
 A list of wildcards to exclude.  This list will always contain the ScriptName.
@@ -224,7 +239,6 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 
 
----
 #### **NoVersion**
 
 If set, the generate MAML will not contain a version number.  
@@ -235,13 +249,12 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[Switch]`|false   |named   |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases    |
+|----------|--------|--------|---------------------|-----------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|Unversioned|
 
 
 
----
 #### **Culture**
 
 If provided, will save the MAML to a different directory than the current UI culture.
@@ -257,7 +270,6 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
----
 #### **PassThru**
 
 If set, will return the files that were generated.
@@ -273,7 +285,11 @@ If set, will return the files that were generated.
 
 
 
+
+
 ---
+
+
 ### Outputs
 * [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
@@ -283,9 +299,12 @@ If set, will return the files that were generated.
 
 
 
+
+
 ---
+
+
 ### Syntax
 ```PowerShell
 Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
 ```
----
