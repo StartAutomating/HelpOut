@@ -95,7 +95,6 @@ The path to the file
 
 
 
----
 #### **ScriptBlock**
 
 A PowerShell script block
@@ -111,7 +110,6 @@ A PowerShell script block
 
 
 
----
 #### **Name**
 
 The name of the script being measured.
