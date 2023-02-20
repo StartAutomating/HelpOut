@@ -89,9 +89,9 @@ The path to the file
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
-|`[String]`|true    |1       |true (ByPropertyName)|
+|Type      |Required|Position|PipelineInput        |Aliases |
+|----------|--------|--------|---------------------|--------|
+|`[String]`|true    |1       |true (ByPropertyName)|Fullname|
 
 
 
@@ -104,8 +104,8 @@ A PowerShell script block
 
 
 
-|Type           |Required|Position|PipelineInput        |
-|---------------|--------|--------|---------------------|
+|Type           |Required|Position|PipelineInput        |Aliases|
+|---------------|--------|--------|---------------------|-------|
 |`[ScriptBlock]`|true    |named   |true (ByPropertyName)|
 
 
@@ -119,8 +119,8 @@ The name of the script being measured.
 
 
 
-|Type      |Required|Position|PipelineInput        |
-|----------|--------|--------|---------------------|
+|Type      |Required|Position|PipelineInput        |Aliases|
+|----------|--------|--------|---------------------|-------|
 |`[String]`|false   |named   |true (ByPropertyName)|
 
 
