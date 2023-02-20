@@ -64,9 +64,9 @@ The path to a file
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
-|`[String[]]`|true    |1       |true (ByPropertyName)|
+|Type        |Required|Position|PipelineInput        |Aliases |
+|------------|--------|--------|---------------------|--------|
+|`[String[]]`|true    |1       |true (ByPropertyName)|Fullname|
 
 
 
@@ -79,9 +79,9 @@ One or more PowerShell ScriptBlocks
 
 
 
-|Type             |Required|Position|PipelineInput                 |
-|-----------------|--------|--------|------------------------------|
-|`[ScriptBlock[]]`|true    |1       |true (ByValue, ByPropertyName)|
+|Type             |Required|Position|PipelineInput                 |Aliases   |
+|-----------------|--------|--------|------------------------------|----------|
+|`[ScriptBlock[]]`|true    |1       |true (ByValue, ByPropertyName)|Definition|
 
 
 
@@ -94,8 +94,8 @@ If set, will recursively find references.
 
 
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
+|Type      |Required|Position|PipelineInput|Aliases|
+|----------|--------|--------|-------------|-------|
 |`[Switch]`|false   |named   |false        |
 
 
