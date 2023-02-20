@@ -111,7 +111,6 @@ The name of or more commands.
 
 
 
----
 #### **Module**
 
 The name of one or more modules.
@@ -127,7 +126,6 @@ The name of one or more modules.
 
 
 
----
 #### **CommandInfo**
 
 The CommandInfo object (returned from Get-Command).
@@ -143,7 +141,6 @@ The CommandInfo object (returned from Get-Command).
 
 
 
----
 #### **Compact**
 
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
@@ -159,7 +156,6 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 
 
 
----
 #### **XML**
 
 If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.
@@ -175,7 +171,6 @@ If set, will return the MAML as an XmlDocument.  The default is to return the MA
 
 
 
----
 #### **NoVersion**
 
 If set, the generate MAML will not contain a version number.  
