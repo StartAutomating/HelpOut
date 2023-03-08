@@ -35,12 +35,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
-        HelpOutScript: ${{inputs.HelpOutScript}}
         SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
-        CommitMessage: ${{inputs.CommitMessage}}
+        UserName: ${{inputs.UserName}}
         UserEmail: ${{inputs.UserEmail}}
         InstallModule: ${{inputs.InstallModule}}
-        UserName: ${{inputs.UserName}}
+        HelpOutScript: ${{inputs.HelpOutScript}}
+        CommitMessage: ${{inputs.CommitMessage}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -121,6 +121,7 @@ runs:
             
         # If we were not, return.
         if ((-not $branchName) -or $LASTEXITCODE) {
+            $LASTEXITCODE = 0
             "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
             return
         }
@@ -133,9 +134,16 @@ runs:
         #region -InstallModule
         if ($InstallModule) {
             "::group::Installing Modules" | Out-Host
-            foreach ($moduleToInstall in $InstallModule) {        
-                Install-Module $moduleToInstall -Scope CurrentUser -Force
-                Import-Module $moduleToInstall -Force -PassThru | Out-Host
+            foreach ($moduleToInstall in $InstallModule) {
+                $moduleInWorkspace = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -File |
+                    Where-Object Name -eq "$($moduleToInstall).psd1" |
+                    Where-Object { 
+                        $(Get-Content $_.FullName -Raw) -match 'ModuleVersion'
+                    }
+                if (-not $moduleInWorkspace) {
+                    Install-Module $moduleToInstall -Scope CurrentUser -Force
+                    Import-Module $moduleToInstall -Force -PassThru | Out-Host
+                }
             }
             "::endgroup::" | Out-Host
         }

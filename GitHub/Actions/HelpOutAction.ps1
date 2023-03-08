@@ -23,10 +23,9 @@ $HelpOutScript,
 [switch]
 $SkipHelpOutPS1,
 
-# The name of the module for which types and formats are being generated.
-# If not provided, this will be assumed to be the name of the root directory.
-[string]
-$ModuleName,
+# A list of modules to be installed from the PowerShell gallery before scripts run.
+[string[]]
+$InstallModule = @("ugit"),
 
 # If provided, will commit any remaining changes made to the workspace with this commit message.
 # If no commit message is provided, changes will not be committed.
@@ -63,10 +62,33 @@ $branchName = git rev-parse --abrev-ref HEAD
     
 # If we were not, return.
 if ((-not $branchName) -or $LASTEXITCODE) {
+    $LASTEXITCODE = 0
     "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
     return
 }
 
+# Use ANSI rendering if available
+if ($PSStyle.OutputRendering) {
+    $PSStyle.OutputRendering = 'ANSI'
+}
+
+#region -InstallModule
+if ($InstallModule) {
+    "::group::Installing Modules" | Out-Host
+    foreach ($moduleToInstall in $InstallModule) {
+        $moduleInWorkspace = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -File |
+            Where-Object Name -eq "$($moduleToInstall).psd1" |
+            Where-Object { 
+                $(Get-Content $_.FullName -Raw) -match 'ModuleVersion'
+            }
+        if (-not $moduleInWorkspace) {
+            Install-Module $moduleToInstall -Scope CurrentUser -Force
+            Import-Module $moduleToInstall -Force -PassThru | Out-Host
+        }
+    }
+    "::endgroup::" | Out-Host
+}
+#endregion -InstallModule
 
 $PSD1Found = Get-ChildItem -Recurse -Filter "*.psd1" |
     Where-Object Name -eq 'HelpOut.psd1' | 
@@ -78,7 +100,7 @@ if ($PSD1Found) {
 } elseif ($env:GITHUB_ACTION_PATH) {
     $HelpOutModulePath = Join-Path $env:GITHUB_ACTION_PATH 'HelpOut.psd1'
     if (Test-path $HelpOutModulePath) {
-        Import-Module $HelpOutModulePath -Force -PassThru | Out-String
+        Import-Module $HelpOutModulePath -Force -PassThru | Out-Host
     } else {
         throw "HelpOut not found"
     }
@@ -101,12 +123,12 @@ $processScriptOutput = { process {
     if ($shouldCommit) {
         git add $fullName
         if ($out.Message) {
-            git commit -m "$($out.Message)"
+            git commit -m "$($out.Message)" | Out-Host
         } elseif ($out.CommitMessage) {
-            git commit -m "$($out.CommitMessage)"
+            git commit -m "$($out.CommitMessage)" | Out-Host
         }  elseif ($gitHubEvent.head_commit.message) {
-            git commit -m "$($gitHubEvent.head_commit.message)"
-        }  
+            git commit -m "$($gitHubEvent.head_commit.message)" | Out-Host
+        }
         $anyFilesChanged = $true
     }
     $out
@@ -154,7 +176,8 @@ if ($HelpOutScript) {
         Out-Host
 }
 $HelpOutScriptTook = [Datetime]::Now - $HelpOutScriptStart
-"::set-output name=HelpOutScriptRuntime::$($HelpOutScriptTook.TotalMilliseconds)"   | Out-Host
+
+"::notice title=Runtime::$($HelpOutScriptTook.TotalMilliseconds)"   | Out-Host
 
 $HelpOutPS1Start = [DateTime]::Now
 $HelpOutPS1List  = @()
@@ -178,12 +201,12 @@ if (-not $SkipHelpOutPS1) {
 
 $HelpOutPS1EndStart = [DateTime]::Now
 $HelpOutPS1Took = [Datetime]::Now - $HelpOutPS1Start
-"::set-output name=HelpOutPS1Count::$($HelpOutPS1List.Length)"   | Out-Host
-"::set-output name=HelpOutPS1Files::$($HelpOutPS1List -join ';')"   | Out-Host
-"::set-output name=HelpOutPS1Runtime::$($HelpOutPS1Took.TotalMilliseconds)"   | Out-Host
+"::group::$($HelpOutPS1List.Length) Files in $($HelpOutPS1Took.TotalMilliseconds)" | Out-Host
+$HelpOutPS1List -join ([Environment]::NewLine) | Out-Host
+"::endgroup::"
 if ($CommitMessage -or $anyFilesChanged) {
     if ($CommitMessage) {
-        dir $env:GITHUB_WORKSPACE -Recurse |
+        Get-ChildItem $env:GITHUB_WORKSPACE -Recurse |
             ForEach-Object {
                 $gitStatusOutput = git status $_.Fullname -s
                 if ($gitStatusOutput) {
@@ -196,13 +219,15 @@ if ($CommitMessage -or $anyFilesChanged) {
 
     $checkDetached = git symbolic-ref -q HEAD
     if (-not $LASTEXITCODE) {
-        "::notice::Pulling Changes" | Out-Host
+        "::group::Pulling Changes" | Out-Host
         git pull | Out-Host
-        "::notice::Pushing Changes" | Out-Host
-        git push        
-        "Git Push Output: $($gitPushed  | Out-String)"
+        "::endgroup::" | Out-Host
+        "::group::Pushing Changes" | Out-Host        
+        $gitPushed = git push
+        "Git Push Output: $($gitPushed  | Out-String)" | Out-Host
+        "::endgroup::" | Out-Host
     } else {
-        "::notice::Not pushing changes (on detached head)" | Out-Host
+        "::warning title=Not pushing changes::(on detached head)" | Out-Host
         $LASTEXITCODE = 0
         exit 0
     }
