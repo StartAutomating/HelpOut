@@ -45,7 +45,6 @@ $UserName
 [PSCustomObject]$PSBoundParameters | Format-List | Out-Host
 "::endgroup::" | Out-Host
 
-
 $gitHubEvent = if ($env:GITHUB_EVENT_PATH) {
     [IO.File]::ReadAllText($env:GITHUB_EVENT_PATH) | ConvertFrom-Json
 } else { $null }
@@ -59,6 +58,8 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 
 # Check to ensure we are on a branch
 $branchName = git rev-parse --abrev-ref HEAD
+
+$repoRoot = (git rev-parse --show-toplevel *>&1) -replace '/', [IO.Path]::DirectorySeparatorChar
     
 # If we were not, return.
 if ((-not $branchName) -or $LASTEXITCODE) {
@@ -116,8 +117,10 @@ $processScriptOutput = { process {
     $outItem = Get-Item -Path $out -ErrorAction SilentlyContinue
     $fullName, $shouldCommit = 
         if ($out -is [IO.FileInfo]) {
+            if ($out.FullName -notlike "$repoRoot*") { return }
             $out.FullName, (git status $out.Fullname -s)
         } elseif ($outItem) {
+            if ($outItem.FullName -notlike "$repoRoot*") { return }
             $outItem.FullName, (git status $outItem.Fullname -s)
         }
     if ($shouldCommit) {
