@@ -57,16 +57,15 @@ $($gitHubEvent | ConvertTo-Json -Depth 100)
 
 
 # Check to ensure we are on a branch
-$branchName = git rev-parse --abrev-ref HEAD
-
-$repoRoot = (git rev-parse --show-toplevel *>&1) -replace '/', [IO.Path]::DirectorySeparatorChar
-    
+$branchName = git rev-parse --abrev-ref HEAD    
 # If we were not, return.
 if ((-not $branchName) -or $LASTEXITCODE) {
     $LASTEXITCODE = 0
     "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
     return
 }
+
+$repoRoot = (git rev-parse --show-toplevel *>&1) -replace '/', [IO.Path]::DirectorySeparatorChar
 
 # Use ANSI rendering if available
 if ($PSStyle.OutputRendering) {
@@ -150,7 +149,7 @@ if (-not $UserName)  {
         }
 }
 
-if (-not $UserEmail) { 
+if (-not $UserEmail) {
     $GitHubUserEmail = 
         if ($env:GITHUB_TOKEN) {
             Invoke-RestMethod -uri "https://api.github.com/user/emails" -Headers @{
@@ -170,7 +169,11 @@ git config --global user.name  $UserName
 
 if (-not $env:GITHUB_WORKSPACE) { throw "No GitHub workspace" }
 
-git pull | Out-Host
+$checkDetached = git symbolic-ref -q HEAD
+if (-not $LASTEXITCODE) {
+    git pull | Out-Host
+}
+
 
 $HelpOutScriptStart = [DateTime]::Now
 if ($HelpOutScript) {
