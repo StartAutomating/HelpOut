@@ -1,3 +1,12 @@
+### 0.4.3
+
+* Action Improvements:
+  * Not obeying -InstallModule if a local module is found (Fixes #113)
+  * Not adding files found outside of the workspace (Fixes #114)
+  * Checking for detached branch before pulling (Fixes #103)
+
+---
+
 ### 0.4.2
 
 * Markdown Help Improvements:
