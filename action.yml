@@ -35,12 +35,12 @@ runs:
       id: HelpOutAction
       shell: pwsh
       env: 
-        HelpOutScript: ${{inputs.HelpOutScript}}
         SkipHelpOutPS1: ${{inputs.SkipHelpOutPS1}}
-        CommitMessage: ${{inputs.CommitMessage}}
+        UserName: ${{inputs.UserName}}
         UserEmail: ${{inputs.UserEmail}}
         InstallModule: ${{inputs.InstallModule}}
-        UserName: ${{inputs.UserName}}
+        HelpOutScript: ${{inputs.HelpOutScript}}
+        CommitMessage: ${{inputs.CommitMessage}}
       run: |
         $Parameters = @{}
         $Parameters.HelpOutScript = ${env:HelpOutScript}
@@ -104,7 +104,6 @@ runs:
         [PSCustomObject]$PSBoundParameters | Format-List | Out-Host
         "::endgroup::" | Out-Host
         
-        
         $gitHubEvent = if ($env:GITHUB_EVENT_PATH) {
             [IO.File]::ReadAllText($env:GITHUB_EVENT_PATH) | ConvertFrom-Json
         } else { $null }
@@ -117,13 +116,15 @@ runs:
         
         
         # Check to ensure we are on a branch
-        $branchName = git rev-parse --abrev-ref HEAD
-            
+        $branchName = git rev-parse --abrev-ref HEAD    
         # If we were not, return.
         if ((-not $branchName) -or $LASTEXITCODE) {
+            $LASTEXITCODE = 0
             "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
             return
         }
+        
+        $repoRoot = (git rev-parse --show-toplevel *>&1) -replace '/', [IO.Path]::DirectorySeparatorChar
         
         # Use ANSI rendering if available
         if ($PSStyle.OutputRendering) {
@@ -133,9 +134,16 @@ runs:
         #region -InstallModule
         if ($InstallModule) {
             "::group::Installing Modules" | Out-Host
-            foreach ($moduleToInstall in $InstallModule) {        
-                Install-Module $moduleToInstall -Scope CurrentUser -Force
-                Import-Module $moduleToInstall -Force -PassThru | Out-Host
+            foreach ($moduleToInstall in $InstallModule) {
+                $moduleInWorkspace = Get-ChildItem -Path $env:GITHUB_WORKSPACE -Recurse -File |
+                    Where-Object Name -eq "$($moduleToInstall).psd1" |
+                    Where-Object { 
+                        $(Get-Content $_.FullName -Raw) -match 'ModuleVersion'
+                    }
+                if (-not $moduleInWorkspace) {
+                    Install-Module $moduleToInstall -Scope CurrentUser -Force
+                    Import-Module $moduleToInstall -Force -PassThru | Out-Host
+                }
             }
             "::endgroup::" | Out-Host
         }
@@ -167,8 +175,10 @@ runs:
             $outItem = Get-Item -Path $out -ErrorAction SilentlyContinue
             $fullName, $shouldCommit = 
                 if ($out -is [IO.FileInfo]) {
+                    if ($out.FullName -notlike "$repoRoot*") { return }
                     $out.FullName, (git status $out.Fullname -s)
                 } elseif ($outItem) {
+                    if ($outItem.FullName -notlike "$repoRoot*") { return }
                     $outItem.FullName, (git status $outItem.Fullname -s)
                 }
             if ($shouldCommit) {
@@ -198,7 +208,7 @@ runs:
                 }
         }
         
-        if (-not $UserEmail) { 
+        if (-not $UserEmail) {
             $GitHubUserEmail = 
                 if ($env:GITHUB_TOKEN) {
                     Invoke-RestMethod -uri "https://api.github.com/user/emails" -Headers @{
@@ -218,7 +228,11 @@ runs:
         
         if (-not $env:GITHUB_WORKSPACE) { throw "No GitHub workspace" }
         
-        git pull | Out-Host
+        $checkDetached = git symbolic-ref -q HEAD
+        if (-not $LASTEXITCODE) {
+            git pull | Out-Host
+        }
+        
         
         $HelpOutScriptStart = [DateTime]::Now
         if ($HelpOutScript) {
