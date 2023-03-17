@@ -238,6 +238,6 @@ if ($CommitMessage -or $anyFilesChanged) {
         exit 0
     }
 } else {
-    "No files changed and no commit message" | Out-Host
+    "Nothing to commit in this build." | Out-Host
     exit 0
 }
