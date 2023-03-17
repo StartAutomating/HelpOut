@@ -224,7 +224,7 @@ if ($CommitMessage -or $anyFilesChanged) {
         git commit -m $ExecutionContext.SessionState.InvokeCommand.ExpandString($CommitMessage)
     }    
 
-    $checkDetached = git symbolic-ref -q HEAD
+    $checkDetached = git symbolic-ref -q HEAD 2>&1
     if (-not $LASTEXITCODE) {
         "::group::Pulling Changes" | Out-Host
         git pull | Out-Host
@@ -237,4 +237,7 @@ if ($CommitMessage -or $anyFilesChanged) {
         $LASTEXITCODE = 0
         exit 0
     }
+} else {
+    "No files changed and no commit message" | Out-Host
+    exit 0
 }
