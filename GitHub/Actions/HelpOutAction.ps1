@@ -62,6 +62,7 @@ $branchName = git rev-parse --abrev-ref HEAD
 if ((-not $branchName) -or $LASTEXITCODE) {
     $LASTEXITCODE = 0
     "::warning title=No Branch Found::Not on a Branch.  Can not run." | Out-Host
+    exit 0
     return
 }
 
@@ -229,8 +230,7 @@ if ($CommitMessage -or $anyFilesChanged) {
         git pull | Out-Host
         "::endgroup::" | Out-Host
         "::group::Pushing Changes" | Out-Host        
-        $gitPushed = git push
-        "Git Push Output: $($gitPushed  | Out-String)" | Out-Host
+        git push | Out-Host
         "::endgroup::" | Out-Host
     } else {
         "::warning title=Not pushing changes::(on detached head)" | Out-Host
