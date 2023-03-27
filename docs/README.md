@@ -1,4 +1,10 @@
-# HelpOut
+<div align='center'>
+<img src='Assets/HelpOut.svg' alt='HelpOut' />
+<a href='https://www.powershellgallery.com/packages/HelpOut/'>
+<img src='https://img.shields.io/powershellgallery/dt/HelpOut' />
+</a>
+</div>
+
 ## A Helpful Toolkit for Managing PowerShell Help
 
 HelpOut is a Helpful Toolkit for Managing PowerShell Help.
@@ -8,6 +14,33 @@ It helps you to:
 * Make Markdown Documentation and Wikis For Your Module
 * Measure how much documentation is in a script or a function
 * Find references within a script.
+
+You can install HelpOut from the gallery, or use it as a GitHub Action.
+
+## HelpOut as a GitHub action
+
+To use HelpOut as a GitHub action, simply copy/paste this code into a job in your workflow
+
+~~~yaml
+   - name: UseHelpOut
+     uses: StartAutomating/HelpOut@master
+~~~
+
+Then, create a `*.HelpOut.ps1` file.
+
+This file should import your module and then use Save-MarkdownHelp with -PassThru
+
+Files produced this way will be checked in if there are any changes.
+
+**NOTE** You must allow repository write permissions to your GitHub Workflow for HelpOut to update files.
+
+## Using HelpOut Locally
+
+To use HelpOut locally, start off by installing it from the PowerShell Gallery:
+
+~~~PowerShell
+Install-Module HelpOut -Scope CurrentUser -Force
+~~~
 
 ### Generating MAML
 ~~~PowerShell
