@@ -1,7 +1,6 @@
 
 name: OnIssueOrRelease
 on: 
-  issues: 
   workflow_dispatch: 
   release: 
     types: 
