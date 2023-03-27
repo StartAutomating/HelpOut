@@ -1,6 +1,6 @@
 ### 0.4.4
 
-* HelpOut action testability improvements (Fixes #121)
+* Improved HelpOut action output (Fixes #121)
 * HelpOut has a logo (Fixes #120)
 * Save-MarkdownHelp now trims content (Fixes #119)
 
