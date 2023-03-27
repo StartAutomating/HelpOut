@@ -227,7 +227,7 @@ if ($filesChanged) {
     $FilesChanged -join ([Environment]::NewLine) | Out-Host
     "::endgroup::" | Out-Host
 } else {
-    "$($filesOutputted) files generated with no changes"
+    "$($filesOutputted.Length) files generated with no changes"
 }
 
 if ($CommitMessage -or $anyFilesChanged) {
