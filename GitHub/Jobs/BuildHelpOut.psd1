@@ -12,7 +12,19 @@
             id = 'PSSVG'
         },
         'RunPipeScript',
-        'RunEZOut',       
-        'RunHelpOut'
+        'RunEZOut',
+        @{
+            name = 'Run Help Out (on master)'
+            if   = '${{github.ref_name == ''master''}}'
+            uses = 'StartAutomating/HelpOut@master'
+            id = 'HelpOutMaster'
+        },                
+        @{
+            name = 'Run Help Out (on branch)'
+            if   = '${{github.ref_name != ''master''}}'
+            uses = './'
+            id = 'HelpOutBranch'
+        }      
+        
     )
 }

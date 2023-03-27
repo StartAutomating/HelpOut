@@ -582,7 +582,12 @@ jobs:
         uses: StartAutomating/PipeScript@main
       - name: UseEZOut
         uses: StartAutomating/EZOut@master
-      - name: Run Help Out
+      - name: Run Help Out (on master)
+        if: ${{github.ref_name == 'master'}}
         uses: StartAutomating/HelpOut@master
-        id: HelpOut
+        id: HelpOutMaster
+      - name: Run Help Out (on branch)
+        if: ${{github.ref_name != 'master'}}
+        uses: ./
+        id: HelpOutBranch
 

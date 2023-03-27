@@ -112,19 +112,30 @@ if ($PSD1Found) {
 "::notice title=ModuleLoaded::HelpOut Loaded from Path - $($HelpOutModulePath)" | Out-Host
 
 $anyFilesChanged = $false
-$processScriptOutput = { process { 
+$totalFilesOutputted = 0 
+$totalFilesChanged   = 0
+$filesOutputted      = @()
+$filesChanged        = @()
+
+filter ProcessActionOutput {
     $out = $_
+    
     $outItem = Get-Item -Path $out -ErrorAction SilentlyContinue
+    
+    $totalFilesOutputted++
     $fullName, $shouldCommit = 
         if ($out -is [IO.FileInfo]) {
             if ($out.FullName -notlike "$repoRoot*") { return }
             $out.FullName, (git status $out.Fullname -s)
+            $filesOutputted += $out
         } elseif ($outItem) {
             if ($outItem.FullName -notlike "$repoRoot*") { return }
             $outItem.FullName, (git status $outItem.Fullname -s)
+            $filesOutputted += $outItem
         }
     if ($shouldCommit) {
         git add $fullName
+        $filesChanged += $fullName
         if ($out.Message) {
             git commit -m "$($out.Message)" | Out-Host
         } elseif ($out.CommitMessage) {
@@ -133,9 +144,11 @@ $processScriptOutput = { process {
             git commit -m "$($gitHubEvent.head_commit.message)" | Out-Host
         }
         $anyFilesChanged = $true
+        $totalFilesChanged++
     }
     $out
-} }
+}
+
 
 
 if (-not $UserName)  {
@@ -179,7 +192,7 @@ if (-not $LASTEXITCODE) {
 $HelpOutScriptStart = [DateTime]::Now
 if ($HelpOutScript) {
     Invoke-Expression -Command $HelpOutScript |
-        . $processScriptOutput |
+        . ProcessActionOutput |
         Out-Host
 }
 $HelpOutScriptTook = [Datetime]::Now - $HelpOutScriptStart
@@ -200,7 +213,7 @@ if (-not $SkipHelpOutPS1) {
             $HelpOutPS1Count++
             "::notice title=Running::$($_.Fullname)" | Out-Host
             . $_.FullName |            
-                . $processScriptOutput  | 
+                . ProcessActionOutput  | 
                 Out-Host
         }
     }
@@ -208,9 +221,15 @@ if (-not $SkipHelpOutPS1) {
 
 $HelpOutPS1EndStart = [DateTime]::Now
 $HelpOutPS1Took = [Datetime]::Now - $HelpOutPS1Start
-"::group::$($HelpOutPS1List.Length) Files in $($HelpOutPS1Took.TotalMilliseconds)" | Out-Host
-$HelpOutPS1List -join ([Environment]::NewLine) | Out-Host
-"::endgroup::"
+"Ran $($HelpOutPS1List.Length) Files in $($HelpOutPS1Took.TotalMilliseconds)" | Out-Host
+if ($filesChanged) {
+    "::group::$($filesOutputted.Length) files generated with $($filesChanged.Length) changes" | Out-Host
+    $FilesChanged -join ([Environment]::NewLine) | Out-Host
+    "::endgroup::" | Out-Host
+} else {
+    "$($filesOutputted.Length) files generated with no changes"
+}
+
 if ($CommitMessage -or $anyFilesChanged) {
     if ($CommitMessage) {
         Get-ChildItem $env:GITHUB_WORKSPACE -Recurse |

@@ -6,7 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
-    ModuleVersion='0.4.3'
+    ModuleVersion='0.4.4'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -14,6 +14,14 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
+### 0.4.4
+
+* Improved HelpOut action output (Fixes #121)
+* HelpOut has a logo (Fixes #120)
+* Save-MarkdownHelp now trims content (Fixes #119)
+
+---
+
 ### 0.4.3
 
 * Action Improvements:

@@ -1,3 +1,11 @@
+### 0.4.4
+
+* Improved HelpOut action output (Fixes #121)
+* HelpOut has a logo (Fixes #120)
+* Save-MarkdownHelp now trims content (Fixes #119)
+
+---
+
 ### 0.4.3
 
 * Action Improvements:
@@ -187,4 +195,3 @@ All Markdown help now includes a YAML Header unless -NoYAMLHeader is passed (Fix
 * Renmaing ConvertTo-MAML->Get-MAML
 
 ---
-
