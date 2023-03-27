@@ -1737,7 +1737,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>OutputPath</maml:name>
           <maml:description>
-            <maml:para>The output path.  
+            <maml:para>The output path.
 If not provided, will be assumed to be the "docs" folder of a given module (unless -Wiki is specified)</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
@@ -1806,7 +1806,7 @@ If provided without -OutputPath, will assume that a wiki resides in a sibling di
           <maml:name>ScriptPath</maml:name>
           <maml:description>
             <maml:para>If provided, will generate documentation for any scripts found within these paths.
--ScriptPath can be either a file name or a full path.  
+-ScriptPath can be either a file name or a full path.
 If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
@@ -1995,7 +1995,7 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg</maml:pa
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>SkipCommandType</maml:name>
           <maml:description>
-            <maml:para>A list of command types to skip.  
+            <maml:para>A list of command types to skip.
 If not provided, all types of commands from the module will be saved as a markdown document.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">System.Management.Automation.CommandTypes[]</command:parameterValue>
@@ -2122,7 +2122,7 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>OutputPath</maml:name>
         <maml:description>
-          <maml:para>The output path.  
+          <maml:para>The output path.
 If not provided, will be assumed to be the "docs" folder of a given module (unless -Wiki is specified)</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
@@ -2229,7 +2229,7 @@ If not provided, will be assumed to be the "docs" folder of a given module (unle
         <maml:name>ScriptPath</maml:name>
         <maml:description>
           <maml:para>If provided, will generate documentation for any scripts found within these paths.
--ScriptPath can be either a file name or a full path.  
+-ScriptPath can be either a file name or a full path.
 If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
@@ -2256,7 +2256,7 @@ If an exact match is not found -ScriptPath will also check to see if there is a 
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>SkipCommandType</maml:name>
         <maml:description>
-          <maml:para>A list of command types to skip.  
+          <maml:para>A list of command types to skip.
 If not provided, all types of commands from the module will be saved as a markdown document.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">System.Management.Automation.CommandTypes[]</command:parameterValue>

@@ -163,7 +163,7 @@ The name of one or more modules.
 
 #### **OutputPath**
 
-The output path.  
+The output path.
 If not provided, will be assumed to be the "docs" folder of a given module (unless -Wiki is specified)
 
 
@@ -242,7 +242,7 @@ If provided, will replace parts of the names of the scripts discovered in a -Com
 #### **ScriptPath**
 
 If provided, will generate documentation for any scripts found within these paths.
--ScriptPath can be either a file name or a full path.  
+-ScriptPath can be either a file name or a full path.
 If an exact match is not found -ScriptPath will also check to see if there is a wildcard match.
 
 
@@ -467,7 +467,7 @@ Valid Values:
 
 #### **SkipCommandType**
 
-A list of command types to skip.  
+A list of command types to skip.
 If not provided, all types of commands from the module will be saved as a markdown document.
 
 

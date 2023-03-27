@@ -187,4 +187,3 @@ All Markdown help now includes a YAML Header unless -NoYAMLHeader is passed (Fix
 * Renmaing ConvertTo-MAML->Get-MAML
 
 ---
-
