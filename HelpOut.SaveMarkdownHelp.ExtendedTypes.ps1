@@ -41,7 +41,7 @@ foreach ($extendedType in $extendedTypeNames) {
 
         foreach ($potentialProperty in 'Script','GetScriptBlock','SetScriptBlock') {
             if ($member.$PotentialProperty -notlike '*<#*.synopsis*#>*') { continue }
-
+            $markdownSplat = @{}
             # Create a temporary function to hold the help.
             $getSetNothing = 
                 if ($potentialProperty -eq 'GetScriptBlock') {
@@ -51,12 +51,14 @@ foreach ($extendedType in $extendedTypeNames) {
                     "set_"
                 }
                 elseif ($potentialProperty -eq 'Script') {
-                    ''
+                    ''                    
                 }
-            $temporaryFunctionName = "$($extendedType).$GetSetNothing$($member.Name)" -replace $replaceMostPunctuation        
+            $temporaryFunctionName = "$($extendedType).$GetSetNothing$($member.Name)" -replace $replaceMostPunctuation
+            $markdownSplat.Rename = "$temporaryFunctionName()"        
             $ExecutionContext.SessionState.PSVariable.Set("function:$($temporaryFunctionName)", $member.$PotentialProperty)
             # Then Get-MarkdownHelp,
-            $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase
+            $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase @markdownSplat
+            $markdownHelp.HideSection("Syntax")
             # .Save it,
             $markdownHelp.Save((Join-Path $outputPath "$($temporaryFunctionName).md"))            
             # and remove the temporary function (it would have gone out of scope anyways)
