@@ -13,8 +13,8 @@ Description: |
 ---
 
 
-PowerShell.Markdown.Help.HideSection
-------------------------------------
+PowerShell.Markdown.Help.HideSection()
+--------------------------------------
 
 
 
@@ -71,9 +71,3 @@ Valid Values:
 
 
 ---
-
-
-### Syntax
-```PowerShell
-PowerShell.Markdown.Help.HideSection [[-SectionNames] <String[]>] [<CommonParameters>]
-```
