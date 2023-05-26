@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-16"?>
+<!-- Generated with EZOut 1.9.9: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
+<Types>
+  <Type>
+    <Name>PowerShell.Markdown.Help</Name>
+    <Members>
+      <ScriptMethod>
+        <Name>HideSection</Name>
+        <Script>
+                        &lt;#
+.SYNOPSIS
+    Hides sections of markdown help
+.DESCRIPTION
+    Hides sections of a command's markdown help.
+#&gt;
+param(
+# One or more section names.
+[ValidateSet('Name','Synopsis','Description','RelatedLinks','Examples','Parameters','Inputs','Outputs','Notes','Story','Syntax')]
+[Alias('SectionName')]
+[string[]]
+$SectionNames
+)
+
+
+$skipSectionNames = @($This.HideSections)
+foreach ($SectionName in $SectionNames) {
+    if ($skipSectionNames -notcontains $SectionName) {     
+        $skipSectionNames += $SectionName 
+    }
+}
+
+$this | 
+    Add-Member NoteProperty HideSections $skipSectionNames -Force
+
+                    </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+</Types>
