@@ -20,7 +20,7 @@
 * You can now sponsor HelpOut (#126)
 * Added ScriptMethods to PowerShell.Markdown.Help (#125)
 * Now allowing Save-MarkDownHelp to be extended by any HelpOut.SaveMarkdownHelp file or function (#123)
-* Auto-documenting extended types (#101)
+* This is used in HelpOut.SaveMarkdownHelp.ExtendedTypes, which auto documents extended types (#101)
 
 ---
 
