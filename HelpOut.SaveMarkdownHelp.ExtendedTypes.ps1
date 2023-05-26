@@ -55,17 +55,10 @@ foreach ($extendedType in $extendedTypeNames) {
                 }
             $temporaryFunctionName = "$($extendedType).$GetSetNothing$($member.Name)" -replace $replaceMostPunctuation        
             $ExecutionContext.SessionState.PSVariable.Set("function:$($temporaryFunctionName)", $member.$PotentialProperty)
-            # Then Get-MarkdownHelp
-            $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase |
-                Out-String -Width 1mb # and format the result
-            # Then determine the exported file name
-            $exportedFileName = "$($temporaryFunctionName).md"
-            # and absolute path.
-            $exportedFilePath = Join-Path $outputPath $exportedFileName
-            # Then write the content,
-            Set-Content -Path $exportedFilePath -Value $markdownHelp
-            # return the file
-            Get-Item -Path $exportedFilePath
+            # Then Get-MarkdownHelp,
+            $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase
+            # .Save it,
+            $markdownHelp.Save((Join-Path $outputPath "$($temporaryFunctionName).md"))            
             # and remove the temporary function (it would have gone out of scope anyways)
             $ExecutionContext.SessionState.PSVariable.Remove("function:$($temporaryFunctionName)")
         }
