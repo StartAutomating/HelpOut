@@ -6,6 +6,7 @@
     Author='James Brundage'
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
+    TypesToProcess='HelpOut.types.ps1xml'
     ModuleVersion='0.4.4'
     PrivateData = @{
         PSData = @{
