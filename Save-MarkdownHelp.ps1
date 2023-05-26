@@ -225,13 +225,11 @@
                 # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
-                & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp
-                    Out-String -Width 1mb                | # output it as a string
-                    ForEach-Object { $_.Trim()}          | # trim it
-                    Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
+                
+                $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
 
                 if ($PassThru) { # If -PassThru was provided, get the path.
-                    Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                    $markdownFile
                 }
             }
 
@@ -266,10 +264,7 @@
                     else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
                     try {
-                        & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp
-                            Out-String -Width 1mb                | # output it as a string
-                            ForEach-Object { $_.Trim()}          | # trim it
-                            Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
+                        $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)                        
                     }
                     catch {
                         $ex = $_
@@ -277,7 +272,7 @@
                     }
 
                     $filesChanged += # add the file to the changed list.
-                        Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                        $markdownFile
 
                     # If -PassThru was provided (and we're not going to change anything)
                     if ($PassThru -and -not $ReplaceLink) {
@@ -333,22 +328,14 @@
                         $getMarkdownHelpSplat.Rename = $relativePath
                         if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                         else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                        # Call Get-MarkdownHelp
-                        $markdownHelp = & $GetMarkdownHelp @getMarkdownHelpSplat |
-                            Out-String -Width 1mb # format the result
-
-                        if ($markdownHelp) {
-                            $markdownHelp.Trim() |
-                                Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
-                        }
-
-
-                        $filesChanged += # add the file to the changed list.
-                            Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                        # Call Get-MarkdownHelp, .Save it, and
+                        $markdownFile = (& $GetMarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
+                            
+                        $filesChanged += $markdownFile # add the file to the changed list.
 
                         # If -PassThru was provided (and we're not going to change anything)
                         if ($PassThru -and -not $ReplaceLink) {
-                            $filesChanged[-1] # output the file changed now.
+                            $markdownFile # output the file changed now.
                         }
                     }
             }
@@ -459,6 +446,64 @@
                         }
                     }
             }
+
+            #region Run Extensions to this Command
+            $MyModule = $MyInvocation.MyCommand.ScriptBlock.Module
+            $ScriptPattern   = "$($MyModule.Name)\.$($MyInvocation.MyCommand.Name -replace '\p{P}')\.(?<Name>(?:.|\s){0,}?(?=\z|\.ps1))\.ps1"
+            $commandWildcard = "$($MyModule.Name).$($MyInvocation.MyCommand.Name)*" 
+            $commandPattern  = "$($myModule.Name)\.$($MyInvocation.MyCommand.Name -replace '\p{P}')\.(?<Name>(?:.|\s){0,}?(?=\z|\.ps1))"
+            $myExtensions = @(
+                foreach ($loadedModule in Get-Module){
+                    if ($loadedModule -eq $MyModule -or 
+                        $loadedModule -eq $m -or 
+                        $loadedModule.Tags -contains $MyModule.Name) {
+                        foreach ($file in Get-ChildItem -Recurse -Filter *.ps1 (
+                            Split-Path $loadedModule.Path
+                        )) {
+
+                            if ($file.Name -notmatch $ScriptPattern) {
+                                continue
+                            }
+                            $scriptCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($file.FullName, 'ExternalScript')
+                            $scriptCmd.psobject.Members.Add([psnoteproperty]::new("ExtensionName", $Matches.Name), $true)
+                            if ($scriptCmd.pstypenames -notcontains "$($myModule.Name).Extension") {                        
+                                $scriptCmd.pstypenames.insert(0, "$($myModule.Name).Extension")
+                            }
+                            $scriptCmd
+                        }
+                    }                
+                }
+                foreach ($cmdFound in $ExecutionContext.SessionState.InvokeCommand.GetCommands(
+                    $commandWildcard, 'Function,Alias,Cmdlet', $true
+                ) -match $commandPattern) {
+                    $cmdFound.psobject.Members.Add([psnoteproperty]::new("ExtensionName", $Matches.Name), $true)
+                    if ($cmdFound.pstypenames -notcontains "$($myModule.Name).Extension") {
+                        $cmdFound.pstypenames.insert(0, "$($myModule.Name).Extension")
+                    }
+                    $cmdFound
+                }
+            )
+
+            $extensionOutputs = @(foreach ($extension in $myExtensions) {
+                $extensionSplat = [Ordered]@{}
+                if ($extension.Parameters.Module) {
+                    $extensionSplat.Module = $theModule
+                }
+                & $extension @extensionSplat                
+            })
+
+            if ($extensionOutputs) {
+                foreach ($extensionOutput in $extensionOutputs) {
+                    if ($extensionOutput -is [IO.FileInfo]) {
+                        if ($extensionOutput.Extension -in '.md', '.markdown' -and $ReplaceLink) {
+                            $filesChanged += $extensionOutput
+                        } elseif ($PassThru) {
+                            $extensionOutput
+                        }                        
+                    }
+                }
+            }
+            #endregion Run Extensions to this Command
         }
 
         if ($PassThru -and $ReplaceLink) {
