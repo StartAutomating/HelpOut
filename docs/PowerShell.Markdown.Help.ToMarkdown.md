@@ -12,8 +12,8 @@ Description: |
 ---
 
 
-PowerShell.Markdown.Help.ToMarkdown
------------------------------------
+PowerShell.Markdown.Help.ToMarkdown()
+-------------------------------------
 
 
 
@@ -63,9 +63,3 @@ This would need to be declared in a .format.ps1xml file by another loaded module
 
 
 ---
-
-
-### Syntax
-```PowerShell
-PowerShell.Markdown.Help.ToMarkdown [[-View] <String>] [<CommonParameters>]
-```
