@@ -16,8 +16,8 @@ Description: |
 ---
 
 
-PowerShell.Markdown.Help.Save
------------------------------
+PowerShell.Markdown.Help.Save()
+-------------------------------
 
 
 
@@ -96,9 +96,3 @@ This would need to be declared in a .format.ps1xml file by another loaded module
 
 
 ---
-
-
-### Syntax
-```PowerShell
-PowerShell.Markdown.Help.Save [[-FilePath] <String>] [[-View] <String>] [<CommonParameters>]
-```
