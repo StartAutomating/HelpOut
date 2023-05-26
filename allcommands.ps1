@@ -1636,13 +1636,11 @@ function Save-MarkdownHelp
                 # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
-                & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp
-                    Out-String -Width 1mb                | # output it as a string
-                    ForEach-Object { $_.Trim()}          | # trim it
-                    Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
+                
+                $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
 
                 if ($PassThru) { # If -PassThru was provided, get the path.
-                    Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                    $markdownFile
                 }
             }
 
@@ -1677,10 +1675,7 @@ function Save-MarkdownHelp
                     else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
                     try {
-                        & $GetMarkdownHelp @getMarkdownHelpSplat | # Call Get-MarkdownHelp
-                            Out-String -Width 1mb                | # output it as a string
-                            ForEach-Object { $_.Trim()}          | # trim it
-                            Set-Content -Path $docOutputPath -Encoding utf8  # and set the encoding.
+                        $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)                        
                     }
                     catch {
                         $ex = $_
@@ -1688,7 +1683,7 @@ function Save-MarkdownHelp
                     }
 
                     $filesChanged += # add the file to the changed list.
-                        Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                        $markdownFile
 
                     # If -PassThru was provided (and we're not going to change anything)
                     if ($PassThru -and -not $ReplaceLink) {
@@ -1744,22 +1739,14 @@ function Save-MarkdownHelp
                         $getMarkdownHelpSplat.Rename = $relativePath
                         if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                         else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-                        # Call Get-MarkdownHelp
-                        $markdownHelp = & $GetMarkdownHelp @getMarkdownHelpSplat |
-                            Out-String -Width 1mb # format the result
-
-                        if ($markdownHelp) {
-                            $markdownHelp.Trim() |
-                                Set-Content -Path $docOutputPath -Encoding utf8 # and save it to a file.
-                        }
-
-
-                        $filesChanged += # add the file to the changed list.
-                            Get-Item -Path $docOutputPath -ErrorAction SilentlyContinue
+                        # Call Get-MarkdownHelp, .Save it, and
+                        $markdownFile = (& $GetMarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
+                            
+                        $filesChanged += $markdownFile # add the file to the changed list.
 
                         # If -PassThru was provided (and we're not going to change anything)
                         if ($PassThru -and -not $ReplaceLink) {
-                            $filesChanged[-1] # output the file changed now.
+                            $markdownFile # output the file changed now.
                         }
                     }
             }
