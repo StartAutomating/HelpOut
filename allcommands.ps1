@@ -1870,6 +1870,64 @@ function Save-MarkdownHelp
                         }
                     }
             }
+
+            #region Run Extensions to this Command
+            $MyModule = $MyInvocation.MyCommand.ScriptBlock.Module
+            $ScriptPattern   = "$($MyModule.Name)\.$($MyInvocation.MyCommand.Name -replace '\p{P}')\.(?<Name>(?:.|\s){0,}?(?=\z|\.ps1))\.ps1"
+            $commandWildcard = "$($MyModule.Name).$($MyInvocation.MyCommand.Name)*" 
+            $commandPattern  = "$($myModule.Name)\.$($MyInvocation.MyCommand.Name -replace '\p{P}')\.(?<Name>(?:.|\s){0,}?(?=\z|\.ps1))"
+            $myExtensions = @(
+                foreach ($loadedModule in Get-Module){
+                    if ($loadedModule -eq $MyModule -or 
+                        $loadedModule -eq $m -or 
+                        $loadedModule.Tags -contains $MyModule.Name) {
+                        foreach ($file in Get-ChildItem -Recurse -Filter *.ps1 (
+                            Split-Path $loadedModule.Path
+                        )) {
+
+                            if ($file.Name -notmatch $ScriptPattern) {
+                                continue
+                            }
+                            $scriptCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($file.FullName, 'ExternalScript')
+                            $scriptCmd.psobject.Members.Add([psnoteproperty]::new("ExtensionName", $Matches.Name), $true)
+                            if ($scriptCmd.pstypenames -notcontains "$($myModule.Name).Extension") {                        
+                                $scriptCmd.pstypenames.insert(0, "$($myModule.Name).Extension")
+                            }
+                            $scriptCmd
+                        }
+                    }                
+                }
+                foreach ($cmdFound in $ExecutionContext.SessionState.InvokeCommand.GetCommands(
+                    $commandWildcard, 'Function,Alias,Cmdlet', $true
+                ) -match $commandPattern) {
+                    $cmdFound.psobject.Members.Add([psnoteproperty]::new("ExtensionName", $Matches.Name), $true)
+                    if ($cmdFound.pstypenames -notcontains "$($myModule.Name).Extension") {
+                        $cmdFound.pstypenames.insert(0, "$($myModule.Name).Extension")
+                    }
+                    $cmdFound
+                }
+            )
+
+            $extensionOutputs = @(foreach ($extension in $myExtensions) {
+                $extensionSplat = [Ordered]@{}
+                if ($extension.Parameters.Module) {
+                    $extensionSplat.Module = $theModule
+                }
+                & $extension @extensionSplat                
+            })
+
+            if ($extensionOutputs) {
+                foreach ($extensionOutput in $extensionOutputs) {
+                    if ($extensionOutput -is [IO.FileInfo]) {
+                        if ($extensionOutput.Extension -in '.md', '.markdown' -and $ReplaceLink) {
+                            $filesChanged += $extensionOutput
+                        } elseif ($PassThru) {
+                            $extensionOutput
+                        }                        
+                    }
+                }
+            }
+            #endregion Run Extensions to this Command
         }
 
         if ($PassThru -and $ReplaceLink) {
