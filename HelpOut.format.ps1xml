@@ -435,9 +435,11 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
         $sectionCounter = 0
         foreach ($sectionName in $orderOfSections) {
+
             $sectionCounter++
             $sectionContent =
-                if ($MarkdownSections.$sectionName -is [ScriptBlock]) {
+                if ($MarkdownSections.$sectionName -is [ScriptBlock] -and 
+                    $helpObject.HideSections -notcontains $sectionName) {
                     &amp; $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
