@@ -13,8 +13,8 @@ Description: |
 ---
 
 
-PowerShell.Markdown.Help.ShowSection
-------------------------------------
+PowerShell.Markdown.Help.ShowSection()
+--------------------------------------
 
 
 
@@ -71,9 +71,3 @@ Valid Values:
 
 
 ---
-
-
-### Syntax
-```PowerShell
-PowerShell.Markdown.Help.ShowSection [[-SectionNames] <String[]>] [<CommonParameters>]
-```
