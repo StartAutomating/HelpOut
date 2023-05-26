@@ -329,10 +329,10 @@
                         if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                         else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                         # Call Get-MarkdownHelp, .Save it, and
-                        $markdownFile = (& $GetMarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath) |
+                        $markdownFile = (& $GetMarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
                             
                         $filesChanged += $markdownFile # add the file to the changed list.
-                                                    
+
                         # If -PassThru was provided (and we're not going to change anything)
                         if ($PassThru -and -not $ReplaceLink) {
                             $markdownFile # output the file changed now.
