@@ -37,6 +37,9 @@ Returns the content of this help topic as a markdown string.
 
 ### Examples
 #### EXAMPLE 1
+```PowerShell
+(Get-MarkDownHelp Get-MarkDownHelp).ToMarkdown()
+```
 
 
 

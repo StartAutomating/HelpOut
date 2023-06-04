@@ -500,11 +500,19 @@ function Get-MarkdownHelp {
                         # We decorate that object with the typename `PowerShell.Markdown.Help`.
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
+                        $IsHelpAboutAlias = $helpObj.Name -ne $gotHelp.Name
+                        $helpObj | Add-Member NoteProperty IsAlias $IsHelpAboutAlias -Force
+                        if ($IsHelpAboutAlias) {
+                            $aliasCommand = $ExecutionContext.SessionState.InvokeCommand.GetCommand($gotHelp.Name, 'Alias')
+                            $helpObj | Add-Member NoteProperty AliasCommand $aliasCommand -Force
+                        }
 
                         # Then we attach parameters passed to this command to the help object.
                         # * `-Rename` will become `[string] .Rename`
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
+                        } elseif ($IsHelpAboutAlias) {
+                            $helpObj | Add-Member NoteProperty Rename $gotHelp.Name -Force
                         }
 
                         # * `-SectionOrder` will become `[string[]] .SectionOrder`
@@ -1641,11 +1649,13 @@ function Save-MarkdownHelp
                     if ($markdownTopic.Save) {
                         $markdownTopic.Save($docOutputPath)
                     } else { $null }
-                
-                $filesChanged += $markdownFile
 
-                if ($PassThru) { # If -PassThru was provided, get the path.
-                    $markdownFile
+                if ($markdownFile) {                
+                    $filesChanged += $markdownFile
+
+                    if ($PassThru) { # If -PassThru was provided, get the path.
+                        $markdownFile
+                    }
                 }
             }
 
@@ -1678,7 +1688,7 @@ function Save-MarkdownHelp
                     $getMarkdownHelpSplat.Rename = $replacedCmdName
                     if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                     else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-
+                    $markdownFile  = $null
                     try {
                         $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat
                         $markdownFile  =
@@ -1691,12 +1701,14 @@ function Save-MarkdownHelp
                         Write-Error -Exception $ex.Exception -Message "Could not Get Help for $($cmd.Name): $($ex.Exception.Message)" -TargetObject $getMarkdownHelpSplat
                     }
 
-                    $filesChanged += # add the file to the changed list.
-                        $markdownFile
+                    if ($markdownFile) {
+                        $filesChanged += # add the file to the changed list.
+                            $markdownFile
 
-                    # If -PassThru was provided (and we're not going to change anything)
-                    if ($PassThru -and -not $ReplaceLink) {
-                        $filesChanged[-1] # output the file changed now.
+                        # If -PassThru was provided (and we're not going to change anything)
+                        if ($PassThru -and -not $ReplaceLink) {
+                            $filesChanged[-1] # output the file changed now.
+                        }
                     }
 
                 }
@@ -1754,12 +1766,13 @@ function Save-MarkdownHelp
                             if ($markdownTopic.Save) {
                                 $markdownTopic.Save($docOutputPath)
                             } else { $null }
-                                                    
-                        $filesChanged += $markdownFile # add the file to the changed list.
+                        if ($markdownFile) {
+                            $filesChanged += $markdownFile # add the file to the changed list.
 
-                        # If -PassThru was provided (and we're not going to change anything)
-                        if ($PassThru -and -not $ReplaceLink) {
-                            $markdownFile # output the file changed now.
+                            # If -PassThru was provided (and we're not going to change anything)
+                            if ($PassThru -and -not $ReplaceLink) {
+                                $markdownFile # output the file changed now.
+                            }
                         }
                     }
             }

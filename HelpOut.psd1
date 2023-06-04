@@ -7,7 +7,7 @@
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
     TypesToProcess='HelpOut.types.ps1xml'
-    ModuleVersion='0.4.6'
+    ModuleVersion='0.4.7'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -15,11 +15,13 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
-### HelpOut 0.4.6:
+### HelpOut 0.4.7:
 
-* Save-MarkdownHelp:  Improving resiliency (Fixes #128)
+* Get-MarkdownHelp:  Automatically renaming help about aliases (Fixes #130)
+* Save-MarkdownHelp:  Improving resiliency (avoiding null burps) (Fixes #128)
 
 ---
+
 Additional Changes in [Changelog](/CHANGELOG.md)
 '@
         }

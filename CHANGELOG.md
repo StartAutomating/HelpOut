@@ -1,3 +1,10 @@
+### HelpOut 0.4.7:
+
+* Get-MarkdownHelp:  Automatically renaming help about aliases (Fixes #130)
+* Save-MarkdownHelp:  Improving resiliency (avoiding null burps) (Fixes #128)
+
+---
+
 ### HelpOut 0.4.6:
 
 * Save-MarkdownHelp:  Improving resiliency (Fixes #128)
