@@ -1636,8 +1636,13 @@ function Save-MarkdownHelp
                 # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
+                $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat                
+                $markdownFile  =
+                    if ($markdownTopic.Save) {
+                        $markdownTopic.Save($docOutputPath)
+                    } else { $null }
                 
-                $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
+                $filesChanged += $markdownFile
 
                 if ($PassThru) { # If -PassThru was provided, get the path.
                     $markdownFile
@@ -1675,7 +1680,11 @@ function Save-MarkdownHelp
                     else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
 
                     try {
-                        $markdownFile = (Get-MarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)                        
+                        $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat
+                        $markdownFile  =
+                            if ($markdownTopic.Save) {
+                                $markdownTopic.Save($docOutputPath)
+                            } else { $null }
                     }
                     catch {
                         $ex = $_
@@ -1740,8 +1749,12 @@ function Save-MarkdownHelp
                         if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki}
                         else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
                         # Call Get-MarkdownHelp, .Save it, and
-                        $markdownFile = (& $GetMarkdownHelp @getMarkdownHelpSplat).Save($docOutputPath)
-                            
+                        $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat
+                        $markdownFile  =
+                            if ($markdownTopic.Save) {
+                                $markdownTopic.Save($docOutputPath)
+                            } else { $null }
+                                                    
                         $filesChanged += $markdownFile # add the file to the changed list.
 
                         # If -PassThru was provided (and we're not going to change anything)

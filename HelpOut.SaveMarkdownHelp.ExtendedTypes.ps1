@@ -58,6 +58,10 @@ foreach ($extendedType in $extendedTypeNames) {
             $ExecutionContext.SessionState.PSVariable.Set("function:$($temporaryFunctionName)", $member.$PotentialProperty)
             # Then Get-MarkdownHelp,
             $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase @markdownSplat
+            if ($markdownHelp -is [string]) {
+                $ExecutionContext.SessionState.PSVariable.Remove("function:$($temporaryFunctionName)")
+                continue    
+            }
             $markdownHelp.HideSection("Syntax")
             # .Save it,
             $markdownHelp.Save((Join-Path $outputPath "$($temporaryFunctionName).md"))            

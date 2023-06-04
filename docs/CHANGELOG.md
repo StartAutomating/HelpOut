@@ -1,3 +1,9 @@
+### HelpOut 0.4.6:
+
+* Save-MarkdownHelp:  Improving resiliency (Fixes #128)
+
+---
+
 ### HelpOut 0.4.5:
 
 * You can now sponsor HelpOut (#126)
