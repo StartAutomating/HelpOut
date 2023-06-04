@@ -97,11 +97,19 @@
                         # We decorate that object with the typename `PowerShell.Markdown.Help`.
                         $helpObj.pstypenames.clear()
                         $helpObj.pstypenames.add('PowerShell.Markdown.Help')
+                        $IsHelpAboutAlias = $helpObj.Name -ne $gotHelp.Name
+                        $helpObj | Add-Member NoteProperty IsAlias $IsHelpAboutAlias -Force
+                        if ($IsHelpAboutAlias) {
+                            $aliasCommand = $ExecutionContext.SessionState.InvokeCommand.GetCommand($gotHelp.Name, 'Alias')
+                            $helpObj | Add-Member NoteProperty AliasCommand $aliasCommand -Force
+                        }
 
                         # Then we attach parameters passed to this command to the help object.
                         # * `-Rename` will become `[string] .Rename`
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
+                        } elseif ($IsHelpAboutAlias) {
+                            $helpObj | Add-Member NoteProperty Rename $gotHelp.Name -Force
                         }
 
                         # * `-SectionOrder` will become `[string[]] .SectionOrder`
