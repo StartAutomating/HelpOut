@@ -4,7 +4,7 @@
 .DESCRIPTION
     Returns the content of this help topic as a markdown string.
 .EXAMPLE
-
+    (Get-MarkDownHelp Get-MarkDownHelp).ToMarkdown()
 #>
 param(
 # An optional view.
