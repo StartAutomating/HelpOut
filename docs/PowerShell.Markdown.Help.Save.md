@@ -96,3 +96,11 @@ This would need to be declared in a .format.ps1xml file by another loaded module
 
 
 ---
+
+
+### Notes
+This will not save to files that have illegal names on Windows.
+
+
+
+---
