@@ -3,6 +3,8 @@
     Saves a Markdown Help Topic
 .DESCRIPTION
     Saves a Markdown Help Topic to a file.
+.NOTES
+    This will not save to files that have illegal names on Windows.
 .EXAMPLE
     (Get-MarkdownHelp Get-MarkdownHelp).Save(".\test.md")
 .LINK
@@ -19,6 +21,11 @@ $FilePath,
 [string]
 $View = 'PowerShell.Markdown.Help'
 )
+
+if ($filePath -match '[\<\>\|\?\*]') {
+    Write-Warning "Will not .Save to $filePath, because that path will not be readable on all operating systems."
+    return
+}
 
 if (-not (Test-Path $FilePath)) {
     $createdFile = New-Item -ItemType File -Path $FilePath -Force
