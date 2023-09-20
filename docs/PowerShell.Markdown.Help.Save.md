@@ -56,7 +56,6 @@ Saves a Markdown Help Topic to a file.
 ```
 
 
-
 ---
 
 
