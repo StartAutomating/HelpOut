@@ -29,7 +29,7 @@ Parameters:
   - Name: Module
     Type: System.String[]
     Aliases: 
-    
+    - Name
   - Name: NoValidValueEnumeration
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
@@ -130,16 +130,16 @@ Get markdown help for each command in a module and saves it to the appropriate l
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Save-MarkdownHelp -Module HelpOut  # Save Markdown to HelpOut/docs
 ```
+> EXAMPLE 2
 
-#### EXAMPLE 2
 ```PowerShell
 Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
 ```
-
 
 
 ---
@@ -155,9 +155,9 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
-|`[String[]]`|false   |named   |true (ByPropertyName)|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|Name   |
 
 
 

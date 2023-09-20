@@ -1433,7 +1433,8 @@ function Save-MarkdownHelp
     #>
     param(
     # The name of one or more modules.
-    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName)]
+    [Alias('Name')]
     [string[]]
     $Module,
 
@@ -1591,15 +1592,18 @@ function Save-MarkdownHelp
             }
         }
 
+        $c = 0
+        $t = $Module.Count
 
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.
             if ($t -gt 1) {
                 $c++
+                $p = $c * 100 / $t
                 Write-Progress 'Saving Markdown' $m -PercentComplete $p  -Id $id
             }
 
-            $theModule = Get-Module $m # Find the module
+            $theModule = Get-Module $module # Find the module
             if (-not $theModule) { continue } # (continue if we couldn't).
             $theModuleRoot = $theModule | Split-Path # Find the module's root.
             if (-not $psBoundParameters.OutputPath) { # If no -OutputPath was provided
@@ -1941,8 +1945,15 @@ function Save-MarkdownHelp
                 }
             }
             #endregion Run Extensions to this Command
-        }
+        }        
 
+        if ($t -gt 1) {
+            Write-Progress 'Saving Markdown' 'Complete' -Completed -Id $id
+        }
+        #endregion Save the Markdowns
+    }
+
+    end {
         if ($PassThru -and $ReplaceLink) {
             $linkFinder = [Regex]::new("
             (?<IsImage>\!)?    # If there is an exclamation point, then it is an image link
@@ -1990,10 +2001,5 @@ function Save-MarkdownHelp
                 }
             }
         }
-
-        if ($t -gt 1) {
-            Write-Progress 'Saving Markdown' 'Complete' -Completed -Id $id
-        }
-        #endregion Save the Markdowns
     }
 }

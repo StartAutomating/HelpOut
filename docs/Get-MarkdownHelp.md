@@ -75,7 +75,7 @@ Gets Help for a given command, in Markdown
 
 
 
-* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Get-Help](https://learn.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
@@ -85,11 +85,11 @@ Gets Help for a given command, in Markdown
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Get-MarkdownHelp Get-Help
 ```
-
 
 
 ---

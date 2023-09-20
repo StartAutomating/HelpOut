@@ -50,11 +50,11 @@ Saves a Markdown Help Topic to a file.
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 (Get-MarkdownHelp Get-MarkdownHelp).Save(".\test.md")
 ```
-
 
 
 ---
@@ -92,6 +92,14 @@ This would need to be declared in a .format.ps1xml file by another loaded module
 |`[String]`|false   |2       |false        |
 
 
+
+
+
+---
+
+
+### Notes
+This will not save to files that have illegal names on Windows.
 
 
 

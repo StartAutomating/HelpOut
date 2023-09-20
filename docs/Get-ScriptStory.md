@@ -53,11 +53,11 @@ Script Stories are a simple markdown summary of all single-line comments within 
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Get-Command Get-ScriptStory | Get-ScriptStory
 ```
-
 
 
 ---

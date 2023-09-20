@@ -1,3 +1,20 @@
+### HelpOut 0.4.8:
+
+* Markdown Help Improvements:
+  * Fixing Long Examples (Fixes #141)
+  * Allowing first comment lines in an example to be markdown (#143)
+  * Also, switching numbered example headings to blockquotes
+* Save-MarkdownHelp updates:
+  * Fixing Piping Behavior (#140)
+  * Not Saving to illegal windows paths (#132)
+* Improving Extended Types Doc Generation
+  * Now puts extended type documentation into subfolders (#135)
+  * Also, generates a summary file for each type (#133)
+* Updating links to Microsoft modules (#142)
+* Integrating PSA into HelpOut (#144)
+
+---
+
 ### HelpOut 0.4.7:
 
 * Get-MarkdownHelp:  Automatically renaming help about aliases (Fixes #130)

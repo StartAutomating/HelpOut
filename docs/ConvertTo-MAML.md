@@ -56,7 +56,7 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 
 ### Related Links
-* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Get-Help](https://learn.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
@@ -70,26 +70,26 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Get-MAML -Name Get-MAML
 ```
+> EXAMPLE 2
 
-#### EXAMPLE 2
 ```PowerShell
 Get-Command Get-MAML | Get-MAML
 ```
+> EXAMPLE 3
 
-#### EXAMPLE 3
 ```PowerShell
 Get-MAML -Name Get-MAML -Compact
 ```
+> EXAMPLE 4
 
-#### EXAMPLE 4
 ```PowerShell
 Get-MAML -Name Get-MAML -XML
 ```
-
 
 
 ---

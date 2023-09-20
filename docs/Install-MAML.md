@@ -108,11 +108,11 @@ Ideally, you should use the allcommands script
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Install-MAML -Module HelpOut
 ```
-
 
 
 ---

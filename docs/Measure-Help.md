@@ -44,7 +44,7 @@ Determines the percentage of documentation in a given script
 
 
 ### Related Links
-* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Get-Help](https://learn.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
@@ -54,17 +54,18 @@ Determines the percentage of documentation in a given script
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 dir -Filter *.ps1 | Measure-Help
 ```
+> EXAMPLE 2
 
-#### EXAMPLE 2
 ```PowerShell
 Get-Command -Module HelpOut | Measure-Help
 ```
+> EXAMPLE 3
 
-#### EXAMPLE 3
 ```PowerShell
 Measure-Help {
     # This script has some documentation, and then a bunch of code that literally does nothing
@@ -73,7 +74,6 @@ Measure-Help {
     $null / 100 # Nothing out of 100             
 } | Select-Object -ExpandProperty PercentageDocumented
 ```
-
 
 
 ---

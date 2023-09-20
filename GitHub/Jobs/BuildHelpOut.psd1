@@ -24,7 +24,11 @@
             if   = '${{github.ref_name != ''master''}}'
             uses = './'
             id = 'HelpOutBranch'
-        }      
-        
+        },
+        @{
+            name = 'PSA'
+            uses = 'StartAutomating/PSA@main'
+            id = 'PSA'
+        }
     )
 }

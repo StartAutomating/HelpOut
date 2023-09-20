@@ -34,7 +34,7 @@
                         }
                         elseif ($linkedCmd -and ($linkedCmd.Module -like 'microsoft.*' -or $linkedCmd.Source -like 'microsoft.*')) {
                             $linkSrc = if ($linkedCmd.Module) { $linkedCmd.Module} else { $linkedCmd.Source }
-                            "https://docs.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
+                            "https://learn.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
                         } elseif ($helpObject.WikiLink) {
                             $nav.LinkText
                         } elseif ($null -ne $helpObject.DocLink) {
@@ -54,17 +54,49 @@
         Examples = {
             if ($helpObject.Examples) {
                 Format-Markdown -Heading "Examples" -headingsize 3
-
+                
+                
                 foreach ($example in $helpObject.Examples.Example) {
-                    Format-Markdown -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4
+                    
+                    # Combine the code and remarks
+                    $exampleLines = 
+                        @(
+                            $example.Code
+                            foreach ($remark in $example.Remarks.text) {
+                                if (-not $remark) { continue }
+                                $remark
+                            }
+                        ) -join ([Environment]::NewLine) -split '(?>\r\n|\n)' # and split into lines
 
-                    if ($example.Code) {
-                        $example.Code | Format-Markdown -CodeLanguage PowerShell
-                    }
-
-                    if ($example.Remarks) {
-                        ($example.Remarks | Out-String -Width 1mb).Trim()
-                    }
+                    # Anything until the first non-comment line is a markdown predicate to the example
+                    $nonCommentLine = $false
+                    $markdownLines = @()
+                    
+                    # Go thru each line in the example as part of a loop
+                    $codeBlock = @(foreach ($exampleLine in $exampleLines) {
+                        if ($exampleLine -match '^\#' -and -not $nonCommentLine) {
+                            $markdownLines += $exampleLine -replace '^\#' -replace '^\s+'
+                        } else {
+                            $nonCommentLine = $true
+                            $exampleLine
+                        }
+                    }) -join [Environment]::NewLine
+                    @(
+                        if ($markdownLines) {
+                            $markdownLines -join [Environment]::NewLine
+                        } else {
+                            Format-Markdown -BlockQuote -InputObject ($example.Title -replace '^[-\s]+' -replace '[-\s]+$')
+                        }
+                        
+                        if ($codeBlock) {
+                            $codeBlockAsScriptBlock = try { [ScriptBlock]::Create($codeBlock) } catch { $false }
+                            if ($codeBlockAsScriptBlock) {
+                                $codeBlockAsScriptBlock | Format-Markdown
+                            } else {
+                                $codeBlock
+                            }
+                        }
+                    ) -join [Environment]::NewLine * 2
                 }
             }
         }
