@@ -56,7 +56,7 @@ Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xm
 
 
 ### Related Links
-* [Get-Help](https://docs.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
+* [Get-Help](https://learn.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
 
 
