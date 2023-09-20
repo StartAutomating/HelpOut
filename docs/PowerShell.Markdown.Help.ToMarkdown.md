@@ -42,7 +42,6 @@ Returns the content of this help topic as a markdown string.
 ```
 
 
-
 ---
 
 
