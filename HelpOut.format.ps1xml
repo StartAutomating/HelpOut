@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-16"?>
-<!-- Generated with EZOut 1.9.9: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
+<!-- Generated with EZOut 2.0.1: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
 <Configuration>
   <ViewDefinitions>
     <View>
-      <Name>File.Documentation.PercentageDocumentation.Percentage</Name>
+      <Name>File.Documentation.Percentage</Name>
       <ViewSelectedBy>
         <TypeName>File.Documentation.Percentage</TypeName>
         <TypeName>Documentation.Percentage</TypeName>
@@ -54,20 +54,20 @@
             } while ($false)
             
         
-
-                $__ = $_
-                $ci = . {
+                        
+                        $CellColorValue = $($Script:_LastCellStyle = $($__ = $_;. {
         &amp; ${HelpOut_Format-Heatmap} -HeatMapMax 20 -InputObject $_.CommentPercent -HeatMapHot "#11ff11" -HeatMapCool "#ff1111"
-    }
-                $_ = $__
-                if ($ci -is [string]) {
-                    $ci = &amp; ${HelpOut_Format-RichText} -NoClear -ForegroundColor $ci
-                } else {                    
-                    $ci = &amp; ${HelpOut_Format-RichText} -NoClear @ci
-                }
-                $output = . { '' + ([Math]::Round($_.CommentPercent,2)) + '%' }
-                @($ci; $output; &amp; ${HelpOut_Format-RichText}) -join ""
-                </ScriptBlock>
+    };$_ = $__);$Script:_LastCellStyle)
+                        
+                            if ($CellColorValue -and $CellColorValue -is [string]) {
+                                $CellColorValue = &amp; ${HelpOut_Format-RichText} -NoClear -ForegroundColor $CellColorValue
+                            } elseif (`$CellColorValue -is [Collections.IDictionary]) {
+                                $CellColorValue = &amp; ${HelpOut_Format-RichText} -NoClear @CellColorValue
+                            }
+                                                    
+                        $output = . { '' + ([Math]::Round($_.CommentPercent,2)) + '%' }
+                        @($CellColorValue; $output; &amp; ${HelpOut_Format-RichText}) -join ''
+                        </ScriptBlock>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -171,13 +171,14 @@
                 foreach ($example in $helpObject.Examples.Example) {
                     &amp; ${HelpOut_Format-Markdown} -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4
 
-                    if ($example.Code) {
-                        $example.Code | &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell
-                    }
-
-                    if ($example.Remarks) {
-                        ($example.Remarks | Out-String -Width 1mb).Trim()
-                    }
+                    @(
+                        $example.Code
+                        foreach ($remark in $example.Remarks.text) {
+                            if (-not $remark) { continue }
+                            $remark
+                        }
+                    ) -join ([Environment]::NewLine) |
+                        &amp; ${HelpOut_Format-Markdown} -CodeLanguage PowerShell                    
                 }
             }
         }
@@ -853,7 +854,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                 }
                 elseif ($canUseANSI) {
                     # For ANSI,
-                    '' + $esc + ']8m;;' + $Link + $esc + '\'   
+                    '' + $esc + ']8;;' + $Link + $esc + '\'   
                 }
             }
             
@@ -1439,6 +1440,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
     )
 
     begin {
+        if (-not $Depth) { $depth = $FormatEnumerationLimit }
         $toYaml = {
             param(
             [Parameter(ValueFromPipeline,Position=0)]$Object,
