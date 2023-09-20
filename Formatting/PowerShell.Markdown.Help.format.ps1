@@ -58,13 +58,14 @@
                 foreach ($example in $helpObject.Examples.Example) {
                     Format-Markdown -Heading ($example.Title -replace '^[-\s]+' -replace '[-\s]+$') -HeadingSize 4
 
-                    if ($example.Code) {
-                        $example.Code | Format-Markdown -CodeLanguage PowerShell
-                    }
-
-                    if ($example.Remarks) {
-                        ($example.Remarks | Out-String -Width 1mb).Trim()
-                    }
+                    @(
+                        $example.Code
+                        foreach ($remark in $example.Remarks.text) {
+                            if (-not $remark) { continue }
+                            $remark
+                        }
+                    ) -join ([Environment]::NewLine) |
+                        Format-Markdown -CodeLanguage PowerShell                    
                 }
             }
         }
