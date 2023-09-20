@@ -50,7 +50,8 @@ Saves a Markdown Help Topic to a file.
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 (Get-MarkdownHelp Get-MarkdownHelp).Save(".\test.md")
 ```
