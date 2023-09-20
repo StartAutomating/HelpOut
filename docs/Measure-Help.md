@@ -58,12 +58,10 @@ Determines the percentage of documentation in a given script
 ```PowerShell
 dir -Filter *.ps1 | Measure-Help
 ```
-
 #### EXAMPLE 2
 ```PowerShell
 Get-Command -Module HelpOut | Measure-Help
 ```
-
 #### EXAMPLE 3
 ```PowerShell
 Measure-Help {
@@ -73,7 +71,6 @@ Measure-Help {
     $null / 100 # Nothing out of 100             
 } | Select-Object -ExpandProperty PercentageDocumented
 ```
-
 
 
 ---
