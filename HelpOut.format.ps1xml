@@ -147,7 +147,7 @@
                         }
                         elseif ($linkedCmd -and ($linkedCmd.Module -like 'microsoft.*' -or $linkedCmd.Source -like 'microsoft.*')) {
                             $linkSrc = if ($linkedCmd.Module) { $linkedCmd.Module} else { $linkedCmd.Source }
-                            "https://docs.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
+                            "https://learn.microsoft.com/powershell/module/$linkSrc/$linkedCmd"
                         } elseif ($helpObject.WikiLink) {
                             $nav.LinkText
                         } elseif ($null -ne $helpObject.DocLink) {
