@@ -85,7 +85,8 @@ Gets Help for a given command, in Markdown
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Get-MarkdownHelp Get-Help
 ```
