@@ -29,7 +29,7 @@ Parameters:
   - Name: Module
     Type: System.String[]
     Aliases: 
-    
+    - Name
   - Name: NoValidValueEnumeration
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
@@ -153,9 +153,9 @@ The name of one or more modules.
 
 
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
-|`[String[]]`|false   |named   |true (ByPropertyName)|
+|Type        |Required|Position|PipelineInput        |Aliases|
+|------------|--------|--------|---------------------|-------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|Name   |
 
 
 
