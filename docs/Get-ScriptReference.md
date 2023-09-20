@@ -44,7 +44,8 @@ Gets the external references of a given PowerShell command.  These are the comma
 
 
 ### Examples
-#### EXAMPLE 1
+> EXAMPLE 1
+
 ```PowerShell
 Get-Command Get-ScriptReference | Get-ScriptReference
 ```
