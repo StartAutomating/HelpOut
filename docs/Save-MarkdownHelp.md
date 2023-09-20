@@ -134,12 +134,10 @@ Get markdown help for each command in a module and saves it to the appropriate l
 ```PowerShell
 Save-MarkdownHelp -Module HelpOut  # Save Markdown to HelpOut/docs
 ```
-
 #### EXAMPLE 2
 ```PowerShell
 Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
 ```
-
 
 
 ---
