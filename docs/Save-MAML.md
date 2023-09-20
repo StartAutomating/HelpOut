@@ -66,17 +66,14 @@ Generates a Module's MAML file, and then saves it to the appropriate location.
 ```PowerShell
 Save-Maml -Module HelpOut
 ```
-
 #### EXAMPLE 2
 ```PowerShell
 Save-Maml -Module HelpOut -WhatIf
 ```
-
 #### EXAMPLE 3
 ```PowerShell
 Save-Maml -Module HelpOut -PassThru
 ```
-
 
 
 ---
