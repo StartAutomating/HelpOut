@@ -8,7 +8,7 @@
       <maml:description>
         <maml:para>Gets MAML help</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.</maml:para>
@@ -400,7 +400,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Gets Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets Help for a given command, in Markdown</maml:para>
@@ -513,9 +513,45 @@ If not provided, this will be the order they are defined in the formatter.</maml
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>FormatAttribute</maml:name>
+          <maml:description>
+            <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+          <dev:type>
+            <maml:name>Psobject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>FormatAttribute</maml:name>
+        <maml:description>
+          <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+        <dev:type>
+          <maml:name>Psobject</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>GitHubDocRoot</maml:name>
         <maml:description>
@@ -640,7 +676,8 @@ If not provided, this will be the order they are defined in the formatter.</maml
         <maml:introduction>
           <maml:para> PS &gt;  </maml:para>
         </maml:introduction>
-        <dev:code> Get-MarkdownHelp Get-Help </dev:code>
+        <dev:code> ##### Getting Markdown Help        
+Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:code>
         <dev:remarks>
         </dev:remarks>
       </command:example>
@@ -666,7 +703,7 @@ If not provided, this will be the order they are defined in the formatter.</maml
       <maml:description>
         <maml:para>Gets a script's references</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.</maml:para>
@@ -792,7 +829,7 @@ If not provided, this will be the order they are defined in the formatter.</maml
       <maml:description>
         <maml:para>Gets a Script's story</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the Script's "Story"</maml:para>
@@ -955,7 +992,7 @@ If not provided, this will be the order they are defined in the formatter.</maml
       <maml:description>
         <maml:para>Installs MAML into a module</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Installs MAML into a module.  </maml:para>
@@ -1309,7 +1346,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Determines the percentage of documentation</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Determines the percentage of documentation in a given script</maml:para>
@@ -1452,7 +1489,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's MAML</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Generates a Module's MAML file, and then saves it to the appropriate location.</maml:para>
@@ -1713,7 +1750,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.4.8</dev:version>
+      <dev:version>0.4.9</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Get markdown help for each command in a module and saves it to the appropriate location.</maml:para>
@@ -2006,6 +2043,24 @@ If not provided, all types of commands from the module will be saved as a markdo
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>FormatAttribute</maml:name>
+          <maml:description>
+            <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+          <dev:type>
+            <maml:name>Psobject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2046,6 +2101,24 @@ Topic files that match this pattern will not be included.</maml:para>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>FormatAttribute</maml:name>
+        <maml:description>
+          <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+        <dev:type>
+          <maml:name>Psobject</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>

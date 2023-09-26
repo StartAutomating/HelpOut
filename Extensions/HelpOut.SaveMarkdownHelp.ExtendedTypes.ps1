@@ -79,6 +79,9 @@ foreach ($extendedType in $extendedTypeNames) {
         
     })
 
+    # If there were no member files, there's no point in generating a summary.
+    if (-not $memberFiles) { continue }
+
     $ExtendedTypeDocFile = Join-Path $outputPath "$(
         ($extendedType -split $punctuationNotDashOrUnderscore) -join [IO.Path]::DirectorySeparatorChar
     )$([IO.Path]::DirectorySeparatorChar)README.md"

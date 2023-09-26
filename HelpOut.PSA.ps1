@@ -22,7 +22,7 @@ Get-BskyActorProfile -Actor $env:AT_PROTOCOL_HANDLE -Cache | Out-Host
 
 $isMergeToMain = 
     ($gitHubEvent.head_commit.message -match "Merge Pull Request #(?<PRNumber>\d+)") -and 
-    $gitHubEvent.ref -eq 'refs/heads/main'
+    $gitHubEvent.ref -in 'refs/heads/main', 'refs/heads/master'
 
 if ($isMergeToMain) {
     Import-Module .\HelpOut.psd1 -Global -PassThru | Out-Host
@@ -34,8 +34,10 @@ if ($isMergeToMain) {
         "#PowerShell people, help yourself to new bits: " |
             Get-Random        
 
-        "$moduleAndVersion is out!"
-    )    
+        "$moduleAndVersion is out!"        
+
+        "https://github.com/StartAutomating/HelpOut"
+    ) -join ([Environment]::NewLine * 2)
     
     Send-AtProto -Text $fullMessage -WebCard @{
         Url = "https://github.com/StartAutomating/HelpOut"

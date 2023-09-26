@@ -5,7 +5,8 @@
     .DESCRIPTION
         Gets Help for a given command, in Markdown
     .EXAMPLE
-        Get-MarkdownHelp Get-Help
+        ##### Getting Markdown Help        
+        Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help
     .LINK
         Save-MarkdownHelp
     .LINK
@@ -60,7 +61,16 @@
     [ValidateSet('Command','Help','Metadata')]
     [Alias('YamlHeaderInfoType')]
     [string[]]
-    $YamlHeaderInformationType
+    $YamlHeaderInformationType,
+
+    # The formatting used for unknown attributes.
+    # Any key or property in this object will be treated as a potential typename
+    # Any value will be the desired formatting.
+    # If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+    # If the value is a [string], it will be expanded
+    # In either context, `$_` will be the current attribute.
+    [PSObject]
+    $FormatAttribute
     )
 
     process
@@ -95,8 +105,8 @@
                         $helpObj = $_
                         # Command Help will be returned as an object
                         # We decorate that object with the typename `PowerShell.Markdown.Help`.
-                        $helpObj.pstypenames.clear()
-                        $helpObj.pstypenames.add('PowerShell.Markdown.Help')
+                        # $helpObj.pstypenames.clear()
+                        $helpObj.pstypenames.insert(0,'PowerShell.Markdown.Help')
                         $IsHelpAboutAlias = $helpObj.Name -ne $gotHelp.Name
                         $helpObj | Add-Member NoteProperty IsAlias $IsHelpAboutAlias -Force
                         if ($IsHelpAboutAlias) {
@@ -129,6 +139,9 @@
                         # * `-NoValidValueEnumeration`
                         $helpObj | Add-Member NoteProperty YamlHeaderInformationType $YamlHeaderInformationType -Force
 
+                        if ($FormatAttribute) {
+                            $helpObj | Add-Member NoteProperty FormatAttribute $FormatAttribute -Force
+                        }
 
                         # After we've attached all of the properties, we simply output the object.
                         # PowerShell.Markdown.Help formatter will display it exactly as we'd like it.                        

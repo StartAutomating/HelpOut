@@ -1,3 +1,14 @@
+### HelpOut 0.4.9:
+
+* Supporting custom attribute formatting with -FormatAttribute (#147)
+  * Markdown Formatter - Honoring .FormatAttribute (#148)
+  * Get-MarkdownHelp -FormatAttribute (#149)
+  * Save-MarkdownHelp -FormatAttribute (#150)
+* Extended Type Formatting - Improving handling of empty directories (#146)
+* Updating HelpOut PSA (#152)
+
+---
+
 ### HelpOut 0.4.8:
 
 * Markdown Help Improvements:
