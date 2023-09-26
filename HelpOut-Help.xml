@@ -2043,6 +2043,24 @@ If not provided, all types of commands from the module will be saved as a markdo
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>FormatAttribute</maml:name>
+          <maml:description>
+            <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+          <dev:type>
+            <maml:name>Psobject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2083,6 +2101,24 @@ Topic files that match this pattern will not be included.</maml:para>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>FormatAttribute</maml:name>
+        <maml:description>
+          <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+        <dev:type>
+          <maml:name>Psobject</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
