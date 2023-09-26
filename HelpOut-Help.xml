@@ -513,9 +513,45 @@ If not provided, this will be the order they are defined in the formatter.</maml
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>FormatAttribute</maml:name>
+          <maml:description>
+            <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+          <dev:type>
+            <maml:name>Psobject</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>FormatAttribute</maml:name>
+        <maml:description>
+          <maml:para>The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Psobject</command:parameterValue>
+        <dev:type>
+          <maml:name>Psobject</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>GitHubDocRoot</maml:name>
         <maml:description>
@@ -640,7 +676,8 @@ If not provided, this will be the order they are defined in the formatter.</maml
         <maml:introduction>
           <maml:para> PS &gt;  </maml:para>
         </maml:introduction>
-        <dev:code> Get-MarkdownHelp Get-Help </dev:code>
+        <dev:code> ##### Getting Markdown Help        
+Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:code>
         <dev:remarks>
         </dev:remarks>
       </command:example>
