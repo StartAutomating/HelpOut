@@ -5,6 +5,10 @@ Parameters:
     Type: System.String
     Aliases: 
     
+  - Name: FormatAttribute
+    Type: System.Management.Automation.PSObject
+    Aliases: 
+    
   - Name: GitHubDocRoot
     Type: System.String
     Aliases: 
@@ -85,10 +89,10 @@ Gets Help for a given command, in Markdown
 
 
 ### Examples
-> EXAMPLE 1
+#### Getting Markdown Help        
 
 ```PowerShell
-Get-MarkdownHelp Get-Help
+Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help
 ```
 
 
@@ -225,6 +229,26 @@ Valid Values:
 
 
 
+#### **FormatAttribute**
+
+The formatting used for unknown attributes.
+Any key or property in this object will be treated as a potential typename
+Any value will be the desired formatting.
+If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+If the value is a [string], it will be expanded
+In either context, `$_` will be the current attribute.
+
+
+
+
+
+
+|Type        |Required|Position|PipelineInput|
+|------------|--------|--------|-------------|
+|`[PSObject]`|false   |named   |false        |
+
+
+
 
 
 ---
@@ -259,7 +283,7 @@ How It Works
 
 
 
- Command Help will be returned as an object We decorate that object with the typename `PowerShell.Markdown.Help`.  Then we attach parameters passed to this command to the help object.  
+ Command Help will be returned as an object We decorate that object with the typename `PowerShell.Markdown.Help`.  $helpObj.pstypenames.clear() Then we attach parameters passed to this command to the help object.  
 * `-Rename` will become `[string] .Rename` 
 * `-SectionOrder` will become `[string[]] .SectionOrder` 
 * `-Wiki`  will become `[bool] .WikiLink` 
@@ -267,8 +291,6 @@ How It Works
 * `-NoValidValueEnumeration` 
 * `-IncludeYamlHeader` 
 * `-NoValidValueEnumeration`
-
-
 
  After we've attached all of the properties, we simply output the object.  PowerShell.Markdown.Help formatter will display it exactly as we'd like it.
 
@@ -278,5 +300,5 @@ How It Works
 
 ### Syntax
 ```PowerShell
-Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [<CommonParameters>]
+Get-MarkdownHelp [[-Name] <String>] [-Wiki] [-GitHubDocRoot <String>] [-Rename <String>] [-SectionOrder <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-FormatAttribute <PSObject>] [<CommonParameters>]
 ```
