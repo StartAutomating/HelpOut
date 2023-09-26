@@ -1,6 +1,18 @@
 ﻿Write-FormatView -TypeName PowerShell.Markdown.Help -Action {
-    $helpObject = $_
+    $helpObject      = $_
     $helpCmd         = $ExecutionContext.SessionState.InvokeCommand.GetCommand($helpObject.Name, 'All')
+    $resolvedHelpCmd =         
+        if ($helpCmd -is [Management.Automation.AliasInfo]) {
+            $resolved = helpCmd.ResolvedCommand 
+            while ($resolved.ResolvedCommand) {
+                $resolved = $resolved.ResolvedCommand 
+            }
+            $resolved 
+        } else {
+            $helpCmd
+        }
+    
+    
     $helpCmdMetadata = [Management.Automation.CommandMetadata]$helpCmd
 
     $MarkdownSections = [Ordered]@{
@@ -20,6 +32,43 @@
             Format-Markdown -HeadingSize 3 -Heading "Description"
             foreach ($desc in $helpObject.Description) {
                 [Environment]::NewLine + $desc.text  + [Environment]::NewLine
+            }
+        }
+        CommandAttribute = {
+            
+            if (-not $helpObject.FormatAttribute) { return }
+            
+            $CmdAttributes = 
+                if ($resolvedHelpCmd.ImplementingType) {
+                    $resolvedHelpCmd.ImplementingType.GetCustomAttributes()
+                } elseif ($resolvedHelpCmd.ScriptBlock) {
+                    $resolvedHelpCmd.ScriptBlock.Attributes
+                }
+                
+            if (-not $CmdAttributes) { return }
+            
+            foreach ($attr in $CmdAttributes) {
+                $attrType = $attr.GetType()
+                $attrFormatting = 
+                    if ($helpObject.FormatAttribute.$($attrType.FullName)) {
+                        $helpObject.FormatAttribute.$($attrType.FullName)
+                    }
+                    elseif ($helpObject.FormatAttribute.$($attrType.Name)) {
+                        $helpObject.FormatAttribute.$($attrType.Name)
+                    }
+                    elseif ($helpObject.FormatAttribute.$($attrType.Name -replace 'Attribute$')) {
+                        $helpObject.FormatAttribute.$($attrType.Name -replace 'Attribute$')
+                    }
+                
+                if (-not $attrFormatting) { continue }
+                
+                $_ = $attr
+                if ($attrFormatting -is [string]) {                    
+                    $ExecutionContext.SessionState.InvokeCommand.ExpandString($attrFormatting)
+                } elseif ($attrFormatting -is [scriptblock]) {
+                    $attrFormatting | Out-Host
+                    & ([ScriptBlock]::Create($attrFormatting))
+                }
             }
         }
         RelatedLinks = {
@@ -116,6 +165,29 @@
                         }
 
                     Format-Markdown -HeadingSize 4 -Heading $parameterDisplayName
+
+                    if ($resolvedHelpCmd -and 
+                        $resolvedHelpCmd.Parameters[$parameter.Name].Attributes) {
+
+                        $paramAttributes = $resolvedHelpCmd.Parameters[$parameter.Name].Attributes
+                        foreach ($attr in $paramAttributes) {
+                            $attrType = $attr.GetType()
+                            $attrFormatting = 
+                                if ($helpObject.FormatAttribute.$($attrType.FullName)) {
+                                    $helpObject.FormatAttribute.$($attrType.FullName)
+                                }
+                                elseif ($helpObject.FormatAttribute.($attrType.Name)) {
+                                    $helpObject.FormatAttribute.($attrType.Name)
+                                }
+                            if (-not $attrFormatting) { continue }
+                            $_ = $attr
+                            if ($attrFormatting -is [string]) {                    
+                                $ExecutionContext.SessionState.InvokeCommand.ExpandString($attrFormatting)
+                            } elseif ($attrFormatting -is [scriptblock]) {
+                                . ([ScriptBlock]::Create($attrFormatting))
+                            }
+                        }
+                    }
 
                     if ($parameter.Name -in 'WhatIf', 'Confirm') {
                         "-$($parameter.Name) " +
