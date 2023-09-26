@@ -131,7 +131,16 @@
     [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('SkipCommandTypes','ExcludeCommandType','ExcludeCommandTypes')]
     [Management.Automation.CommandTypes[]]
-    $SkipCommandType
+    $SkipCommandType,
+
+    # The formatting used for unknown attributes.
+    # Any key or property in this object will be treated as a potential typename
+    # Any value will be the desired formatting.
+    # If the value is a [ScriptBlock], the [ScriptBlock] will be run.
+    # If the value is a [string], it will be expanded
+    # In either context, `$_` will be the current attribute.
+    [PSObject]
+    $FormatAttribute
     )
 
     begin {
