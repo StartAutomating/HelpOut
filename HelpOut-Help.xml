@@ -1113,7 +1113,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1132,6 +1132,19 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
           <command:parameterValue required="false" variableLength="true">Cultureinfo</command:parameterValue>
           <dev:type>
             <maml:name>Cultureinfo</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoComment</maml:name>
+          <maml:description>
+            <maml:para>If set, will remove comments within functions when generating allcommands.ps1</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>
@@ -1232,6 +1245,19 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoComment</maml:name>
+        <maml:description>
+          <maml:para>If set, will remove comments within functions when generating allcommands.ps1</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>NoRecurse</maml:name>
         <maml:description>
           <maml:para>If set, the function roots will not be recursively searched.</maml:para>
@@ -1260,7 +1286,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>NoVersion</maml:name>
         <maml:description>
-          <maml:para>If set, the generate MAML will not contain a version number.  
+          <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
