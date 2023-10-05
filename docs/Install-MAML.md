@@ -237,6 +237,38 @@ If set, will return the files that were generated.
 
 
 
+#### **Minify**
+
+If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|
+
+
+
+#### **MinifierSource**
+
+If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[String]`|false   |named   |true (ByPropertyName)|
+
+
+
 
 
 ---
@@ -258,5 +290,5 @@ If set, will return the files that were generated.
 
 ### Syntax
 ```PowerShell
-Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-NoComment] [-PassThru] [<CommonParameters>]
+Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-NoComment] [-PassThru] [-Minify] [-MinifierSource <String>] [<CommonParameters>]
 ```
