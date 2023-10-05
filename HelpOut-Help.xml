@@ -1608,7 +1608,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1677,7 +1677,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1746,7 +1746,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>NoVersion</maml:name>
         <maml:description>
-          <maml:para>If set, the generate MAML will not contain a version number.  
+          <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
