@@ -1,3 +1,12 @@
+### HelpOut 0.5:
+
+* Install-MAML - Adding -NoComment (#157)
+* Install-MAML - Adding -Minify (#158)
+
+Thanks @potatoqualitee ! 
+
+---
+
 ### HelpOut 0.4.9:
 
 * Supporting custom attribute formatting with -FormatAttribute (#147)
