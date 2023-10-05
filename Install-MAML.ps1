@@ -24,60 +24,66 @@
     [OutputType([Nullable], [IO.FileInfo])]
     param(
     # The name of one or more modules.
-    [Parameter(Mandatory=$true,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Mandatory,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName)]
     [string[]]
     $Module,
     
     # If set, will refresh the documentation for the module before generating the commands file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRefresh,
 
     # If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
    
     # The name of the combined script.  By default, allcommands.ps1.
-    [Parameter(Position=1,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=1,ValueFromPipelineByPropertyName)]
     [string]
     $ScriptName = 'allcommands.ps1',
 
     # The root directories containing functions.  If not provided, the function root will be the module root.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $FunctionRoot,
 
     # If set, the function roots will not be recursively searched.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRecurse,
 
     # The encoding of the combined script.  By default, UTF8.
-    [Parameter(Position=2,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=2,ValueFromPipelineByPropertyName)]
     [ValidateNotNull()]
     [Text.Encoding]
     $Encoding = [Text.Encoding]::UTF8,
 
     # A list of wildcards to exclude.  This list will always contain the ScriptName.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $Exclude,
 
-    # If set, the generate MAML will not contain a version number.  
+    # If set, the generated MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('Unversioned')]
     [switch]
     $NoVersion,
 
     # If provided, will save the MAML to a different directory than the current UI culture.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Globalization.CultureInfo]
     $Culture,
 
+    # If set, will remove comments within functions when generating allcommands.ps1
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoBlockComments','NoBlockComment','NoComments')]
+    [switch]
+    $NoComment,
+
     # If set, will return the files that were generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $PassThru
     )
@@ -155,7 +161,7 @@
             $newFileContent = # We'll assign new file content by
                 foreach ($f in $fileList) { # walking thru each file. 
                     $fCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($f.FullName, 'ExternalScript')
-                    $fileContent = $fCmd.ScriptBlock # and read it as a string.
+                    $fileContent = "$($fCmd.ScriptBlock)" # and read it as a string.
                     $start = 0
                     do { 
                         $matched = $regex.Match($fileContent,$start) # See if we find a functon. 
@@ -170,10 +176,21 @@
                             $start += $insert.Length # and update our starting position.
                         }        
                         # Keep doing this until we've reached the end of the file or the end of the matches.
-                    } while ($start -le $filecontent.Length -and $matched.Success) 
-  
-                    # Then output the file content.
-                    $fileContent
+                    } while ($start -le $filecontent.Length -and $matched.Success)                    
+                                          
+                    # If -NoComment was passed
+                    if ($NoComment) {
+                        # Try replacing the block comments
+                        try {
+                            [Regex]::Replace($fileContent,'\<\#(?<Block>(.|\s)+?(?=\z|\#>))\#\>', '', [Timespan]'00:00:05')
+                        } catch {
+                            # (if it fails, include the content normally)
+                            $fileContent
+                        }                        
+                    } else {
+                        # Then output the file content.
+                        $fileContent
+                    }                    
                 }
             
             # Last but not least, we 
