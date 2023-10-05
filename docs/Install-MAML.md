@@ -29,6 +29,12 @@ Parameters:
     Type: System.String[]
     Aliases: 
     
+  - Name: NoComment
+    Type: System.Management.Automation.SwitchParameter
+    Aliases: 
+    - NoBlockComments
+    - NoBlockComment
+    - NoComments
   - Name: NoRecurse
     Type: System.Management.Automation.SwitchParameter
     Aliases: 
@@ -241,7 +247,7 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 #### **NoVersion**
 
-If set, the generate MAML will not contain a version number.  
+If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
 
 
@@ -267,6 +273,21 @@ If provided, will save the MAML to a different directory than the current UI cul
 |Type           |Required|Position|PipelineInput        |
 |---------------|--------|--------|---------------------|
 |`[CultureInfo]`|false   |named   |true (ByPropertyName)|
+
+
+
+#### **NoComment**
+
+If set, will remove comments within functions when generating allcommands.ps1
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |Aliases                                          |
+|----------|--------|--------|---------------------|-------------------------------------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|NoBlockComments<br/>NoBlockComment<br/>NoComments|
 
 
 
@@ -306,5 +327,5 @@ If set, will return the files that were generated.
 
 ### Syntax
 ```PowerShell
-Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
+Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-NoComment] [-PassThru] [<CommonParameters>]
 ```
