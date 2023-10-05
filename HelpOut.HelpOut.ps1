@@ -10,4 +10,4 @@ Save-MarkdownHelp -PassThru -Module HelpOut # -IncludeYamlHeader
 
 # This will generate the MAML for the module (and output the files changed).
 # MAML loads faster than inline help.
-Install-MAML -Module HelpOut -PassThru -NoComment
+Install-MAML -Module HelpOut -PassThru -NoComment -Minify
