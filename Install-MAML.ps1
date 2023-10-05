@@ -24,62 +24,80 @@
     [OutputType([Nullable], [IO.FileInfo])]
     param(
     # The name of one or more modules.
-    [Parameter(Mandatory=$true,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Mandatory,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName)]
     [string[]]
     $Module,
     
     # If set, will refresh the documentation for the module before generating the commands file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRefresh,
 
     # If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
    
     # The name of the combined script.  By default, allcommands.ps1.
-    [Parameter(Position=1,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=1,ValueFromPipelineByPropertyName)]
     [string]
     $ScriptName = 'allcommands.ps1',
 
     # The root directories containing functions.  If not provided, the function root will be the module root.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $FunctionRoot,
 
     # If set, the function roots will not be recursively searched.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRecurse,
 
     # The encoding of the combined script.  By default, UTF8.
-    [Parameter(Position=2,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=2,ValueFromPipelineByPropertyName)]
     [ValidateNotNull()]
     [Text.Encoding]
     $Encoding = [Text.Encoding]::UTF8,
 
     # A list of wildcards to exclude.  This list will always contain the ScriptName.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $Exclude,
 
-    # If set, the generate MAML will not contain a version number.  
+    # If set, the generated MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('Unversioned')]
     [switch]
     $NoVersion,
 
     # If provided, will save the MAML to a different directory than the current UI culture.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Globalization.CultureInfo]
     $Culture,
 
-    # If set, will return the files that were generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    # If set, will remove comments within functions when generating allcommands.ps1
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoBlockComments','NoBlockComment','NoComments')]
     [switch]
-    $PassThru
+    $NoComment,
+
+    # If set, will return the files that were generated.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $PassThru,
+
+    # If set, will minify the code in allcommands.ps1.
+    # By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).    
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $Minify,
+
+    # If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+    # If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string]
+    $MinifierSource
     )
 
     process {        
@@ -152,10 +170,40 @@
 ', 'MultiLine,IgnoreCase,IgnorePatternWhitespace', '00:00:05')
 
             
+            # If we want to minify
+            $compressScriptBlockCmd = $null
+            if ($Minify) {
+                # check for the minifier
+                $compressScriptBlockCmd = $($executionContext.SessionState.InvokeCommand.GetCommands("Compress-ScriptBlock*", "Function", $true))
+                if (-not $compressScriptBlockCmd) {
+                    if ($MinifierSource -eq 'Gallery') {
+                        $installedPSMinifier = Install-Module -Name PSMinifier -Scope CurrentUser -Force
+                        if ($?) {
+                            Import-Module PSMinifier -Global
+                        }
+                    }
+                    else {
+                        if ($MinifierSource -eq 'GitHub' -or -not $MinifierSource) {
+                            $MinifierSource = "https://raw.githubusercontent.com/StartAutomating/PSMinifier/master/Compress-ScriptBlock.min.ps1"
+                        }
+                        $downloadedMinifier = Invoke-RestMethod -Uri $MinifierSource
+                        . ([scriptblock]::Create($downloadedMinifier))                                
+                    }
+                    $compressScriptBlockCmd = $($executionContext.SessionState.InvokeCommand.GetCommands("Compress-ScriptBlock*", "Function", $true))
+                }
+            }
+
+
             $newFileContent = # We'll assign new file content by
                 foreach ($f in $fileList) { # walking thru each file. 
                     $fCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($f.FullName, 'ExternalScript')
-                    $fileContent = $fCmd.ScriptBlock # and read it as a string.
+                    $fileContent = 
+                        if ($Minify -and $compressScriptBlockCmd) {
+                            & $compressScriptBlockCmd $fCmd.ScriptBlock
+                        } else {
+                            "$($fCmd.ScriptBlock)" # and read it as a string.
+                        }
+                    
                     $start = 0
                     do { 
                         $matched = $regex.Match($fileContent,$start) # See if we find a functon. 
@@ -170,10 +218,22 @@
                             $start += $insert.Length # and update our starting position.
                         }        
                         # Keep doing this until we've reached the end of the file or the end of the matches.
-                    } while ($start -le $filecontent.Length -and $matched.Success) 
-  
-                    # Then output the file content.
-                    $fileContent
+                    } while ($start -le $filecontent.Length -and $matched.Success)                                        
+                                          
+                    # If -NoComment was passed
+                    if ($NoComment) {
+                        # Try replacing the block comments
+                        try {
+                            [Regex]::new('\<\#[\S\s]+?\#\>', 'Multiline,IgnoreCase,IgnorePatternWhitespace', [Timespan]'00:00:05').Replace($fileContent, '')
+                            
+                        } catch {
+                            # (if it fails, include the content normally)
+                            $fileContent
+                        }                        
+                    } else {
+                        # Then output the file content.
+                        $fileContent
+                    }                    
                 }
             
             # Last but not least, we 

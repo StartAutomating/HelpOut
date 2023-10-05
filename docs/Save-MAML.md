@@ -1,33 +1,3 @@
----
-CommandName: Save-MAML
-Parameters: 
-  - Name: Compact
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: Culture
-    Type: System.Globalization.CultureInfo
-    Aliases: 
-    
-  - Name: Module
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: NoVersion
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    - Unversioned
-  - Name: PassThru
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-Synopsis: Saves a Module's MAML
-Description: |
-  
-  Generates a Module's MAML file, and then saves it to the appropriate location.
----
-
-
 Save-MAML
 ---------
 
@@ -130,7 +100,7 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 #### **NoVersion**
 
-If set, the generate MAML will not contain a version number.  
+If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
 
 

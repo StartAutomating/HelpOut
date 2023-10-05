@@ -159,7 +159,7 @@ function Get-ScriptReference
     end {
         $myParams = @{} + $PSBoundParameters
         if (-not $allFiles.Count) { return }
-        $c, $t, $id = 0, $allFiles.Count, $(Get-Random)
+        $c, $t, $id = 0, $allFiles.Count, [Random]::new().Next()
         foreach ($file in $allFiles) {
             $c++ 
             $resolvedFile=  try { $ExecutionContext.SessionState.Path.GetResolvedPSPathFromPSPath($file)} catch { $null }

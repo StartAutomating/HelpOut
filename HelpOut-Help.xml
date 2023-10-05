@@ -8,7 +8,7 @@
       <maml:description>
         <maml:para>Gets MAML help</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.</maml:para>
@@ -400,7 +400,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Gets Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets Help for a given command, in Markdown</maml:para>
@@ -703,7 +703,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Gets a script's references</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.</maml:para>
@@ -829,7 +829,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Gets a Script's story</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the Script's "Story"</maml:para>
@@ -992,7 +992,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Installs MAML into a module</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Installs MAML into a module.  </maml:para>
@@ -1113,7 +1113,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1138,6 +1138,19 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoComment</maml:name>
+          <maml:description>
+            <maml:para>If set, will remove comments within functions when generating allcommands.ps1</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>PassThru</maml:name>
           <maml:description>
             <maml:para>If set, will return the files that were generated.</maml:para>
@@ -1145,6 +1158,34 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
           <dev:type>
             <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Minify</maml:name>
+          <maml:description>
+            <maml:para>If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>MinifierSource</maml:name>
+          <maml:description>
+            <maml:para>If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>
@@ -1219,6 +1260,34 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>MinifierSource</maml:name>
+        <maml:description>
+          <maml:para>If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Minify</maml:name>
+        <maml:description>
+          <maml:para>If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Module</maml:name>
         <maml:description>
           <maml:para>The name of one or more modules.</maml:para>
@@ -1226,6 +1295,19 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoComment</maml:name>
+        <maml:description>
+          <maml:para>If set, will remove comments within functions when generating allcommands.ps1</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
@@ -1260,7 +1342,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>NoVersion</maml:name>
         <maml:description>
-          <maml:para>If set, the generate MAML will not contain a version number.  
+          <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1346,7 +1428,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Determines the percentage of documentation</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Determines the percentage of documentation in a given script</maml:para>
@@ -1489,7 +1571,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's MAML</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Generates a Module's MAML file, and then saves it to the appropriate location.</maml:para>
@@ -1526,7 +1608,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1595,7 +1677,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
           <maml:name>NoVersion</maml:name>
           <maml:description>
-            <maml:para>If set, the generate MAML will not contain a version number.  
+            <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
           </maml:description>
           <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1664,7 +1746,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>NoVersion</maml:name>
         <maml:description>
-          <maml:para>If set, the generate MAML will not contain a version number.  
+          <maml:para>If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
@@ -1750,7 +1832,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.4.9</dev:version>
+      <dev:version>0.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Get markdown help for each command in a module and saves it to the appropriate location.</maml:para>

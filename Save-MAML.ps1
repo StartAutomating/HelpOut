@@ -18,21 +18,21 @@
     [OutputType([Nullable], [IO.FileInfo])]
     param( 
     # The name of one or more modules.
-    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName)]
     [string[]]
     $Module,
 
     # If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
     
     # If provided, will save the MAML to a different directory than the current UI culture.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Globalization.CultureInfo]
     $Culture,
 
-    # If set, the generate MAML will not contain a version number.  
+    # If set, the generated MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
     [Alias('Unversioned')]
     [switch]

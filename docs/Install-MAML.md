@@ -1,66 +1,3 @@
----
-CommandName: Install-MAML
-Parameters: 
-  - Name: Encoding
-    Type: System.Text.Encoding
-    Aliases: 
-    
-  - Name: ScriptName
-    Type: System.String
-    Aliases: 
-    
-  - Name: Module
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: Compact
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: Culture
-    Type: System.Globalization.CultureInfo
-    Aliases: 
-    
-  - Name: Exclude
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: FunctionRoot
-    Type: System.String[]
-    Aliases: 
-    
-  - Name: NoRecurse
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: NoRefresh
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-  - Name: NoVersion
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    - Unversioned
-  - Name: PassThru
-    Type: System.Management.Automation.SwitchParameter
-    Aliases: 
-    
-Synopsis: Installs MAML into a module
-Description: |
-  
-  Installs MAML into a module.  
-  
-  This generates a single script that: 
-  * Includes all commands
-  * Removes their multiline comments
-  * Directs the commands to use external help
-  
-  You should then include this script in your module import.
-  
-  Ideally, you should use the allcommands script
----
-
-
 Install-MAML
 ------------
 
@@ -241,7 +178,7 @@ A list of wildcards to exclude.  This list will always contain the ScriptName.
 
 #### **NoVersion**
 
-If set, the generate MAML will not contain a version number.  
+If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
 
 
@@ -270,6 +207,21 @@ If provided, will save the MAML to a different directory than the current UI cul
 
 
 
+#### **NoComment**
+
+If set, will remove comments within functions when generating allcommands.ps1
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |Aliases                                          |
+|----------|--------|--------|---------------------|-------------------------------------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|NoBlockComments<br/>NoBlockComment<br/>NoComments|
+
+
+
 #### **PassThru**
 
 If set, will return the files that were generated.
@@ -282,6 +234,38 @@ If set, will return the files that were generated.
 |Type      |Required|Position|PipelineInput        |
 |----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
+
+
+
+#### **Minify**
+
+If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|
+
+
+
+#### **MinifierSource**
+
+If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).
+
+
+
+
+
+
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[String]`|false   |named   |true (ByPropertyName)|
 
 
 
@@ -306,5 +290,5 @@ If set, will return the files that were generated.
 
 ### Syntax
 ```PowerShell
-Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-PassThru] [<CommonParameters>]
+Install-MAML [-Module] <String[]> [-NoRefresh] [-Compact] [[-ScriptName] <String>] [-FunctionRoot <String[]>] [-NoRecurse] [[-Encoding] <Encoding>] [-Exclude <String[]>] [-NoVersion] [-Culture <CultureInfo>] [-NoComment] [-PassThru] [-Minify] [-MinifierSource <String>] [<CommonParameters>]
 ```

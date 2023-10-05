@@ -3,33 +3,7 @@
 #.ExternalHelp HelpOut-Help.xml
 function Get-MAML
 {
-    <#
-    .Synopsis
-        Gets MAML help
-    .Description
-        Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.
-    .Example
-        Get-MAML -Name Get-MAML
-    .Example
-        Get-Command Get-MAML | Get-MAML
-    .Example
-        Get-MAML -Name Get-MAML -Compact
-    .Example
-        Get-MAML -Name Get-MAML -XML
-    .Link
-        Get-Help
-    .Link
-        Save-MAML
-    .INPUTS 
-        [Management.Automation.CommandInfo]
-        Accepts a command
-    .Outputs
-        [String]
-        The MAML, as a String.  This is the default.
-    .Outputs
-        [Xml]
-        The MAML, as an XmlDocument (when -XML is passed in)
-    #>
+    
     [CmdletBinding(DefaultParameterSetName='CommandInfo')]
     [OutputType([string],[xml])]
     [Alias('ConvertTo-MAML')]
@@ -402,23 +376,7 @@ function Get-MAML
 } 
 #.ExternalHelp HelpOut-Help.xml
 function Get-MarkdownHelp {
-    <#
-    .SYNOPSIS
-        Gets Markdown Help
-    .DESCRIPTION
-        Gets Help for a given command, in Markdown
-    .EXAMPLE
-        ##### Getting Markdown Help        
-        Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help
-    .LINK
-        Save-MarkdownHelp
-    .LINK
-        Get-Help
-    .OUTPUTS
-        [string]
-
-        The documentation for a single command, in Markdown.
-    #>
+    
     [Reflection.AssemblyMetadata("HelpOut.TellStory", $true)]
     [Reflection.AssemblyMetadata("HelpOut.Story.Process", "For each Command")]
     [OutputType('PowerShell.Markdown.Help')]
@@ -557,14 +515,7 @@ function Get-MarkdownHelp {
  #requires -version 3.0
 function Get-ScriptReference
 {
-    <#
-    .Synopsis
-        Gets a script's references
-    .Description
-        Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.
-    .Example
-        Get-Command Get-ScriptReference | Get-ScriptReference
-    #>
+    
     [CmdletBinding(DefaultParameterSetName='FilePath')]
     param(
     # The path to a file
@@ -715,7 +666,7 @@ function Get-ScriptReference
     end {
         $myParams = @{} + $PSBoundParameters
         if (-not $allFiles.Count) { return }
-        $c, $t, $id = 0, $allFiles.Count, $(Get-Random)
+        $c, $t, $id = 0, $allFiles.Count, [Random]::new().Next()
         foreach ($file in $allFiles) {
             $c++ 
             $resolvedFile=  try { $ExecutionContext.SessionState.Path.GetResolvedPSPathFromPSPath($file)} catch { $null }
@@ -745,18 +696,7 @@ function Get-ScriptReference
 #.ExternalHelp HelpOut-Help.xml
 function Get-ScriptStory
 {
-    <#
-    .Synopsis
-        Gets a Script's story
-    .Description
-        Gets the Script's "Story"
-
-        Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
-    .Example
-        Get-Command Get-ScriptStory | Get-ScriptStory
-    .Notes
-        
-    #>
+    
     [CmdletBinding(DefaultParameterSetName='ScriptBlock')]
     param(
     # A script block
@@ -994,86 +934,84 @@ function Get-ScriptStory
 #.ExternalHelp HelpOut-Help.xml
 function Install-MAML
 {
-    <#
-    .Synopsis
-        Installs MAML into a module
-    .Description
-        Installs MAML into a module.  
-        
-        This generates a single script that: 
-        * Includes all commands
-        * Removes their multiline comments
-        * Directs the commands to use external help
-        
-        You should then include this script in your module import.
-
-        Ideally, you should use the allcommands script 
-    .Example
-        Install-MAML -Module HelpOut
-    .Link
-        Save-MAML
-    .Link
-        ConvertTo-MAML
-    #>
+    
     [OutputType([Nullable], [IO.FileInfo])]
     param(
     # The name of one or more modules.
-    [Parameter(Mandatory=$true,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Mandatory,Position=0,ParameterSetName='Module',ValueFromPipelineByPropertyName)]
     [string[]]
     $Module,
     
     # If set, will refresh the documentation for the module before generating the commands file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRefresh,
 
     # If set, will compact the generated MAML.  This will be ignored if -Refresh is not passed, since no new MAML will be generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
    
     # The name of the combined script.  By default, allcommands.ps1.
-    [Parameter(Position=1,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=1,ValueFromPipelineByPropertyName)]
     [string]
     $ScriptName = 'allcommands.ps1',
 
     # The root directories containing functions.  If not provided, the function root will be the module root.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $FunctionRoot,
 
     # If set, the function roots will not be recursively searched.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $NoRecurse,
 
     # The encoding of the combined script.  By default, UTF8.
-    [Parameter(Position=2,ValueFromPipelineByPropertyName=$true)]
+    [Parameter(Position=2,ValueFromPipelineByPropertyName)]
     [ValidateNotNull()]
     [Text.Encoding]
     $Encoding = [Text.Encoding]::UTF8,
 
     # A list of wildcards to exclude.  This list will always contain the ScriptName.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $Exclude,
 
-    # If set, the generate MAML will not contain a version number.  
+    # If set, the generated MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('Unversioned')]
     [switch]
     $NoVersion,
 
     # If provided, will save the MAML to a different directory than the current UI culture.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Globalization.CultureInfo]
     $Culture,
 
-    # If set, will return the files that were generated.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    # If set, will remove comments within functions when generating allcommands.ps1
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('NoBlockComments','NoBlockComment','NoComments')]
     [switch]
-    $PassThru
+    $NoComment,
+
+    # If set, will return the files that were generated.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $PassThru,
+
+    # If set, will minify the code in allcommands.ps1.
+    # By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).    
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [switch]
+    $Minify,
+
+    # If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+    # If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [string]
+    $MinifierSource
     )
 
     process {        
@@ -1146,10 +1084,40 @@ function Install-MAML
 ', 'MultiLine,IgnoreCase,IgnorePatternWhitespace', '00:00:05')
 
             
+            # If we want to minify
+            $compressScriptBlockCmd = $null
+            if ($Minify) {
+                # check for the minifier
+                $compressScriptBlockCmd = $($executionContext.SessionState.InvokeCommand.GetCommands("Compress-ScriptBlock*", "Function", $true))
+                if (-not $compressScriptBlockCmd) {
+                    if ($MinifierSource -eq 'Gallery') {
+                        $installedPSMinifier = Install-Module -Name PSMinifier -Scope CurrentUser -Force
+                        if ($?) {
+                            Import-Module PSMinifier -Global
+                        }
+                    }
+                    else {
+                        if ($MinifierSource -eq 'GitHub' -or -not $MinifierSource) {
+                            $MinifierSource = "https://raw.githubusercontent.com/StartAutomating/PSMinifier/master/Compress-ScriptBlock.min.ps1"
+                        }
+                        $downloadedMinifier = Invoke-RestMethod -Uri $MinifierSource
+                        . ([scriptblock]::Create($downloadedMinifier))                                
+                    }
+                    $compressScriptBlockCmd = $($executionContext.SessionState.InvokeCommand.GetCommands("Compress-ScriptBlock*", "Function", $true))
+                }
+            }
+
+
             $newFileContent = # We'll assign new file content by
                 foreach ($f in $fileList) { # walking thru each file. 
                     $fCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand($f.FullName, 'ExternalScript')
-                    $fileContent = $fCmd.ScriptBlock # and read it as a string.
+                    $fileContent = 
+                        if ($Minify -and $compressScriptBlockCmd) {
+                            & $compressScriptBlockCmd $fCmd.ScriptBlock
+                        } else {
+                            "$($fCmd.ScriptBlock)" # and read it as a string.
+                        }
+                    
                     $start = 0
                     do { 
                         $matched = $regex.Match($fileContent,$start) # See if we find a functon. 
@@ -1164,10 +1132,22 @@ function Install-MAML
                             $start += $insert.Length # and update our starting position.
                         }        
                         # Keep doing this until we've reached the end of the file or the end of the matches.
-                    } while ($start -le $filecontent.Length -and $matched.Success) 
-  
-                    # Then output the file content.
-                    $fileContent
+                    } while ($start -le $filecontent.Length -and $matched.Success)                                        
+                                          
+                    # If -NoComment was passed
+                    if ($NoComment) {
+                        # Try replacing the block comments
+                        try {
+                            [Regex]::new('\<\#[\S\s]+?\#\>', 'Multiline,IgnoreCase,IgnorePatternWhitespace', [Timespan]'00:00:05').Replace($fileContent, '')
+                            
+                        } catch {
+                            # (if it fails, include the content normally)
+                            $fileContent
+                        }                        
+                    } else {
+                        # Then output the file content.
+                        $fileContent
+                    }                    
                 }
             
             # Last but not least, we 
@@ -1187,25 +1167,7 @@ function Install-MAML
 #.ExternalHelp HelpOut-Help.xml
 function Measure-Help
 {
-    <#
-    .Synopsis
-        Determines the percentage of documentation
-    .Description
-        Determines the percentage of documentation in a given script
-    .Example
-        dir -Filter *.ps1 | Measure-Help 
-    .EXAMPLE
-        Get-Command -Module HelpOut | Measure-Help
-    .Example
-        Measure-Help {
-            # This script has some documentation, and then a bunch of code that literally does nothing
-            $null = $null # The null equivilancy 
-            $null * 500 # x times nothing is still nothing
-            $null / 100 # Nothing out of 100             
-        } | Select-Object -ExpandProperty PercentageDocumented
-    .LINK
-        Get-Help
-    #>    
+        
     [CmdletBinding(DefaultParameterSetName='FilePath')]
     param(
     # The path to the file
@@ -1324,39 +1286,26 @@ function Measure-Help
 #.ExternalHelp HelpOut-Help.xml
 function Save-MAML
 {
-    <#
-    .Synopsis
-        Saves a Module's MAML
-    .Description
-        Generates a Module's MAML file, and then saves it to the appropriate location.
-    .Link
-        Get-MAML
-    .Example
-        Save-Maml -Module HelpOut
-    .Example
-        Save-Maml -Module HelpOut -WhatIf
-    .Example
-        Save-Maml -Module HelpOut -PassThru
-    #>
+    
     [CmdletBinding(DefaultParameterSetName='CommandInfo',SupportsShouldProcess=$true)]
     [OutputType([Nullable], [IO.FileInfo])]
     param( 
     # The name of one or more modules.
-    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName)]
     [string[]]
     $Module,
 
     # If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
     
     # If provided, will save the MAML to a different directory than the current UI culture.
-    [Parameter(ValueFromPipelineByPropertyName=$true)]
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Globalization.CultureInfo]
     $Culture,
 
-    # If set, the generate MAML will not contain a version number.  
+    # If set, the generated MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
     [Alias('Unversioned')]
     [switch]
@@ -1432,18 +1381,7 @@ function Save-MAML
 #.ExternalHelp HelpOut-Help.xml
 function Save-MarkdownHelp
 {
-    <#
-    .Synopsis
-        Saves a Module's Markdown Help
-    .Description
-        Get markdown help for each command in a module and saves it to the appropriate location.
-    .Link
-        Get-MarkdownHelp
-    .Example
-        Save-MarkdownHelp -Module HelpOut  # Save Markdown to HelpOut/docs
-    .Example
-        Save-MarkdownHelp -Module HelpOut -Wiki # Save Markdown to ../HelpOut.wiki
-    #>
+    
     param(
     # The name of one or more modules.
     [Parameter(ParameterSetName='ByModule',ValueFromPipelineByPropertyName)]
