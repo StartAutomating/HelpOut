@@ -1,21 +1,3 @@
----
-CommandName: PowerShell.Markdown.Help.Save
-Parameters: 
-  - Name: View
-    Type: System.String
-    Aliases: 
-    
-  - Name: FilePath
-    Type: System.String
-    Aliases: 
-    
-Synopsis: Saves a Markdown Help Topic
-Description: |
-  
-  Saves a Markdown Help Topic to a file.
----
-
-
 PowerShell.Markdown.Help.Save()
 -------------------------------
 
