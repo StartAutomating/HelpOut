@@ -1,18 +1,3 @@
----
-CommandName: PowerShell.Markdown.Help.HideSection
-Parameters: 
-  - Name: SectionNames
-    Type: System.String[]
-    Aliases: 
-    - SectionName
-
-Synopsis: Hides sections of markdown help
-Description: |
-  
-  Hides sections of a command's markdown help.
----
-
-
 PowerShell.Markdown.Help.HideSection()
 --------------------------------------
 
