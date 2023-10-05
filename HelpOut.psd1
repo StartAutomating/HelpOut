@@ -7,7 +7,7 @@
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
     TypesToProcess='HelpOut.types.ps1xml'
-    ModuleVersion='0.4.9'
+    ModuleVersion='0.5'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -15,18 +15,18 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
-### HelpOut 0.4.9:
+### HelpOut 0.5:
 
-* Supporting custom attribute formatting with -FormatAttribute (#147)
-  * Markdown Formatter - Honoring .FormatAttribute (#148)
-  * Get-MarkdownHelp -FormatAttribute (#149)
-  * Save-MarkdownHelp -FormatAttribute (#150)
-* Extended Type Formatting - Improving handling of empty directories (#146)
-* Updating HelpOut PSA (#152)
+* Install-MAML - Adding -NoComment (#157)
+* Install-MAML - Adding -Minify (#158)
+
+Thanks @potatoqualitee ! 
 
 ---
 
 Additional Changes in [Changelog](/CHANGELOG.md)
+Like It?  Start It.  Love It?  Support It.
+
 '@
         }
     }
