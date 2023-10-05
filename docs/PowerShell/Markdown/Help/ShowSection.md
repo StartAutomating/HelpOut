@@ -1,18 +1,3 @@
----
-CommandName: PowerShell.Markdown.Help.ShowSection
-Parameters: 
-  - Name: SectionNames
-    Type: System.String[]
-    Aliases: 
-    - SectionName
-
-Synopsis: Shows sections of markdown help
-Description: |
-  
-  Shows sections of a command's markdown help.
----
-
-
 PowerShell.Markdown.Help.ShowSection()
 --------------------------------------
 
