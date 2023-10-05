@@ -182,7 +182,8 @@
                     if ($NoComment) {
                         # Try replacing the block comments
                         try {
-                            [Regex]::Replace($fileContent,'\<\#(?<Block>(.|\s)+?(?=\z|\#>))\#\>', '', [Timespan]'00:00:05')
+                            [Regex]::new('\<\#[\S\s]+?\#\>', 'Multiline,IgnoreCase,IgnorePatternWhitespace', [Timespan]'00:00:05').Replace($fileContent, '')
+                            
                         } catch {
                             # (if it fails, include the content normally)
                             $fileContent
