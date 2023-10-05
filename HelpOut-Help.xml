@@ -1163,6 +1163,34 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>Minify</maml:name>
+          <maml:description>
+            <maml:para>If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>MinifierSource</maml:name>
+          <maml:description>
+            <maml:para>If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1226,6 +1254,34 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>MinifierSource</maml:name>
+        <maml:description>
+          <maml:para>If -MinifierSource is like `*Gallery*`, it will use the PowerShell Gallery to download.
+If -MinifierSource is an alternate URL, it will download the contents of that URL (it must define a function named Compress-ScriptBlock).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>Minify</maml:name>
+        <maml:description>
+          <maml:para>If set, will minify the code in allcommands.ps1.
+By default, this will stream down the latest version of [PSMinifier](https://github.com/StartAutomating/PSMinifier).</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
