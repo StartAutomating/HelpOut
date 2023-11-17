@@ -1,25 +1,16 @@
 PowerShell.Markdown.Help.HideSection()
 --------------------------------------
 
-
-
-
 ### Synopsis
 Hides sections of markdown help
 
-
-
 ---
-
 
 ### Description
 
 Hides sections of a command's markdown help.
 
-
-
 ---
-
 
 ### Parameters
 #### **SectionNames**
@@ -38,16 +29,8 @@ Valid Values:
 * Story
 * Syntax
 
-
-
-
-
-
 |Type        |Required|Position|PipelineInput|Aliases    |
 |------------|--------|--------|-------------|-----------|
 |`[String[]]`|false   |1       |false        |SectionName|
-
-
-
 
 ---
