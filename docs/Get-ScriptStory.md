@@ -36,11 +36,7 @@ Get-Command Get-ScriptStory | Get-ScriptStory
 
 ### Parameters
 #### **ScriptBlock**
-
 A script block
-
-
-
 
 
 
@@ -49,13 +45,8 @@ A script block
 |`[ScriptBlock]`|true    |1       |true (ByValue)|
 
 
-
 #### **Text**
-
 A block of text
-
-
-
 
 
 
@@ -64,20 +55,14 @@ A block of text
 |`[String]`|true    |1       |true (ByValue, ByPropertyName)|ScriptContents<br/>Definition|
 
 
-
 #### **RegionName**
-
 The friendly names of code regions or begin,process, or end blocks.
-
-
-
 
 
 
 |Type           |Required|Position|PipelineInput|
 |---------------|--------|--------|-------------|
 |`[IDictionary]`|false   |named   |false        |
-
 
 
 #### **HeadingSize**
@@ -88,7 +73,6 @@ The friendly names of code regions or begin,process, or end blocks.
 |Type     |Required|Position|PipelineInput|
 |---------|--------|--------|-------------|
 |`[Int32]`|false   |named   |false        |
-
 
 
 
