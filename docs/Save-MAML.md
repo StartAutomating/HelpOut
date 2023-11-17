@@ -54,11 +54,7 @@ Save-Maml -Module HelpOut -PassThru
 
 ### Parameters
 #### **Module**
-
 The name of one or more modules.
-
-
-
 
 
 
@@ -67,13 +63,8 @@ The name of one or more modules.
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **Compact**
-
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
-
-
-
 
 
 
@@ -82,13 +73,8 @@ If set, the generated MAML will be compact (no extra whitespace or indentation).
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **Culture**
-
 If provided, will save the MAML to a different directory than the current UI culture.
-
-
-
 
 
 
@@ -97,14 +83,9 @@ If provided, will save the MAML to a different directory than the current UI cul
 |`[CultureInfo]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **NoVersion**
-
 If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-
-
-
 
 
 
@@ -113,20 +94,14 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 |`[Switch]`|false   |named   |false        |Unversioned|
 
 
-
 #### **PassThru**
-
 If set, will return the files that were generated.
-
-
-
 
 
 
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
-
 
 
 #### **WhatIf**
