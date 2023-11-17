@@ -23,11 +23,7 @@ Hides sections of a command's markdown help.
 
 ### Parameters
 #### **SectionNames**
-
 One or more section names.
-
-
-
 Valid Values:
 
 * Name
@@ -50,7 +46,6 @@ Valid Values:
 |Type        |Required|Position|PipelineInput|Aliases    |
 |------------|--------|--------|-------------|-----------|
 |`[String[]]`|false   |1       |false        |SectionName|
-
 
 
 
