@@ -48,11 +48,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help
 
 ### Parameters
 #### **Name**
-
 The name of the specified command or concept.
-
-
-
 
 
 
@@ -61,13 +57,8 @@ The name of the specified command or concept.
 |`[String]`|false   |1       |true (ByPropertyName)|
 
 
-
 #### **Wiki**
-
 If set, will generate a markdown wiki.  Links will be relative to the current path, and will not include the .md extensions
-
-
-
 
 
 
@@ -76,13 +67,8 @@ If set, will generate a markdown wiki.  Links will be relative to the current pa
 |`[Switch]`|false   |named   |false        |
 
 
-
 #### **GitHubDocRoot**
-
 If set, will interlink documentation as if it were for GitHub pages, beneath a given directory
-
-
-
 
 
 
@@ -91,13 +77,8 @@ If set, will interlink documentation as if it were for GitHub pages, beneath a g
 |`[String]`|false   |named   |false        |GitHubPageRoot|
 
 
-
 #### **Rename**
-
 If provided, will rename the help topic before getting markdown.
-
-
-
 
 
 
@@ -106,14 +87,9 @@ If provided, will rename the help topic before getting markdown.
 |`[String]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **SectionOrder**
-
 The order of the sections.
 If not provided, this will be the order they are defined in the formatter.
-
-
-
 
 
 
@@ -122,13 +98,8 @@ If not provided, this will be the order they are defined in the formatter.
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **NoValidValueEnumeration**
-
 If set, will not enumerate valid values and enums of parameters.
-
-
-
 
 
 
@@ -137,13 +108,8 @@ If set, will not enumerate valid values and enums of parameters.
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **IncludeYamlHeader**
-
 If set, will not attach a YAML header to the generated help.
-
-
-
 
 
 
@@ -152,13 +118,8 @@ If set, will not attach a YAML header to the generated help.
 |`[Switch]`|false   |named   |true (ByPropertyName)|IncludeFrontMatter<br/>IncludeHeader|
 
 
-
 #### **YamlHeaderInformationType**
-
 The type of information to include in the YAML Header
-
-
-
 Valid Values:
 
 * Command
@@ -175,9 +136,7 @@ Valid Values:
 |`[String[]]`|false   |named   |false        |YamlHeaderInfoType|
 
 
-
 #### **FormatAttribute**
-
 The formatting used for unknown attributes.
 Any key or property in this object will be treated as a potential typename
 Any value will be the desired formatting.
@@ -187,13 +146,9 @@ In either context, `$_` will be the current attribute.
 
 
 
-
-
-
 |Type        |Required|Position|PipelineInput|
 |------------|--------|--------|-------------|
 |`[PSObject]`|false   |named   |false        |
-
 
 
 
