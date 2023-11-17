@@ -34,11 +34,7 @@ Get-Command Get-ScriptReference | Get-ScriptReference
 
 ### Parameters
 #### **FilePath**
-
 The path to a file
-
-
-
 
 
 
@@ -47,13 +43,8 @@ The path to a file
 |`[String[]]`|true    |1       |true (ByPropertyName)|Fullname|
 
 
-
 #### **ScriptBlock**
-
 One or more PowerShell ScriptBlocks
-
-
-
 
 
 
@@ -62,20 +53,14 @@ One or more PowerShell ScriptBlocks
 |`[ScriptBlock[]]`|true    |1       |true (ByValue, ByPropertyName)|Definition|
 
 
-
 #### **Recurse**
-
 If set, will recursively find references.
-
-
-
 
 
 
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
-
 
 
 
