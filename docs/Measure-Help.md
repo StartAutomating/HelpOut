@@ -59,11 +59,7 @@ Measure-Help {
 
 ### Parameters
 #### **FilePath**
-
 The path to the file
-
-
-
 
 
 
@@ -72,13 +68,8 @@ The path to the file
 |`[String]`|true    |1       |true (ByPropertyName)|Fullname|
 
 
-
 #### **ScriptBlock**
-
 A PowerShell script block
-
-
-
 
 
 
@@ -87,20 +78,14 @@ A PowerShell script block
 |`[ScriptBlock]`|true    |named   |true (ByPropertyName)|
 
 
-
 #### **Name**
-
 The name of the script being measured.
-
-
-
 
 
 
 |Type      |Required|Position|PipelineInput        |
 |----------|--------|--------|---------------------|
 |`[String]`|false   |named   |true (ByPropertyName)|
-
 
 
 
