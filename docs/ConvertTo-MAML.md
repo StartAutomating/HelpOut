@@ -63,11 +63,7 @@ Get-MAML -Name Get-MAML -XML
 
 ### Parameters
 #### **Name**
-
 The name of or more commands.
-
-
-
 
 
 
@@ -76,13 +72,8 @@ The name of or more commands.
 |`[String[]]`|false   |1       |true (ByPropertyName)|
 
 
-
 #### **Module**
-
 The name of one or more modules.
-
-
-
 
 
 
@@ -91,13 +82,8 @@ The name of one or more modules.
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
 
-
 #### **CommandInfo**
-
 The CommandInfo object (returned from Get-Command).
-
-
-
 
 
 
@@ -106,51 +92,35 @@ The CommandInfo object (returned from Get-Command).
 |`[CommandInfo[]]`|true    |named   |true (ByValue)|
 
 
-
 #### **Compact**
-
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
 
 
 
-
-
-
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
 
 
-
 #### **XML**
-
 If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.
 
 
 
-
-
-
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
 
 
-
 #### **NoVersion**
-
 If set, the generate MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-
-
-
 
 
 
 |Type      |Required|Position|PipelineInput|Aliases    |
 |----------|--------|--------|-------------|-----------|
 |`[Switch]`|false   |named   |false        |Unversioned|
-
 
 
 
