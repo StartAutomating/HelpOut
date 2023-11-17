@@ -7,7 +7,7 @@
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
     TypesToProcess='HelpOut.types.ps1xml'
-    ModuleVersion='0.5'
+    ModuleVersion='0.5.1'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -15,12 +15,12 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
-### HelpOut 0.5:
+### HelpOut 0.5.1:
 
-* Install-MAML - Adding -NoComment (#157)
-* Install-MAML - Adding -Minify (#158)
+* Save-MarkdownHelp - -OutputPath now handles relative paths (#159)
+* Markdown Help Formatting - Trimming Whitespace (#161) (rendering should be unchanged)
 
-Thanks @potatoqualitee ! 
+Thanks @PrzemyslawKlys ! 
 
 ---
 

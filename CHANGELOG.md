@@ -1,3 +1,12 @@
+### HelpOut 0.5.1:
+
+* Save-MarkdownHelp - -OutputPath now handles relative paths (#159)
+* Markdown Help Formatting - Trimming Whitespace (#161) (rendering should be unchanged)
+
+Thanks @PrzemyslawKlys ! 
+
+---
+
 ### HelpOut 0.5:
 
 * Install-MAML - Adding -NoComment (#157)
