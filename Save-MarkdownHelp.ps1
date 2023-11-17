@@ -203,6 +203,9 @@
                     } else {
                         Join-Path $theModuleRoot "docs" # Otherwise, it's the docs subdirectory.
                     }
+            } else { 
+                # If -OutputPath was provided, we want to make sure it becomes an absolute path
+                $OutputPath = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputPath)
             }
 
             # If the -OutputPath does not exist

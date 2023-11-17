@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-16"?>
-<!-- Generated with EZOut 2.0.1: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
+<!-- Generated with EZOut 2.0.3: Install-Module EZOut or https://github.com/StartAutomating/EZOut -->
 <Configuration>
   <ViewDefinitions>
     <View>
@@ -321,7 +321,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     }
 
                     $descriptionLines = @($parameter.description | Out-String -Width 1mb) -split '(?&gt;\r\n|\n)'
-                    $descriptionLines -replace '^-\s', '* ' -join [Environment]::NewLine
+                    $descriptionLines -replace '^-\s', '* ' -ne '' -join [Environment]::NewLine
 
                     if (-not $helpObject.NoValidValueEnumeration -and $helpCmd -and $helpCmd.Parameters.($parameter.Name)) {
                         $parameterMetadata = $helpCmd.Parameters[$parameter.Name]
@@ -357,7 +357,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
                     &amp; ${HelpOut_Format-Markdown} -MarkdownTable -InputObject ([PSCustomObject]$parameterTableInfo)
 
-                    [Environment]::NewLine * 2
+                    [Environment]::NewLine
                 }
             }
         }
@@ -547,16 +547,20 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     &amp; $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '^[\r\n]') {
+                    [Environment]::NewLine    
+                }
                 $sectionContent
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '[\r\n]$') {
+                    [Environment]::NewLine
+                }                
                 if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') {
                     '---'
                 }
             }
         }
 
-    ) -join [Environment]::NewLine).Trim()
+    ) -join [Environment]::NewLine -replace "(?&gt;\r\n|\n){3,}", ([Environment]::NewLine * 2)).Trim()
 </ScriptBlock>
               </ExpressionBinding>
             </CustomItem>

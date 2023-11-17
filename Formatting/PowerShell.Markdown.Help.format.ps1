@@ -208,7 +208,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     }
 
                     $descriptionLines = @($parameter.description | Out-String -Width 1mb) -split '(?>\r\n|\n)'
-                    $descriptionLines -replace '^-\s', '* ' -join [Environment]::NewLine
+                    $descriptionLines -replace '^-\s', '* ' -ne '' -join [Environment]::NewLine
 
                     if (-not $helpObject.NoValidValueEnumeration -and $helpCmd -and $helpCmd.Parameters.($parameter.Name)) {
                         $parameterMetadata = $helpCmd.Parameters[$parameter.Name]
@@ -244,7 +244,7 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
                     Format-Markdown -MarkdownTable -InputObject ([PSCustomObject]$parameterTableInfo)
 
-                    [Environment]::NewLine * 2
+                    [Environment]::NewLine
                 }
             }
         }
@@ -434,14 +434,18 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     & $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '^[\r\n]') {
+                    [Environment]::NewLine    
+                }
                 $sectionContent
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '[\r\n]$') {
+                    [Environment]::NewLine
+                }                
                 if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') {
                     '---'
                 }
             }
         }
 
-    ) -join [Environment]::NewLine).Trim()
+    ) -join [Environment]::NewLine -replace "(?>\r\n|\n){3,}", ([Environment]::NewLine * 2)).Trim()
 }

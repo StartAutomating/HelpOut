@@ -1,16 +1,10 @@
 Get-ScriptStory
 ---------------
 
-
-
-
 ### Synopsis
 Gets a Script's story
 
-
-
 ---
-
 
 ### Description
 
@@ -18,10 +12,7 @@ Gets the Script's "Story"
 
 Script Stories are a simple markdown summary of all single-line comments within a script (aside from those in the param block).
 
-
-
 ---
-
 
 ### Examples
 > EXAMPLE 1
@@ -30,71 +21,37 @@ Script Stories are a simple markdown summary of all single-line comments within 
 Get-Command Get-ScriptStory | Get-ScriptStory
 ```
 
-
 ---
-
 
 ### Parameters
 #### **ScriptBlock**
-
 A script block
-
-
-
-
-
 
 |Type           |Required|Position|PipelineInput |
 |---------------|--------|--------|--------------|
 |`[ScriptBlock]`|true    |1       |true (ByValue)|
 
-
-
 #### **Text**
-
 A block of text
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput                 |Aliases                      |
 |----------|--------|--------|------------------------------|-----------------------------|
 |`[String]`|true    |1       |true (ByValue, ByPropertyName)|ScriptContents<br/>Definition|
 
-
-
 #### **RegionName**
-
 The friendly names of code regions or begin,process, or end blocks.
-
-
-
-
-
 
 |Type           |Required|Position|PipelineInput|
 |---------------|--------|--------|-------------|
 |`[IDictionary]`|false   |named   |false        |
 
-
-
 #### **HeadingSize**
-
-
-
 
 |Type     |Required|Position|PipelineInput|
 |---------|--------|--------|-------------|
 |`[Int32]`|false   |named   |false        |
 
-
-
-
-
 ---
-
 
 ### Syntax
 ```PowerShell

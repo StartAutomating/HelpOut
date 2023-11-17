@@ -1,35 +1,21 @@
 Measure-Help
 ------------
 
-
-
-
 ### Synopsis
 Determines the percentage of documentation
 
-
-
 ---
-
 
 ### Description
 
 Determines the percentage of documentation in a given script
 
-
-
 ---
-
 
 ### Related Links
 * [Get-Help](https://learn.microsoft.com/powershell/module/Microsoft.PowerShell.Core/Get-Help)
 
-
-
-
-
 ---
-
 
 ### Examples
 > EXAMPLE 1
@@ -53,60 +39,31 @@ Measure-Help {
 } | Select-Object -ExpandProperty PercentageDocumented
 ```
 
-
 ---
-
 
 ### Parameters
 #### **FilePath**
-
 The path to the file
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput        |Aliases |
 |----------|--------|--------|---------------------|--------|
 |`[String]`|true    |1       |true (ByPropertyName)|Fullname|
 
-
-
 #### **ScriptBlock**
-
 A PowerShell script block
-
-
-
-
-
 
 |Type           |Required|Position|PipelineInput        |
 |---------------|--------|--------|---------------------|
 |`[ScriptBlock]`|true    |named   |true (ByPropertyName)|
 
-
-
 #### **Name**
-
 The name of the script being measured.
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput        |
 |----------|--------|--------|---------------------|
 |`[String]`|false   |named   |true (ByPropertyName)|
 
-
-
-
-
 ---
-
 
 ### Syntax
 ```PowerShell

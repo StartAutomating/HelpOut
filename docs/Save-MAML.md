@@ -1,35 +1,21 @@
 Save-MAML
 ---------
 
-
-
-
 ### Synopsis
 Saves a Module's MAML
 
-
-
 ---
-
 
 ### Description
 
 Generates a Module's MAML file, and then saves it to the appropriate location.
 
-
-
 ---
-
 
 ### Related Links
 * [Get-MAML](Get-MAML.md)
 
-
-
-
-
 ---
-
 
 ### Examples
 > EXAMPLE 1
@@ -48,86 +34,44 @@ Save-Maml -Module HelpOut -WhatIf
 Save-Maml -Module HelpOut -PassThru
 ```
 
-
 ---
-
 
 ### Parameters
 #### **Module**
-
 The name of one or more modules.
-
-
-
-
-
 
 |Type        |Required|Position|PipelineInput        |
 |------------|--------|--------|---------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
 
-
-
 #### **Compact**
-
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput        |
 |----------|--------|--------|---------------------|
 |`[Switch]`|false   |named   |true (ByPropertyName)|
 
-
-
 #### **Culture**
-
 If provided, will save the MAML to a different directory than the current UI culture.
-
-
-
-
-
 
 |Type           |Required|Position|PipelineInput        |
 |---------------|--------|--------|---------------------|
 |`[CultureInfo]`|false   |named   |true (ByPropertyName)|
 
-
-
 #### **NoVersion**
-
 If set, the generated MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput|Aliases    |
 |----------|--------|--------|-------------|-----------|
 |`[Switch]`|false   |named   |false        |Unversioned|
 
-
-
 #### **PassThru**
-
 If set, will return the files that were generated.
-
-
-
-
-
 
 |Type      |Required|Position|PipelineInput|
 |----------|--------|--------|-------------|
 |`[Switch]`|false   |named   |false        |
-
-
 
 #### **WhatIf**
 -WhatIf is an automatic variable that is created when a command has ```[CmdletBinding(SupportsShouldProcess)]```.
@@ -138,27 +82,16 @@ If set, will return the files that were generated.
 
 If you pass ```-Confirm:$false``` you will not be prompted.
 
-
 If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$confirmImpactPreference```, you will not be prompted unless -Confirm is passed.
 
-
-
 ---
-
 
 ### Outputs
 * [Nullable](https://learn.microsoft.com/en-us/dotnet/api/System.Nullable)
 
-
 * [IO.FileInfo](https://learn.microsoft.com/en-us/dotnet/api/System.IO.FileInfo)
 
-
-
-
-
-
 ---
-
 
 ### Syntax
 ```PowerShell
