@@ -434,14 +434,18 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
                     & $MarkdownSections.$sectionName
                 } else { $null }
             if ($sectionContent) {
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '^[\r\n]') {
+                    [Environment]::NewLine    
+                }
                 $sectionContent
-                [Environment]::NewLine
+                if ($sectionContent -notmatch '[\r\n]$') {
+                    [Environment]::NewLine
+                }                
                 if ($sectionCounter -lt $orderOfSections.Length -and $sectionContent -notmatch '---\s{0,}$') {
                     '---'
                 }
             }
         }
 
-    ) -join [Environment]::NewLine).Trim()
+    ) -join [Environment]::NewLine -replace "(?>\r\n|\n){3,}", ([Environment]::NewLine * 2)).Trim()
 }
