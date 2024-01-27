@@ -1474,6 +1474,13 @@ function Save-MarkdownHelp
     [string[]]
     $ExcludeFile,
 
+    # A whitelist of files or directories to include.
+    # If this is provided, only files that match these criteria will be included.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('IncludePath','IncludeDirectory','IncludeFolder')]
+    [string[]]
+    $IncludeFile,
+
     # One or more extensions to include.
     # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -1529,6 +1536,23 @@ function Save-MarkdownHelp
             }
 
         $NotExcluded = {
+            if ($IncludeFile) {
+                $shouldIncludePath = 
+                    foreach ($include in $IncludeFile) {
+                        if ($include -match '^/' -and $include -match '/$') {
+                            if ([Regex]::New(
+                                $include -replace '^/' -replace '/$', 'IgnoreCase,IgnorePatternWhitespace'
+                            ).Match($_.FullName)) {
+                                $true;break
+                            }
+                        } else {
+                            if ($_.FullName -like $include -or $_.Name -like $include) {
+                                $true;break
+                            }
+                        }
+                    }
+                if (-not $shouldIncludePath) { return $false }
+            }
             if (-not $ExcludeFile) { return $true }
             foreach ($ex in $ExcludeFile) {
                 if ($ex -match '^/' -and $ex -match '/$') {
