@@ -2100,6 +2100,33 @@ By default, not extensions are specifically excluded.</maml:para>
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>IncludeSubmodule</maml:name>
+          <maml:description>
+            <maml:para>If set, will explicitly include submodule directories.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>ExcludeSubModule</maml:name>
+          <maml:description>
+            <maml:para>If set, will explicitly exclude submodule directories.
+This is the default.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>NoValidValueEnumeration</maml:name>
           <maml:description>
@@ -2217,6 +2244,20 @@ If the file name starts and ends with slashes, it will be treated as a Regular E
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>ExcludeSubModule</maml:name>
+        <maml:description>
+          <maml:para>If set, will explicitly exclude submodule directories.
+This is the default.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>ExcludeTopic</maml:name>
         <maml:description>
           <maml:para>One or more topic file patterns to exclude.
@@ -2271,6 +2312,19 @@ If this is provided, only files that match these criteria will be included.</mam
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>IncludeSubmodule</maml:name>
+        <maml:description>
+          <maml:para>If set, will explicitly include submodule directories.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
