@@ -122,6 +122,15 @@
     [string[]]
     $ExcludeExtension,
 
+    # If set, will explicitly include submodule directories.
+    [switch]
+    $IncludeSubmodule,
+
+    # If set, will explicitly exclude submodule directories.
+    # This is the default.
+    [switch]
+    $ExcludeSubModule,
+
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
@@ -213,7 +222,7 @@
         }
 
         $c = 0
-        $t = $Module.Count
+        $t = $Module.Count        
 
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.
@@ -241,6 +250,25 @@
             # If the -OutputPath does not exist
             if (-not (Test-Path $OutputPath)) {
                 $null = New-Item -ItemType Directory -Path $OutputPath # create it.
+            }
+
+            if ((-not $ExcludeSubModule) -and (-not $IncludeSubmodule)) {
+                Push-Location $theModuleRoot
+                
+                $gitCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand('git','Alias,Application')
+                $submoduleRoots = 
+                    if ($gitCmd -is [Management.Automation.AliasInfo]) {
+                        git submodule | Select-Object -ExpandProperty Submodule
+                    }
+                    else {
+                        git submodule | & { process {@($_ -split '\s')[1]} }
+                    }
+
+                if ($submoduleRoots) {
+                    $ExcludeFile += "$($pwd)$([io.path]::DirectorySeparatorChar)$submoduleRoot$([io.path]::DirectorySeparatorChar)*"
+                }
+
+                Pop-Location
             }
 
             $outputPathName = $OutputPath | Split-Path -Leaf
