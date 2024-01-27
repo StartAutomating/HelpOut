@@ -150,9 +150,9 @@ One or more files to exclude.
 By default, this is treated as a wildcard.
 If the file name starts and ends with slashes, it will be treated as a Regular Expression.
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
-|`[String[]]`|false   |named   |true (ByPropertyName)|
+|Type        |Required|Position|PipelineInput        |Aliases                                           |
+|------------|--------|--------|---------------------|--------------------------------------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|ExcludePath<br/>ExcludeDirectory<br/>ExcludeFolder|
 
 #### **IncludeExtension**
 One or more extensions to include.
