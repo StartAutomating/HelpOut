@@ -22,7 +22,7 @@ $FilePath,
 $View = 'PowerShell.Markdown.Help'
 )
 
-if ($filePath -match '[\<\>\|\?\*]') {
+if ($filePath -match '[\<\>\|\?\*\:]') {
     Write-Warning "Will not .Save to $filePath, because that path will not be readable on all operating systems."
     return
 }
