@@ -1479,6 +1479,11 @@ function Save-MarkdownHelp
     [string[]]
     $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png', '.svg'),
 
+    # One or more extensions to exclude.
+    # By default, not extensions are specifically excluded.    
+    [string[]]
+    $ExcludeExtension,
+
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
@@ -1819,6 +1824,13 @@ function Save-MarkdownHelp
                     Where-Object $NotExcluded | # (and as long as they're not excluded)
                     ForEach-Object {
                         $fileInfo = $_
+                        if ($ExcludeExtension) {
+                            foreach ($ext in $ExcludeExtension) {
+                                if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
+                                    return
+                                }
+                            }
+                        }
                         foreach ($ext in $IncludeExtension) { # and see if they are the right extension
                             if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
                                 # Determine the relative path
