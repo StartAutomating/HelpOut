@@ -100,6 +100,7 @@
     # By default, this is treated as a wildcard.
     # If the file name starts and ends with slashes, it will be treated as a Regular Expression.
     [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('ExcludePath','ExcludeDirectory','ExcludeFolder')]
     [string[]]
     $ExcludeFile,
 
