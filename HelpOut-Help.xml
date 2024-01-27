@@ -2059,6 +2059,20 @@ If the file name starts and ends with slashes, it will be treated as a Regular E
           </dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
+          <maml:name>IncludeFile</maml:name>
+          <maml:description>
+            <maml:para>A whitelist of files or directories to include.
+If this is provided, only files that match these criteria will be included.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+          <dev:type>
+            <maml:name>System.String[]</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="True (ByPropertyName)" aliases="" variableLength="true" globbing="false">
           <maml:name>IncludeExtension</maml:name>
           <maml:description>
             <maml:para>One or more extensions to include.
@@ -2239,6 +2253,20 @@ In either context, `$_` will be the current attribute.</maml:para>
         <maml:description>
           <maml:para>One or more extensions to include.
 By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
+        <dev:type>
+          <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>IncludeFile</maml:name>
+        <maml:description>
+          <maml:para>A whitelist of files or directories to include.
+If this is provided, only files that match these criteria will be included.</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>

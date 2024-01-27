@@ -154,6 +154,14 @@ If the file name starts and ends with slashes, it will be treated as a Regular E
 |------------|--------|--------|---------------------|--------------------------------------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|ExcludePath<br/>ExcludeDirectory<br/>ExcludeFolder|
 
+#### **IncludeFile**
+A whitelist of files or directories to include.
+If this is provided, only files that match these criteria will be included.
+
+|Type        |Required|Position|PipelineInput        |Aliases                                           |
+|------------|--------|--------|---------------------|--------------------------------------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|IncludePath<br/>IncludeDirectory<br/>IncludeFolder|
+
 #### **IncludeExtension**
 One or more extensions to include.
 By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
@@ -231,5 +239,5 @@ In either context, `$_` will be the current attribute.
 
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeExtension <String[]>] [-ExcludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeFile <String[]>] [-IncludeExtension <String[]>] [-ExcludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
 ```
