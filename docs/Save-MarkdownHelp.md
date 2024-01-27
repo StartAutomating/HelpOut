@@ -178,6 +178,21 @@ By default, not extensions are specifically excluded.
 |------------|--------|--------|-------------|
 |`[String[]]`|false   |named   |false        |
 
+#### **IncludeSubmodule**
+If set, will explicitly include submodule directories.
+
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
+
+#### **ExcludeSubModule**
+If set, will explicitly exclude submodule directories.
+This is the default.
+
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
+
 #### **NoValidValueEnumeration**
 If set, will not enumerate valid values and enums of parameters.
 
@@ -239,5 +254,5 @@ In either context, `$_` will be the current attribute.
 
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeFile <String[]>] [-IncludeExtension <String[]>] [-ExcludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeFile <String[]>] [-IncludeExtension <String[]>] [-ExcludeExtension <String[]>] [-IncludeSubmodule] [-ExcludeSubModule] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
 ```
