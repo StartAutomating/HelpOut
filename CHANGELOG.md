@@ -1,3 +1,16 @@
+### HelpOut 0.5.2:
+
+* Save-MarkdownHelp:
+  * IncludeSubModule/-ExcludeSubModule ( #155 )
+  * -IncludePath ( #169 )
+  * -ExcludeFile aliases ( #168 )
+  * -ExcludeExtension ( #167 )
+  * Not Saving Files with colons ( #163 )
+
+Thanks @PrzemyslawKlys ! 
+
+---
+
 ### HelpOut 0.5.1:
 
 * Save-MarkdownHelp - -OutputPath now handles relative paths (#159)

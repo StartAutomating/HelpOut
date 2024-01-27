@@ -1470,14 +1470,36 @@ function Save-MarkdownHelp
     # By default, this is treated as a wildcard.
     # If the file name starts and ends with slashes, it will be treated as a Regular Expression.
     [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('ExcludePath','ExcludeDirectory','ExcludeFolder')]
     [string[]]
     $ExcludeFile,
+
+    # A whitelist of files or directories to include.
+    # If this is provided, only files that match these criteria will be included.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('IncludePath','IncludeDirectory','IncludeFolder')]
+    [string[]]
+    $IncludeFile,
 
     # One or more extensions to include.
     # By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
     [Parameter(ValueFromPipelineByPropertyName)]
     [string[]]
     $IncludeExtension = @('.css','.gif', '.htm', '.html','.js', '.jpg', '.jpeg', '.mp4', '.png', '.svg'),
+
+    # One or more extensions to exclude.
+    # By default, not extensions are specifically excluded.    
+    [string[]]
+    $ExcludeExtension,
+
+    # If set, will explicitly include submodule directories.
+    [switch]
+    $IncludeSubmodule,
+
+    # If set, will explicitly exclude submodule directories.
+    # This is the default.
+    [switch]
+    $ExcludeSubModule,
 
     # If set, will not enumerate valid values and enums of parameters.
     [Parameter(ValueFromPipelineByPropertyName)]
@@ -1523,6 +1545,23 @@ function Save-MarkdownHelp
             }
 
         $NotExcluded = {
+            if ($IncludeFile) {
+                $shouldIncludePath = 
+                    foreach ($include in $IncludeFile) {
+                        if ($include -match '^/' -and $include -match '/$') {
+                            if ([Regex]::New(
+                                $include -replace '^/' -replace '/$', 'IgnoreCase,IgnorePatternWhitespace'
+                            ).Match($_.FullName)) {
+                                $true;break
+                            }
+                        } else {
+                            if ($_.FullName -like $include -or $_.Name -like $include) {
+                                $true;break
+                            }
+                        }
+                    }
+                if (-not $shouldIncludePath) { return $false }
+            }
             if (-not $ExcludeFile) { return $true }
             foreach ($ex in $ExcludeFile) {
                 if ($ex -match '^/' -and $ex -match '/$') {
@@ -1553,7 +1592,7 @@ function Save-MarkdownHelp
         }
 
         $c = 0
-        $t = $Module.Count
+        $t = $Module.Count        
 
         #region Save the Markdowns
         foreach ($m in $Module) { # Walk thru the list of module names.
@@ -1581,6 +1620,25 @@ function Save-MarkdownHelp
             # If the -OutputPath does not exist
             if (-not (Test-Path $OutputPath)) {
                 $null = New-Item -ItemType Directory -Path $OutputPath # create it.
+            }
+
+            if ((-not $ExcludeSubModule) -and (-not $IncludeSubmodule)) {
+                Push-Location $theModuleRoot
+                
+                $gitCmd = $ExecutionContext.SessionState.InvokeCommand.GetCommand('git','Alias,Application')
+                $submoduleRoots = 
+                    if ($gitCmd -is [Management.Automation.AliasInfo]) {
+                        git submodule | Select-Object -ExpandProperty Submodule
+                    }
+                    else {
+                        git submodule | & { process {@($_ -split '\s')[1]} }
+                    }
+
+                if ($submoduleRoots) {
+                    $ExcludeFile += "$($pwd)$([io.path]::DirectorySeparatorChar)$submoduleRoot$([io.path]::DirectorySeparatorChar)*"
+                }
+
+                Pop-Location
             }
 
             $outputPathName = $OutputPath | Split-Path -Leaf
@@ -1819,6 +1877,13 @@ function Save-MarkdownHelp
                     Where-Object $NotExcluded | # (and as long as they're not excluded)
                     ForEach-Object {
                         $fileInfo = $_
+                        if ($ExcludeExtension) {
+                            foreach ($ext in $ExcludeExtension) {
+                                if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
+                                    return
+                                }
+                            }
+                        }
                         foreach ($ext in $IncludeExtension) { # and see if they are the right extension
                             if ($fileInfo.Extension -eq $ext -or $fileInfo.Extension -eq ".$ext") {
                                 # Determine the relative path

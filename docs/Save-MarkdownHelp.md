@@ -150,9 +150,17 @@ One or more files to exclude.
 By default, this is treated as a wildcard.
 If the file name starts and ends with slashes, it will be treated as a Regular Expression.
 
-|Type        |Required|Position|PipelineInput        |
-|------------|--------|--------|---------------------|
-|`[String[]]`|false   |named   |true (ByPropertyName)|
+|Type        |Required|Position|PipelineInput        |Aliases                                           |
+|------------|--------|--------|---------------------|--------------------------------------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|ExcludePath<br/>ExcludeDirectory<br/>ExcludeFolder|
+
+#### **IncludeFile**
+A whitelist of files or directories to include.
+If this is provided, only files that match these criteria will be included.
+
+|Type        |Required|Position|PipelineInput        |Aliases                                           |
+|------------|--------|--------|---------------------|--------------------------------------------------|
+|`[String[]]`|false   |named   |true (ByPropertyName)|IncludePath<br/>IncludeDirectory<br/>IncludeFolder|
 
 #### **IncludeExtension**
 One or more extensions to include.
@@ -161,6 +169,29 @@ By default, .css, .gif, .htm, .html, .js, .jpg, .jpeg, .mp4, .png, .svg
 |Type        |Required|Position|PipelineInput        |
 |------------|--------|--------|---------------------|
 |`[String[]]`|false   |named   |true (ByPropertyName)|
+
+#### **ExcludeExtension**
+One or more extensions to exclude.
+By default, not extensions are specifically excluded.
+
+|Type        |Required|Position|PipelineInput|
+|------------|--------|--------|-------------|
+|`[String[]]`|false   |named   |false        |
+
+#### **IncludeSubmodule**
+If set, will explicitly include submodule directories.
+
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
+
+#### **ExcludeSubModule**
+If set, will explicitly exclude submodule directories.
+This is the default.
+
+|Type      |Required|Position|PipelineInput|
+|----------|--------|--------|-------------|
+|`[Switch]`|false   |named   |false        |
 
 #### **NoValidValueEnumeration**
 If set, will not enumerate valid values and enums of parameters.
@@ -223,5 +254,5 @@ In either context, `$_` will be the current attribute.
 
 ### Syntax
 ```PowerShell
-Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeExtension <String[]>] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
+Save-MarkdownHelp [-Module <String[]>] [-OutputPath <String>] [-Wiki] [-Command <CommandInfo[]>] [-ReplaceCommandName <String[]>] [-ReplaceCommandNameWith <String[]>] [-ScriptPath <String[]>] [-ReplaceScriptName <String[]>] [-ReplaceScriptNameWith <String[]>] [-ReplaceLink <String[]>] [-ReplaceLinkWith <String[]>] [-PassThru] [-SectionOrder <String[]>] [-IncludeTopic <String[]>] [-ExcludeTopic <String[]>] [-ExcludeFile <String[]>] [-IncludeFile <String[]>] [-IncludeExtension <String[]>] [-ExcludeExtension <String[]>] [-IncludeSubmodule] [-ExcludeSubModule] [-NoValidValueEnumeration] [-IncludeYamlHeader] [-YamlHeaderInformationType <String[]>] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-FormatAttribute <PSObject>] [<CommonParameters>]
 ```
