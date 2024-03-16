@@ -7,7 +7,7 @@
     ModuleToProcess='HelpOut.psm1'
     FormatsToProcess='HelpOut.format.ps1xml'
     TypesToProcess='HelpOut.types.ps1xml'
-    ModuleVersion='0.5.2'
+    ModuleVersion='0.5.3'
     PrivateData = @{
         PSData = @{
             ProjectURI = 'https://github.com/StartAutomating/HelpOut'
@@ -15,16 +15,12 @@
 
             Tags = 'Markdown', 'Help','PowerShell'
             ReleaseNotes = @'
-### HelpOut 0.5.2:
+### HelpOut 0.5.3:
 
 * Save-MarkdownHelp:
-  * IncludeSubModule/-ExcludeSubModule ( #155 )
-  * -IncludePath ( #169 )
-  * -ExcludeFile aliases ( #168 )
-  * -ExcludeExtension ( #167 )
-  * Not Saving Files with colons ( #163 )
+  * Fix saving markdown with Windows paths ( #175 )
 
-Thanks @PrzemyslawKlys !
+Thanks @ShaunLawrie ! 
 
 ---
 
