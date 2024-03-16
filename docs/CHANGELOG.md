@@ -1,3 +1,12 @@
+### HelpOut 0.5.3:
+
+* Save-MarkdownHelp:
+  * Fix saving markdown with Windows paths ( #175 )
+
+Thanks @ShaunLawrie ! 
+
+---
+
 ### HelpOut 0.5.2:
 
 * Save-MarkdownHelp:
