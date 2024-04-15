@@ -37,6 +37,19 @@
     [Alias('Unversioned')]
     [switch]
     $NoVersion,
+
+    # A list of command types to skip.
+    # If not provided, all types of commands from the module will be saved as a markdown document.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('SkipCommandTypes','ExcludeCommandType','ExcludeCommandTypes')]
+    [Management.Automation.CommandTypes[]]
+    $SkipCommandType,
+
+    # If set, will include aliases in the MAML output.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('IncludeAliases')]
+    [switch]
+    $IncludeAlias,
     
     # If set, will return the files that were generated.
     [switch]
@@ -65,6 +78,10 @@
             if (-not $getMAML.Parameters.ContainsKey($k)) { # that wasn't in Get-MAML.
                 $splat.Remove($k)
             }
+        }
+
+        if ($SkipCommandType -and -not $splat.SkipCommandType) {
+            $splat.SkipCommandType = $SkipCommandType
         }
 
         if (-not $Culture) { # If -Culture wasn't provided, use the current culture
