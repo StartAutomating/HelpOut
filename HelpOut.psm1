@@ -36,3 +36,11 @@ if ($options.Production -or -not $options.Development) {
 $ExecutionContext.SessionState.PSVariable.Set($myModule.Name, $myModule)
 $myModule.pstypeNames.Insert(0, $myModule.Name)
 Export-ModuleMember -Function * -Variable $myModule.Name -Alias *
+
+try {
+    $newDriveSplat = @{Name = $myModule.Name;Scope = 'Global';PSProvider='FileSystem';ErrorAction='Ignore'}
+    $newDriveSplat.Root = $myModule | Split-Path
+    New-PSDrive @newDriveSplat
+} catch {
+    Write-Verbose "$_"
+}
