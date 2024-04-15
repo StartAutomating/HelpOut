@@ -66,6 +66,32 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
 |----------|--------|--------|-------------|-----------|
 |`[Switch]`|false   |named   |false        |Unversioned|
 
+#### **SkipCommandType**
+A list of command types to skip.
+If not provided, all types of commands from the module will be saved as a markdown document.
+Valid Values:
+
+* Alias
+* Function
+* Filter
+* Cmdlet
+* ExternalScript
+* Application
+* Script
+* Configuration
+* All
+
+|Type              |Required|Position|PipelineInput        |Aliases                                                        |
+|------------------|--------|--------|---------------------|---------------------------------------------------------------|
+|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|SkipCommandTypes<br/>ExcludeCommandType<br/>ExcludeCommandTypes|
+
+#### **IncludeAlias**
+If set, will include aliases in the MAML output.
+
+|Type      |Required|Position|PipelineInput        |Aliases       |
+|----------|--------|--------|---------------------|--------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|IncludeAliases|
+
 #### **PassThru**
 If set, will return the files that were generated.
 
@@ -95,8 +121,8 @@ If the command sets a ```[ConfirmImpact("Medium")]``` which is lower than ```$co
 
 ### Syntax
 ```PowerShell
-Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Save-MAML [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 ```PowerShell
-Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
+Save-MAML [-Module <String[]>] [-Compact] [-Culture <CultureInfo>] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [-PassThru] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
