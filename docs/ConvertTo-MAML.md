@@ -68,24 +68,50 @@ The CommandInfo object (returned from Get-Command).
 #### **Compact**
 If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
-|`[Switch]`|false   |named   |false        |
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|
 
 #### **XML**
 If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.
 
-|Type      |Required|Position|PipelineInput|
-|----------|--------|--------|-------------|
-|`[Switch]`|false   |named   |false        |
+|Type      |Required|Position|PipelineInput        |
+|----------|--------|--------|---------------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|
 
 #### **NoVersion**
 If set, the generate MAML will not contain a version number.  
 This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
 
-|Type      |Required|Position|PipelineInput|Aliases    |
-|----------|--------|--------|-------------|-----------|
-|`[Switch]`|false   |named   |false        |Unversioned|
+|Type      |Required|Position|PipelineInput        |Aliases    |
+|----------|--------|--------|---------------------|-----------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|Unversioned|
+
+#### **SkipCommandType**
+A list of command types to skip.
+If not provided, all types of commands from the module will be saved as a markdown document.
+Valid Values:
+
+* Alias
+* Function
+* Filter
+* Cmdlet
+* ExternalScript
+* Application
+* Script
+* Configuration
+* All
+
+|Type              |Required|Position|PipelineInput        |Aliases                                                        |
+|------------------|--------|--------|---------------------|---------------------------------------------------------------|
+|`[CommandTypes[]]`|false   |named   |true (ByPropertyName)|SkipCommandTypes<br/>ExcludeCommandType<br/>ExcludeCommandTypes|
+
+#### **IncludeAlias**
+If set, will include aliases in the MAML output.
+
+|Type      |Required|Position|PipelineInput        |Aliases       |
+|----------|--------|--------|---------------------|--------------|
+|`[Switch]`|false   |named   |true (ByPropertyName)|IncludeAliases|
 
 ---
 
@@ -106,14 +132,14 @@ The MAML, as an XmlDocument (when -XML is passed in)
 
 ### Syntax
 ```PowerShell
-Get-MAML [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
+Get-MAML [-Compact] [-XML] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML [[-Name] <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
+Get-MAML [[-Name] <String[]>] [-Compact] [-XML] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML [-Module <String[]>] [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
+Get-MAML [-Module <String[]>] [-Compact] [-XML] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [<CommonParameters>]
 ```
 ```PowerShell
-Get-MAML -CommandInfo <CommandInfo[]> [-Compact] [-XML] [-NoVersion] [<CommonParameters>]
+Get-MAML -CommandInfo <CommandInfo[]> [-Compact] [-XML] [-NoVersion] [-SkipCommandType {Alias | Function | Filter | Cmdlet | ExternalScript | Application | Script | Configuration | All}] [-IncludeAlias] [<CommonParameters>]
 ```
