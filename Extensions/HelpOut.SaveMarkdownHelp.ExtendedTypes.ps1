@@ -56,7 +56,13 @@ foreach ($extendedType in $extendedTypeNames) {
                 }
             $fullExtendedTypeInfo = "$($extendedType).$GetSetNothing$($member.Name)"
             $temporaryFunctionName = "$($extendedType).$GetSetNothing$($member.Name)" -replace $replaceMostPunctuation
-            $markdownSplat.Rename = "$temporaryFunctionName()"        
+            
+            $markdownSplat.Rename = 
+                if ($getSetNothing) {
+                    "$getSetNothing$($member.Name)"
+                } else {
+                    "$temporaryFunctionName()"
+                }
             $ExecutionContext.SessionState.PSVariable.Set("function:$($temporaryFunctionName)", $member.$PotentialProperty)
             # Then Get-MarkdownHelp,
             $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase @markdownSplat
