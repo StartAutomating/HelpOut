@@ -507,7 +507,7 @@ function Get-MarkdownHelp {
                         if ($Rename) {
                             $helpObj | Add-Member NoteProperty Rename $Rename -Force
                         } elseif ($IsHelpAboutAlias) {
-                            $helpObj | Add-Member NoteProperty Rename $gotHelp.Name -Force
+                            $helpObj | Add-Member NoteProperty Rename $getHelp.Name -Force
                         }
 
                         # * `-SectionOrder` will become `[string[]] .SectionOrder`
