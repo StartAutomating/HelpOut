@@ -1,5 +1,5 @@
 #requires -Module PSSVG
-
+Push-Location ($PSScriptRoot | Split-Path)
 $psChevronPolygonPoints = @(
     "40,20"
     "45,20"
@@ -19,7 +19,7 @@ $psChevron =
 
 
 
-$assetsPath = Join-Path $psScriptRoot Assets
+$assetsPath = Join-Path $pwd Assets
 
 if (-not (Test-Path $assetsPath)) {
     $null = New-Item -ItemType Directory -Path $assetsPath -Force
@@ -33,3 +33,4 @@ svg @(
         svg.tspan "Out" -FontFamily 'sans-serif' -Dx '-0.3em' -Rotate 1 -Dy '0.0em' -FontSize 24 -Opacity .9
     ) -FontSize 36 -Fill '#4488ff' -X 50% -DominantBaseline 'middle' -TextAnchor 'middle' -Y 50%
 ) -ViewBox 300, 100 -OutputPath (Join-Path $assetsPath HelpOut.svg)
+Pop-Location

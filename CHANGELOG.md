@@ -1,3 +1,24 @@
+### HelpOut 0.5.4:
+
+* HelpOut containerization
+  * Dockerfile (#182)
+  * Publishing to `https://ghcr.io/startautomating/helpout` (#183)
+  * Container.init.ps1 (#191)
+  * Container.start.ps1 (#193)
+  * Container.stop.ps1 (#194)
+* Get/Save-Maml -IncludeAlias/-SkipCommandType (#178) (thanks @potatoqualitee ! )
+* Get-MarkdownHelp keeps alias names (#200)
+* HelpOut repository improvements
+  * Organizing Files (#184, #185, #186, #187)
+* HelpOut is now exported as `$HelpOut` (#188)
+* HelpOut's root is now exported as `HelpOut:` (#189)
+* Extended Type Help Improvement:
+  * Extended Member Titles (#198)
+  * Fixing Grouping (#197)
+  * Fixing Type File Naming (#196)
+
+---
+
 ### HelpOut 0.5.3:
 
 * Save-MarkdownHelp:

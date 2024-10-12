@@ -56,7 +56,13 @@ foreach ($extendedType in $extendedTypeNames) {
                 }
             $fullExtendedTypeInfo = "$($extendedType).$GetSetNothing$($member.Name)"
             $temporaryFunctionName = "$($extendedType).$GetSetNothing$($member.Name)" -replace $replaceMostPunctuation
-            $markdownSplat.Rename = "$temporaryFunctionName()"        
+            
+            $markdownSplat.Rename = 
+                if ($getSetNothing) {
+                    "$getSetNothing$($member.Name)"
+                } else {
+                    "$temporaryFunctionName()"
+                }
             $ExecutionContext.SessionState.PSVariable.Set("function:$($temporaryFunctionName)", $member.$PotentialProperty)
             # Then Get-MarkdownHelp,
             $markdownHelp = Get-MarkdownHelp -Name $temporaryFunctionName @getMarkdownHelpSplatBase @markdownSplat
@@ -66,12 +72,16 @@ foreach ($extendedType in $extendedTypeNames) {
             }
             $markdownHelp.HideSection("Syntax")
 
+            $TopicPathSegments = @(
+                $extendedType -split $punctuationNotDashOrUnderscore
+                $member.Name -replace $replaceMostPunctuation
+            )
             $etsDocPath = Join-Path $outputPath "$(
-                @($fullExtendedTypeInfo -split $punctuationNotDashOrUnderscore) -join [IO.Path]::DirectorySeparatorChar
+                $TopicPathSegments -join [IO.Path]::DirectorySeparatorChar
             ).md"
             
             # .Save it,
-            $markdownHelp.Save($etsDocPath)            
+            $markdownHelp.Save($etsDocPath)
             # and remove the temporary function (it would have gone out of scope anyways)
             $ExecutionContext.SessionState.PSVariable.Remove("function:$($temporaryFunctionName)")
         }
@@ -82,34 +92,45 @@ foreach ($extendedType in $extendedTypeNames) {
     # If there were no member files, there's no point in generating a summary.
     if (-not $memberFiles) { continue }
 
+    # Determine the path to the README.md file
     $ExtendedTypeDocFile = Join-Path $outputPath "$(
         ($extendedType -split $punctuationNotDashOrUnderscore) -join [IO.Path]::DirectorySeparatorChar
     )$([IO.Path]::DirectorySeparatorChar)README.md"
 
-    $getSetFile = '\.(?>get|set)_'
+    # Make a pattern to match get_ and set_ files (including hidden properties)
+    $getSetFile = '\.?(?>get|set)_'
     $ExtendedTypeDocContent = @(
         "## $extendedType"
         [Environment]::NewLine
 
+        # If the type had a .README member, include it inline
         if ($actualTypeData.Members -and $actualTypeData.Members["README"].Value) {
             $actualTypeData.Members["README"].Value
         }
-        
-        
-        $propertyMemberFiles = $memberFiles | Where-Object Name -Match $getSetFile
-        if ($propertyMemberFiles) {
-            "### Script Properties"
-            [Environment]::NewLine
-            foreach ($memberFile in $propertyMemberFiles | Sort-Object { $_.Name -replace $getSetFile}) {                
-                "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
-            }
-        }
+         
+        # Sort the member files into properties and methods
         $methodMemberFiles = $memberFiles | Where-Object Name -NotMatch $getSetFile
-        if ($methodMemberFiles) {
-            "### Script Methods"
-            [Environment]::NewLine
-            foreach ($memberFile in $methodMemberFiles) {
-                "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+        $propertyMemberFiles = $memberFiles | Where-Object Name -Match $getSetFile
+
+        # If any member files were found, list them.
+        if ($memberFiles) {
+            # Properties should come before methods
+            if ($propertyMemberFiles) {
+                "### Script Properties"
+                [Environment]::NewLine
+                # and be sorted by property name.
+                foreach ($memberFile in $propertyMemberFiles | Sort-Object { $_.Name -replace $getSetFile}) {
+                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                }
+            }
+            # Methods should come after properties.
+            if ($methodMemberFiles) {
+                "### Script Methods"
+                [Environment]::NewLine
+                # and will be sorted alphabetically.
+                foreach ($memberFile in $methodMemberFiles) {
+                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                }
             }
         }
     

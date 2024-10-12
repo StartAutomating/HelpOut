@@ -25,7 +25,7 @@ $isMergeToMain =
     $gitHubEvent.ref -in 'refs/heads/main', 'refs/heads/master'
 
 if ($isMergeToMain) {
-    Import-Module .\HelpOut.psd1 -Global -PassThru | Out-Host
+    Import-Module ..\HelpOut.psd1 -Global -PassThru | Out-Host
     $helpOutModule = Get-Module HelpOut
     $moduleAndVersion = "$($helpOutModule.Name) $($helpOutModule.Version)"
     $fullMessage = @(

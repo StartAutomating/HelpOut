@@ -42,23 +42,40 @@
     $Module,
 
     # The CommandInfo object (returned from Get-Command).
-    [Parameter(Mandatory=$true,ParameterSetName='FromCommandInfo', ValueFromPipeline=$true)]
+    [Parameter(Mandatory=$true,ParameterSetName='FromCommandInfo', ValueFromPipeline=$true)]    
     [Management.Automation.CommandInfo[]]
     $CommandInfo,
 
     # If set, the generated MAML will be compact (no extra whitespace or indentation).  If not set, the MAML will be indented.
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $Compact,
     
     # If set, will return the MAML as an XmlDocument.  The default is to return the MAML as a string.
+    [Parameter(ValueFromPipelineByPropertyName)]
     [switch]
     $XML,
     
     # If set, the generate MAML will not contain a version number.  
     # This slightly reduces the size of the MAML file, and reduces the rate of changes in the MAML file.
+    [Parameter(ValueFromPipelineByPropertyName)]
     [Alias('Unversioned')]
     [switch]
-    $NoVersion)
+    $NoVersion,
+    
+    # A list of command types to skip.
+    # If not provided, all types of commands from the module will be saved as a markdown document.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('SkipCommandTypes','ExcludeCommandType','ExcludeCommandTypes')]
+    [Management.Automation.CommandTypes[]]
+    $SkipCommandType,
+
+    # If set, will include aliases in the MAML output.
+    [Parameter(ValueFromPipelineByPropertyName)]
+    [Alias('IncludeAliases')]
+    [switch]
+    $IncludeAlias
+    )
     
     begin {
         # First, we need to create a list of all commands we encounter (so we can process them at the end)
@@ -320,7 +337,7 @@
     process {
         
         if ($PSCmdlet.ParameterSetName -eq 'ByName') { # If we're getting comamnds by name,
-            $CommandInfo = @(foreach ($n in $name) { 
+            $CommandInfo = @(foreach ($n in $name) {
                 $ExecutionContext.InvokeCommand.GetCommands($N,'Function,Cmdlet', $true) # find each command (treating Name like a wildcard).
             })
         }
@@ -334,8 +351,18 @@
 
 
         $filteredCmds = @(foreach ($ci in $CommandInfo) { # Filter the list of commands 
-            if ($ci -is [Management.Automation.AliasInfo] -or # (throw out aliases and applications).
-                $ci -is [Management.Automation.ApplicationInfo]) { continue }
+             # (throw out applications)
+            if ($ci -is [Management.Automation.ApplicationInfo]) {
+                continue
+            }
+
+            if ($ci -is [Management.Automation.AliasInfo]) {
+                if (-not $IncludeAlias) { continue }
+            }
+
+            if ($SkipCommandType -and 
+                $SkipCommandType -contains $ci.CommandType) { continue } # (throw out any we were told to skip)
+
             $ci 
         })
          

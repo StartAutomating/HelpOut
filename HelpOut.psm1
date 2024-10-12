@@ -1,4 +1,5 @@
 ﻿$options = @{}
+$myModule = $MyInvocation.MyCommand.ScriptBlock.Module
 
 foreach ($a in $args) {
     if ($a -is [string]) {
@@ -30,4 +31,16 @@ if ($options.Development) {
 
 if ($options.Production -or -not $options.Development) {
     . $PSScriptRoot\allcommands.ps1
+}
+
+$ExecutionContext.SessionState.PSVariable.Set($myModule.Name, $myModule)
+$myModule.pstypeNames.Insert(0, $myModule.Name)
+Export-ModuleMember -Function * -Variable $myModule.Name -Alias *
+
+try {
+    $newDriveSplat = @{Name = $myModule.Name;Scope = 'Global';PSProvider='FileSystem';ErrorAction='Ignore'}
+    $newDriveSplat.Root = $myModule | Split-Path
+    New-PSDrive @newDriveSplat
+} catch {
+    Write-Verbose "$_"
 }
