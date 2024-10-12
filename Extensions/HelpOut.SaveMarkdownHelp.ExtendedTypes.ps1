@@ -100,23 +100,14 @@ foreach ($extendedType in $extendedTypeNames) {
         if ($actualTypeData.Members -and $actualTypeData.Members["README"].Value) {
             $actualTypeData.Members["README"].Value
         }
-        
-        
-        $propertyMemberFiles = $memberFiles | Where-Object Name -Match $getSetFile
-        if ($propertyMemberFiles) {
-            "### Script Properties"
-            [Environment]::NewLine
-            foreach ($memberFile in $propertyMemberFiles | Sort-Object { $_.Name -replace $getSetFile}) {                
-                "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
-            }
-        }
+                
         $methodMemberFiles = $memberFiles | Where-Object Name -NotMatch $getSetFile
-        $memberPropertyFiles = $memberFiles | Where-Object Name -Match $getSetFile
+        $propertyMemberFiles = $memberFiles | Where-Object Name -Match $getSetFile
         if ($memberFiles) {
-            if ($memberPropertyFiles) {
+            if ($propertyMemberFiles) {
                 "### Script Properties"
                 [Environment]::NewLine
-                foreach ($memberFile in $methodMemberFiles) {
+                foreach ($memberFile in $propertyMemberFiles | Sort-Object { $_.Name -replace $getSetFile}) {
                     "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
                 }
             }
@@ -127,7 +118,6 @@ foreach ($extendedType in $extendedTypeNames) {
                     "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
                 }
             }
-            
         }
     
     )  -join ([Environment]::NewLine)
