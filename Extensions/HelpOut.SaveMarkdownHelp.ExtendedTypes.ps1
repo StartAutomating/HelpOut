@@ -77,7 +77,7 @@ foreach ($extendedType in $extendedTypeNames) {
             ).md"
             
             # .Save it,
-            $markdownHelp.Save($etsDocPath)            
+            $markdownHelp.Save($etsDocPath)
             # and remove the temporary function (it would have gone out of scope anyways)
             $ExecutionContext.SessionState.PSVariable.Remove("function:$($temporaryFunctionName)")
         }
@@ -111,7 +111,7 @@ foreach ($extendedType in $extendedTypeNames) {
                     "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
                 }
             }
-            if ($memberMethodFiles) {
+            if ($methodMemberFiles) {
                 "### Script Methods"
                 [Environment]::NewLine
                 foreach ($memberFile in $methodMemberFiles) {
