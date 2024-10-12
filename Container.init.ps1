@@ -107,4 +107,5 @@ if (-not $KeepGit) {
 # If you have any adjustments, please put them below here, in the `#region Custom`
 
 #region Custom
+Update-Help  # HelpOut should have up-to-date help in the container.
 #endregion Custom
