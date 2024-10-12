@@ -111,12 +111,23 @@ foreach ($extendedType in $extendedTypeNames) {
             }
         }
         $methodMemberFiles = $memberFiles | Where-Object Name -NotMatch $getSetFile
-        if ($methodMemberFiles) {
-            "### Script Methods"
-            [Environment]::NewLine
-            foreach ($memberFile in $methodMemberFiles) {
-                "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+        $memberPropertyFiles = $memberFiles | Where-Object Name -Match $getSetFile
+        if ($memberFiles) {
+            if ($memberPropertyFiles) {
+                "### Script Properties"
+                [Environment]::NewLine
+                foreach ($memberFile in $methodMemberFiles) {
+                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                }
             }
+            if ($memberMethodFiles) {
+                "### Script Methods"
+                [Environment]::NewLine
+                foreach ($memberFile in $methodMemberFiles) {
+                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                }
+            }
+            
         }
     
     )  -join ([Environment]::NewLine)
