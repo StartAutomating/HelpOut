@@ -1,6 +1,6 @@
 ### HelpOut 0.5.4:
 
-* HelpOut containization
+* HelpOut containerization
   * Dockerfile (#182)
   * Publishing to `https://ghcr.io/startautomating/helpout` (#183)
   * Container.init.ps1 (#191)
