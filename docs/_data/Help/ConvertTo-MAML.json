@@ -1,0 +1,58 @@
+{
+  "Synopsis": "Gets MAML help",
+  "Description": "Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.",
+  "Parameters": [
+    {
+      "Name": null,
+      "Type": null,
+      "Description": "",
+      "Required": false,
+      "Position": 0,
+      "Aliases": null,
+      "DefaultValue": null,
+      "Globbing": false,
+      "PipelineInput": null,
+      "variableLength": false
+    }
+  ],
+  "Notes": [
+    null
+  ],
+  "CommandType": "Function",
+  "Component": [
+    null
+  ],
+  "Inputs": [
+    "[Management.Automation.CommandInfo]\nAccepts a command"
+  ],
+  "Outputs": [
+    "[String]\nThe MAML, as a String.  This is the default.",
+    "[Xml]\nThe MAML, as an XmlDocument (when -XML is passed in)"
+  ],
+  "Links": [
+    null,
+    null
+  ],
+  "Examples": [
+    {
+      "Title": "EXAMPLE 1",
+      "Markdown": "",
+      "Code": "Get-MAML -Name Get-MAML"
+    },
+    {
+      "Title": "EXAMPLE 2",
+      "Markdown": "",
+      "Code": "Get-Command Get-MAML | Get-MAML"
+    },
+    {
+      "Title": "EXAMPLE 3",
+      "Markdown": "",
+      "Code": "Get-MAML -Name Get-MAML -Compact"
+    },
+    {
+      "Title": "EXAMPLE 4",
+      "Markdown": "",
+      "Code": "Get-MAML -Name Get-MAML -XML"
+    }
+  ]
+}

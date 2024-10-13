@@ -1,0 +1,51 @@
+{
+  "Synopsis": "Determines the percentage of documentation",
+  "Description": "Determines the percentage of documentation in a given script",
+  "Parameters": [
+    {
+      "Name": null,
+      "Type": null,
+      "Description": "",
+      "Required": false,
+      "Position": 0,
+      "Aliases": null,
+      "DefaultValue": null,
+      "Globbing": false,
+      "PipelineInput": null,
+      "variableLength": false
+    }
+  ],
+  "Notes": [
+    null
+  ],
+  "CommandType": "Function",
+  "Component": [
+    null
+  ],
+  "Inputs": [
+    null
+  ],
+  "Outputs": [
+    null
+  ],
+  "Links": [
+    null
+  ],
+  "Examples": [
+    {
+      "Title": "EXAMPLE 1",
+      "Markdown": "",
+      "Code": "dir -Filter *.ps1 | Measure-Help"
+    },
+    {
+      "Title": "EXAMPLE 2",
+      "Markdown": "",
+      "Code": "Get-Command -Module HelpOut | Measure-Help"
+    },
+    {
+      "Title": "EXAMPLE 3",
+      "Markdown": "",
+      "Code": "Measure-Help {\n    # This script has some documentation, and then a bunch of code that literally does nothing\n    $null = $null # The null equivilancy \n    $null * 500 # x times nothing is still nothing\n    $null / 100 # Nothing out of 100             \n} | Select-Object -ExpandProperty PercentageDocumented"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "Synopsis": "Gets Markdown Help",
+  "Description": "Gets Help for a given command, in Markdown",
+  "Parameters": [
+    {
+      "Name": null,
+      "Type": null,
+      "Description": "",
+      "Required": false,
+      "Position": 0,
+      "Aliases": null,
+      "DefaultValue": null,
+      "Globbing": false,
+      "PipelineInput": null,
+      "variableLength": false
+    }
+  ],
+  "Notes": [
+    null
+  ],
+  "CommandType": "Function",
+  "Component": [
+    null
+  ],
+  "Inputs": [
+    null
+  ],
+  "Outputs": [
+    "[string]\n\nThe documentation for a single command, in Markdown."
+  ],
+  "Links": [
+    null,
+    null
+  ],
+  "Examples": [
+    {
+      "Title": "EXAMPLE 1",
+      "Markdown": "#### Getting Markdown Help        ",
+      "Code": "Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help"
+    }
+  ]
+}

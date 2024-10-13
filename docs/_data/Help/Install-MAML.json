@@ -1,0 +1,43 @@
+{
+  "Synopsis": "Installs MAML into a module",
+  "Description": "Installs MAML into a module.  \n\nThis generates a single script that: \n* Includes all commands\n* Removes their multiline comments\n* Directs the commands to use external help\n\nYou should then include this script in your module import.\n\nIdeally, you should use the allcommands script",
+  "Parameters": [
+    {
+      "Name": null,
+      "Type": null,
+      "Description": "",
+      "Required": false,
+      "Position": 0,
+      "Aliases": null,
+      "DefaultValue": null,
+      "Globbing": false,
+      "PipelineInput": null,
+      "variableLength": false
+    }
+  ],
+  "Notes": [
+    null
+  ],
+  "CommandType": "Function",
+  "Component": [
+    null
+  ],
+  "Inputs": [
+    null
+  ],
+  "Outputs": [
+    "System.Nullable",
+    "System.IO.FileInfo"
+  ],
+  "Links": [
+    null,
+    null
+  ],
+  "Examples": [
+    {
+      "Title": "EXAMPLE 1",
+      "Markdown": "",
+      "Code": "Install-MAML -Module HelpOut"
+    }
+  ]
+}

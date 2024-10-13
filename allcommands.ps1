@@ -1576,7 +1576,17 @@ function Save-MarkdownHelp
     # If the value is a [string], it will be expanded
     # In either context, `$_` will be the current attribute.
     [PSObject]
-    $FormatAttribute
+    $FormatAttribute,
+
+    # The path where json data should be located.
+    # If this is not provided, it will be assumed to be a subdirectory of the -OutputPath.
+    # Specifically, it will be assumed to be: `$OutputPath/_data/Help`
+    [string]
+    $JsonDataPath,
+
+    # If set, will not output json data files.
+    [switch]
+    $NoJson
     )
 
     begin {
@@ -1666,6 +1676,12 @@ function Save-MarkdownHelp
                 $null = New-Item -ItemType Directory -Path $OutputPath # create it.
             }
 
+            if (-not $PSBoundParameters.JsonDataPath) {
+                $JsonDataPath = Join-Path $OutputPath '_data' | Join-Path -ChildPath 'Help'
+            } else {
+                $JsonDataPath = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($JsonDataPath)
+            }
+
             if ((-not $ExcludeSubModule) -and (-not $IncludeSubmodule)) {
                 Push-Location $theModuleRoot
                 
@@ -1705,6 +1721,9 @@ function Save-MarkdownHelp
 
                 # Determine the output path for each item.
                 $docOutputPath = Join-Path $outputPath ($cmd.Name + '.md')
+                if ($JsonDataPath) {
+                    $jsonOutputPath = Join-Path $JsonDataPath ($cmd.Name + '.json')
+                }
                 # Prepare a splat for this command by copying out base splat.
                 $getMarkdownHelpSplat = @{Name="$cmd"} + $getMarkdownHelpSplatBase
 
@@ -1712,8 +1731,9 @@ function Save-MarkdownHelp
                 if ($Wiki) { $getMarkdownHelpSplat.Wiki = $Wiki }
                 # otherwise, pass down the parent of $OutputPath.
                 else { $getMarkdownHelpSplat.GitHubDocRoot = "$($outputPath|Split-Path -Leaf)"}
-
-                $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat                
+               
+                $markdownTopic = Get-MarkdownHelp @getMarkdownHelpSplat
+                
                 $markdownFile  =
                     if ($markdownTopic.Save) {
                         $markdownTopic.Save($docOutputPath)
@@ -1724,6 +1744,20 @@ function Save-MarkdownHelp
 
                     if ($PassThru) { # If -PassThru was provided, get the path.
                         $markdownFile
+                    }
+                }
+                if ($JsonDataPath -and -not $NoJson) {
+                    $jsonFile =
+                        if ($markdownTopic.SaveJson) {
+                            $markdownTopic.SaveJson($jsonOutputPath)
+                        } else { $null }
+
+                    if ($jsonFile) {
+                        $filesChanged += $jsonFile
+
+                        if ($PassThru) { # If -PassThru was provided, get the path.
+                            $jsonFile
+                        }
                     }
                 }
             }

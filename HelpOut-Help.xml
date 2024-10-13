@@ -8,7 +8,7 @@
       <maml:description>
         <maml:para>Gets MAML help</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets help for a given command, as MAML (Microsoft Assistance Markup Language) xml.</maml:para>
@@ -535,7 +535,7 @@ If not provided, all types of commands from the module will be saved as a markdo
       <maml:description>
         <maml:para>Gets Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets Help for a given command, in Markdown</maml:para>
@@ -838,7 +838,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Gets a script's references</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the external references of a given PowerShell command.  These are the commands the script calls, and the types the script uses.</maml:para>
@@ -964,7 +964,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Gets a Script's story</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Gets the Script's "Story"</maml:para>
@@ -1127,7 +1127,7 @@ Get-MarkdownHelp Get-Help # Get-MarkdownHelp is a wrapper for Get-Help </dev:cod
       <maml:description>
         <maml:para>Installs MAML into a module</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Installs MAML into a module.  </maml:para>
@@ -1563,7 +1563,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Determines the percentage of documentation</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Determines the percentage of documentation in a given script</maml:para>
@@ -1706,7 +1706,7 @@ This slightly reduces the size of the MAML file, and reduces the rate of changes
       <maml:description>
         <maml:para>Saves a Module's MAML</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Generates a Module's MAML file, and then saves it to the appropriate location.</maml:para>
@@ -2048,7 +2048,7 @@ If not provided, all types of commands from the module will be saved as a markdo
       <maml:description>
         <maml:para>Saves a Module's Markdown Help</maml:para>
       </maml:description>
-      <dev:version>0.5.4</dev:version>
+      <dev:version>0.5.5</dev:version>
     </command:details>
     <maml:description>
       <maml:para>Get markdown help for each command in a module and saves it to the appropriate location.</maml:para>
@@ -2414,6 +2414,34 @@ In either context, `$_` will be the current attribute.</maml:para>
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>JsonDataPath</maml:name>
+          <maml:description>
+            <maml:para>The path where json data should be located.
+If this is not provided, it will be assumed to be a subdirectory of the -OutputPath.
+Specifically, it will be assumed to be: `$OutputPath/_data/Help`</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoJson</maml:name>
+          <maml:description>
+            <maml:para>If set, will not output json data files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2575,6 +2603,21 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>JsonDataPath</maml:name>
+        <maml:description>
+          <maml:para>The path where json data should be located.
+If this is not provided, it will be assumed to be a subdirectory of the -OutputPath.
+Specifically, it will be assumed to be: `$OutputPath/_data/Help`</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Module</maml:name>
         <maml:description>
           <maml:para>The name of one or more modules.</maml:para>
@@ -2582,6 +2625,19 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoJson</maml:name>
+        <maml:description>
+          <maml:para>If set, will not output json data files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
