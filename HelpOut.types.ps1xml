@@ -4,6 +4,10 @@
   <Type>
     <Name>HelpInfo</Name>
     <Members>
+      <AliasProperty>
+        <Name>Notes</Name>
+        <ReferencedMemberName>Note</ReferencedMemberName>
+      </AliasProperty>
       <ScriptMethod>
         <Name>ToJson</Name>
         <Script>
@@ -93,6 +97,22 @@ $helpObject = $this
 } | ConvertTo-Json -Depth 10
                     </Script>
       </ScriptMethod>
+      <ScriptProperty>
+        <Name>Note</Name>
+        <GetScriptBlock>
+                        &lt;#
+.SYNOPSIS
+    Gets HelpInfo notes
+.DESCRIPTION
+    Gets the `Notes` section of a HelpInfo object.
+.EXAMPLE
+    (Get-Help Get-Help).Note
+#&gt;
+param()
+
+@($this.alertSet.alert.text)
+                    </GetScriptBlock>
+      </ScriptProperty>
     </Members>
   </Type>
   <Type>
