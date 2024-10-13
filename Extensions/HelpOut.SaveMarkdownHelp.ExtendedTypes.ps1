@@ -79,7 +79,11 @@ foreach ($extendedType in $extendedTypeNames) {
 
             $TopicPathSegments = @(
                 $extendedType -split $punctuationNotDashOrUnderscore
-                $member.Name -replace $replaceMostPunctuation
+                if ($getSetNothing) {
+                    $getSetNothing + ($member.Name -replace $replaceMostPunctuation)
+                } else {
+                    $member.Name -replace $replaceMostPunctuation
+                }                
             )
             $etsDocPath = Join-Path $outputPath "$(
                 $TopicPathSegments -join [IO.Path]::DirectorySeparatorChar
