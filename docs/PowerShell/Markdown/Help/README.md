@@ -9,6 +9,8 @@ To get help for any command as markdown, use `Get-MarkdownHelp`.
 $MarkdownHelp = Get-MarkdownHelp Get-MarkdownHelp
 $MarkdownHelp
 ~~~
+
+
 ### Script Methods
 
 
