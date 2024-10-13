@@ -35,7 +35,12 @@ $punctuationNotDashOrUnderscore = '[\p{P}-[\-_]]'
 # go over each extended type
 foreach ($extendedType in $extendedTypeNames) {
     # and get the actual type data
-    $actualTypeData = Get-TypeData -TypeName $extendedType    
+    $actualTypeData = Get-TypeData -TypeName $extendedType
+    
+    # We will want to keep track of methods and properties in order, 
+    # so we don't have to sort or resolve them later.
+    $methodsByName = [Ordered]@{}
+    $propertiesByName = [Ordered]@{}
 
     $memberFiles = 
     @(foreach ($member in $actualTypeData.Members.Values) {
@@ -81,9 +86,22 @@ foreach ($extendedType in $extendedTypeNames) {
             ).md"
             
             # .Save it,
-            $markdownHelp.Save($etsDocPath)
-            # and remove the temporary function (it would have gone out of scope anyways)
+            $memberFile = $markdownHelp.Save($etsDocPath)
+            # and remove the temporary function (it would have gone out of scope anyways).
             $ExecutionContext.SessionState.PSVariable.Remove("function:$($temporaryFunctionName)")
+
+            # Emit the member file
+            $memberFile
+
+            if ($getSetNothing) {
+                if (-not $propertiesByName[$member.Name]) {
+                    $propertiesByName[$member.Name] = $memberFile
+                } else {
+                    $propertiesByName[$member.Name] = @($propertiesByName[$member.Name]) + $memberFile
+                }                
+            } else {
+                $methodsByName[$member.Name] = $memberFile
+            }
         }
 
         
@@ -119,21 +137,27 @@ foreach ($extendedType in $extendedTypeNames) {
                 "### Script Properties"
                 [Environment]::NewLine
                 # and be sorted by property name.
-                foreach ($memberFile in $propertyMemberFiles | Sort-Object { $_.Name -replace $getSetFile}) {
-                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                foreach ($memberKeyValue in $propertiesByName.GetEnumerator()) {
+                    # If there are multiple files for a property, it's got a get and a set.
+                    if ($memberKeyValue.Value -is [array]) {
+                        "* [get_$($memberKeyValue.Key)]($($memberKeyValue.Value[0].Name))"
+                        "* [set_$($memberKeyValue.Key)]($($memberKeyValue.Value[1].Name))"
+                    } else {
+                        "* [get_$($memberKeyValue.Key)]($($memberKeyValue.Value.Name))"
+                    }
                 }
+                [Environment]::NewLine
             }
             # Methods should come after properties.
             if ($methodMemberFiles) {
                 "### Script Methods"
                 [Environment]::NewLine
                 # and will be sorted alphabetically.
-                foreach ($memberFile in $methodMemberFiles) {
-                    "* [$(@($memberFile.Name -split '[\p{P}-[_]]')[-2])]($($memberFile.Name))"
+                foreach ($memberKeyValue in $methodsByName.GetEnumerator()) {
+                    "* [$($memberKeyValue.Key)()]($($memberKeyValue.Value.Name))"
                 }
             }
         }
-    
     )  -join ([Environment]::NewLine)
     
     $ExtendedTypeDocContent | Set-Content -Path $ExtendedTypeDocFile
