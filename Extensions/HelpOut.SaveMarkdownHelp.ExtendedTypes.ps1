@@ -124,6 +124,7 @@ foreach ($extendedType in $extendedTypeNames) {
         # If the type had a .README member, include it inline
         if ($actualTypeData.Members -and $actualTypeData.Members["README"].Value) {
             $actualTypeData.Members["README"].Value
+            [Environment]::NewLine
         }
          
         # Sort the member files into properties and methods
