@@ -137,6 +137,17 @@ $View = 'PowerShell.Markdown.Help'
     Out-String -Width 1mb).Trim()
                     </Script>
       </ScriptMethod>
+      <NoteProperty>
+        <Name>README</Name>
+        <Value>This PSType is used to transform help for a command into Markdown.
+
+To get help for any command as markdown, use `Get-MarkdownHelp`.
+
+~~~PowerShell
+$MarkdownHelp = Get-MarkdownHelp Get-MarkdownHelp
+$MarkdownHelp
+~~~</Value>
+      </NoteProperty>
     </Members>
   </Type>
 </Types>
