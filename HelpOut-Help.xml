@@ -2414,6 +2414,34 @@ In either context, `$_` will be the current attribute.</maml:para>
           <dev:defaultValue>
           </dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>JsonDataPath</maml:name>
+          <maml:description>
+            <maml:para>The path where json data should be located.
+If this is not provided, it will be assumed to be a subdirectory of the -OutputPath.
+Specifically, it will be assumed to be: `$OutputPath/_data/Help`</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+          <maml:name>NoJson</maml:name>
+          <maml:description>
+            <maml:para>If set, will not output json data files.</maml:para>
+          </maml:description>
+          <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+          <dev:type>
+            <maml:name>Switch</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>
+          </dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2575,6 +2603,21 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         </dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>JsonDataPath</maml:name>
+        <maml:description>
+          <maml:para>The path where json data should be located.
+If this is not provided, it will be assumed to be a subdirectory of the -OutputPath.
+Specifically, it will be assumed to be: `$OutputPath/_data/Help`</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
         <maml:name>Module</maml:name>
         <maml:description>
           <maml:para>The name of one or more modules.</maml:para>
@@ -2582,6 +2625,19 @@ By default ```\.help\.txt$``` and ```\.md$```</maml:para>
         <command:parameterValue required="false" variableLength="true">System.String[]</command:parameterValue>
         <dev:type>
           <maml:name>System.String[]</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>
+        </dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" position="named" pipelineInput="False" aliases="" variableLength="true" globbing="false">
+        <maml:name>NoJson</maml:name>
+        <maml:description>
+          <maml:para>If set, will not output json data files.</maml:para>
+        </maml:description>
+        <command:parameterValue required="false" variableLength="true">Switch</command:parameterValue>
+        <dev:type>
+          <maml:name>Switch</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>
