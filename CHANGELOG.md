@@ -1,3 +1,18 @@
+### HelpOut 0.5.5:
+
+* Save-MarkdownHelp `-JsonDataPath/-NoJson` (#208, #179)
+* Extending `HelpInfo`:
+  * `HelpInfo.ToJson` (#205)
+  * `HelpInfo.get_Note` (#206)
+  * `HelpInfo.SaveJson` (#207)
+* Extended Type Help Improvements:
+  * Fixing Summary Titles (#202)
+  * Separating Script Properties (#203)
+* Special Thanks: 
+  * @potatoqualitee
+
+---
+
 ### HelpOut 0.5.4:
 
 * HelpOut containerization
